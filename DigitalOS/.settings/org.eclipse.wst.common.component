@@ -2,9 +2,6 @@
     <wb-module deploy-name="DigitalOS">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/model"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/view"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/controller"/>
         <property name="context-root" value="DigitalOS"/>
         <property name="java-output-path" value="/DigitalOS/build/classes"/>
     </wb-module>

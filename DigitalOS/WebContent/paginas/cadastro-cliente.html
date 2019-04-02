@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="lib/css/custom-css.css" rel="stylesheet">
+<link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/customCssOS.css" rel="stylesheet">
+<script src="../scripts/scripts.js"></script>
 </head>
 
 <body>
@@ -13,7 +14,7 @@
 		<div class="hidden-xs col-sm-3 col-md-2 col-lg-2 barra-lateral" data-toggle="collapse" role="navigation" id="barra-lateral">
 			<div class="navbar-header">
 				<div class="navbar-brand titulo">
-					<img src="imagens/logoteste2.png" class="img-responsive">
+					<img src="../imagens/logoteste2.png" class="img-responsive">
 				</div>
 			</div><!-- navbar-header -->
 			
@@ -93,11 +94,12 @@
 		      </div>
 		      
 		      <div class="modal-body">
+		      <form id="formCadastroCliente">
 		        <div class="form">     	
 		        	<div class="row">
 		        		<div class="col-md-12">
 			        		<label class="titulotipo">Tipo Cliente</label><br>
-			        		<input type="radio" name="tipocliente" value="0"><label class="tipo1">Pessoa Física</label>
+			        		<input type="radio" name="tipocliente" value="0" required><label class="tipo1">Pessoa Física</label>
 			        		<span class="espacotipos"></span>
 			        		<input type="radio" name="tipocliente" value="1"><label class="tipo2">Pessoa Jurídica</label>
 		        		</div>
@@ -107,83 +109,105 @@
 		        	<div class="row">
 			        	<div class="form-group col-md-7">
 			        		<label>Nome</label>
-			        		<input class="form-control" type="text" id="nomecliente" placeholder="Nome">
+			        		<input class="form-control" type="text" id="nomecliente" name="nomecliente" placeholder="Nome" required>
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-3">
 			        		<label>CPF</label>
-			        		<input class="form-control " type="text" id="cpfcliente" placeholder="000.000.000-00">
+			        		<input class="form-control " type="text" id="cpfcliente" name="cpfcliente" placeholder="000.000.000-00">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-2">
 			        		<label>RG</label>
-			        		<input class="form-control" type="text" id="rgcliente" placeholder="0.000.000">
+			        		<input class="form-control" type="text" id="rgcliente" name="rgcliente" placeholder="0.000.000">
 			        	</div><!-- /. FORM-GROUP -->
 		        	</div><!-- /.ROW -->
 		        
 		        	<div class="row">
 			        	<div class="form-group col-md-6">
 			        		<label>E-mail</label>
-			        		<input class="form-control" type="email" id="emailcliente" placeholder="E-mail">
+			        		<input class="form-control" type="email" id="emailcliente" name="emailcliente" placeholder="E-mail">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-3">
 			        		<label>Telefone</label>
-			        		<input class="form-control" type="text" id="telefonecliente" placeholder="(00) 0000-0000">
+			        		<input class="form-control" type="text" id="telefonecliente" name="telefonecliente" placeholder="(00) 0000-0000">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-3">
 			        		<label>Celular</label>
-			        		<input class="form-control" type="text" id="celularcliente" placeholder="(00) 00000-0000">
+			        		<input class="form-control" type="text" id="celularcliente" name="celularcliente" placeholder="(00) 00000-0000">
 			        	</div><!-- /. FORM-GROUP -->
 		        	</div><!-- /.ROW -->
 		        	
 		        	<div class="row">
 			        	<div class="form-group col-md-5">
 			        		<label>Enderço</label>
-			        		<input class="form-control" type="text" id="enderecocliente" placeholder="Endereço">
+			        		<input class="form-control" type="text" id="enderecocliente" name="enderecocliente" placeholder="Endereço">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 						<div class="form-group col-md-2">
 			        		<label>Numero</label>
-			        		<input class="form-control" type="text" id="numerocliente" placeholder="0000">
+			        		<input class="form-control" type="text" id="numerocliente" name="numerocliente" placeholder="0000">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-5">
 			        		<label>Complemento</label>
-			        		<input class="form-control" type="text" id="complementocliente" placeholder="Proximo a lanhouse">
+			        		<input class="form-control" type="text" id="complementocliente" name="complementocliente" placeholder="Proximo a lanhouse">
 			        	</div><!-- /. FORM-GROUP -->
 			      	</div><!-- /.ROW -->
 			      
 			      	<div class="row">
 			        	<div class="form-group col-md-6">
 			        		<label>Estado</label>
-			        		<select class="form-control" id="UF">
-			        			<option>Santa Catarina</option>
-			        			<option>Parana</option>
-			        			<option>Sao Paulo</option>
-			        			<option>Rio de Janeiro</option>
-			        			<option>Rio Grande do Sul</option>
-			        		</select>
+			        		<input class="form-control" type="text" id="estadocliente" name="estadocliente" placeholder="Santa Catarina">
+			        		<!-- <select class="form-control" id="UF">
+			        			<option value="0">UF</option>
+			        			<option value="1">AC</option>
+			        			<option value="2">AL</option>
+			        			<option value="3">AP</option>
+			        			<option value="4">AM</option>
+			        			<option value="5">BA</option>
+			        			<option value="6">CE</option>
+			        			<option value="7">DF</option>
+			        			<option value="8">ES</option>
+			        			<option value="9">GO</option>
+			        			<option value="10">MA</option>
+			        			<option value="11">MT</option>
+			        			<option value="12">MS</option>
+			        			<option value="13">MG</option>
+			        			<option value="14">PA</option>
+			        			<option value="15">PB</option>
+			        			<option value="16">PR</option>
+			        			<option value="17">PE</option>
+			        			<option value="18">PI</option>
+			        			<option value="19">RJ</option>
+			        			<option value="20">RN</option>
+			        			<option value="21">RS</option>
+			        			<option value="22">RO</option>
+			        			<option value="23">RR</option>
+			        			<option value="24">SC</option>
+			        			<option value="25">SP</option>
+			        			<option value="26">SE</option>
+			        			<option value="27">TO</option>
+			        		</select> -->
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-6">
 			        		<label>Cidade</label>
-			        		<select class="form-control" id="cidade">
-			        			<option>Joinville</option>
-			        			<option>Araqueri</option>
-			        			<option>Itajai</option>
-			        			<option>Barra Velha</option>
-			        			<option>Barra do Sul</option>
-			        		</select>
+			        		<input class="form-control" type="text" id="cidadecliente" name="cidadecliente" placeholder="Joinville">
+			        		<!-- <select class="form-control" id="cidade" onchange="cidadeEstado(this.value)">
+			        			<option value="0">cidades</option>
+			        		</select> -->
 			        	</div><!-- /. FORM-GROUP -->
 		        	</div><!-- /.ROW -->
 		        </div><!-- /.form -->
+		        </form>
 		      </div><!-- /.modal-body -->
 		      
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">Cancelar</button>
-		        <button type="button" class="btn btn-primary botao-salvar">Salvar</button>
+		        <button type="submit" class="btn btn-primary botao-salvar" onclick="CadastroUsuario()">Salvar</button>
 		      </div>
 		      
 		    </div><!-- /.modal-content -->
@@ -201,8 +225,8 @@
 		</div>
 	</div><!-- geral-menu -->
 		
-	<script src="lib/jquery/jquery.min.js"></script>
-	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../resources/jquery/jquery.min.js"></script>
+	<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
 	
 	<script>
 		$("#botao-icone-menu").click(function(e) {

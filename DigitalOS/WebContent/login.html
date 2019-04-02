@@ -8,9 +8,10 @@
 
     <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/customCssOS.css" rel="stylesheet">
+	<script type="text/javascript" src="scripts/scripts.js"></script>
 </head>
 
-<body class="custom-background-login">
+<body class="custom-background-login" >
   <div class="container container-fluid">
     <div class="main-div">
 
@@ -27,7 +28,7 @@
               </div>
             </div>
           </div>
-
+		<form>
           <div class="row">
             <div class="col-md-12 col-sm-12 form-group">
               <div class="div-usuario">
@@ -48,7 +49,7 @@
 
           <div class="row">
             <div class="col-md-12 col-sm-12 entrar text-center">
-                <button type="button" class="btn btn-primary" onclick="submit">ENTRAR</button>
+                <input type="button"  value="ENTRAR" class="btn btn-primary" onclick="loginOS()">
             </div>
           </div>
 
@@ -57,7 +58,7 @@
               <a onclick= "chamaModal()" id="esqueci-minha-senha">ESQUECI MINHA SENHA</a>
             </div>
           </div>
-
+		</form>
         </div>
       </div>
      </div> <!-- div-row -->
