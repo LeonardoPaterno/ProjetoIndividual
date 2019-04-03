@@ -99,9 +99,9 @@
 		        	<div class="row">
 		        		<div class="col-md-12">
 			        		<label class="titulotipo">Tipo Cliente</label><br>
-			        		<input type="radio" name="tipocliente" value="0" required><label class="tipo1">Pessoa Física</label>
+			        		<input type="radio" id="tipocliente" name="tipocliente" value="0" checked><label class="tipo1">Pessoa Física</label>
 			        		<span class="espacotipos"></span>
-			        		<input type="radio" name="tipocliente" value="1"><label class="tipo2">Pessoa Jurídica</label>
+			        		<input type="radio" id="tipocliente" name="tipocliente" value="1"><label class="tipo2">Pessoa Jurídica</label>
 		        		</div>
 		        	</div><!-- /.titulotipo -->
 		        	
@@ -109,7 +109,7 @@
 		        	<div class="row">
 			        	<div class="form-group col-md-7">
 			        		<label>Nome</label>
-			        		<input class="form-control" type="text" id="nomecliente" name="nomecliente" placeholder="Nome" required>
+			        		<input class="form-control" type="text" id="nomecliente" name="nomecliente" placeholder="Nome">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-3">
@@ -207,7 +207,7 @@
 		      
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">Cancelar</button>
-		        <button type="submit" class="btn btn-primary botao-salvar" onclick="CadastroUsuario()">Salvar</button>
+		        <button type="submit" class="btn btn-primary botao-salvar" onclick="parent.CadastroUsuario()">Salvar</button>
 		      </div>
 		      
 		    </div><!-- /.modal-content -->

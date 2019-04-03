@@ -32,9 +32,9 @@ public class ServletCadastroCliente extends HttpServlet {
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		process(request, response);
 		
-		CadastroCliente novoCliente = null;
+		String pessoa = request.getParameter("formulario").toString();
 		
-		
+		System.out.println(pessoa);
 		
 		
 	}

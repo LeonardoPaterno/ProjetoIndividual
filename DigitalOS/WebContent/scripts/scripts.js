@@ -25,52 +25,12 @@ function loginOS(){
 }
 
 function CadastroUsuario(){
-		
-	if( $("input[name=tipocliente]").val() == null){
-		alert("Campo Tipo Cliente Vazio, seleciona uma opção!");
-		return false;
-	}
-	if($("input[name=nomecliente]").val() == null){
-		alert("Campo Nome Completo Vazio, seleciona uma opção!");
-		return false;
-	}
-	if(  $("input[name=cpfcliente]").val() == null){
-		alert("Campo CPF Vazio, seleciona uma opção!");
-		return false;
-	}
-	if( $("input[name=rgcliente]").val() == null){
-		alert("Campo RG Vazio, seleciona uma opção!");
-		return false;
-	}
-	if( $("input[name=emailcliente]").val() == null){
-		alert("Campo E-mail Vazio, seleciona uma opção!");
-		return false;
-	}
-	if(  $("input[name=telefonecliente]").val() == null){
-		alert("Campo Telefone Vazio, seleciona uma opção!");
-		return false;
-	}
-	if( $("input[name=enderecocliente]").val() == null){
-		alert("Campo Endereço Vazio, seleciona uma opção!");
-		return false;
-	}
-	if( $("input[name=numerocliente]").val() == null){
-		alert("Campo Numero Endereço Vazio, seleciona uma opção!");
-		return false;
-	}
-	if( $("select[value=estadocliente]").val() == null){
-		alert("Campo Estado Vazio, seleciona uma opção!");
-		return false;
-	}
-	if( $("select[value=cidadecliente]").val() == null){
-		alert("Campo Cidade Vazio, informe a cidade!");
-		return false;
-	}else{
-	return true;
 	
+	var formulario = $('input[type=submit]').closest("#formCadastroCliente");
+	alert(formulario);
 	$.ajax({
 		type: 'POST',
-		url: 'servletCadastroCliente',
+		url: 'ServletCadastroCliente',
 		data: {formulario: 'formulario'},
 		
 		success:function(resposta){
@@ -80,6 +40,4 @@ function CadastroUsuario(){
 			
 		}
 	});
-	}
-	
 }
