@@ -13,21 +13,12 @@
 
 
 <servlet>
-    <servlet-name>ServletLoginOs</servlet-name>
-    <servlet-class>br.com.digitalOS.LoginOs</servlet-class>
+    <servlet-name>ServletConsultaLogin</servlet-name>
+    <servlet-class>br.com.digitalOS.servlets.ServletConsultaLogin</servlet-class>
 </servlet>
 <servlet-mapping>
-	<servlet-name>ServletLoginOs</servlet-name>
-    <url-pattern>/ServletLoginOs</url-pattern>
+	<servlet-name>ServletConsultaLogin</servlet-name>
+    <url-pattern>/ServletConsultaLogin</url-pattern>
 </servlet-mapping>
-  
-<servlet>
-    <servlet-name>ServletCadastroCliente</servlet-name>
-    <servlet-class>br.com.digitalOS.ServletCadastroCliente</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>ServletCadastroCliente</servlet-name>
-    <url-pattern>/ServletCadastroCliente</url-pattern>
-</servlet-mapping>
-  
+    
 </web-app>
