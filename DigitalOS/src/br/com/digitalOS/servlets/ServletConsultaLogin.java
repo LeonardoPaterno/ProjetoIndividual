@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
 import br.com.digitalOS.bd.conexao.Conexao;
 import br.com.digitalOS.jdbc.JDBCDigitalOSLoginDAO;
 import br.com.digitalOS.objetos.LoginObj;
@@ -56,7 +58,6 @@ public class ServletConsultaLogin extends HttpServlet {
 		byte[] arreyBytes = Base64.getDecoder().decode(senhaCod);
 		String senhaDecoded = new String(arreyBytes);
 		login.setSenha(senhaDecoded);
-		// System.out.println(senhaDecoded);
 
 		try {
 			Conexao conec = new Conexao();
@@ -64,13 +65,34 @@ public class ServletConsultaLogin extends HttpServlet {
 			JDBCDigitalOSLoginDAO jdbclogin = new JDBCDigitalOSLoginDAO(conexao);
 			boolean retorno = jdbclogin.consultarLogin(login);
 			conec.fecharConexao();
-			
-			//System.out.println("Servlet: " + retorno);
-			
-			if (!retorno == false) {
+
+			String context = request.getServletContext().getContextPath();
+			Map<String, String> resposta = new HashMap<String, String>();
+			PrintWriter out = response.getWriter();
+
+			if (retorno != false) {
 				HttpSession sessao = request.getSession();
-				sessao.setAttribute("login", request.getParameter("usuarioLogin"));
+				sessao.setAttribute("login", request.getParameter("user"));
+				resposta.put("url", context + "/paginas/menu.html");
+
+				String json = new Gson().toJson(resposta);
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(json);
+
+				((HttpServletResponse) response).setStatus(HttpServletResponse.SC_OK);
+				out.print(json);
+				out.flush();
 			} else {
+				resposta.put("url", context + "/login.html");
+				String json = new Gson().toJson(resposta);
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(json);
+
+				((HttpServletResponse) response).setStatus(HttpServletResponse.SC_NOT_FOUND);
+				out.print(json);
+				out.flush();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

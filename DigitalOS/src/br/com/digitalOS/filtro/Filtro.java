@@ -15,9 +15,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import com.google.gson.Gson;
 
-
-@WebFilter("/recursos/paginas/*")
+@WebFilter("/paginas/*")
 public class Filtro implements Filter {
 
 	@Override
@@ -26,16 +26,11 @@ public class Filtro implements Filter {
 		String context = request.getServletContext().getContextPath();
 
 		try {
-			HttpSession session = ((HttpServletRequest) request).getSession();
-			String usuario = null;
-
-			if (session != null) {
-				usuario = (String) session.getAttribute("login");
-			}
-
-			if (usuario == null) {
-				session.setAttribute("retorno", "Acesso Negado!");
-				((HttpServletResponse) response).sendRedirect(context + "/index.html");
+			HttpSession sessao = ((HttpServletRequest) request).getSession();
+			String usuario = (String) sessao.getAttribute("login");
+			Map<String, String> resposta = new HashMap<String, String>();
+			if (usuario == null || usuario == "") {
+				resposta.put("resposta", context + "/index.html");
 			} else {
 				chain.doFilter(request, response);
 			}

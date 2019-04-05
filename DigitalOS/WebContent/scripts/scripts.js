@@ -2,8 +2,6 @@ function loginOS() {
 	var user = $("input[name=usuario]").val();
 	var password = $("input[name=senha]").val();
 
-	alert(user + " | " + password);
-
 	if (user != "" && user != null && password != "" && password != null) {
 		var passCoded = btoa(password);
 
@@ -13,10 +11,12 @@ function loginOS() {
 			data : 'user=' + user + '&passCoded=' + passCoded,
 
 			success : function(resposta) {
-
+				alert(resposta);
+				window.location = resposta.url;
 			},
 			error : function(resposta) {
-
+				alert(resposta);
+				window.location = resposta.url;
 			}
 		});
 	} else {
@@ -24,7 +24,7 @@ function loginOS() {
 	}
 }
 
-function CadastroUsuario() {
+/*function CadastroUsuario() {
 
 	var formulario = $('input[type=submit]').closest("#formCadastroCliente");
 	alert(formulario);
@@ -42,4 +42,4 @@ function CadastroUsuario() {
 
 		}
 	});
-}
+}*/
