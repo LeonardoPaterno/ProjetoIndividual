@@ -1,9 +1,6 @@
 package br.com.digitalOS.filtro;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -15,7 +12,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import com.google.gson.Gson;
 
 @WebFilter("/paginas/*")
 public class Filtro implements Filter {
@@ -28,13 +24,21 @@ public class Filtro implements Filter {
 		try {
 			HttpSession sessao = ((HttpServletRequest) request).getSession();
 			String usuario = (String) sessao.getAttribute("login");
-			Map<String, String> resposta = new HashMap<String, String>();
-			if (usuario == null || usuario == "") {
-				resposta.put("resposta", context + "/index.html");
+			System.out.println(usuario);
+
+			if (sessao != null) {
+				usuario = (String) sessao.getAttribute("login");
+				System.out.println("usuario Filtro: " + usuario);
+
+				request.getRequestDispatcher("/login.html").forward(request, response);
+			}
+
+			if (usuario == null) {
+				sessao.setAttribute("msg", "Você não está logado no sistema!");
+				((HttpServletResponse) response).sendRedirect(context + "/login.html");
 			} else {
 				chain.doFilter(request, response);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

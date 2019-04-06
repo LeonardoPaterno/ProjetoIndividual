@@ -12,11 +12,11 @@ function loginOS() {
 
 			success : function(resposta) {
 				alert(resposta);
-				window.location = resposta.url;
+				window.location = resposta;
 			},
 			error : function(resposta) {
-				alert(resposta);
-				window.location = resposta.url;
+				alert(resposta.url);
+				window.location = resposta;
 			}
 		});
 	} else {

@@ -40,7 +40,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	public boolean consultarLogin(LoginObj login) {
 		String comando = "select idlogin, email, senha from login" + " where email like '%" + login.getEmail()
 				+ "' and senha like '%" + login.getSenha() + "%'";
-		//System.out.println(comando);
+		//System.out.println("1 "+comando);
 		try {
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
@@ -50,14 +50,13 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				login.setSenha(rs.getString("senha"));
 				
 				//String consultou = "Idlogin: "+login.getId()+"\nEmail:"+login.getEmail()+"\nSenha:"+login.getSenha();
-				//System.out.println(consultou);
+				//System.out.println("2 "+consultou);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 		return true;
-
 	}
 
 }
