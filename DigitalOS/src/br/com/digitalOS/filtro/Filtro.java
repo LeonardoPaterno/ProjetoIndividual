@@ -28,9 +28,6 @@ public class Filtro implements Filter {
 
 			if (sessao != null) {
 				usuario = (String) sessao.getAttribute("login");
-				System.out.println("usuario Filtro: " + usuario);
-
-				request.getRequestDispatcher("/login.html").forward(request, response);
 			}
 
 			if (usuario == null) {

@@ -5,12 +5,16 @@ import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
 
 import br.com.digitalOS.bd.conexao.Conexao;
 import br.com.digitalOS.jdbc.JDBCDigitalOSLoginDAO;
@@ -58,22 +62,28 @@ public class ServletConsultaLogin extends HttpServlet {
 			JDBCDigitalOSLoginDAO jdbclogin = new JDBCDigitalOSLoginDAO(conexao);
 			boolean retorno = jdbclogin.consultarLogin(login);
 			conec.fecharConexao();
-
+			String json = null;
 			String context = request.getServletContext().getContextPath();
 			PrintWriter out = response.getWriter();
-			String resposta;
+			Map<String, String> msg = new HashMap<String, String>();
 			if (retorno != false) {
 				HttpSession sessao = request.getSession();
 				sessao.setAttribute("login", request.getParameter("user"));
-				resposta = context + "/paginas/menu.html";
+				msg.put("url", context + "/paginas/menu.html");
+				json = new Gson().toJson(msg);
 
-				System.out.println(resposta);
-				out.print(resposta);
+				out = response.getWriter();
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				out.print(json);
 				out.flush();
 			} else {
-				resposta = context + "/login.html";
-				System.out.println(resposta);
-				out.print(resposta);
+				msg.put("url", context + "/login.html");
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(json);
+				response.setStatus(HttpServletResponse.SC_OK);
+				out.print(json);
 				out.flush();
 
 			}

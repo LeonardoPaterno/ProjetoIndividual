@@ -11,12 +11,10 @@ function loginOS() {
 			data : 'user=' + user + '&passCoded=' + passCoded,
 
 			success : function(resposta) {
-				alert(resposta);
-				window.location = resposta;
+				location.href = resposta.url;
 			},
 			error : function(resposta) {
-				alert(resposta.url);
-				window.location = resposta;
+				location.href = resposta.url;
 			}
 		});
 	} else {
