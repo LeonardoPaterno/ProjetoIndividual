@@ -260,9 +260,9 @@ h4{
     /* width: 1130px !important; */
 }
 
-.icone-adicionar-clientes{
+.icone-adicionar-cliente{
 	display: inline-block;
-	margin-left: 812px;
+	margin-left: 912px;
 	position: absolute !important;
 	top: 3px;
 	font-size: 16px;
@@ -270,7 +270,7 @@ h4{
 
 .icone-adicionar-funcionario{
 	display: inline-block;
-	margin-left: 885px;
+	margin-left: 874px;
 	position: absolute !important;
 	top: 3px;
 	font-size: 16px;
@@ -278,7 +278,7 @@ h4{
 
 .icone-adicionar-aparelho{
 	display: inline-block;
-	margin-left: 907px;
+	margin-left: 895px;
 	position: absolute !important;
 	top: 3px;
 	font-size: 16px;
@@ -286,7 +286,7 @@ h4{
 
 .icone-adicionar-servico{
 	display: inline-block;
-	margin-left: 921px;
+	margin-left: 910px;
 	position: absolute !important;
 	top: 3px;
 	font-size: 16px;
@@ -294,7 +294,7 @@ h4{
 
 .icone-adicionar-itens-servico{
 	display: inline-block;
-	margin-left: 862px;
+	margin-left: 851px;
 	position: absolute !important;
 	top: 3px;
 	font-size: 16px;
@@ -321,7 +321,7 @@ h4{
 .div-painel-ordemservicos{
 	margin-top: 30px;
 	font-weight: bold;
-	width: 1055px;
+	width: 1150px;
 }
 
 /* .icone-adicionar{

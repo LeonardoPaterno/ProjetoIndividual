@@ -24,7 +24,6 @@ public class Filtro implements Filter {
 		try {
 			HttpSession sessao = ((HttpServletRequest) request).getSession();
 			String usuario = (String) sessao.getAttribute("login");
-			System.out.println(usuario);
 
 			if (sessao != null) {
 				usuario = (String) sessao.getAttribute("login");

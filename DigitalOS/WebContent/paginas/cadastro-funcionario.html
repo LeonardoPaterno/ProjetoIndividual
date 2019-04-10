@@ -1,11 +1,12 @@
 <!doctype html>
-
+<html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="lib/css/custom-css.css" rel="stylesheet">
+<link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/customCssOS.css" rel="stylesheet">
+<script src="../scripts/scripts.js"></script>
 </head>
 
 <body>
@@ -13,7 +14,7 @@
 		<div class="hidden-xs col-sm-3 col-md-2 col-lg-2 barra-lateral" data-toggle="collapse" role="navigation" id="barra-lateral">
 			<div class="navbar-header">
 				<div class="navbar-brand titulo">
-					<img src="imagens/logoteste2.png" class="img-responsive">
+					<img src="../imagens/logoteste2.png" class="img-responsive">
 				</div>
 			</div><!-- navbar-header -->
 			
@@ -24,11 +25,11 @@
 					<ul class="dropdown-menu dropdown-menu-custom div-botao-cadastrar">
 						<li>
 							<div class="btn-group-vertical" role="group">
-								<button class="btn btn-primary btn-primary-custom">Aparelho</button>
-								<button class="btn btn-primary btn-primary-custom">Cliente</button>
-								<button class="btn btn-primary btn-primary-custom">Funcionario</button>
-								<button class="btn btn-primary btn-primary-custom">Itens de Serviço</button>
-								<button class="btn btn-primary btn-primary-custom">Serviços</button>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-aparelho.html'">Aparelho</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Cliente</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-funcionario.html'">Funcionario</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-itens-servico.html'">Itens de Serviço</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-servico.html'">Serviços</a>
 							</div>
 						</li>
 					</ul>
@@ -40,10 +41,10 @@
 					<ul class="dropdown-menu dropdown-menu-custom div-botao-ordem-servico">
 						<li>
 							<div class="btn-group-vertical" role="group">
-								<button class="btn btn-primary btn-primary-custom">Aberta</button>
-								<button class="btn btn-primary btn-primary-custom">Concluida</button>
-								<button class="btn btn-primary btn-primary-custom">Em Andamento</button>
-								<button class="btn btn-primary btn-primary-custom">Cancelada</button>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='#'">Aberta</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='#'">Concluida</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='#'">Em Andamento</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='#'">Cancelada</a>
 							</div>
 						</li>
 					</ul>
@@ -54,10 +55,10 @@
 					<ul class="dropdown-menu dropdown-menu-custom div-botao-relatorio">
 						<li>
 							<div class="btn-group-vertical" role="group">
-								<button class="btn btn-primary btn-primary-custom">Funcionario</button>
-								<button class="btn btn-primary btn-primary-custom">Cliente</button>
-								<button class="btn btn-primary btn-primary-custom">Ordem de Serviço</button>
-								<button class="btn btn-primary btn-primary-custom">Itens de Serviço</button>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='#'">Funcionario</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='#'">Cliente</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='#'">Ordem de Serviço</a>
+								<a class="btn btn-primary btn-primary-custom" >Itens de Serviço</a>
 							</div>
 						</li>
 					</ul>
@@ -199,17 +200,18 @@
 		</div>
 	</div><!-- geral-menu -->
 		
-	<script src="lib/jquery/jquery.min.js"></script>
-	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
-	
+	<script src="../resources/jquery/jquery.min.js"></script>
+	<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+
 	<script>
 		$("#botao-icone-menu").click(function(e) {
-		      e.preventDefault();
-		      $("#barra-lateral").toggle();
-	    });
+			e.preventDefault();
+			$("#barra-lateral").toggle();
+		});
 		
 		$(".icone-adicionar-funcionario").click(function(){
 			$('#modalfuncionario').modal('show');
 		});
 	</script>
 </body>
+</html>

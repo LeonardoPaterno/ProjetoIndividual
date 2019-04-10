@@ -1,4 +1,4 @@
 INSERT INTO `ordemservico`.`endereco` (`idendereco`, `rua`, `bairro`, `cidade`, `numero`, `cep`) VALUES ('1', 'rua', 'bairro', 'cidade', '1', '89208782');
 INSERT INTO `ordemservico`.`pessoa` (`idpessoa`, `nome`, `cpf`, `datanascimento`, `rg`, `profissao`, `endereco_idendereco`, `funcionario_idfuncionario`) VALUES ('1', 'Leonardo', '09612435979', '12111995', '6655574', 'suporte', '1', '0');
 INSERT INTO `ordemservico`.`perfil` (`idperfil`, `tipoperfil`, `nometipoperfil`) VALUES ('1', '1', 'perfil1');
-INSERT INTO `ordemservico`.`login` (`idlogin`, `email`, `senha`, `pessoa_idpessoa`, `perfil_idperfil`, `ordemservico_numeroos`) VALUES ('1', 'paternoleo@gmail.com', '123', '1', '1', '0');
+INSERT INTO `ordemservico`.`login` (`idlogin`, `email`, `senha`, `pessoa_idpessoa`, `perfil_idperfil`, `ordemservico_numeroos`) VALUES ('1', 'leo', '123', '1', '1', '0');

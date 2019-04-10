@@ -22,22 +22,28 @@ function loginOS() {
 	}
 }
 
-/*function CadastroUsuario() {
+function CadastroAparelho() {
 
-	var formulario = $('input[type=submit]').closest("#formCadastroCliente");
-	alert(formulario);
+	var nome = $("input[name=nomeaparelho]").val();
+	var marca = $("input[name=marcaaparelho]").val();
+	var modelo = $("input[name=modeloaparelho]").val();
+	var nsaparelho = $("input[name=nsaparelho]").val();
+	var categoria = $("input[name=categoriaaparelho]").val();
+	alert(marca + "\n" + modelo + "\n" + nsaparelho);
 	$.ajax({
 		type : 'POST',
-		url : 'ServletCadastroCliente',
+		url : 'ServletCadastroAparelho',
 		data : {
-			formulario : 'formulario'
+			marca : 'marca',
+			modelo : 'modelo',
+			nsaparelho : 'nsaparelho'
 		},
 
 		success : function(resposta) {
-
+			
 		},
 		error : function(resposta) {
 
 		}
 	});
-}*/
+}

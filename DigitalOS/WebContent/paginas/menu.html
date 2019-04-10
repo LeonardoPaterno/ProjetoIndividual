@@ -4,86 +4,72 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link type="text/css" rel="stylesheet" href="../css/customCssOS.css" >
+<link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/customCssOS.css" rel="stylesheet">
+<script src="../scripts/scripts.js"></script>
 </head>
 
 <body>
 	<div class="container container-fluid geral-menu" id="menu">
-		<div class="hidden-xs col-sm-3 col-md-2 col-lg-2 barra-lateral"
-			data-toggle="collapse" role="navigation" id="barra-lateral">
+		<div class="hidden-xs col-sm-3 col-md-2 col-lg-2 barra-lateral" data-toggle="collapse" role="navigation" id="barra-lateral">
 			<div class="navbar-header">
 				<div class="navbar-brand titulo">
 					<img src="../imagens/logoteste2.png" class="img-responsive">
 				</div>
-			</div>
-			<!-- navbar-header -->
-
-			<div class="btn-group btn-group-vertical btn-group-custom"
-				role="group">
-
+			</div><!-- navbar-header -->
+			
+			<div class="btn-group btn-group-vertical btn-group-custom" role="group">
+				
 				<div class="btn-group btn-group-vertical group-menu" role="group">
-					<button class="btn btn-primary dropdown-toggle"
-						data-toggle="dropdown">Cadastrar</button>
+					<button class="btn btn-primary dropdown-toggle"	data-toggle="dropdown">Cadastrar</button>
 					<ul class="dropdown-menu dropdown-menu-custom div-botao-cadastrar">
 						<li>
 							<div class="btn-group-vertical" role="group">
-								<button class="btn btn-primary btn-primary-custom">Aparelho</button>
-								<button class="btn btn-primary btn-primary-custom">Cliente</button>
-								<button class="btn btn-primary btn-primary-custom">Estoque</button>
-								<button class="btn btn-primary btn-primary-custom">Funcionario</button>
-								<button class="btn btn-primary btn-primary-custom">Itens
-									de Serviço</button>
-								<button class="btn btn-primary btn-primary-custom">Serviços</button>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-aparelho.html'">Aparelho</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Cliente</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-funcionario.html'">Funcionario</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-itens-servico.html'">Itens de Serviço</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-servico.html'">Serviços</a>
 							</div>
 						</li>
 					</ul>
 				</div>
-
-
+				
+				
 				<div class="btn-group btn-group-vertical group-menu" role="group">
-					<button class="btn btn-primary dropdown-toggle"
-						data-toggle="dropdown">Ordens de Serviço</button>
-					<ul
-						class="dropdown-menu dropdown-menu-custom div-botao-ordem-servico">
+					<button class="btn btn-primary dropdown-toggle"	data-toggle="dropdown">Ordens de Serviço</button>
+					<ul class="dropdown-menu dropdown-menu-custom div-botao-ordem-servico">
 						<li>
 							<div class="btn-group-vertical" role="group">
-								<button class="btn btn-primary btn-primary-custom">Aberta</button>
-								<button class="btn btn-primary btn-primary-custom">Concluida</button>
-								<button class="btn btn-primary btn-primary-custom">Em
-									Andamento</button>
-								<button class="btn btn-primary btn-primary-custom">Cancelada</button>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Aberta</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Concluida</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Em Andamento</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Cancelada</a>
 							</div>
 						</li>
 					</ul>
 				</div>
-
+				
 				<div class="btn-group btn-group-vertical group-menu" role="group">
-					<button class="btn btn-primary dropdown-toggle"
-						data-toggle="dropdown">Relatório</button>
+					<button class="btn btn-primary dropdown-toggle"	data-toggle="dropdown">Relatório</button>
 					<ul class="dropdown-menu dropdown-menu-custom div-botao-relatorio">
 						<li>
 							<div class="btn-group-vertical" role="group">
-								<button class="btn btn-primary btn-primary-custom">Funcionario</button>
-								<button class="btn btn-primary btn-primary-custom">Cliente</button>
-								<button class="btn btn-primary btn-primary-custom">Ordem
-									de Serviço</button>
-								<button class="btn btn-primary btn-primary-custom">Itens
-									de Serviço</button>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Funcionario</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Cliente</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Ordem de Serviço</a>
+								<a class="btn btn-primary btn-primary-custom" >Itens de Serviço</a>
 							</div>
 						</li>
 					</ul>
 				</div>
-
+				
 				<div class="btn-group btn-group-vertical div-botao-sair">
-					<button class="btn btn-danger botao-sair" id="botao-sair">
-						Sair<span class="glyphicon glyphicon-log-out icone-sair"></span>
-					</button>
+					<button class="btn btn-danger botao-sair" id="botao-sair">Sair<span class="glyphicon glyphicon-log-out icone-sair"></span></button>
 				</div>
-
-			</div>
-			<!-- btn-group-vertical -->
-		</div>
-		<!-- barra-lateral -->
+				
+			</div><!-- btn-group-vertical -->
+		</div><!-- barra-lateral -->
 
 		<div
 			class="btn-group visible-xs col-xs-1 col-sm-1 col-xs1-custom botao-barra-lateral-xs"
