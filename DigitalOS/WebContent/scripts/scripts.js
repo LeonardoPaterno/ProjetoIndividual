@@ -25,11 +25,12 @@ function loginOS() {
 function CadastroAparelho() {
 
 	var nome = $("input[name=nomeaparelho]").val();
-	var marca = $("input[name=marcaaparelho]").val();
+	var categoria = $("select.categoria").children("option:selected").val();
+	var marca = $("select.marca").children("option:selected").val();
 	var modelo = $("input[name=modeloaparelho]").val();
 	var nsaparelho = $("input[name=nsaparelho]").val();
-	var categoria = $("input[name=categoriaaparelho]").val();
-	alert(marca + "\n" + modelo + "\n" + nsaparelho);
+	
+	alert(nome + "\n" + categoria + "\n" + marca + "\n" + modelo + "\n" + nsaparelho);
 	$.ajax({
 		type : 'POST',
 		url : 'ServletCadastroAparelho',

@@ -13,7 +13,8 @@
 <script src="../resources/jquery/jquery.min.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../scripts/graficos.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 <script type="text/javascript" src="../scripts/scripts.js"></script>
 
 </head>
@@ -114,8 +115,29 @@
 		</div>
 		<!-- menu-display-xs -->
 
-		<canvas class="primeirografico" id="primeiroGrafico"></canvas>
-		<canvas class="segundografico" id="segundoGrafico"></canvas>
+		<div class="panel panel-default"
+			style="position: absolute; left: 14%; top: 2%; width: 55%; height: 80%;">
+			<div class="panel-heading" style="background-color: grey">
+				<div class="panel-title">
+					<h3>Grafico Ordens de Serviço</h3>
+				</div>
+			</div>
+			<div class="panel-body">
+				<canvas class="primeirografico" id="primeiroGrafico"></canvas>
+			</div>
+		</div>
+
+		<div class="panel panel-default"
+			style="position: absolute; left: 75%; top: 2%; width: 20%; height: 93%;">
+			<div class="panel-heading" style="background-color: grey">
+				<div class="panel-title"><h5>Legendas</h5>
+				</div>
+			</div>
+			<div class="panel-body">
+				
+			</div>
+		</div>
+		<!-- <canvas class="segundografico" id="segundoGrafico"></canvas> -->
 
 	</div>
 	<!-- menu -->

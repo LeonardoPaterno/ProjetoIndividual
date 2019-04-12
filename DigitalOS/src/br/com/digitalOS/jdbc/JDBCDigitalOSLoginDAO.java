@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import br.com.digitalOS.jdbcInterface.DigitalOSInterface;
+import br.com.digitalOS.objetos.AparelhoObj;
 import br.com.digitalOS.objetos.LoginObj;
 import br.com.digitalOS.objetos.PessoaObj;
 
@@ -54,6 +55,27 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean cadastrarAparelho(AparelhoObj novoAparelho) {
+		String comando = "insert into login (nome, categoria, marca, modelo, nsaparelho) values(?,?,?,?,?)";
+		
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while(rs.next()) {
+				novoAparelho.setNome(rs.getString("nome"));
+				novoAparelho.setCategoria(rs.getString("categoria"));
+				novoAparelho.setMarca(rs.getString("marca"));
+				novoAparelho.setModelo(rs.getString("modelo"));
+				novoAparelho.setNsaparelho(rs.getString("nsaparelho"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace(); 
 			return false;
 		}
 		return true;
