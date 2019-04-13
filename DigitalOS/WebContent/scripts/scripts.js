@@ -29,22 +29,50 @@ function CadastroAparelho() {
 	var marca = $("select.marca").children("option:selected").val();
 	var modelo = $("input[name=modeloaparelho]").val();
 	var nsaparelho = $("input[name=nsaparelho]").val();
-	
-	alert(nome + "\n" + categoria + "\n" + marca + "\n" + modelo + "\n" + nsaparelho);
+
+	alert(nome + "\n" + categoria + "\n" + marca + "\n" + modelo + "\n"
+			+ nsaparelho);
 	$.ajax({
 		type : 'POST',
 		url : 'ServletCadastroAparelho',
 		data : {
+			nome : 'nome',
 			marca : 'marca',
 			modelo : 'modelo',
-			nsaparelho : 'nsaparelho'
+			nsaparelho : 'nsaparelho',
+			categoria : 'categoria'
 		},
 
 		success : function(resposta) {
-			
+			var modal = {
+				title : "Mensagem",
+				heigth : 250,
+				width : 400,
+				modal : true,
+				buttons : {
+					"Ok" : function() {
+						$(this).dialog("close");
+					}
+				}
+			};
+			$("#msg").html(resposta.resposta);
+			$("#msg").dialog(modal);
+
 		},
 		error : function(resposta) {
-
+			var modal = {
+				title : "Mensagem",
+				heigth : 250,
+				width : 400,
+				modal : true,
+				buttons : {
+					"Ok" : function() {
+						$(this).dialog("close");
+					}
+				}
+			};
+			$("#msg").html(resposta.resposta);
+			$("#msg").dialog(modal);
 		}
 	});
 }

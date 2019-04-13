@@ -62,17 +62,23 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 
 	@Override
 	public boolean cadastrarAparelho(AparelhoObj novoAparelho) {
-		String comando = "insert into login (nome, categoria, marca, modelo, nsaparelho) values(?,?,?,?,?)";
+		String comando = "insert into login "
+						+ " (nomeaparelho, numeroserie, modelo, marca_marca, categoriaaparelho_categoriaaparelho) "
+						+ "values(?,?,?,?,?)";
 		
 		try {
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
 			while(rs.next()) {
 				novoAparelho.setNome(rs.getString("nome"));
-				novoAparelho.setCategoria(rs.getString("categoria"));
+				novoAparelho.setCategoria(Integer.parseInt(rs.getString("categoria")));
 				novoAparelho.setMarca(rs.getString("marca"));
 				novoAparelho.setModelo(rs.getString("modelo"));
-				novoAparelho.setNsaparelho(rs.getString("nsaparelho"));
+				novoAparelho.setNsaparelho(Integer.parseInt(rs.getString("nsaparelho")));
+				
+				String aparelho = novoAparelho.getIdaparelho()+"\n"+ novoAparelho.getNome()+"\n"+ novoAparelho.getCategoria()+"\n"+
+						novoAparelho.getMarca()+"\n"+ novoAparelho.getModelo()+"\n"+ novoAparelho.getNsaparelho();
+				System.out.println("Novo Aparelho: "+aparelho);
 			}
 		}catch(Exception e) {
 			e.printStackTrace(); 

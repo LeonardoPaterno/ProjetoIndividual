@@ -24,6 +24,16 @@
 		<servlet-name>ServletConsultaLogin</servlet-name>
 		<url-pattern>/ServletConsultaLogin</url-pattern>
 	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>ServletCadastroAparelho</servlet-name>
+		<servlet-class>br.com.digitalOS.servlets.ServletCadastroAparelho</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ServletCadastroAparelho</servlet-name>
+		<url-pattern>/ServletCadastroAparelho</url-pattern>
+	</servlet-mapping>
 
 	<filter>
 		<filter-name>Filtro</filter-name>
