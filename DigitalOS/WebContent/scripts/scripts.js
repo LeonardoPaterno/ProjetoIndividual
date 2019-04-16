@@ -29,18 +29,16 @@ function CadastroAparelho() {
 	var marca = $("select.marca").children("option:selected").val();
 	var modelo = $("input[name=modeloaparelho]").val();
 	var nsaparelho = $("input[name=nsaparelho]").val();
-
-	alert(nome + "\n" + categoria + "\n" + marca + "\n" + modelo + "\n"
-			+ nsaparelho);
+	
 	$.ajax({
 		type : 'POST',
-		url : 'ServletCadastroAparelho',
+		url : '../ServletCadastroAparelho',
 		data : {
-			nome : 'nome',
-			marca : 'marca',
-			modelo : 'modelo',
-			nsaparelho : 'nsaparelho',
-			categoria : 'categoria'
+			'nome':nome,
+			'marca': marca,
+			'modelo':modelo,
+			'nsaparelho':nsaparelho,
+			'categoria':categoria
 		},
 
 		success : function(resposta) {

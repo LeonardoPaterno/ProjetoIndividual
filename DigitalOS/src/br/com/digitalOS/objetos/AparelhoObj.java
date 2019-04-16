@@ -8,9 +8,9 @@ public class AparelhoObj implements Serializable{
 	
 	private int idaparelho;
 	private String nome;
-	private int nsaparelho;
+	private String nsaparelho;
 	private String modelo;
-	private String marca;
+	private int marca;
 	private int categoria;
 	
 	public int getIdaparelho() {
@@ -25,10 +25,10 @@ public class AparelhoObj implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getNsaparelho() {
+	public String getNsaparelho() {
 		return nsaparelho;
 	}
-	public void setNsaparelho(int nsaparelho) {
+	public void setNsaparelho(String nsaparelho) {
 		this.nsaparelho = nsaparelho;
 	}
 	public String getModelo() {
@@ -37,10 +37,10 @@ public class AparelhoObj implements Serializable{
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
-	public String getMarca() {
+	public int getMarca() {
 		return marca;
 	}
-	public void setMarca(String marca) {
+	public void setMarca(int marca) {
 		this.marca = marca;
 	}
 	public int getCategoria() {

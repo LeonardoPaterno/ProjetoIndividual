@@ -41,7 +41,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	public boolean consultarLogin(LoginObj login) {
 		String comando = "select idlogin, email, senha from login" + " where email like '%" + login.getEmail()
 				+ "' and senha like '%" + login.getSenha() + "%'";
-		//System.out.println("1 "+comando);
+		// System.out.println("1 "+comando);
 		try {
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
@@ -49,9 +49,10 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				login.setId(rs.getInt("idlogin"));
 				login.setEmail(rs.getString("email"));
 				login.setSenha(rs.getString("senha"));
-				
-				//String consultou = "Idlogin: "+login.getId()+"\nEmail:"+login.getEmail()+"\nSenha:"+login.getSenha();
-				//System.out.println("2 "+consultou);
+
+				// String consultou = "Idlogin:
+				// "+login.getId()+"\nEmail:"+login.getEmail()+"\nSenha:"+login.getSenha();
+				// System.out.println("2 "+consultou);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -62,26 +63,21 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 
 	@Override
 	public boolean cadastrarAparelho(AparelhoObj novoAparelho) {
-		String comando = "insert into login "
-						+ " (nomeaparelho, numeroserie, modelo, marca_marca, categoriaaparelho_categoriaaparelho) "
-						+ "values(?,?,?,?,?)";
-		
+		String comando = "INSERT INTO `ordemservico`.`registroaparelho` "
+				+ "(`nomeaparelho`, `numerodeserie`, `modelo`, `marca_marca`, `categoriaaparelho_categoriaaparelho`)"
+				+ "values(?,?,?,?,?)";
+
+		PreparedStatement p;
 		try {
-			java.sql.Statement stmt = conexao.createStatement();
-			ResultSet rs = stmt.executeQuery(comando);
-			while(rs.next()) {
-				novoAparelho.setNome(rs.getString("nome"));
-				novoAparelho.setCategoria(Integer.parseInt(rs.getString("categoria")));
-				novoAparelho.setMarca(rs.getString("marca"));
-				novoAparelho.setModelo(rs.getString("modelo"));
-				novoAparelho.setNsaparelho(Integer.parseInt(rs.getString("nsaparelho")));
-				
-				String aparelho = novoAparelho.getIdaparelho()+"\n"+ novoAparelho.getNome()+"\n"+ novoAparelho.getCategoria()+"\n"+
-						novoAparelho.getMarca()+"\n"+ novoAparelho.getModelo()+"\n"+ novoAparelho.getNsaparelho();
-				System.out.println("Novo Aparelho: "+aparelho);
-			}
-		}catch(Exception e) {
-			e.printStackTrace(); 
+			p = this.conexao.prepareStatement(comando);
+			p.setString(1, novoAparelho.getNome());
+			p.setString(2, novoAparelho.getNsaparelho());
+			p.setString(3, novoAparelho.getModelo());
+			p.setInt(4, novoAparelho.getMarca());
+			p.setInt(5, novoAparelho.getCategoria());
+			p.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 		return true;
