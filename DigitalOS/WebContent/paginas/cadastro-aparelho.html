@@ -6,9 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="../resources/jquery/jquery.min.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="../scripts/scripts.js"></script>
 <link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="../css/customCssOS.css" rel="stylesheet">
-<script src="../scripts/scripts.js"></script>
 </head>
 
 <body>
@@ -104,9 +104,9 @@
 		<div class="div-barra-pesquisa col-xs-3 col-sm-9 col-md-8">
 			<div class="input-group input-group-custom">
 				<input type="text" class="form-control"
-					placeholder="Juliano Pereira"> <span
+					placeholder="Juliano Pereira" id="buscaAparelho" name="bsucaAparelho"> <span
 					class="input-group-addon icone-pesquisar glyphicon glyphicon-search"
-					id="buscaraparelho"></span>
+					id="buscaraparelho" onclick="buscarAparelho()"></span>
 			</div>
 		</div>
 		<!-- /.Div-Barra-Pesquisa -->
@@ -172,7 +172,6 @@
 										placeholder="XT560048">
 								</div>
 								<!-- /. FORM-GROUP -->
-
 							</div>
 							<!-- /.ROW -->
 						</div>
@@ -191,23 +190,16 @@
 				<!-- /.modal-content -->
 			</div>
 			<!-- /.modal-dialog -->
-			<div class="modal fade" tabindex="-2" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div id="msg"></div>
-					</div>
-				</div>
-			</div>
 		</div>
 		<!-- /.modal -->
 
 		<div class="div-painel-aparelhos col-xs-5 col-sm-3 col-md-9">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					PAINEL DE APARELHOS <span
-						class="btn btn-default glyphicon glyphicon-plus icone-adicionar-aparelho"></span>
+					PAINEL DE APARELHOS <span class="btn btn-default glyphicon glyphicon-plus icone-adicionar-aparelho"></span>
 				</div>
 				<div class="panel-body"></div>
+					<div id="resultadoAparelhos" class="resultadoAparelhos"></div>
 				<div class="panel-footer"></div>
 			</div>
 		</div>

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.digitalOS.jdbcInterface.DigitalOSInterface;
 import br.com.digitalOS.objetos.AparelhoObj;
@@ -81,6 +83,44 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			return false;
 		}
 		return true;
+	}
+
+	public List<AparelhoObj> buscarAparelho(AparelhoObj Aparelho) {
+		String comando = "select * from registroaparelho";
+		String nome = Aparelho.getNome();
+		System.out.println(nome);
+		if (!nome.equals("")) {
+			comando += " where nomeaparelho like '" + nome + "%'";
+		}
+
+		List<AparelhoObj> listAparelhoObj = new ArrayList<AparelhoObj>();
+
+		AparelhoObj AparelhoObj = null;
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while (rs.next()) {
+				AparelhoObj = new AparelhoObj();
+				int idaparelho = rs.getInt("idregistroaparelho");
+				String nomeaparelho = rs.getString("nomeaparelho");
+				String nsaparelho = rs.getString("numerodeserie");
+				String modelo = rs.getString("modelo");
+				int marca = Integer.parseInt(rs.getString("marca_marca"));
+				int categoria = Integer.parseInt(rs.getString("categoriaaparelho_cateriaaparelho"));
+
+				AparelhoObj.setIdaparelho(idaparelho);
+				AparelhoObj.setNome(nomeaparelho);
+				AparelhoObj.setNsaparelho(nsaparelho);;
+				AparelhoObj.setModelo(modelo);
+				AparelhoObj.setMarca(marca);
+				AparelhoObj.setCategoria(categoria);
+
+				listAparelhoObj.add(AparelhoObj);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listAparelhoObj;
 	}
 
 }
