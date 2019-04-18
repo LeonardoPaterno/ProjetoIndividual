@@ -86,15 +86,13 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 
 	public List<AparelhoObj> buscarAparelho(AparelhoObj Aparelho) {
-		String comando = "select * from registroaparelho";
 		String nome = Aparelho.getNome();
-		System.out.println(nome);
-		if (!nome.equals("")) {
-			comando += " where nomeaparelho like '" + nome + "%'";
+		String comando = "select * from registroaparelho";
+		if (nome != "") {
+			comando += " where nomeaparelho like '" + nome + "%';";
 		}
 
-		List<AparelhoObj> listAparelhoObj = new ArrayList<AparelhoObj>();
-
+		List<AparelhoObj> listAparelhoObj = null;
 		AparelhoObj AparelhoObj = null;
 		try {
 			java.sql.Statement stmt = conexao.createStatement();
@@ -106,8 +104,9 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				String nsaparelho = rs.getString("numerodeserie");
 				String modelo = rs.getString("modelo");
 				int marca = Integer.parseInt(rs.getString("marca_marca"));
-				int categoria = Integer.parseInt(rs.getString("categoriaaparelho_cateriaaparelho"));
-
+				int categoria = Integer.parseInt(rs.getString("categoriaaparelho_categoriaaparelho"));
+				
+				listAparelhoObj = new ArrayList<AparelhoObj>();
 				AparelhoObj.setIdaparelho(idaparelho);
 				AparelhoObj.setNome(nomeaparelho);
 				AparelhoObj.setNsaparelho(nsaparelho);;

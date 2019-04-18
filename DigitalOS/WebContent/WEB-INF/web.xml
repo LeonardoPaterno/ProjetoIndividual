@@ -28,7 +28,7 @@
     <url-pattern>/ServletCadastroAparelho</url-pattern>
   </servlet-mapping>
   
-   <servlet>
+  <servlet>
     <servlet-name>ServletBuscarAparelho</servlet-name>
     <servlet-class>br.com.digitalOS.servlets.ServletBuscarAparelho</servlet-class>
   </servlet>

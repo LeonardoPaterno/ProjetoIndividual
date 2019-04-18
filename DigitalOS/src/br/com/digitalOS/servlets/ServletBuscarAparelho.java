@@ -1,6 +1,7 @@
 package br.com.digitalOS.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
@@ -33,9 +34,11 @@ public class ServletBuscarAparelho extends HttpServlet {
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		AparelhoObj Aparelho = new AparelhoObj();
-		Aparelho.setNome(request.getParameter("valorBusca"));
-		System.out.println(request.getParameter("valorBusca"));
+		Aparelho.setNome(request.getParameter("buscarAparelho"));
+		//System.out.println(request.getParameter("buscarAparelho"));
+		
 		List<AparelhoObj> ListAparelhoObjs = new ArrayList<AparelhoObj>();
+		
 		Conexao conec =  new Conexao();
 		Connection conexao = conec.abrirConexao();
 		JDBCDigitalOSLoginDAO jdbcAparelhoObj = new JDBCDigitalOSLoginDAO(conexao);
@@ -43,11 +46,16 @@ public class ServletBuscarAparelho extends HttpServlet {
 		conec.fecharConexao();
 		
 		String json = new Gson().toJson(ListAparelhoObjs);
+		System.out.println(json);
+		PrintWriter out = response.getWriter();
 		try{
+			out = response.getWriter();
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(json);
 			response.setStatus(HttpServletResponse.SC_OK);
+			response.getWriter();
+			out.print(json);
+			out.flush();
 			
 		}catch(IOException e){
 			e.printStackTrace();

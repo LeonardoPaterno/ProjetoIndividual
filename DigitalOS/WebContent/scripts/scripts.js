@@ -75,13 +75,14 @@ function CadastroAparelho() {
 	});
 }
 
+
 function buscarAparelho(){
 	var valorBusca = $("#buscaAparelho").val();
 	alert(valorBusca);
 	exibirAparelhos(undefined, valorBusca);
 };
 
-function exibirAparelhos(listaDeAparelhos, valorBusca) {
+function exibirAparelhos(listaDeAparelhos, valorBusca){ 
 	var html = "<div class='table-responsive'><table class='table table-striped table-condensed'>";
 	html += "<tr> <th>Nome</th> <th>Catergoria</th> <th>Marca</th> <th>Modelo</th> <th>Numero Serie</th> </tr>";
 	if (listaDeAparelhos != undefined && listaDeAparelhos.length > 0 && listaDeAparelhos[0].id != undefined) {
@@ -99,12 +100,13 @@ function exibirAparelhos(listaDeAparelhos, valorBusca) {
 						"</td>"	+ 
 					"</tr>";
 		}
+		console.log(html);
 	} else {
 		if (listaDeAparelhos == undefined || (listaDeAparelhos != undefined && listaDeAparelhos.length > 0)) {
 			$.ajax({
-				type : "POST",
-				url : "../ServletBuscarAparelho",
-				data : "buscarAparelho=" + valorBusca,
+				type : 'POST',
+				url:  '../ServletBuscarAparelho',
+				data : {"buscarAparelho" : valorBusca},
 				success : function(listaDeAparelhos) {
 						exibirAparelhos(listaDeAparelhos);
 				},
