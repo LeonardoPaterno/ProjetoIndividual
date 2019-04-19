@@ -40,25 +40,24 @@ function CadastroAparelho() {
 			'nsaparelho' : nsaparelho,
 			'categoria' : categoria
 		},
-
 		success : function(resposta) {
-			var modal = {
+			var modalzinha = {
 				title : "Mensagem",
 				heigth : 250,
 				width : 400,
 				modal : true,
 				buttons : {
-					"Ok" : function() {
-						$(this).modal("close");
+					"OK" : function() {
+						$(this).dialog("close");
 					}
 				}
 			};
 			$("#msg").html(resposta.resposta);
-			$("#msg").modal(modal);
+			$("#msg").dialog(modalzinha);
 
 		},
 		error : function(resposta) {
-			var modal = {
+			var modalzinha = {
 				title : "Mensagem",
 				heigth : 250,
 				width : 400,
@@ -70,19 +69,30 @@ function CadastroAparelho() {
 				}
 			};
 			$("#msg").html(resposta.resposta);
-			$("#msg").modal(modal);
+			$("#msg").modal(modalzinha);
 		}
 	});
 }
 
 
 function buscarAparelho(){
-	var valorBusca = $("#buscaAparelho").val();
+	var valorBusca = $("input[name=buscaAparelho]").val();
 	alert(valorBusca);
-	exibirAparelhos(undefined, valorBusca);
+	
+		$.ajax({
+			type : 'POST',
+			url:  '../ServletBuscarAparelho',
+			data : {"buscarAparelho" : valorBusca},
+			success : function(listAparelhosAchados) {
+					listaDeAparelhos(listAparelhosAchados);
+			},
+			error : function(resposta) {
+				alert("Erro ao Consultar Aparelhos");
+			}
+		});
 };
 
-function exibirAparelhos(listaDeAparelhos, valorBusca){ 
+/*function exibirAparelhos(listaDeAparelhos, valorBusca){ 
 	var html = "<div class='table-responsive'><table class='table table-striped table-condensed'>";
 	html += "<tr> <th>Nome</th> <th>Catergoria</th> <th>Marca</th> <th>Modelo</th> <th>Numero Serie</th> </tr>";
 	if (listaDeAparelhos != undefined && listaDeAparelhos.length > 0 && listaDeAparelhos[0].id != undefined) {
@@ -100,7 +110,6 @@ function exibirAparelhos(listaDeAparelhos, valorBusca){
 						"</td>"	+ 
 					"</tr>";
 		}
-		console.log(html);
 	} else {
 		if (listaDeAparelhos == undefined || (listaDeAparelhos != undefined && listaDeAparelhos.length > 0)) {
 			$.ajax({
@@ -121,4 +130,4 @@ function exibirAparelhos(listaDeAparelhos, valorBusca){
 	html += "</table></div>";
 	$("#resultadoAparelhos").html(html);
 };
-exibirAparelhos(undefined, "");
+exibirAparelhos(undefined, "");*/
