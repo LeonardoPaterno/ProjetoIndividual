@@ -32,17 +32,17 @@ public class ServletBuscarAparelho extends HttpServlet {
 	}
 	
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		List<AparelhoObj> listaAparelho = null;
 		AparelhoObj Aparelho = new AparelhoObj();
 		Aparelho.setNome(request.getParameter("valorBusca"));
 		System.out.println(request.getParameter("valorBusca"));
 		
 		List<AparelhoObj> ListAparelhoObjs = new ArrayList<AparelhoObj>();
-		
+		listaAparelho = new ArrayList<AparelhoObj>();
 		Conexao conec =  new Conexao();
 		Connection conexao = conec.abrirConexao();
 		JDBCDigitalOSLoginDAO jdbcAparelhoObj = new JDBCDigitalOSLoginDAO(conexao);
-		ListAparelhoObjs = jdbcAparelhoObj.buscarAparelho(Aparelho);
+		ListAparelhoObjs = jdbcAparelhoObj.buscarAparelho(listaAparelho);
 		conec.fecharConexao();
 		
 		String json = new Gson().toJson(ListAparelhoObjs);

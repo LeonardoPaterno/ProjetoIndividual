@@ -85,18 +85,17 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		return true;
 	}
 
-	public List<AparelhoObj> buscarAparelho(AparelhoObj Aparelho) {
+	public List<AparelhoObj> buscarAparelho(List<AparelhoObj> listaAparelho) {
+		AparelhoObj Aparelho = new AparelhoObj();
 		String nome = Aparelho.getNome();
 		String comando = "select idregistroaparelho, nomeaparelho, numerodeserie, modelo, marca_marca, categoriaaparelho_categoriaaparelho from registroaparelho";
 		if (nome != "") {
 			comando += " where nomeaparelho like '" + nome + "%';";
 		}
 
-		List<AparelhoObj> listAparelhoObj = null;
 		try {
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
-			AparelhoObj AparelhoObj = new AparelhoObj();
 			while (rs.next()) {
 				int idaparelho = rs.getInt("idregistroaparelho");
 				String nomeaparelho = rs.getString("nomeaparelho");
@@ -104,21 +103,37 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				String modelo = rs.getString("modelo");
 				int marca = Integer.parseInt(rs.getString("marca_marca"));
 				int categoria = Integer.parseInt(rs.getString("categoriaaparelho_categoriaaparelho"));
-				
-				listAparelhoObj = new ArrayList<AparelhoObj>();
-				AparelhoObj.setIdaparelho(idaparelho);
-				AparelhoObj.setNome(nomeaparelho);
-				AparelhoObj.setNsaparelho(nsaparelho);;
-				AparelhoObj.setModelo(modelo);
-				AparelhoObj.setMarca(marca);
-				AparelhoObj.setCategoria(categoria);
 
-				listAparelhoObj.add(AparelhoObj);
+				Aparelho.setIdaparelho(idaparelho);
+				Aparelho.setNome(nomeaparelho);
+				Aparelho.setNsaparelho(nsaparelho);
+				Aparelho.setModelo(modelo);
+				Aparelho.setMarca(marca);
+				Aparelho.setCategoria(categoria);
+
+				listaAparelho.add(Aparelho);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return listAparelhoObj;
+		return listaAparelho;
+
+		/*
+		 * try { java.sql.Statement stmt = conexao.createStatement(); ResultSet rs =
+		 * stmt.executeQuery(comando); while (rs.next()) { int idaparelho =
+		 * rs.getInt("idregistroaparelho"); String nomeaparelho =
+		 * rs.getString("nomeaparelho"); String nsaparelho =
+		 * rs.getString("numerodeserie"); String modelo = rs.getString("modelo"); int
+		 * marca = Integer.parseInt(rs.getString("marca_marca")); int categoria =
+		 * Integer.parseInt(rs.getString("categoriaaparelho_categoriaaparelho"));
+		 * 
+		 * Aparelho.setIdaparelho(idaparelho); Aparelho.setNome(nomeaparelho);
+		 * Aparelho.setNsaparelho(nsaparelho);; Aparelho.setModelo(modelo);
+		 * Aparelho.setMarca(marca); Aparelho.setCategoria(categoria);
+		 * 
+		 * listaAparelho.add(Aparelho); } } catch (Exception e) { e.printStackTrace(); }
+		 * return listaAparelho;
+		 */
 	}
 
 }
