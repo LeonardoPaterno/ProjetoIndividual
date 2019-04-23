@@ -34,8 +34,8 @@ public class ServletBuscarAparelho extends HttpServlet {
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		AparelhoObj Aparelho = new AparelhoObj();
-		Aparelho.setNome(request.getParameter("buscarAparelho"));
-		//System.out.println(request.getParameter("buscarAparelho"));
+		Aparelho.setNome(request.getParameter("valorBusca"));
+		System.out.println(request.getParameter("valorBusca"));
 		
 		List<AparelhoObj> ListAparelhoObjs = new ArrayList<AparelhoObj>();
 		

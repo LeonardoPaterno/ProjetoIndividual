@@ -48,12 +48,12 @@ function CadastroAparelho() {
 				modal : true,
 				buttons : {
 					"OK" : function() {
-						$(this).dialog("close");
+						$(this).modal("close");
 					}
 				}
 			};
 			$("#msg").html(resposta.resposta);
-			$("#msg").dialog(modalzinha);
+			$("#msg").modal(modalzinha);
 
 		},
 		error : function(resposta) {
@@ -72,62 +72,57 @@ function CadastroAparelho() {
 			$("#msg").modal(modalzinha);
 		}
 	});
+	
+	
 }
 
+/*function timer(){
+	var timerBusca = setTimeOut(function(){exibirAparelhos()}, 2000);
+}
 
+*/
 function buscarAparelho(){
 	var valorBusca = $("input[name=buscaAparelho]").val();
 	alert(valorBusca);
-	
-		$.ajax({
-			type : 'POST',
-			url:  '../ServletBuscarAparelho',
-			data : {"buscarAparelho" : valorBusca},
-			success : function(listAparelhosAchados) {
-					listaDeAparelhos(listAparelhosAchados);
-			},
-			error : function(resposta) {
-				alert("Erro ao Consultar Aparelhos");
-			}
-		});
+	exibirAparelhos(undefined, valorBusca);
 };
 
-/*function exibirAparelhos(listaDeAparelhos, valorBusca){ 
-	var html = "<div class='table-responsive'><table class='table table-striped table-condensed'>";
-	html += "<tr> <th>Nome</th> <th>Catergoria</th> <th>Marca</th> <th>Modelo</th> <th>Numero Serie</th> </tr>";
-	if (listaDeAparelhos != undefined && listaDeAparelhos.length > 0 && listaDeAparelhos[0].id != undefined) {
-		for (var i = 0; i < listaDeAparelhos.length; i++) {
-			html += "<tr>"+ 
-						"<td>" + listaDeAparelhos[i].id + "</td>" + 
-						"<td>" + listaDeAparelhos[i].nome + "</td>" + 
-						"<td>" + listaDeAparelhos[i].categoria + "</td>" + 
-						"<td>" + listaDeAparelhos[i].marca + "</td>" + 
-						"<td>" + listaDeAparelhos[i].modelo + "</td>" + 
-						"<td>" + listaDeAparelhos[i].nsaparelho + "</td>" + 
-						"<td>" + 
-							"<a class='link'onclick='editarAparelho(" + listaDeAparelhos[i].id + ")'>Editar</a>" + 
-							"<a class='link'onclick='deletarAparelho(" + listaDeAparelhos[i].id + ")'>Deletar</a>" + 
-						"</td>"	+ 
-					"</tr>";
+function exibirAparelhos(listaAparelhosAchados, valorBusca){
+	var html = "<div class='teble-reponsive'>" +
+				"<table class='table table-striped table-condesed'>";
+		html += "<tr>"
+					+ "<th>Nome</th> <th>Categoria</th> <th>Marca</th> <th>Modelo</th> <th>Numero Serie</th> " +
+				"</tr>"
+		if(listaAparelhosAchados != undefined && listaAparelhosAchados.jength > 0 && listaAparelhosAchados[0].id != undefined){
+			for(var i = 0; i < listaAparelhosAchados.length; i++){
+				html += "<tr>"
+							+"<td>" + listaAparelhosAchados[i].id + "</td>"
+							+"<td>" + listaAparelhosAchados[i].nome + "</td>"
+							+"<td>" + listaAparelhosAchados[i].categoria + "</td>"
+							+"<td>" + listaAparelhosAchados[i].marca + "</td>"
+							+"<td>" + listaAparelhosAchados[i].modelo + "</td>"
+							+"<td>" + listaAparelhosAchados[i].nsaparelho + "</td>"
+						+"</tr>"
+			}
+		}else{
+			if(listaAparelhosAchados == undefined || (listaAparelhosAchados != undefined && listaAparelhosAchados.length > 0)){
+				$.ajax({
+					type: 'POST',
+					url: '../ServletBuscarAparelho',
+					data: {'valorBusca': valorBusca},
+					success: function(listaAparelhosAchados){
+						exibirAparelhos(listaAparelhosAchados);
+					},
+					error: function(){
+						alert("Error, nenhum aparelho encontrado");
+					}
+				});
+			}else{
+				alert("Ferrou Tudo");
+			}
 		}
-	} else {
-		if (listaDeAparelhos == undefined || (listaDeAparelhos != undefined && listaDeAparelhos.length > 0)) {
-			$.ajax({
-				type : 'POST',
-				url:  '../ServletBuscarAparelho',
-				data : {"buscarAparelho" : valorBusca},
-				success : function(listaDeAparelhos) {
-						exibirAparelhos(listaDeAparelhos);
-				},
-				error : function(resposta) {
-					alert("Erro ao Consultar Aparelhos");
-				}
-			});
-		} else {
-			html += "<tr style='display:inline-block'><td colspan='6'>Nenhum Registro Encontrado</td></tr>";
-		}
-	}
-	html += "</table></div>";
-	$("#resultadoAparelhos").html(html);
-};
-exibirAparelhos(undefined, "");*/
+		html += "</table> </div>"
+		$("#resultadoAparelhos").html(html);
+		exibirAparelhos(undefined, "");
+}
+

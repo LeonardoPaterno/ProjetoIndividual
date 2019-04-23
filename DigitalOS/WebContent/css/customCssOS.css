@@ -1,7 +1,7 @@
 .custom-background-login {
 	background-image: url("../imagens/pc.jpg");
 	position: relative;
-	z-index: 10000;
+	z-index: 100;
 }
 
 .div-primaria {
