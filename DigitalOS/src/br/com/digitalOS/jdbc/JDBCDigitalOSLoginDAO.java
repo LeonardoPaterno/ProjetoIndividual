@@ -87,18 +87,17 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 
 	public List<AparelhoObj> buscarAparelho(AparelhoObj Aparelho) {
 		String nome = Aparelho.getNome();
-		String comando = "select * from registroaparelho";
+		String comando = "select idregistroaparelho, nomeaparelho, numerodeserie, modelo, marca_marca, categoriaaparelho_categoriaaparelho from registroaparelho";
 		if (nome != "") {
 			comando += " where nomeaparelho like '" + nome + "%';";
 		}
 
 		List<AparelhoObj> listAparelhoObj = null;
-		AparelhoObj AparelhoObj = null;
 		try {
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
+			AparelhoObj AparelhoObj = new AparelhoObj();
 			while (rs.next()) {
-				AparelhoObj = new AparelhoObj();
 				int idaparelho = rs.getInt("idregistroaparelho");
 				String nomeaparelho = rs.getString("nomeaparelho");
 				String nsaparelho = rs.getString("numerodeserie");
