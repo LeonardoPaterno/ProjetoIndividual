@@ -85,18 +85,21 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		return true;
 	}
 
-	public List<AparelhoObj> buscarAparelho(List<AparelhoObj> listaAparelho) {
-		AparelhoObj Aparelho = new AparelhoObj();
-		String nome = Aparelho.getNome();
-		String comando = "select idregistroaparelho, nomeaparelho, numerodeserie, modelo, marca_marca, categoriaaparelho_categoriaaparelho from registroaparelho";
+	public List<AparelhoObj> buscarAparelho(AparelhoObj aparelho) {
+		
+		String nome = aparelho.getNome();
+		String comando = "select idregistroaparelho, nomeaparelho, numerodeserie, modelo, marca_marca, categoriaaparelho_categoriaaparelho "
+						+ "from registroaparelho";
 		if (nome != "") {
 			comando += " where nomeaparelho like '" + nome + "%';";
 		}
 
+		List<AparelhoObj> ListaAparelho = new ArrayList<AparelhoObj>();
 		try {
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
 			while (rs.next()) {
+				AparelhoObj aparelhoAux = new AparelhoObj();
 				int idaparelho = rs.getInt("idregistroaparelho");
 				String nomeaparelho = rs.getString("nomeaparelho");
 				String nsaparelho = rs.getString("numerodeserie");
@@ -104,36 +107,19 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				int marca = Integer.parseInt(rs.getString("marca_marca"));
 				int categoria = Integer.parseInt(rs.getString("categoriaaparelho_categoriaaparelho"));
 
-				Aparelho.setIdaparelho(idaparelho);
-				Aparelho.setNome(nomeaparelho);
-				Aparelho.setNsaparelho(nsaparelho);
-				Aparelho.setModelo(modelo);
-				Aparelho.setMarca(marca);
-				Aparelho.setCategoria(categoria);
+				aparelhoAux.setIdaparelho(idaparelho);
+				aparelhoAux.setNome(nomeaparelho);
+				aparelhoAux.setNsaparelho(nsaparelho);
+				aparelhoAux.setModelo(modelo);
+				aparelhoAux.setMarca(marca);
+				aparelhoAux.setCategoria(categoria);
 
-				listaAparelho.add(Aparelho);
+				ListaAparelho.add(aparelhoAux);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return listaAparelho;
-
-		/*
-		 * try { java.sql.Statement stmt = conexao.createStatement(); ResultSet rs =
-		 * stmt.executeQuery(comando); while (rs.next()) { int idaparelho =
-		 * rs.getInt("idregistroaparelho"); String nomeaparelho =
-		 * rs.getString("nomeaparelho"); String nsaparelho =
-		 * rs.getString("numerodeserie"); String modelo = rs.getString("modelo"); int
-		 * marca = Integer.parseInt(rs.getString("marca_marca")); int categoria =
-		 * Integer.parseInt(rs.getString("categoriaaparelho_categoriaaparelho"));
-		 * 
-		 * Aparelho.setIdaparelho(idaparelho); Aparelho.setNome(nomeaparelho);
-		 * Aparelho.setNsaparelho(nsaparelho);; Aparelho.setModelo(modelo);
-		 * Aparelho.setMarca(marca); Aparelho.setCategoria(categoria);
-		 * 
-		 * listaAparelho.add(Aparelho); } } catch (Exception e) { e.printStackTrace(); }
-		 * return listaAparelho;
-		 */
+		return ListaAparelho;
 	}
 
 }
