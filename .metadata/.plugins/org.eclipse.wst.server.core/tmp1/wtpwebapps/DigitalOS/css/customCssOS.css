@@ -441,3 +441,7 @@ h4 {
 .table th, td{
 	text-align: center;
 }
+
+#msgEditAparelho{
+	z-index: 1000;
+}

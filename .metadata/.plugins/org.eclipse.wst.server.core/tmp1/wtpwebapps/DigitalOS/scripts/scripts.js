@@ -72,8 +72,6 @@ function CadastroAparelho() {
 			$("#msg").modal(modalzinha);
 		}
 	});
-	
-	
 }
 
 
@@ -106,11 +104,44 @@ function carregarTabela(listaAparelhosAchados){
 					"<td>" + listaAparelhosAchados[i].marca + "</td>" +
 					"<td>" + listaAparelhosAchados[i].modelo + "</td>" +
 					"<td>" + listaAparelhosAchados[i].nsaparelho + "</td>" +
+					"<td>" +
+						"<div class='btn glyphicon glyphicon-pencil' onclick='editarAparelho("+listaAparelhosAchados[i].id+")'></div>" +
+						"<div class='btn glyphicon glyphicon-remove' onclick='deletarAparelho("+listaAparelhosAchados[i].id+")'></div>" +
+					"</td>";
 				"</tr>"
 	}
 	html += "</table>" +
 			"</div>"
-	console.log(html);
 	$("#resultadoAparelhos").html(html);
 }
 
+function editarAparelho(id){
+	$.ajax({
+		type : 'POST',
+		url : '../ServletCadastroAparelho',
+		success: function(aparelho){
+			$("#nomeEdit").val(aparelho.nome);
+			$("#categoriaEdit").val(aparelho.endereco);
+			$("#marcaEdit").val(aparelho.telefone);
+			$("#modeloEdit").val(aparelho.email);
+			$("#nsaparelhoEdit").val(aparelho.senha);
+			$("#idaparelhoEdit").val(aparelho.id);
+			var cfg = {
+					title : "Alteração de Aparelho",
+					heigth : 250,
+					width : 400,
+					modal : true,
+					buttons : {
+						"Ok" : function() {
+							$(this).dialog("close");
+						}
+					}
+				};
+				$(cfg).modal({escapeClose: false,  clickClose: false,  showClose: false});
+				$("#msgEditAparelho").dialog(cfg);
+		},
+		error: function(err){
+			alert("Erro ao editar aparelho!" + err.responseText);
+		}
+	});
+}
