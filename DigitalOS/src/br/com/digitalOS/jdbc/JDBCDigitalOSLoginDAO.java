@@ -86,10 +86,10 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 
 	public List<AparelhoObj> buscarAparelho(AparelhoObj aparelho) {
-		
+
 		String nome = aparelho.getNome();
 		String comando = "select idregistroaparelho, nomeaparelho, numerodeserie, modelo, marca_marca, categoriaaparelho_categoriaaparelho "
-						+ "from registroaparelho";
+				+ "from registroaparelho";
 		if (nome != "") {
 			comando += " where nomeaparelho like '" + nome + "%';";
 		}
@@ -122,4 +122,23 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		return ListaAparelho;
 	}
 
+	@Override
+	public boolean editarAparelho(AparelhoObj aparelho) {
+	String comando = "UPDATE registroaparelho SET nomeaparelho=?, numerodeserie=?, modelo=?, marca_marca=?, categoriaaparelho_categoriaaparelho=? ";
+	comando += "WHERE idregistroaparelho= " + aparelho.getIdaparelho();
+	PreparedStatement p;
+	try{
+		p = this.conexao.prepareStatement(comando);
+		p.setString(1, aparelho.getNome());
+		p.setString(2, aparelho.getNsaparelho());
+		p.setString(3, aparelho.getModelo());
+		p.setInt(4, aparelho.getMarca());
+		p.setInt(5, aparelho.getCategoria());
+		p.executeUpdate();
+	}catch(SQLException e){
+		e.printStackTrace();
+		return false;
+	}
+	return true;
+	}
 }

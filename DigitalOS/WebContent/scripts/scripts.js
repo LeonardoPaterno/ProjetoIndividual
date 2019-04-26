@@ -94,7 +94,7 @@ function carregarTabela(listaAparelhosAchados){
 	var html = "<div class='teble-reponsive'>" +
 			   "<table class='table table-striped table-condensed table-bordered'>";
 		html += "<tr>" +
-				"<th># ID</th> <th>Nome</th> <th>Categoria</th> <th>Marca</th> <th>Modelo</th> <th>Némero Série</th> <th>Edição / Exclusão</th>" +
+				"<th># ID</th> <th>Nome</th> <th>Categoria</th> <th>Marca</th> <th>Modelo</th> <th>Némero Série</th> <th>Edição</th> <th>Ativação/Inativação</th>" +
 				"</tr>"
 	for(var i = 0; i < listaAparelhosAchados.length; i++){
 		html += "<tr>" +
@@ -106,7 +106,9 @@ function carregarTabela(listaAparelhosAchados){
 					"<td>" + listaAparelhosAchados[i].nsaparelho + "</td>" +
 					"<td>" +
 						"<div class='btn glyphicon glyphicon-pencil' onclick='editarAparelho("+listaAparelhosAchados[i].id+")'></div>" +
-						"<div class='btn glyphicon glyphicon-remove' onclick='deletarAparelho("+listaAparelhosAchados[i].id+")'></div>" +
+					"</td>" +
+					"<td>" +
+						"<div class='btn glyphicon glyphicon glyphicon-unchecked' onclick='ativarAparelho("+listaAparelhosAchados[i].id+")'></div>" +
 					"</td>";
 				"</tr>"
 	}
@@ -128,17 +130,16 @@ function editarAparelho(id){
 			$("#idaparelhoEdit").val(aparelho.id);
 			var cfg = {
 					title : "Alteração de Aparelho",
-					heigth : 250,
+					heigth : 600,
 					width : 400,
 					modal : true,
 					buttons : {
 						"Ok" : function() {
-							$(this).dialog("close");
+							$(this).modal("close");
 						}
 					}
 				};
-				$(cfg).modal({escapeClose: false,  clickClose: false,  showClose: false});
-				$("#msgEditAparelho").dialog(cfg);
+				$("#msgEditAparelho").modal(cfg);
 		},
 		error: function(err){
 			alert("Erro ao editar aparelho!" + err.responseText);

@@ -18,10 +18,10 @@ import br.com.digitalOS.bd.conexao.Conexao;
 import br.com.digitalOS.jdbc.JDBCDigitalOSLoginDAO;
 import br.com.digitalOS.objetos.AparelhoObj;
 
-public class ServletCadastroAparelho extends HttpServlet {
+public class ServletEditarAparelho extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ServletCadastroAparelho() {
+	public ServletEditarAparelho() {
 
 	}
 
@@ -38,7 +38,6 @@ public class ServletCadastroAparelho extends HttpServlet {
 	protected void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		AparelhoObj aparelho = new AparelhoObj();
-		System.out.println("aqui");
 		Map<String, String> msg = new HashMap<String, String>();
 		PrintWriter out = response.getWriter();
 		String json = null;

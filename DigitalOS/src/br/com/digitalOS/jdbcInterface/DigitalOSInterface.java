@@ -11,6 +11,8 @@ public interface DigitalOSInterface {
 	public boolean cadastrarAparelho(AparelhoObj novoAparelho);
 	
 	public List<AparelhoObj> buscarAparelho(AparelhoObj aparelho); 
+	
+	public boolean editarAparelho(AparelhoObj aparelho);
 
 }
 
