@@ -25,20 +25,16 @@ public class ServletCadastroAparelho extends HttpServlet {
 
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		process(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		process(request, response);
 	}
 
-	protected void process(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void process(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		AparelhoObj aparelho = new AparelhoObj();
-		System.out.println("aqui");
 		Map<String, String> msg = new HashMap<String, String>();
 		PrintWriter out = response.getWriter();
 		String json = null;

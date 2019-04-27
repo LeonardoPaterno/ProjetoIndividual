@@ -23,7 +23,7 @@ function loginOS() {
 }
 
 function CadastroAparelho() {
-
+	var id = $("#").val();
 	var nome = $("input[name=nomeaparelho]").val();
 	var categoria = $("select.categoria").children("option:selected").val();
 	var marca = $("select.marca").children("option:selected").val();
@@ -105,7 +105,7 @@ function carregarTabela(listaAparelhosAchados){
 					"<td>" + listaAparelhosAchados[i].modelo + "</td>" +
 					"<td>" + listaAparelhosAchados[i].nsaparelho + "</td>" +
 					"<td>" +
-						"<div class='btn glyphicon glyphicon-pencil' onclick='editarAparelho("+listaAparelhosAchados[i].id+")'></div>" +
+						"<div class='btn glyphicon glyphicon-pencil' onclick='editarAparelho("+listaAparelhosAchados[i].idaparelho+")'></div>" +
 					"</td>" +
 					"<td>" +
 						"<div class='btn glyphicon glyphicon glyphicon-unchecked' onclick='ativarAparelho("+listaAparelhosAchados[i].id+")'></div>" +
@@ -117,17 +117,18 @@ function carregarTabela(listaAparelhosAchados){
 	$("#resultadoAparelhos").html(html);
 }
 
-function editarAparelho(id){
+function editarAparelho(idaparelho){
 	$.ajax({
 		type : 'POST',
 		url : '../ServletCadastroAparelho',
+		data:{'idaparelho':idaparelho},
 		success: function(aparelho){
-			$("#nomeEdit").val(aparelho.nome);
-			$("#categoriaEdit").val(aparelho.endereco);
-			$("#marcaEdit").val(aparelho.telefone);
-			$("#modeloEdit").val(aparelho.email);
-			$("#nsaparelhoEdit").val(aparelho.senha);
-			$("#idaparelhoEdit").val(aparelho.id);
+			$("#EditIdAparelho").val(aparelho.idaparelho);
+			$("#EditNomeAparelho").val(aparelho.nome);
+			$("#EditCategoriaAparelho").val(aparelho.endereco);
+			$("#EditMarcaAparelho").val(aparelho.telefone);
+			$("#EditModeloAparelho").val(aparelho.email);
+			$("#EditNsAparelho").val(aparelho.senha);
 			var cfg = {
 					title : "Alteração de Aparelho",
 					heigth : 600,

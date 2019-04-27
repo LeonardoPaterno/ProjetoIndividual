@@ -1,89 +1,75 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<script src="../resources/jquery/jquery.min.js"></script>
-<script src="../resources/jquery/utils.js"></script>
-<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
-<script src="../scripts/scripts.js"></script>
-
-<link href="../resources/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
-<link href="../css/customCssOS.css" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<script src="../resources/jquery/jquery.min.js"></script>
+	<script src="../resources/jquery/utils.js"></script>
+	<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../scripts/scripts.js"></script>
+	
+	<link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../css/customCssOS.css" rel="stylesheet">
 </head>
 
 <body>
 	<div class="container container-fluid geral-menu" id="menu">
-		<div class="hidden-xs col-sm-3 col-md-2 col-lg-2 barra-lateral"
-			data-toggle="collapse" role="navigation" id="barra-lateral">
+		<div class="hidden-xs col-sm-3 col-md-2 col-lg-2 barra-lateral"	data-toggle="collapse" role="navigation" id="barra-lateral">
 			<div class="navbar-header">
 				<div class="navbar-brand titulo">
 					<img src="../imagens/logoteste2.png" class="img-responsive">
 				</div>
-			</div>
-			<!-- navbar-header -->
+			</div><!-- navbar-header -->
 
-			<div class="btn-group btn-group-vertical btn-group-custom"
-				role="group">
+			<div class="btn-group btn-group-vertical btn-group-custom" role="group">
 
 				<div class="btn-group btn-group-vertical group-menu" role="group">
-					<button class="btn btn-primary dropdown-toggle"
-						data-toggle="dropdown">Cadastrar</button>
-					<ul class="dropdown-menu dropdown-menu-custom div-botao-cadastrar">
-						<li>
-							<div class="btn-group-vertical" role="group">
-								<a class="btn btn-primary btn-primary-custom"
-									onclick="location.href='cadastro-aparelho.html'">Aparelho</a> <a
-									class="btn btn-primary btn-primary-custom"
-									onclick="location.href='cadastro-cliente.html'">Cliente</a> <a
-									class="btn btn-primary btn-primary-custom"
-									onclick="location.href='cadastro-funcionario.html'">Funcionario</a>
-								<a class="btn btn-primary btn-primary-custom"
-									onclick="location.href='cadastro-itens-servico.html'">Itens
-									de Serviço</a> <a class="btn btn-primary btn-primary-custom"
-									onclick="location.href='cadastro-servico.html'">Serviços</a>
-							</div>
-						</li>
-					</ul>
+					<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+						Cadastrar
+					</button>
+						<ul class="dropdown-menu dropdown-menu-custom div-botao-cadastrar">
+							<li>
+								<div class="btn-group-vertical" role="group">
+									<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-aparelho.html'">Aparelho</a> 
+									<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Cliente</a> 
+									<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-funcionario.html'">Funcionario</a>
+									<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-itens-servico.html'">Itens de Serviço</a> 
+									<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-servico.html'">Serviços</a>
+								</div>
+							</li>
+						</ul>
 				</div>
 
 
 				<div class="btn-group btn-group-vertical group-menu" role="group">
-					<button class="btn btn-primary dropdown-toggle"
-						data-toggle="dropdown">Ordens de Serviço</button>
-					<ul
-						class="dropdown-menu dropdown-menu-custom div-botao-ordem-servico">
+					<button class="btn btn-primary dropdown-toggle"	data-toggle="dropdown">
+						Ordens de Serviço
+					</button>
+					<ul	class="dropdown-menu dropdown-menu-custom div-botao-ordem-servico">
 						<li>
 							<div class="btn-group-vertical" role="group">
-								<a class="btn btn-primary btn-primary-custom"
-									onclick="location.href='#'">Aberta</a> <a
-									class="btn btn-primary btn-primary-custom"
-									onclick="location.href='#'">Concluida</a> <a
-									class="btn btn-primary btn-primary-custom"
-									onclick="location.href='#'">Em Andamento</a> <a
-									class="btn btn-primary btn-primary-custom"
-									onclick="location.href='#'">Cancelada</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='#'">Aberta</a> 
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='#'">Concluida</a> 
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='#'">Em Andamento</a> 
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='#'">Cancelada</a>
 							</div>
 						</li>
 					</ul>
 				</div>
 
 				<div class="btn-group btn-group-vertical group-menu" role="group">
-					<button class="btn btn-primary dropdown-toggle"
-						data-toggle="dropdown">Relatório</button>
+					<button class="btn btn-primary dropdown-toggle"	data-toggle="dropdown">
+						Relatório
+					</button>
 					<ul class="dropdown-menu dropdown-menu-custom div-botao-relatorio">
 						<li>
 							<div class="btn-group-vertical" role="group">
-								<a class="btn btn-primary btn-primary-custom"
-									onclick="location.href='#'">Funcionario</a> <a
-									class="btn btn-primary btn-primary-custom"
-									onclick="location.href='#'">Cliente</a> <a
-									class="btn btn-primary btn-primary-custom"
-									onclick="location.href='#'">Ordem de Serviço</a> <a
-									class="btn btn-primary btn-primary-custom">Itens de Serviço</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='#'">Funcionario</a> 
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='#'">Cliente</a> 
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='#'">Ordem de Serviço</a> 
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='#'">Itens de Serviço</a>
 							</div>
 						</li>
 					</ul>
@@ -91,109 +77,107 @@
 
 				<div class="btn-group btn-group-vertical div-botao-sair">
 					<button class="btn btn-danger botao-sair" id="botao-sair">
-						Sair<span class="glyphicon glyphicon-log-out icone-sair"></span>
+						Sair
+						<span class="glyphicon glyphicon-log-out icone-sair"></span>
 					</button>
-				</div>
+				</div><!-- btn-group-vertical div-botao-sair -->
+			</div><!-- btn-group-vertical -->
+		</div><!-- barra-lateral -->
 
-			</div>
-			<!-- btn-group-vertical -->
-		</div>
-		<!-- barra-lateral -->
-
-		<div
-			class="btn-group visible-xs col-xs-1 col-sm-1 col-xs1-custom botao-barra-lateral-xs"
-			id="div-botao-barra-lateral-xs">
-			<a class="btn btn-default btn-lg" type="button" aria-haspopup="true"
-				aria-expanded="false" id="botao-icone-menu"> <span
-				class="glyphicon glyphicon-menu-hamburger"></span>
+		<div class="btn-group visible-xs col-xs-1 col-sm-1 col-xs1-custom botao-barra-lateral-xs" id="div-botao-barra-lateral-xs">
+			<a class="btn btn-default btn-lg" type="button" aria-haspopup="true" aria-expanded="false" id="botao-icone-menu"> 
+				<span class="glyphicon glyphicon-menu-hamburger"></span>
 			</a>
-		</div>
-		<!-- menu-display-xs -->
+		</div><!-- menu-display-xs -->
 
-		<div class="div-barra-pesquisa col-xs-3 col-sm-9 col-md-8">
-			<div
-				class="input-group input-group-custom col-xs-3 col-sm-6 col-md-8 col-lg-10">
-				<input type="text" class="form-control" placeholder="moto G"
-					id="buscaAparelhoInput" name="buscaAparelhoInput">
-				<div
-					class="btn input-group-addon icone-pesquisar glyphicon glyphicon-search"
-					onclick="buscarAparelho()"></div>
-			</div>
-		</div>
-		<!-- /.Div-Barra-Pesquisa -->
-
-		<div class="div-painel-aparelhos col-sm-12 col-md-10 col-lg-10">
-			<div class="panel panel-default">
+		<div class="mary div-painel-aparelhos col-sm-12 col-md-10 col-lg-10">
+			<div class="panel panel-primary">
 				<div class="panel-heading">
-					PAINEL DE APARELHOS <span
-						class="btn btn-default glyphicon glyphicon-plus icone-adicionar-aparelho"></span>
+					<div class="">
+						<label class="label-painel-aparelho">Painel de Aparelhos</label> 
+						<span class="btn btn-default glyphicon glyphicon-plus icone-adicionar-aparelho"></span>
+					</div>
+					<div class="input-group input-group-barra-pesquisa">
+						<input type="text" class="form-control form-control-custom" placeholder="moto G" id="buscaAparelhoInput" name="buscaAparelhoInput">
+						<span class="btn input-group-addon icone-pesquisar glyphicon glyphicon-search" onclick="buscarAparelho()"></span>					
+					</div>
 				</div>
-				<div class="panel-body"></div>
-				<div id="resultadoAparelhos" class="resultadoAparelhos"></div>
-				<div class="panel-footer"></div>
+				<div class="panel-body">
+					<div id="resultadoAparelhos" class="resultadoAparelhos"></div>
+				</div>
 			</div>
 		</div>
 
-		<div class="modal fade" id="msgEditAparelho">
+		<div class="modal fade col-md-12" id="msgEditAparelho">
 			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
+				<div class="modal-content col-md-12">
+					<div class="modal-header col-md-12">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 						<h5 class="modal-title">Edição de aparelho</h5>
 					</div>
-					<div class="modal-body">
+					
+					<div class="modal-body col-md-12">
 						<div class="form">
 							<div class="row">
+								<div class="col-md-6">
+									<label>Nome</label>
+									<input class="form-control" type="text" placeholder="Nome" maxlength="40" id="EditNomeAparelho">								
+								</div>
+								<div class="col-md-6">
+									<label>Categoria</label>
+									<select class="form-control categoria" id="categoriaaparelho" name="categoriaaparelho">
+										<option value="0">Categoria</option>
+										<option value="1">Smartphone</option>
+										<option value="2">Televisor</option>
+										<option value="3">Computador</option>
+										<option value="4">Monitor</option>
+									</select>								
+								</div>
+							</div><br>
+							<div class="row">
 								<div class="col-md-3">
-									<label>Nome</label> <input class="form-control " type="text"
-										id="editnomeaparelho" maxlength="20" name="editnomeaparelho"
-										placeholder="Celular">
+									<label>Marca</label>
+									<select class="form-control marca" id="marcaaparelho" name="marcaaparelho">
+										<option value="0">Marca</option>
+										<option value="1">Motorola</option>
+										<option value="2">Sony</option>
+										<option value="3">Fujifilm</option>
+										<option value="4">AOC</option>
+										<option value="4">SempToshiba</option>
+									</select>								
 								</div>
-								<div class="col-md-2">
-									<label>Categoria</label> <input class="form-control "
-										type="text" id="editnomeaparelho" maxlength="20"
-										name="editnomeaparelho" placeholder="1">
+								<div class="col-md-4">
+									<label>Modelo</label>
+									<input class="form-control" type="text" placeholder="Modelo" maxlength="40" id="EditNomeAparelho">								
 								</div>
-								<div class="col-md-2">
-									<label>Marca</label> <input class="form-control " type="text"
-										id="editnomeaparelho" maxlength="20" name="editnomeaparelho"
-										placeholder="2">
-								</div>
-								<div class="col-md-2">
-									<label>Modelo</label> <input class="form-control " type="text"
-										id="editnomeaparelho" maxlength="20" name="editnomeaparelho"
-										placeholder="moto g">
-								</div>
-								<div class="col-md-3">
-									<label>Numero de Serie</label> <input class="form-control "
-										type="text" id="editnomeaparelho" maxlength="20"
-										name="editnomeaparelho" placeholder="0123456">
+								<div class="col-md-5">
+									<label>Número de Série</label>
+									<input class="form-control" type="text" placeholder="Número de Série" maxlength="40" id="EditNomeAparelho">								
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default botao-cancelar"
-							data-dismiss="modal">Cancelar</button>
-						<button type="submit" class="btn btn-primary botao-salvar"
-							id="salvarAparelho" onclick="CadastroAparelho();">Salvar</button>
+					
+					<div class="modal-footer col-md-12">
+						<button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">
+							Cancelar
+						</button>
+						
+						<button type="submit" class="btn btn-primary botao-salvar" id="salvarAparelho" onclick="EditarAparelho();">
+							Salvar
+						</button>
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- /DIV msgEditAparelho -->
+		</div><!-- /DIV msgEditAparelho -->
 
-		<div class="modal fade col-xs-11 col-sm-6 col-md-12" tabindex="-1"
-			role="dialog" id="modalaparelho">
-			<div class="modal-dialog modal-lg modal-dialog-custom"
-				role="document">
+		<div class="modal fade col-xs-11 col-sm-6 col-md-12" tabindex="-1" role="dialog" id="modalaparelho">
+			<div class="modal-dialog modal-lg modal-dialog-custom" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 						<h3 class="modal-title">Cadastro de aparelho</h3>
@@ -203,27 +187,24 @@
 						<div class="form">
 							<div class="row">
 								<div class="form-group col-md-2">
-									<label>Nome Aparelho</label> <input class="form-control "
-										type="text" id="nomeaparelho" name="nomeaparelho"
-										placeholder="Smartphone">
-								</div>
-								<!-- /. FORM-GROUP -->
+									<label>Nome Aparelho</label> 
+									<input class="form-control " type="text" id="nomeaparelho" name="nomeaparelho" placeholder="Smartphone">
+								</div><!-- /. FORM-GROUP -->
 
 								<div class="form-group col-sm-2 col-md-3">
-									<label>Categoria</label> <select class="form-control categoria"
-										id="categoriaaparelho" name="categoriaaparelho">
+									<label>Categoria</label> 
+									<select class="form-control categoria" id="categoriaaparelho" name="categoriaaparelho">
 										<option value="0">Categoria</option>
 										<option value="1">Smartphone</option>
 										<option value="2">Televisor</option>
 										<option value="3">Computador</option>
 										<option value="4">Monitor</option>
 									</select>
-								</div>
-								<!-- /. FORM-GROUP -->
+								</div><!-- /. FORM-GROUP -->
 
 								<div class="form-group col-md-3">
-									<label>Marca</label> <select class="form-control marca"
-										id="marcaaparelho" name="marcaaparelho">
+									<label>Marca</label> 
+									<select class="form-control marca"	id="marcaaparelho" name="marcaaparelho">
 										<option value="0">Marca</option>
 										<option value="1">Motorola</option>
 										<option value="2">Sony</option>
@@ -231,43 +212,34 @@
 										<option value="4">AOC</option>
 										<option value="4">SempToshiba</option>
 									</select>
-								</div>
-								<!-- /. FORM-GROUP -->
+								</div><!-- /. FORM-GROUP -->
 
 								<div class="form-group col-md-2">
-									<label>Modelo</label> <input class="form-control" type="text"
-										id="modeloaparelho" name="modeloaparelho" placeholder="Modelo">
-								</div>
-								<!-- /. FORM-GROUP -->
+									<label>Modelo</label> 
+									<input class="form-control" type="text" id="modeloaparelho" name="modeloaparelho" placeholder="Modelo">
+								</div><!-- /. FORM-GROUP -->
 
 								<div class="form-group col-md-2">
-									<label>Numero de Série</label> <input class="form-control "
-										type="text" id="nsaparelho" name="nsaparelho"
-										placeholder="XT560048">
-								</div>
-								<!-- /. FORM-GROUP -->
-							</div>
-							<!-- /.ROW -->
-						</div>
-						<!-- /.form -->
-					</div>
-					<!-- /.modal-body -->
+									<label>Número de Série</label> 
+									<input class="form-control " type="text" id="nsaparelho" name="nsaparelho" placeholder="XT560048">
+								</div><!-- /. FORM-GROUP -->
+							</div><!-- /.ROW -->
+						</div><!-- /.form -->
+					</div><!-- /.modal-body -->
 
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default botao-cancelar"
-							data-dismiss="modal">Cancelar</button>
-						<button type="submit" class="btn btn-primary botao-salvar"
-							id="salvarAparelho" onclick="EditarAparelho();">Salvar</button>
+						<button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">
+							Cancelar
+						</button>
+						
+						<button type="submit" class="btn btn-primary botao-salvar" id="salvarAparelho" onclick="CadastroAparelho()">
+							Salvar
+						</button>
 					</div>
-				</div>
-				<!-- /.modal-content -->
-			</div>
-			<!-- /.modal-dialog -->
-		</div>
-		<!-- /.modal -->
-		<div class="modal" id="msgEditAparelho"></div>
-	</div>
-	<!-- geral-menu -->
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	</div><!-- geral-menu -->
 
 	<script>
 		$("#botao-icone-menu").click(function(e) {

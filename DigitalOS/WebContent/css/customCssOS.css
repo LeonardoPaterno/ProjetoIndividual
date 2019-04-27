@@ -58,6 +58,27 @@ h4 {
 	border-color: black;
 }
 
+.label-painel-aparelho{
+	font-size: medium;
+}
+
+.form-control-custom{
+	width: 400px !important;
+}
+
+.icone-pesquisar {
+	width: 0% !important;
+	position: relative;
+	top: 0px;
+	display: table-cell;
+	font-family: 'Glyphicons Halflings';
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
 /*--------------------------------*/
 /*---------------MENU-------------*/
 /*--------------------------------*/
@@ -286,14 +307,6 @@ h4 {
 	font-size: 16px;
 }
 
-.icone-adicionar-aparelho {
-	display: inline-block;
-	margin-left: 895px;
-	position: absolute !important;
-	top: 3px;
-	font-size: 16px;
-}
-
 .icone-adicionar-servico {
 	display: inline-block;
 	margin-left: 910px;
@@ -319,34 +332,21 @@ h4 {
 	border-bottom-right-radius: 4px;
 }
 
-.icone-pesquisar {
-	position: relative;
-	top: 0px;
-	display: table-cell;
-	font-family: 'Glyphicons Halflings';
-	font-style: normal;
-	font-weight: 400;
-	line-height: 1;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+.input-group-barra-pesquisa{
+	position: absolute;
+    display: table;
+    border-collapse: separate;
+    top: 7px;
+    left: 400px;
 }
 
 .div-painel-clientes, .div-painel-funcionarios, .div-painel-aparelhos,
-	.div-painel-servicos, .div-painel-itemservicos,
-	.div-painel-ordemservicos {
-	margin-top: 30px;
+.div-painel-servicos, .div-painel-itemservicos,	.div-painel-ordemservicos {
+	margin-top: 10px;
 	font-weight: bold;
 	width: 1150px;
 }
 
-/* .icone-adicionar{
-	display: inline-block;
-	margin-left: 885px;
-	position: absolute !important;
-	top: 3px;
-	font-size: 16px;
-}
- */
 .icone-adicionar:hover {
 	background-color: #2e6da4 !important;
 	border-color: #2e6da4 !important;
@@ -356,10 +356,6 @@ h4 {
 /*-------------------------------*/
 /*------------ MODAL ------------*/
 /*-------------------------------*/
-
-/* .modal-dialog-custom{
-	margin-left: 230px;
-} */
 .modal-title {
 	font-weight: bold;
 }
@@ -383,14 +379,7 @@ h4 {
 }
 
 @media ( min-width : 992px) .modal-lg {
-	width
-	:
-	 
-	900
-	px
-	;
-	
-
+	width:900px;
 }
 
 /*-------------------------------*/
@@ -432,6 +421,15 @@ h4 {
 
 .icone-cancelar, .icone-salvar {
 	margin-left: 5px;
+}
+
+/* TELA DE APARELHOS */
+.icone-adicionar-aparelho {
+    display: inline-block;
+    left: 1086px;
+    position: absolute !important;
+    top: 6px;
+    font-size: 16px;
 }
 
 .resultadoAparelhos{
