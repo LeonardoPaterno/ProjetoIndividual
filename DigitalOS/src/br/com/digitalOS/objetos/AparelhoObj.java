@@ -8,10 +8,10 @@ public class AparelhoObj implements Serializable{
 	
 	private int idaparelho;
 	private String nome;
-	private String nsaparelho;
-	private String modelo;
-	private int marca;
 	private int categoria;
+	private int marca;
+	private String modelo;
+	private String nsaparelho;
 	
 	public int getIdaparelho() {
 		return idaparelho;

@@ -14,5 +14,7 @@ public interface DigitalOSInterface {
 	
 	public boolean editarAparelho(AparelhoObj aparelho);
 
+	AparelhoObj buscarPorId(int id);
+
 }
 

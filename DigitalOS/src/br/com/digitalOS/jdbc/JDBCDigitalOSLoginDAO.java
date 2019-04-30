@@ -121,11 +121,41 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return ListaAparelho;
 	}
+	
+	@Override
+	public AparelhoObj buscarPorId(int id){
+		String comando = "SELECT * from registroaparelho WHERE idregistroaparelho= " + id;
+		AparelhoObj aparelho = new AparelhoObj();
+		
+		try{
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while(rs.next()){
+				int idaparelho = rs.getInt("idregistroaparelho");
+				String nome = rs.getString("nomeaparelho");
+				String nsaparelho = rs.getString("numerodeserie");
+				String modelo = rs.getString("modelo");
+				String marca = rs.getString("marca_marca");
+				String categoria = rs.getString("categoriaaparelho_categoriaaparelho");
+				
+				aparelho.setIdaparelho(idaparelho);
+				aparelho.setNome(nome);
+				aparelho.setCategoria(Integer.parseInt(categoria));
+				aparelho.setMarca(Integer.parseInt(marca));
+				aparelho.setModelo(modelo);
+				aparelho.setNsaparelho(nsaparelho);			
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return aparelho;
+	}
 
 	@Override
 	public boolean editarAparelho(AparelhoObj aparelho) {
 	String comando = "UPDATE registroaparelho SET nomeaparelho=?, numerodeserie=?, modelo=?, marca_marca=?, categoriaaparelho_categoriaaparelho=? ";
 	comando += "WHERE idregistroaparelho= " + aparelho.getIdaparelho();
+	System.out.println(comando);
 	PreparedStatement p;
 	try{
 		p = this.conexao.prepareStatement(comando);

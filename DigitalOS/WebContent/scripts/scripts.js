@@ -23,7 +23,6 @@ function loginOS() {
 }
 
 function CadastroAparelho() {
-	var id = $("#").val();
 	var nome = $("input[name=nomeaparelho]").val();
 	var categoria = $("select.categoria").children("option:selected").val();
 	var marca = $("select.marca").children("option:selected").val();
@@ -41,7 +40,8 @@ function CadastroAparelho() {
 			'categoria' : categoria
 		},
 		success : function(resposta) {
-			var modalzinha = {
+			alert(resposta);
+			/*var modalzinha = {
 				title : "Mensagem",
 				heigth : 250,
 				width : 400,
@@ -53,11 +53,12 @@ function CadastroAparelho() {
 				}
 			};
 			$("#msg").html(resposta.resposta);
-			$("#msg").modal(modalzinha);
+			$("#msg").modal(modalzinha);*/
 
 		},
 		error : function(resposta) {
-			var modalzinha = {
+			alert(resposta);
+			/*var modalzinha = {
 				title : "Mensagem",
 				heigth : 250,
 				width : 400,
@@ -69,7 +70,7 @@ function CadastroAparelho() {
 				}
 			};
 			$("#msg").html(resposta.resposta);
-			$("#msg").modal(modalzinha);
+			$("#msg").modal(modalzinha);*/
 		}
 	});
 }
@@ -105,7 +106,7 @@ function carregarTabela(listaAparelhosAchados){
 					"<td>" + listaAparelhosAchados[i].modelo + "</td>" +
 					"<td>" + listaAparelhosAchados[i].nsaparelho + "</td>" +
 					"<td>" +
-						"<div class='btn glyphicon glyphicon-pencil' onclick='editarAparelho("+listaAparelhosAchados[i].idaparelho+")'></div>" +
+						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoAparelho("+listaAparelhosAchados[i].idaparelho+")'></div>" +
 					"</td>" +
 					"<td>" +
 						"<div class='btn glyphicon glyphicon glyphicon-unchecked' onclick='ativarAparelho("+listaAparelhosAchados[i].id+")'></div>" +
@@ -117,20 +118,19 @@ function carregarTabela(listaAparelhosAchados){
 	$("#resultadoAparelhos").html(html);
 }
 
-function editarAparelho(idaparelho){
+function exibirEdicaoAparelho(idaparelho){
 	$.ajax({
 		type : 'POST',
-		url : '../ServletCadastroAparelho',
+		url : '../ServletBuscarPorId',
 		data:{'idaparelho':idaparelho},
 		success: function(aparelho){
 			$("#EditIdAparelho").val(aparelho.idaparelho);
 			$("#EditNomeAparelho").val(aparelho.nome);
-			$("#EditCategoriaAparelho").val(aparelho.endereco);
-			$("#EditMarcaAparelho").val(aparelho.telefone);
-			$("#EditModeloAparelho").val(aparelho.email);
-			$("#EditNsAparelho").val(aparelho.senha);
+			$("#EditCategoriaAparelho").val(aparelho.categoria);
+			$("#EditMarcaAparelho").val(aparelho.marca);
+			$("#EditModeloAparelho").val(aparelho.modelo);
+			$("#EditNsAparelho").val(aparelho.nsaparelho);
 			var cfg = {
-					title : "Alteração de Aparelho",
 					heigth : 600,
 					width : 400,
 					modal : true,
@@ -143,7 +143,25 @@ function editarAparelho(idaparelho){
 				$("#msgEditAparelho").modal(cfg);
 		},
 		error: function(err){
-			alert("Erro ao editar aparelho!" + err.responseText);
+			alert("Erro ao editar aparelho!");
 		}
+	});
+}
+
+function editarAparelho(){
+	var idaparelho = $("#EditIdAparelho").val();
+	var nome = $("#EditNomeAparelho").val();
+	var categoria = $("#EditCategoriaAparelho").val();
+	var marca = $("#EditMarcaAparelho").val();
+	var modelo = $("#EditModeloAparelho").val();
+	var nsaparelho = $("#EditNsAparelho").val();
+	$.ajax({
+		type : 'POST',
+		url : '../ServletEditarAparelho',
+		data:{'idaparelho': idaparelho, 'nome':nome, 'categoria':categoria, 'modelo':modelo, 'nsaparelho':nsaparelho},
+		success: function(resposta){
+			alert(resposta.retorno);
+		},
+		error:{}
 	});
 }

@@ -121,13 +121,17 @@
 					<div class="modal-body col-md-12">
 						<div class="form">
 							<div class="row">
+							<div style="display:none">
+									<label>Id</label>
+									<input class="form-control" type="text" placeholder="Id" maxlength="40" id="EditIdAparelho">								
+								</div>
 								<div class="col-md-6">
 									<label>Nome</label>
 									<input class="form-control" type="text" placeholder="Nome" maxlength="40" id="EditNomeAparelho">								
 								</div>
 								<div class="col-md-6">
 									<label>Categoria</label>
-									<select class="form-control categoria" id="categoriaaparelho" name="categoriaaparelho">
+									<select class="form-control categoria" id="EditCategoriaAparelho">
 										<option value="0">Categoria</option>
 										<option value="1">Smartphone</option>
 										<option value="2">Televisor</option>
@@ -139,7 +143,7 @@
 							<div class="row">
 								<div class="col-md-3">
 									<label>Marca</label>
-									<select class="form-control marca" id="marcaaparelho" name="marcaaparelho">
+									<select class="form-control marca" id="EditMarcaAparelho">
 										<option value="0">Marca</option>
 										<option value="1">Motorola</option>
 										<option value="2">Sony</option>
@@ -150,11 +154,11 @@
 								</div>
 								<div class="col-md-4">
 									<label>Modelo</label>
-									<input class="form-control" type="text" placeholder="Modelo" maxlength="40" id="EditNomeAparelho">								
+									<input class="form-control" type="text" placeholder="Modelo" maxlength="40" id="EditModeloAparelho">								
 								</div>
 								<div class="col-md-5">
 									<label>Número de Série</label>
-									<input class="form-control" type="text" placeholder="Número de Série" maxlength="40" id="EditNomeAparelho">								
+									<input class="form-control" type="text" placeholder="Número de Série" maxlength="40" id="EditNsAparelho">								
 								</div>
 							</div>
 						</div>
@@ -165,7 +169,7 @@
 							Cancelar
 						</button>
 						
-						<button type="submit" class="btn btn-primary botao-salvar" id="salvarAparelho" onclick="EditarAparelho();">
+						<button type="submit" class="btn btn-primary botao-salvar" id="salvarAparelho" onclick="editarAparelho()">
 							Salvar
 						</button>
 					</div>
@@ -194,7 +198,7 @@
 								<div class="form-group col-sm-2 col-md-3">
 									<label>Categoria</label> 
 									<select class="form-control categoria" id="categoriaaparelho" name="categoriaaparelho">
-										<option value="0">Categoria</option>
+										<option value="">Categoria</option>
 										<option value="1">Smartphone</option>
 										<option value="2">Televisor</option>
 										<option value="3">Computador</option>
@@ -205,7 +209,7 @@
 								<div class="form-group col-md-3">
 									<label>Marca</label> 
 									<select class="form-control marca"	id="marcaaparelho" name="marcaaparelho">
-										<option value="0">Marca</option>
+										<option value="">Marca</option>
 										<option value="1">Motorola</option>
 										<option value="2">Sony</option>
 										<option value="3">Fujifilm</option>

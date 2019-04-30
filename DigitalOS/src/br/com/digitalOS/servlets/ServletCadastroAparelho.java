@@ -51,8 +51,6 @@ public class ServletCadastroAparelho extends HttpServlet {
 				boolean retorno = jdbccadastro.cadastrarAparelho(aparelho);
 				conec.fecharConexao();
 			if (retorno != false) {
-				HttpSession sessao = request.getSession();
-				sessao.setAttribute("login", request.getParameter("user"));
 				msg.put("resposta", "Aparelho Cadastro");
 				json = new Gson().toJson(msg);
 
