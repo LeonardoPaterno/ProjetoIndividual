@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,7 +16,9 @@ import br.com.digitalOS.jdbc.JDBCDigitalOSLoginDAO;
 import br.com.digitalOS.objetos.AparelhoObj;
 
 
-public class ServletEditarAparelho {
+public class ServletEditarAparelho extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		process(request, response);
 	}
@@ -27,13 +30,14 @@ public class ServletEditarAparelho {
 	protected void process(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		AparelhoObj aparelho = new AparelhoObj();
 		
-		aparelho.setIdaparelho(Integer.parseInt(request.getParameter("EditIdAparelho")));
-		aparelho.setNome(request.getParameter("EditNomeAparelho"));
-		aparelho.setCategoria(Integer.parseInt(request.getParameter("EditCategoriaAparelho")));
-		aparelho.setMarca(Integer.parseInt(request.getParameter("EditMarcaAparelho")));
-		aparelho.setModelo(request.getParameter("EditModeloAparelho"));
-		aparelho.setNsaparelho(request.getParameter("EditNsAparelho"));
-		int id = Integer.parseInt(request.getParameter("EditIdAparelho"));
+		aparelho.setIdaparelho(Integer.parseInt(request.getParameter("idaparelho")));
+		aparelho.setNome(request.getParameter("nome"));
+		aparelho.setCategoria(Integer.parseInt(request.getParameter("categoria")));
+		aparelho.setMarca(Integer.parseInt(request.getParameter("marca")));
+		aparelho.setModelo(request.getParameter("modelo"));
+		aparelho.setNsaparelho(request.getParameter("nsaparelho"));
+		aparelho.setStatus(Integer.parseInt(request.getParameter("status")));
+		int id = Integer.parseInt(request.getParameter("idaparelho"));
 		System.out.println("ID: " + id);
 		try {
 			Conexao conec = new Conexao();

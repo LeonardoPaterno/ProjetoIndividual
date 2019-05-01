@@ -120,8 +120,8 @@
 					
 					<div class="modal-body col-md-12">
 						<div class="form">
-							<div class="row">
-							<div style="display:none">
+							<div class="row col-md-12">
+								<div style="display:none">
 									<label>Id</label>
 									<input class="form-control" type="text" placeholder="Id" maxlength="40" id="EditIdAparelho">								
 								</div>
@@ -139,9 +139,10 @@
 										<option value="4">Monitor</option>
 									</select>								
 								</div>
-							</div><br>
-							<div class="row">
-								<div class="col-md-3">
+							</div>
+								<br>
+							<div class="row col-md-12">
+								<div class="col-md-4">
 									<label>Marca</label>
 									<select class="form-control marca" id="EditMarcaAparelho">
 										<option value="0">Marca</option>
@@ -149,16 +150,26 @@
 										<option value="2">Sony</option>
 										<option value="3">Fujifilm</option>
 										<option value="4">AOC</option>
-										<option value="4">SempToshiba</option>
+										<option value="5">SempToshiba</option>
 									</select>								
 								</div>
 								<div class="col-md-4">
 									<label>Modelo</label>
 									<input class="form-control" type="text" placeholder="Modelo" maxlength="40" id="EditModeloAparelho">								
 								</div>
-								<div class="col-md-5">
+								<div class="col-md-4">
 									<label>Número de Série</label>
 									<input class="form-control" type="text" placeholder="Número de Série" maxlength="40" id="EditNsAparelho">								
+								</div>
+								<div class="row col-md-12">
+									<div class="col-md-3">
+										<label>Status</label>
+										<select class="form-control" id="EditStatusAparelho">
+											<option value="1">Ativo</option>
+											<option value="0">Inativo</option>
+										</select>								
+									</div>
+									<div class="col-md-offset-9"></div>
 								</div>
 							</div>
 						</div>
@@ -190,7 +201,7 @@
 					<div class="modal-body">
 						<div class="form">
 							<div class="row">
-								<div class="form-group col-md-2">
+								<div class="form-group col-md-3">
 									<label>Nome Aparelho</label> 
 									<input class="form-control " type="text" id="nomeaparelho" name="nomeaparelho" placeholder="Smartphone">
 								</div><!-- /. FORM-GROUP -->
@@ -223,10 +234,14 @@
 									<input class="form-control" type="text" id="modeloaparelho" name="modeloaparelho" placeholder="Modelo">
 								</div><!-- /. FORM-GROUP -->
 
-								<div class="form-group col-md-2">
+								<div class="form-group col-md-3">
 									<label>Número de Série</label> 
 									<input class="form-control " type="text" id="nsaparelho" name="nsaparelho" placeholder="XT560048">
 								</div><!-- /. FORM-GROUP -->
+								<div class="col-md-2">
+									<label>Status</label>
+									<input class="form-control" id="statusaparelho" value="ativo" disabled>								
+								</div>
 							</div><!-- /.ROW -->
 						</div><!-- /.form -->
 					</div><!-- /.modal-body -->
@@ -243,7 +258,7 @@
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
-	</div><!-- geral-menu -->
+	</div><!-- geral -->
 
 	<script>
 		$("#botao-icone-menu").click(function(e) {

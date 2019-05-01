@@ -10,7 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
@@ -44,6 +43,7 @@ public class ServletCadastroAparelho extends HttpServlet {
 				aparelho.setModelo(request.getParameter("modelo").toString());
 				aparelho.setNsaparelho(request.getParameter("nsaparelho").toString());
 				aparelho.setCategoria(Integer.parseInt(request.getParameter("categoria")));
+				aparelho.setStatus(Integer.parseInt(request.getParameter("status")));
 
 				Conexao conec = new Conexao();
 				Connection conexao = conec.abrirConexao();

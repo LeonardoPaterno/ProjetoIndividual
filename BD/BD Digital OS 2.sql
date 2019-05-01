@@ -113,6 +113,7 @@ CREATE TABLE IF NOT EXISTS `registroaparelho` (
   `nomeaparelho` VARCHAR(45) NOT NULL,
   `numerodeserie` VARCHAR(45) NOT NULL,
   `modelo` VARCHAR(45) NOT NULL,
+  `statusaparelho` varchar(7) not null,
   `marca_marca` INT NOT NULL,
   `categoriaaparelho_categoriaaparelho` INT NOT NULL,
   PRIMARY KEY (`idregistroaparelho`))

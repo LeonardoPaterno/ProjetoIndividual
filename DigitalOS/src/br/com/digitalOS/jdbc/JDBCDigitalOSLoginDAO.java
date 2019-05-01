@@ -32,7 +32,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			p.setString(3, novaPessoa.getDataNascimento());
 			p.setString(4, novaPessoa.getRg());
 			p.execute();
-			// System.out.println(p);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -41,9 +40,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 
 	public boolean consultarLogin(LoginObj login) {
-		String comando = "select idlogin, email, senha from login" + " where email like '%" + login.getEmail()
-				+ "' and senha like '%" + login.getSenha() + "%'";
-		// System.out.println("1 "+comando);
+		String comando = "select idlogin, email, senha from login" + " where email like '%" + login.getEmail() + "' and senha like '%" + login.getSenha() + "%'";
 		try {
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
@@ -51,10 +48,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				login.setId(rs.getInt("idlogin"));
 				login.setEmail(rs.getString("email"));
 				login.setSenha(rs.getString("senha"));
-
-				// String consultou = "Idlogin:
-				// "+login.getId()+"\nEmail:"+login.getEmail()+"\nSenha:"+login.getSenha();
-				// System.out.println("2 "+consultou);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,8 +59,8 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	@Override
 	public boolean cadastrarAparelho(AparelhoObj novoAparelho) {
 		String comando = "INSERT INTO `ordemservico`.`registroaparelho` "
-				+ "(`nomeaparelho`, `numerodeserie`, `modelo`, `marca_marca`, `categoriaaparelho_categoriaaparelho`)"
-				+ "values(?,?,?,?,?)";
+				+ "(`nomeaparelho`, `numerodeserie`, `modelo`, `statusaparelho`, `marca_marca`, `categoriaaparelho_categoriaaparelho`)"
+				+ "values(?,?,?,?,?,?)";
 
 		PreparedStatement p;
 		try {
@@ -75,8 +68,9 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			p.setString(1, novoAparelho.getNome());
 			p.setString(2, novoAparelho.getNsaparelho());
 			p.setString(3, novoAparelho.getModelo());
-			p.setInt(4, novoAparelho.getMarca());
-			p.setInt(5, novoAparelho.getCategoria());
+			p.setInt(4, novoAparelho.getStatus());
+			p.setInt(5, novoAparelho.getMarca());
+			p.setInt(6, novoAparelho.getCategoria());
 			p.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -88,7 +82,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	public List<AparelhoObj> buscarAparelho(AparelhoObj aparelho) {
 
 		String nome = aparelho.getNome();
-		String comando = "select idregistroaparelho, nomeaparelho, numerodeserie, modelo, marca_marca, categoriaaparelho_categoriaaparelho "
+		String comando = "select idregistroaparelho, nomeaparelho, numerodeserie, modelo, statusaparelho, marca_marca, categoriaaparelho_categoriaaparelho "
 				+ "from registroaparelho";
 		if (nome != "") {
 			comando += " where nomeaparelho like '" + nome + "%';";
@@ -104,6 +98,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				String nomeaparelho = rs.getString("nomeaparelho");
 				String nsaparelho = rs.getString("numerodeserie");
 				String modelo = rs.getString("modelo");
+				String status = rs.getString("statusaparelho");
 				int marca = Integer.parseInt(rs.getString("marca_marca"));
 				int categoria = Integer.parseInt(rs.getString("categoriaaparelho_categoriaaparelho"));
 
@@ -111,6 +106,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				aparelhoAux.setNome(nomeaparelho);
 				aparelhoAux.setNsaparelho(nsaparelho);
 				aparelhoAux.setModelo(modelo);
+				aparelhoAux.setStatus(Integer.parseInt((status)));
 				aparelhoAux.setMarca(marca);
 				aparelhoAux.setCategoria(categoria);
 
@@ -125,6 +121,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	@Override
 	public AparelhoObj buscarPorId(int id){
 		String comando = "SELECT * from registroaparelho WHERE idregistroaparelho= " + id;
+		System.out.println(comando);
 		AparelhoObj aparelho = new AparelhoObj();
 		
 		try{
@@ -135,6 +132,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				String nome = rs.getString("nomeaparelho");
 				String nsaparelho = rs.getString("numerodeserie");
 				String modelo = rs.getString("modelo");
+				int status = rs.getInt(Integer.parseInt("statusaparelho"));
 				String marca = rs.getString("marca_marca");
 				String categoria = rs.getString("categoriaaparelho_categoriaaparelho");
 				
@@ -142,8 +140,9 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				aparelho.setNome(nome);
 				aparelho.setCategoria(Integer.parseInt(categoria));
 				aparelho.setMarca(Integer.parseInt(marca));
+				aparelho.setStatus(status);
 				aparelho.setModelo(modelo);
-				aparelho.setNsaparelho(nsaparelho);			
+				aparelho.setNsaparelho(nsaparelho);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -153,7 +152,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 
 	@Override
 	public boolean editarAparelho(AparelhoObj aparelho) {
-	String comando = "UPDATE registroaparelho SET nomeaparelho=?, numerodeserie=?, modelo=?, marca_marca=?, categoriaaparelho_categoriaaparelho=? ";
+	String comando = "UPDATE registroaparelho SET nomeaparelho=?, numerodeserie=?, modelo=?, statusaparelho=?, marca_marca=?, categoriaaparelho_categoriaaparelho=? ";
 	comando += "WHERE idregistroaparelho= " + aparelho.getIdaparelho();
 	System.out.println(comando);
 	PreparedStatement p;
@@ -162,8 +161,9 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		p.setString(1, aparelho.getNome());
 		p.setString(2, aparelho.getNsaparelho());
 		p.setString(3, aparelho.getModelo());
-		p.setInt(4, aparelho.getMarca());
-		p.setInt(5, aparelho.getCategoria());
+		p.setInt(4, aparelho.getCategoria());
+		p.setInt(5, aparelho.getStatus());
+		p.setInt(6, aparelho.getMarca());
 		p.executeUpdate();
 	}catch(SQLException e){
 		e.printStackTrace();

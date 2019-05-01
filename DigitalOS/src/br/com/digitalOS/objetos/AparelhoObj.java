@@ -12,6 +12,7 @@ public class AparelhoObj implements Serializable{
 	private int marca;
 	private String modelo;
 	private String nsaparelho;
+	private int status;
 	
 	public int getIdaparelho() {
 		return idaparelho;
@@ -48,6 +49,12 @@ public class AparelhoObj implements Serializable{
 	}
 	public void setCategoria(int categoria) {
 		this.categoria = categoria;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 }

@@ -24,10 +24,11 @@ function loginOS() {
 
 function CadastroAparelho() {
 	var nome = $("input[name=nomeaparelho]").val();
-	var categoria = $("select.categoria").children("option:selected").val();
-	var marca = $("select.marca").children("option:selected").val();
+	var categoria = $("#categoriaaparelho").val();
+	var marca = $("#marcaaparelho").val();
 	var modelo = $("input[name=modeloaparelho]").val();
 	var nsaparelho = $("input[name=nsaparelho]").val();
+	var status = $("#statusaparelho").val();
 
 	$.ajax({
 		type : 'POST',
@@ -37,7 +38,8 @@ function CadastroAparelho() {
 			'marca' : marca,
 			'modelo' : modelo,
 			'nsaparelho' : nsaparelho,
-			'categoria' : categoria
+			'categoria' : categoria,
+			'status':status
 		},
 		success : function(resposta) {
 			alert(resposta);
@@ -95,7 +97,7 @@ function carregarTabela(listaAparelhosAchados){
 	var html = "<div class='teble-reponsive'>" +
 			   "<table class='table table-striped table-condensed table-bordered'>";
 		html += "<tr>" +
-				"<th># ID</th> <th>Nome</th> <th>Categoria</th> <th>Marca</th> <th>Modelo</th> <th>Némero Série</th> <th>Edição</th> <th>Ativação/Inativação</th>" +
+				"<th># ID</th> <th>Nome</th> <th>Categoria</th> <th>Marca</th> <th>Modelo</th> <th>Némero Série</th> <th>Status</th> <th>Edição</th>" +
 				"</tr>"
 	for(var i = 0; i < listaAparelhosAchados.length; i++){
 		html += "<tr>" +
@@ -105,12 +107,10 @@ function carregarTabela(listaAparelhosAchados){
 					"<td>" + listaAparelhosAchados[i].marca + "</td>" +
 					"<td>" + listaAparelhosAchados[i].modelo + "</td>" +
 					"<td>" + listaAparelhosAchados[i].nsaparelho + "</td>" +
+					"<td>" + listaAparelhosAchados[i].status + "</td>" +
 					"<td>" +
 						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoAparelho("+listaAparelhosAchados[i].idaparelho+")'></div>" +
 					"</td>" +
-					"<td>" +
-						"<div class='btn glyphicon glyphicon glyphicon-unchecked' onclick='ativarAparelho("+listaAparelhosAchados[i].id+")'></div>" +
-					"</td>";
 				"</tr>"
 	}
 	html += "</table>" +
@@ -124,12 +124,14 @@ function exibirEdicaoAparelho(idaparelho){
 		url : '../ServletBuscarPorId',
 		data:{'idaparelho':idaparelho},
 		success: function(aparelho){
+			console.log(aparelho);
 			$("#EditIdAparelho").val(aparelho.idaparelho);
 			$("#EditNomeAparelho").val(aparelho.nome);
 			$("#EditCategoriaAparelho").val(aparelho.categoria);
 			$("#EditMarcaAparelho").val(aparelho.marca);
 			$("#EditModeloAparelho").val(aparelho.modelo);
 			$("#EditNsAparelho").val(aparelho.nsaparelho);
+			$("#EditStatusAparelho").val(status.aparelho);
 			var cfg = {
 					heigth : 600,
 					width : 400,
@@ -155,12 +157,14 @@ function editarAparelho(){
 	var marca = $("#EditMarcaAparelho").val();
 	var modelo = $("#EditModeloAparelho").val();
 	var nsaparelho = $("#EditNsAparelho").val();
+	var status = $("#EditStatusAparelho").val();
 	$.ajax({
 		type : 'POST',
 		url : '../ServletEditarAparelho',
-		data:{'idaparelho': idaparelho, 'nome':nome, 'categoria':categoria, 'modelo':modelo, 'nsaparelho':nsaparelho},
+		data:{'idaparelho': idaparelho, 'nome':nome, 'categoria':categoria, 'marca':marca, 'modelo':modelo, 'nsaparelho':nsaparelho, 'status':status},
 		success: function(resposta){
-			alert(resposta.retorno);
+			buscarAparelho();
+			alert("Atualizado");
 		},
 		error:{}
 	});
