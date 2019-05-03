@@ -3,6 +3,8 @@ package br.com.digitalOS.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,8 +17,7 @@ import br.com.digitalOS.bd.conexao.Conexao;
 import br.com.digitalOS.jdbc.JDBCDigitalOSLoginDAO;
 import br.com.digitalOS.objetos.AparelhoObj;
 
-
-public class ServletEditarAparelho extends HttpServlet {
+public class ServletFiltroAtivos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
@@ -28,36 +29,33 @@ public class ServletEditarAparelho extends HttpServlet {
 	}
 
 	protected void process(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-		AparelhoObj aparelho = new AparelhoObj();
-		
-		aparelho.setIdaparelho(Integer.parseInt(request.getParameter("idaparelho")));
-		aparelho.setNome(request.getParameter("nome"));
-		aparelho.setCategoria(Integer.parseInt(request.getParameter("categoria")));
-		aparelho.setMarca(Integer.parseInt(request.getParameter("marca")));
-		aparelho.setModelo(request.getParameter("modelo"));
-		aparelho.setNsaparelho(request.getParameter("nsaparelho"));
-		aparelho.setAtivo(request.getParameter("ativo"));
-		try {
-			Conexao conec = new Conexao();
-			Connection conexao = conec.abrirConexao();
-			
-			JDBCDigitalOSLoginDAO jdbccadastro = new JDBCDigitalOSLoginDAO(conexao);
-			
-			boolean retorno = jdbccadastro.editarAparelho(aparelho);
-			conec.fecharConexao();
+		AparelhoObj aparelhos = new AparelhoObj();
+		aparelhos.setAtivo(request.getParameter("ativo"));
 
-			String json = new Gson().toJson(retorno);
-			PrintWriter out = response.getWriter();
+		List<AparelhoObj> ListaAparelhosFiltrados = new ArrayList<AparelhoObj>();
+
+		Conexao conec = new Conexao();
+		Connection conexao = conec.abrirConexao();
+
+		JDBCDigitalOSLoginDAO jdbcAparelhoObj = new JDBCDigitalOSLoginDAO(conexao);
+		ListaAparelhosFiltrados = jdbcAparelhoObj.filtrarAparelhosAtivos(aparelhos);
+		conec.fecharConexao();
+
+		String json = new Gson().toJson(ListaAparelhosFiltrados);
+		PrintWriter out = response.getWriter();
+
+		try {
 			out = response.getWriter();
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
+			response.setStatus(HttpServletResponse.SC_OK);
+			response.getWriter();
 			out.print(json);
 			out.flush();
 
-		} catch (Exception e) {
+		} catch (IOException e) {
 			e.printStackTrace();
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
 	}
-
 }
-

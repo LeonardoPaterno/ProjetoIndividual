@@ -10,11 +10,11 @@ function loginOS() {
 			url : 'ServletConsultaLogin',
 			data : 'user=' + user + '&passCoded=' + passCoded,
 
-			success : function(resposta) {
-				location.href = resposta.url;
+			success : function(url) {
+				location.href = url.url;
 			},
-			error : function(resposta) {
-				location.href = resposta.url;
+			error : function(url) {
+				location.href = url.url;
 			}
 		});
 	} else {
@@ -28,7 +28,7 @@ function CadastroAparelho() {
 	var marca = $("#marcaaparelho").val();
 	var modelo = $("input[name=modeloaparelho]").val();
 	var nsaparelho = $("input[name=nsaparelho]").val();
-	var status = $("#statusaparelho").val();
+	var ativo = $("#statusaparelho").val();
 
 	$.ajax({
 		type : 'POST',
@@ -39,7 +39,7 @@ function CadastroAparelho() {
 			'modelo' : modelo,
 			'nsaparelho' : nsaparelho,
 			'categoria' : categoria,
-			'status':status
+			'ativo':ativo
 		},
 		success : function(resposta) {
 			alert(resposta);
@@ -97,7 +97,7 @@ function carregarTabela(listaAparelhosAchados){
 	var html = "<div class='teble-reponsive'>" +
 			   "<table class='table table-striped table-condensed table-bordered'>";
 		html += "<tr>" +
-				"<th># ID</th> <th>Nome</th> <th>Categoria</th> <th>Marca</th> <th>Modelo</th> <th>Némero Série</th> <th>Status</th> <th>Edição</th>" +
+				"<th># ID</th> <th>Nome</th> <th>Categoria</th> <th>Marca</th> <th>Modelo</th> <th>Número Série</th> <th>Ativo</th> <th>Edição</th>" +
 				"</tr>"
 	for(var i = 0; i < listaAparelhosAchados.length; i++){
 		html += "<tr>" +
@@ -107,7 +107,7 @@ function carregarTabela(listaAparelhosAchados){
 					"<td>" + listaAparelhosAchados[i].marca + "</td>" +
 					"<td>" + listaAparelhosAchados[i].modelo + "</td>" +
 					"<td>" + listaAparelhosAchados[i].nsaparelho + "</td>" +
-					"<td>" + listaAparelhosAchados[i].status + "</td>" +
+					"<td>" + listaAparelhosAchados[i].ativo + "</td>" +
 					"<td>" +
 						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoAparelho("+listaAparelhosAchados[i].idaparelho+")'></div>" +
 					"</td>" +
@@ -131,7 +131,7 @@ function exibirEdicaoAparelho(idaparelho){
 			$("#EditMarcaAparelho").val(aparelho.marca);
 			$("#EditModeloAparelho").val(aparelho.modelo);
 			$("#EditNsAparelho").val(aparelho.nsaparelho);
-			$("#EditStatusAparelho").val(status.aparelho);
+			$("#EditStatusAparelho").val(aparelho.ativo);
 			var cfg = {
 					heigth : 600,
 					width : 400,
@@ -157,15 +157,34 @@ function editarAparelho(){
 	var marca = $("#EditMarcaAparelho").val();
 	var modelo = $("#EditModeloAparelho").val();
 	var nsaparelho = $("#EditNsAparelho").val();
-	var status = $("#EditStatusAparelho").val();
+	var ativo = $("#EditStatusAparelho").val();
 	$.ajax({
 		type : 'POST',
 		url : '../ServletEditarAparelho',
-		data:{'idaparelho': idaparelho, 'nome':nome, 'categoria':categoria, 'marca':marca, 'modelo':modelo, 'nsaparelho':nsaparelho, 'status':status},
+		data:{'idaparelho': idaparelho, 'nome':nome, 'categoria':categoria, 'marca':marca, 'modelo':modelo, 'nsaparelho':nsaparelho, 'ativo':ativo},
 		success: function(resposta){
 			buscarAparelho();
 			alert("Atualizado");
 		},
-		error:{}
+		error:function(){
+			alert("Erro ao Atualizar");
+		}
+	});
+}
+
+function filtroAtivos(){
+	var ativo = $("#filtroAtivoOpc").val();
+	alert(ativo);
+	$.ajax({
+		type:'POST',
+		url: '../ServletFiltroAtivos',
+		data: {'ativo':ativo},
+		success: function(listaAparelhosAchados){
+			console.log(listaAparelhosAchados);
+			carregarTabela(listaAparelhosAchados);
+		},
+		error: function(){
+			alert("Erro ao Filtrar");
+		}
 	});
 }

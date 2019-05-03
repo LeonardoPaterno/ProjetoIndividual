@@ -59,7 +59,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	@Override
 	public boolean cadastrarAparelho(AparelhoObj novoAparelho) {
 		String comando = "INSERT INTO `ordemservico`.`registroaparelho` "
-				+ "(`nomeaparelho`, `numerodeserie`, `modelo`, `statusaparelho`, `marca_marca`, `categoriaaparelho_categoriaaparelho`)"
+				+ "(`nomeaparelho`, `numerodeserie`, `modelo`, `ativo`, `marca_marca`, `categoriaaparelho_categoriaaparelho`)"
 				+ "values(?,?,?,?,?,?)";
 
 		PreparedStatement p;
@@ -68,7 +68,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			p.setString(1, novoAparelho.getNome());
 			p.setString(2, novoAparelho.getNsaparelho());
 			p.setString(3, novoAparelho.getModelo());
-			p.setInt(4, novoAparelho.getStatus());
+			p.setString(4, novoAparelho.getAtivo());
 			p.setInt(5, novoAparelho.getMarca());
 			p.setInt(6, novoAparelho.getCategoria());
 			p.execute();
@@ -82,7 +82,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	public List<AparelhoObj> buscarAparelho(AparelhoObj aparelho) {
 
 		String nome = aparelho.getNome();
-		String comando = "select idregistroaparelho, nomeaparelho, numerodeserie, modelo, statusaparelho, marca_marca, categoriaaparelho_categoriaaparelho "
+		String comando = "select idregistroaparelho, nomeaparelho, numerodeserie, modelo, ativo, marca_marca, categoriaaparelho_categoriaaparelho "
 				+ "from registroaparelho";
 		if (nome != "") {
 			comando += " where nomeaparelho like '" + nome + "%';";
@@ -98,7 +98,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				String nomeaparelho = rs.getString("nomeaparelho");
 				String nsaparelho = rs.getString("numerodeserie");
 				String modelo = rs.getString("modelo");
-				String status = rs.getString("statusaparelho");
+				String ativo = rs.getString("ativo");
 				int marca = Integer.parseInt(rs.getString("marca_marca"));
 				int categoria = Integer.parseInt(rs.getString("categoriaaparelho_categoriaaparelho"));
 
@@ -106,7 +106,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				aparelhoAux.setNome(nomeaparelho);
 				aparelhoAux.setNsaparelho(nsaparelho);
 				aparelhoAux.setModelo(modelo);
-				aparelhoAux.setStatus(Integer.parseInt((status)));
+				aparelhoAux.setAtivo((ativo));
 				aparelhoAux.setMarca(marca);
 				aparelhoAux.setCategoria(categoria);
 
@@ -121,7 +121,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	@Override
 	public AparelhoObj buscarPorId(int id){
 		String comando = "SELECT * from registroaparelho WHERE idregistroaparelho= " + id;
-		System.out.println(comando);
 		AparelhoObj aparelho = new AparelhoObj();
 		
 		try{
@@ -132,7 +131,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				String nome = rs.getString("nomeaparelho");
 				String nsaparelho = rs.getString("numerodeserie");
 				String modelo = rs.getString("modelo");
-				int status = rs.getInt(Integer.parseInt("statusaparelho"));
+				String ativo = rs.getString("ativo");
 				String marca = rs.getString("marca_marca");
 				String categoria = rs.getString("categoriaaparelho_categoriaaparelho");
 				
@@ -140,7 +139,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				aparelho.setNome(nome);
 				aparelho.setCategoria(Integer.parseInt(categoria));
 				aparelho.setMarca(Integer.parseInt(marca));
-				aparelho.setStatus(status);
+				aparelho.setAtivo(ativo);
 				aparelho.setModelo(modelo);
 				aparelho.setNsaparelho(nsaparelho);
 			}
@@ -152,23 +151,65 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 
 	@Override
 	public boolean editarAparelho(AparelhoObj aparelho) {
-	String comando = "UPDATE registroaparelho SET nomeaparelho=?, numerodeserie=?, modelo=?, statusaparelho=?, marca_marca=?, categoriaaparelho_categoriaaparelho=? ";
+	String comando = "update registroaparelho set nomeaparelho=?, numerodeserie=?, modelo=?, ativo=?, marca_marca=?, categoriaaparelho_categoriaaparelho=? ";
 	comando += "WHERE idregistroaparelho= " + aparelho.getIdaparelho();
-	System.out.println(comando);
 	PreparedStatement p;
 	try{
 		p = this.conexao.prepareStatement(comando);
 		p.setString(1, aparelho.getNome());
 		p.setString(2, aparelho.getNsaparelho());
 		p.setString(3, aparelho.getModelo());
-		p.setInt(4, aparelho.getCategoria());
-		p.setInt(5, aparelho.getStatus());
-		p.setInt(6, aparelho.getMarca());
+		p.setString(4, aparelho.getAtivo());
+		p.setInt(5, aparelho.getMarca());
+		p.setInt(6, aparelho.getCategoria());
 		p.executeUpdate();
 	}catch(SQLException e){
 		e.printStackTrace();
 		return false;
 	}
 	return true;
+	}
+	
+	@Override
+	public List<AparelhoObj> filtrarAparelhosAtivos(AparelhoObj aparelho) {
+		List<AparelhoObj> ListaAparelho = new ArrayList<AparelhoObj>();
+		String comando = "";
+		
+		if(aparelho.getAtivo().equals("N")) {
+			comando = "select * from registroaparelho  where ativo = 'N';";
+		}
+		else if(aparelho.getAtivo().equals("S")) {
+			comando = "select * from registroaparelho  where ativo = 'S';";
+		}
+		else{
+			comando = "select * from registroaparelho;";
+		}
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while (rs.next()) {
+				AparelhoObj aparelhofiltrado = new AparelhoObj();
+				int idaparelho = rs.getInt("idregistroaparelho");
+				String nomeaparelho = rs.getString("nomeaparelho");
+				String nsaparelho = rs.getString("numerodeserie");
+				String modelo = rs.getString("modelo");
+				String ativo = rs.getString("ativo");
+				int marca = Integer.parseInt(rs.getString("marca_marca"));
+				int categoria = Integer.parseInt(rs.getString("categoriaaparelho_categoriaaparelho"));
+
+				aparelhofiltrado.setIdaparelho(idaparelho);
+				aparelhofiltrado.setNome(nomeaparelho);
+				aparelhofiltrado.setNsaparelho(nsaparelho);
+				aparelhofiltrado.setModelo(modelo);
+				aparelhofiltrado.setAtivo((ativo));
+				aparelhofiltrado.setMarca(marca);
+				aparelhofiltrado.setCategoria(categoria);
+
+				ListaAparelho.add(aparelhofiltrado);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ListaAparelho;
 	}
 }

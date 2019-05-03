@@ -43,7 +43,7 @@ public class ServletCadastroAparelho extends HttpServlet {
 				aparelho.setModelo(request.getParameter("modelo").toString());
 				aparelho.setNsaparelho(request.getParameter("nsaparelho").toString());
 				aparelho.setCategoria(Integer.parseInt(request.getParameter("categoria")));
-				aparelho.setStatus(Integer.parseInt(request.getParameter("status")));
+				aparelho.setAtivo(request.getParameter("ativo"));
 
 				Conexao conec = new Conexao();
 				Connection conexao = conec.abrirConexao();

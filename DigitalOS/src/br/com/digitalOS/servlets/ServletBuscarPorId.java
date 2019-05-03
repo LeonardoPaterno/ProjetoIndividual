@@ -22,13 +22,11 @@ public class ServletBuscarPorId extends HttpServlet {
 
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		process(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		process(request, response);
 	}
 
@@ -36,21 +34,19 @@ public class ServletBuscarPorId extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("idaparelho"));
 		PrintWriter out = response.getWriter();
 		String json = null;
-		try {	Conexao conec = new Conexao();
-				Connection conexao = conec.abrirConexao();
-				JDBCDigitalOSLoginDAO jdbccadastro = new JDBCDigitalOSLoginDAO(conexao);
-				AparelhoObj aparelho = jdbccadastro.buscarPorId(id);
-				System.out.println(aparelho.getIdaparelho());
-				conec.fecharConexao();
-				
+		try {
+			Conexao conec = new Conexao();
+			Connection conexao = conec.abrirConexao();
+			JDBCDigitalOSLoginDAO jdbccadastro = new JDBCDigitalOSLoginDAO(conexao);
+			AparelhoObj aparelho = jdbccadastro.buscarPorId(id);
+			conec.fecharConexao();
+
 			json = new Gson().toJson(aparelho);
 			out = response.getWriter();
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			out.print(json);
-			out.flush();
-			System.out.println(json);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -443,3 +443,8 @@ h4 {
 #msgEditAparelho{
 	z-index: 5000;
 }
+
+.filtroAtivo{
+	left: 882px;
+    top: -29px;
+}

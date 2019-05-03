@@ -39,7 +39,7 @@
 		<servlet-name>ServletBuscarAparelho</servlet-name>
 		<url-pattern>/ServletBuscarAparelho</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ServletBuscarPorId</servlet-name>
 		<servlet-class>br.com.digitalOS.servlets.ServletBuscarPorId</servlet-class>
@@ -56,6 +56,15 @@
 	<servlet-mapping>
 		<servlet-name>ServletEditarAparelho</servlet-name>
 		<url-pattern>/ServletEditarAparelho</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ServletFiltroAtivos</servlet-name>
+		<servlet-class>br.com.digitalOS.servlets.ServletFiltroAtivos</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ServletFiltroAtivos</servlet-name>
+		<url-pattern>/ServletFiltroAtivos</url-pattern>
 	</servlet-mapping>
 
 	<filter>
