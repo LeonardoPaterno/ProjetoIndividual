@@ -20,25 +20,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		this.conexao = conexao;
 	}
 
-	@Override
-	public boolean cadastrarPessoa(PessoaObj novaPessoa) {
-
-		String comando = "insert into novaPessoa " + "(nome, cpf, datanascimento, rg)" + "values(?,?,?,?,?)";
-		PreparedStatement p;
-		try {
-			p = this.conexao.prepareStatement(comando);
-			p.setString(1, novaPessoa.getNome());
-			p.setString(2, novaPessoa.getCpf());
-			p.setString(3, novaPessoa.getDataNascimento());
-			p.setString(4, novaPessoa.getRg());
-			p.execute();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-
 	public boolean consultarLogin(LoginObj login) {
 		String comando = "select idlogin, email, senha from login" + " where email like '%" + login.getEmail() + "' and senha like '%" + login.getSenha() + "%'";
 		try {
@@ -211,5 +192,41 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			e.printStackTrace();
 		}
 		return ListaAparelho;
+	}
+
+	@Override
+	public boolean inserirPessoa(PessoaObj pessoa) {
+
+		String comando = "insert into pessoa " + "(nome, cpf, datanascimento, rg)" + "values(?,?,?,?)";
+		PreparedStatement p;
+		try {
+			p = this.conexao.prepareStatement(comando);
+			p.setString(1, pessoa.getNome());
+			p.setString(2, pessoa.getCpf());
+			p.setString(3, pessoa.getDataNascimento());
+			p.setString(4, pessoa.getRg());
+			p.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	
+	public void atualizar(PessoaObj pessoaObj) {
+		
+	}
+
+	public PessoaObj buscarPessoaPorId(int id) {
+		return null;
+	}
+
+	public void deletarPessoaObj(int id) {
+		
+	}
+
+	public List<PessoaObj> buscarPessoaPorNome(String nome) {
+		return null;
 	}
 }

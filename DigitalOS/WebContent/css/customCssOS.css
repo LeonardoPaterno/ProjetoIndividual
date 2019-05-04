@@ -58,7 +58,7 @@ h4 {
 	border-color: black;
 }
 
-.label-painel-aparelho{
+.label-painel-aparelho, .label-painel-clientes{
 	font-size: medium;
 }
 
@@ -292,11 +292,11 @@ h4 {
 }
 
 .icone-adicionar-cliente {
-	display: inline-block;
-	margin-left: 912px;
-	position: absolute !important;
-	top: 3px;
-	font-size: 16px;
+    display: inline-block;
+    left: 94%;
+    position: absolute !important;
+    top: 6px;
+    font-size: 16px;
 }
 
 .icone-adicionar-funcionario {
@@ -426,7 +426,7 @@ h4 {
 /* TELA DE APARELHOS */
 .icone-adicionar-aparelho {
     display: inline-block;
-    left: 1086px;
+    left: 94%;
     position: absolute !important;
     top: 6px;
     font-size: 16px;

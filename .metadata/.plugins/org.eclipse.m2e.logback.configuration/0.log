@@ -21,3 +21,4 @@
 2019-05-02 21:10:49,408 [Worker-72: JDI thread evaluations] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-catalina/7.0.56/tomcat-catalina-7.0.56-sources.jar
 2019-05-02 21:10:49,953 [Worker-68: Debug Source Lookup] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-catalina/7.0.56/tomcat-catalina-7.0.56-sources.jar
 2019-05-02 21:10:51,108 [Worker-68: Debug Source Lookup] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-catalina/7.0.56/tomcat-catalina-7.0.56-sources.jar
+2019-05-03 18:52:22,797 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is not available. Remote download required.

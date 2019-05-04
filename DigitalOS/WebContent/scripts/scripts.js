@@ -43,36 +43,9 @@ function CadastroAparelho() {
 		},
 		success : function(resposta) {
 			alert(resposta);
-			/*var modalzinha = {
-				title : "Mensagem",
-				heigth : 250,
-				width : 400,
-				modal : true,
-				buttons : {
-					"OK" : function() {
-						$(this).modal("close");
-					}
-				}
-			};
-			$("#msg").html(resposta.resposta);
-			$("#msg").modal(modalzinha);*/
-
 		},
 		error : function(resposta) {
 			alert(resposta);
-			/*var modalzinha = {
-				title : "Mensagem",
-				heigth : 250,
-				width : 400,
-				modal : true,
-				buttons : {
-					"Ok" : function() {
-						$(this).modal("close");
-					}
-				}
-			};
-			$("#msg").html(resposta.resposta);
-			$("#msg").modal(modalzinha);*/
 		}
 	});
 }
@@ -187,4 +160,9 @@ function filtroAtivos(){
 			alert("Erro ao Filtrar");
 		}
 	});
+}
+
+function inserirPessoa(){
+	alert($("#formCadastroCliente").serialize());
+	$.ajax({});
 }

@@ -67,6 +67,21 @@
 		<url-pattern>/ServletFiltroAtivos</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>Jersey REST Service</servlet-name>
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>com.sun.jersey.config.property.packages</param-name>
+			<param-value>br.com.br.com.digitalOS.Rest</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Jersey REST Service</servlet-name>
+		<url-pattern>/Rest/*</url-pattern>
+	</servlet-mapping>
+
 	<filter>
 		<filter-name>Filtro</filter-name>
 		<filter-class>br.com.digitalOS.filtro.Filtro</filter-class>

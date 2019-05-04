@@ -6,7 +6,7 @@ import br.com.digitalOS.objetos.AparelhoObj;
 import br.com.digitalOS.objetos.PessoaObj;
 
 public interface DigitalOSInterface {
-	public boolean cadastrarPessoa(PessoaObj novaPessoa);
+	public boolean inserirPessoa(PessoaObj pessoa);
 	
 	public boolean cadastrarAparelho(AparelhoObj novoAparelho);
 	
