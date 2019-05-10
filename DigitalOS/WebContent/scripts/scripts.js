@@ -48,6 +48,7 @@ function CadastroAparelho() {
 			alert(resposta);
 		}
 	});
+	buscarAparelho();
 }
 
 
@@ -145,15 +146,13 @@ function editarAparelho(){
 	});
 }
 
-function filtroAtivos(){
+function filtroAparelhosAtivos(){
 	var ativo = $("#filtroAtivoOpc").val();
-	alert(ativo);
 	$.ajax({
 		type:'POST',
 		url: '../ServletFiltroAtivos',
 		data: {'ativo':ativo},
 		success: function(listaAparelhosAchados){
-			console.log(listaAparelhosAchados);
 			carregarTabela(listaAparelhosAchados);
 		},
 		error: function(){
@@ -164,5 +163,29 @@ function filtroAtivos(){
 
 function inserirPessoa(){
 	alert($("#formCadastroCliente").serialize());
-	$.ajax({});
+	var pessoa = new Object();
+		pessoa.nome = $("#nomecliente").val();
+		pessoa.datanascimento = $("#datanscimento").val();
+		pessoa.cpf = $("#cpfcliente").val();
+		pessoa.rg = $("#rgcliente").val();
+		pessoa.email = $("#emailcliente").val();
+		pessoa.telefone = $("#telefonecliente").val();
+		pessoa.celular = $("#celularcliente").val();
+		pessoa.edereco = $("#enderecocliente").val();
+		pessoa.numero = $("#numerocliente").val();
+		pessoa.complemento = $("#complementocliente").val();
+		pessoa.estado = $("#estadocliente").val();
+		pessoa.cidade = $("#cidadecliente").val();
+		pessoa.ativo = ("#statuspessoa").val();
+	$.ajax({
+		type:'POST',
+		url: '../rest/RestPessoa/addPessoa',
+		data: pessoa,
+		success: function(listaAparelhosAchados){
+			carregarTabela(listaAparelhosAchados);
+		},
+		error: function(){
+			alert("Erro ao cadastrar nova pessoa");
+		}
+	});
 }

@@ -107,7 +107,7 @@
 		        	
 		        	<hr/><!-- Linha Divisoria na Modal -->
 		        	<div class="row">
-			        	<div class="form-group col-md-7">
+			        	<div class="form-group col-md-6">
 			        		<label>Nome</label>
 			        		<input class="form-control" type="text" id="nomecliente" name="nomecliente" placeholder="Nome">
 			        	</div><!-- /. FORM-GROUP -->
@@ -117,14 +117,19 @@
 			        		<input class="form-control" type="text" id="cpfcliente" name="cpfcliente" placeholder="000.000.000-00">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
-			        	<div class="form-group col-md-2">
+			        	<div class="form-group col-md-3">
 			        		<label>RG</label>
 			        		<input class="form-control" type="text" id="rgcliente" name="rgcliente" placeholder="0.000.000">
 			        	</div><!-- /. FORM-GROUP -->
 		        	</div><!-- /.ROW -->
 		        
 		        	<div class="row">
-			        	<div class="form-group col-md-6">
+		        		<div class="form-group col-md-4">
+			        		<label>Data Nascimento</label>
+			        		<input class="form-control" type="date" id="datanscimento" name="datanascimento">
+			        	</div><!-- /. FORM-GROUP -->
+		        		
+			        	<div class="form-group col-md-5">
 			        		<label>E-mail</label>
 			        		<input class="form-control" type="email" id="emailcliente" name="emailcliente" placeholder="E-mail">
 			        	</div><!-- /. FORM-GROUP -->
@@ -133,32 +138,32 @@
 			        		<label>Telefone</label>
 			        		<input class="form-control" type="text" id="telefonecliente" name="telefonecliente" placeholder="(00) 0000-0000">
 			        	</div><!-- /. FORM-GROUP -->
-			        	
-			        	<div class="form-group col-md-3">
-			        		<label>Celular</label>
-			        		<input class="form-control" type="text" id="celularcliente" name="celularcliente" placeholder="(00) 00000-0000">
-			        	</div><!-- /. FORM-GROUP -->
 		        	</div><!-- /.ROW -->
 		        	
 		        	<div class="row">
+		        		<div class="form-group col-md-4">
+			        		<label>Celular</label>
+			        		<input class="form-control" type="text" id="celularcliente" name="celularcliente" placeholder="(00) 00000-0000">
+			        	</div><!-- /. FORM-GROUP -->
+		        	
 			        	<div class="form-group col-md-5">
 			        		<label>Enderço</label>
 			        		<input class="form-control" type="text" id="enderecocliente" name="enderecocliente" placeholder="Endereço">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
-						<div class="form-group col-md-2">
+						<div class="form-group col-md-3">
 			        		<label>Numero</label>
 			        		<input class="form-control" type="text" id="numerocliente" name="numerocliente" placeholder="0000">
-			        	</div><!-- /. FORM-GROUP -->
-			        	
-			        	<div class="form-group col-md-5">
-			        		<label>Complemento</label>
-			        		<input class="form-control" type="text" id="complementocliente" name="complementocliente" placeholder="Proximo a lanhouse">
-			        	</div><!-- /. FORM-GROUP -->
+			        	</div><!-- /. FORM-GROUP -->		        	
 			      	</div><!-- /.ROW -->
 			      
 			      	<div class="row">
-			        	<div class="form-group col-md-6">
+			      		<div class="form-group col-md-4">
+			        		<label>Complemento</label>
+			        		<input class="form-control" type="text" id="complementocliente" name="complementocliente" placeholder="Proximo a lanhouse">
+			        	</div><!-- /. FORM-GROUP -->
+			      	
+			        	<div class="form-group col-md-3">
 			        		<label>Estado</label>
 			        		<input class="form-control" type="text" id="estadocliente" name="estadocliente" placeholder="Santa Catarina">
 			        		<!-- <select class="form-control" id="UF">
@@ -193,12 +198,19 @@
 			        		</select> -->
 			        	</div><!-- /. FORM-GROUP -->
 			        	
-			        	<div class="form-group col-md-6">
+			        	<div class="form-group col-md-3">
 			        		<label>Cidade</label>
 			        		<input class="form-control" type="text" id="cidadecliente" name="cidadecliente" placeholder="Joinville">
 			        		<!-- <select class="form-control" id="cidade" onchange="cidadeEstado(this.value)">
 			        			<option value="0">cidades</option>
 			        		</select> -->
+			        	</div><!-- /. FORM-GROUP -->
+			        	<div class="form-group col-md-2">
+			        		<label>Status</label>
+			        		<select class="form-control" id="statuspessoa" name="statuspessoa">
+			        			<option value="S">Ativo</option>
+			        			<option value="N">Inativo</option>
+			        		</select>
 			        	</div><!-- /. FORM-GROUP -->
 		        	</div><!-- /.ROW -->
 		        </div><!-- /.form -->

@@ -63,7 +63,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	public List<AparelhoObj> buscarAparelho(AparelhoObj aparelho) {
 
 		String nome = aparelho.getNome();
-		String comando = "select idregistroaparelho, nomeaparelho, numerodeserie, modelo, ativo, marca_marca, categoriaaparelho_categoriaaparelho "
+		String comando = "select idregistroaparelho, nomeaparelho, numerodeserie, modelo,  ativo,marca_marca, categoriaaparelho_categoriaaparelho "
 				+ "from registroaparelho";
 		if (nome != "") {
 			comando += " where nomeaparelho like '" + nome + "%';";

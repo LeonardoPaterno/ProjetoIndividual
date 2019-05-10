@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="icone-adicionar" key="selection"/>
+		<item value="ativo" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="statusaparelho"/>
 			<item value="icone-adicionar"/>
 			<item value="label-painel"/>
 			<item value="label-painel-cliente"/>
@@ -22,13 +23,12 @@
 			<item value="div-painel-aparelhos"/>
 			<item value="form-control-custom"/>
 			<item value="icone-pesquisar"/>
-			<item value="input-form"/>
 		</list>
 		<list key="replacehistory">
+			<item value="ativo"/>
 			<item value="JDBCDigitalOSLoginDAO"/>
 			<item value="PessoaObj"/>
 			<item value=""/>
-			<item value="ativo"/>
 			<item value="Ativo"/>
 			<item value="AparelhoObj"/>
 		</list>

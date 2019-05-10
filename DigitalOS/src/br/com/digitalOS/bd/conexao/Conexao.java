@@ -6,8 +6,8 @@ public class Conexao {
 	private Connection conexao;
 
 	public Connection abrirConexao() {
-		try {
-			Class.forName("org.gjt.mm.mysql.Driver");
+		try {Class.forName("org.gjt.mm.mysql.Driver"); 
+
 
 			conexao = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/ordemservico", "root", "root");
 		} catch (Exception e) {

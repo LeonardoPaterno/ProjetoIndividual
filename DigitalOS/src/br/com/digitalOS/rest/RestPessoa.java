@@ -1,4 +1,4 @@
-package br.com.digitalOS.Rest;
+package br.com.digitalOS.rest;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import br.com.digitalOS.bd.conexao.Conexao;
 import br.com.digitalOS.jdbc.JDBCDigitalOSLoginDAO;
 import br.com.digitalOS.objetos.PessoaObj;
-import br.com.digitalOS.Rest.UtilRest;
+import br.com.digitalOS.rest.UtilRest;
 
 @Path("RestPessoa")
 public class RestPessoa extends UtilRest{
@@ -29,8 +29,10 @@ public class RestPessoa extends UtilRest{
 	@Consumes("application/*")
 
 	public Response addPessoaObj(String PessoaObjParam) {
+		System.out.println(PessoaObjParam);
 		try {
 			PessoaObj pessoaNova = new ObjectMapper().readValue(PessoaObjParam, PessoaObj.class);
+			System.out.println(pessoaNova.getNome());
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);

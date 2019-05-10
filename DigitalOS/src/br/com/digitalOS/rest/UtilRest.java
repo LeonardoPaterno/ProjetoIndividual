@@ -1,4 +1,4 @@
-package br.com.digitalOS.Rest;
+package br.com.digitalOS.rest;
 
 import java.io.StringWriter;
 import javax.ws.rs.core.Response;
