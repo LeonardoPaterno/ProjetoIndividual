@@ -7,8 +7,8 @@ public class PessoaObj implements Serializable{
 	
 	private int id;
 	private String nome;
-	private String cpf;
 	private String datanascimento;
+	private String cpf;
 	private String rg;
 	private String email;
 	private String telefone;
@@ -18,6 +18,7 @@ public class PessoaObj implements Serializable{
 	private String complemento;
 	private String UF;
 	private String cidade;
+	private String ativo;
 	
 	public int getId() {
 		return id;
@@ -98,5 +99,11 @@ public class PessoaObj implements Serializable{
 	
 	public void setDataNascimento(String datanascimento) {
 		this.datanascimento = datanascimento;
+	}
+	public String getAtivo() {
+		return ativo;
+	}
+	public void setAtivo(String ativo) {
+		this.ativo = ativo;
 	}
 }

@@ -197,7 +197,8 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	@Override
 	public boolean inserirPessoa(PessoaObj pessoa) {
 
-		String comando = "insert into pessoa " + "(nome, cpf, datanascimento, rg)" + "values(?,?,?,?)";
+		String comando = "insert into pessoa " + 
+		"(nome, cpf, datanascimento, rg)" + "values(?,?,?,?)";
 		PreparedStatement p;
 		try {
 			p = this.conexao.prepareStatement(comando);

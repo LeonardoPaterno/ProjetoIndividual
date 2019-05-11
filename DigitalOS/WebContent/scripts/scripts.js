@@ -1,9 +1,9 @@
 function loginOS() {
-	var user = $("input[name=usuario]").val();
-	var password = $("input[name=senha]").val();
+	obj.user = $("input[name=usuario]").val();
+	obj.password = $("input[name=senha]").val();
 
 	if (user != "" && user != null && password != "" && password != null) {
-		var passCoded = btoa(password);
+		obj.passCoded = btoa(password);
 
 		$.ajax({
 			type : 'POST',
@@ -23,12 +23,12 @@ function loginOS() {
 }
 
 function CadastroAparelho() {
-	var nome = $("input[name=nomeaparelho]").val();
-	var categoria = $("#categoriaaparelho").val();
-	var marca = $("#marcaaparelho").val();
-	var modelo = $("input[name=modeloaparelho]").val();
-	var nsaparelho = $("input[name=nsaparelho]").val();
-	var ativo = $("#statusaparelho").val();
+	obj.nome = $("input[name=nomeaparelho]").val();
+	obj.categoria = $("#categoriaaparelho").val();
+	obj.marca = $("#marcaaparelho").val();
+	obj.modelo = $("input[name=modeloaparelho]").val();
+	obj.nsaparelho = $("input[name=nsaparelho]").val();
+	obj.ativo = $("#statusaparelho").val();
 
 	$.ajax({
 		type : 'POST',
@@ -53,7 +53,7 @@ function CadastroAparelho() {
 
 
 function buscarAparelho(){
-	var valorBusca = $('#buscaAparelhoInput').val();
+	obj.valorBusca = $('#buscaAparelhoInput').val();
 	$.ajax({
 		type: 'POST',
 		url: '../ServletBuscarAparelho',
@@ -68,12 +68,12 @@ function buscarAparelho(){
 };
 
 function carregarTabela(listaAparelhosAchados){
-	var html = "<div class='teble-reponsive'>" +
+	obj.html = "<div class='teble-reponsive'>" +
 			   "<table class='table table-striped table-condensed table-bordered'>";
 		html += "<tr>" +
 				"<th># ID</th> <th>Nome</th> <th>Categoria</th> <th>Marca</th> <th>Modelo</th> <th>Número Série</th> <th>Ativo</th> <th>Edição</th>" +
 				"</tr>"
-	for(var i = 0; i < listaAparelhosAchados.length; i++){
+	for(obj.i = 0; i < listaAparelhosAchados.length; i++){
 		html += "<tr>" +
 					"<td>" + listaAparelhosAchados[i].idaparelho + "</td>" +
 					"<td>" + listaAparelhosAchados[i].nome + "</td>" +
@@ -106,7 +106,7 @@ function exibirEdicaoAparelho(idaparelho){
 			$("#EditModeloAparelho").val(aparelho.modelo);
 			$("#EditNsAparelho").val(aparelho.nsaparelho);
 			$("#EditStatusAparelho").val(aparelho.ativo);
-			var cfg = {
+			obj.cfg = {
 					heigth : 600,
 					width : 400,
 					modal : true,
@@ -125,13 +125,13 @@ function exibirEdicaoAparelho(idaparelho){
 }
 
 function editarAparelho(){
-	var idaparelho = $("#EditIdAparelho").val();
-	var nome = $("#EditNomeAparelho").val();
-	var categoria = $("#EditCategoriaAparelho").val();
-	var marca = $("#EditMarcaAparelho").val();
-	var modelo = $("#EditModeloAparelho").val();
-	var nsaparelho = $("#EditNsAparelho").val();
-	var ativo = $("#EditStatusAparelho").val();
+	obj.idaparelho = $("#EditIdAparelho").val();
+	obj.nome = $("#EditNomeAparelho").val();
+	obj.categoria = $("#EditCategoriaAparelho").val();
+	obj.marca = $("#EditMarcaAparelho").val();
+	obj.modelo = $("#EditModeloAparelho").val();
+	obj.nsaparelho = $("#EditNsAparelho").val();
+	obj.ativo = $("#EditStatusAparelho").val();
 	$.ajax({
 		type : 'POST',
 		url : '../ServletEditarAparelho',
@@ -147,7 +147,7 @@ function editarAparelho(){
 }
 
 function filtroAparelhosAtivos(){
-	var ativo = $("#filtroAtivoOpc").val();
+	obj.ativo = $("#filtroAtivoOpc").val();
 	$.ajax({
 		type:'POST',
 		url: '../ServletFiltroAtivos',
@@ -162,24 +162,36 @@ function filtroAparelhosAtivos(){
 }
 
 function inserirPessoa(){
-	alert($("#formCadastroCliente").serialize());
-	var pessoa = new Object();
-		pessoa.nome = $("#nomecliente").val();
-		pessoa.datanascimento = $("#datanscimento").val();
-		pessoa.cpf = $("#cpfcliente").val();
-		pessoa.rg = $("#rgcliente").val();
-		pessoa.email = $("#emailcliente").val();
-		pessoa.telefone = $("#telefonecliente").val();
-		pessoa.celular = $("#celularcliente").val();
-		pessoa.edereco = $("#enderecocliente").val();
-		pessoa.numero = $("#numerocliente").val();
-		pessoa.complemento = $("#complementocliente").val();
-		pessoa.estado = $("#estadocliente").val();
-		pessoa.cidade = $("#cidadecliente").val();
-		pessoa.ativo = ("#statuspessoa").val();
+/*	var obj = new Object;
+	obj.nome = $("#nomecliente").val();
+	obj.cpf = $("#cpfcliente").val();
+	obj.rg = $("#rgcliente").val();
+	obj.datanascimento = $("#datanascimento").val();
+	obj.email = $("#emailcliente").val();
+	obj.telefone = $("#celularcliente").val();
+	obj.endereco = $("#enderecocliente").val();
+	obj.numero = $("#numerocliente").val();
+	obj.complemento = $("#complementocliente").val();
+	obj.estado = $("#estadocliente").val();
+	obj.cidade = $("#cidadecliente").val();
+	obj.ativo = $("#statuspessoa").val();*/
+		var nome = $("#nomecliente").val();
+		var cpf = $("#cpfcliente").val();
+		var rg = $("#rgcliente").val();
+		var datanascimento = $("#datanascimento").val();
+		var email = $("#emailcliente").val();
+		var telefone = $("#celularcliente").val();
+		var endereco = $("#enderecocliente").val();
+		var numero = $("#numerocliente").val();
+		var complemento = $("#complementocliente").val();
+		var estado = $("#estadocliente").val();
+		var cidade = $("#cidadecliente").val();
+		var ativo = $("#statuspessoa").val();
+
+		var pessoa = ('{"nome":'+nome, '"cpf":'+cpf,'"rg":'+rg, '"datanascimento":'+ datanascimento +"}'");
 	$.ajax({
 		type:'POST',
-		url: '../rest/RestPessoa/addPessoa',
+		url: '/DigitalOS/rest/RestPessoa/addPessoaObj',
 		data: pessoa,
 		success: function(listaAparelhosAchados){
 			carregarTabela(listaAparelhosAchados);

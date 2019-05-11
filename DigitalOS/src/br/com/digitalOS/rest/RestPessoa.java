@@ -25,20 +25,20 @@ public class RestPessoa extends UtilRest{
 	}
 
 	@POST
-	@Path("/addPessoa")
+	@Path("/addPessoaObj")
 	@Consumes("application/*")
 
-	public Response addPessoaObj(String PessoaObjParam) {
-		System.out.println(PessoaObjParam);
+	public Response addPessoaObj(String pessoa) {
+		System.out.println(pessoa);
 		try {
-			PessoaObj pessoaNova = new ObjectMapper().readValue(PessoaObjParam, PessoaObj.class);
+			PessoaObj pessoaNova = new ObjectMapper().readValue(pessoa, PessoaObj.class);
 			System.out.println(pessoaNova.getNome());
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);
 			jdbcPessoaObj.inserirPessoa(pessoaNova);
 			conec.fecharConexao();
-			return this.buildResponse("PessoaObj cadastrado com sucesso!");
+			return this.buildResponse("Pessoa cadastrada com sucesso!");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
