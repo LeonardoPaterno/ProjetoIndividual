@@ -45,9 +45,9 @@ DROP TABLE IF EXISTS `funcionario` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `funcionario` (
   `idfuncionario` INT NOT NULL AUTO_INCREMENT,
-  `numerocarteiratrabalho` VARCHAR(8) NOT NULL,
-  `PIS` VARCHAR(11) NOT NULL,
-  `salario` FLOAT NOT NULL,
+  `numerocarteiratrabalho` VARCHAR(8),
+  `PIS` VARCHAR(11),
+  `salario` FLOAT,
   PRIMARY KEY (`idfuncionario`))
 ENGINE = InnoDB;
 
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `pessoa` (
   `idpessoa` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
   `cpf` VARCHAR(11) NOT NULL,
-  `datanascimento` VARCHAR(8) NOT NULL,
+  `datanascimento` DATE NOT NULL,
   `rg` VARCHAR(7) NULL,
   `profissao` VARCHAR(75) NULL,
   `endereco_idendereco` INT NOT NULL,
