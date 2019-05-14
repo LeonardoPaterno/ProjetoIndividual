@@ -89,6 +89,6 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>Filtro</filter-name>
-		<url-pattern>/paginas/*</url-pattern>
+		<url-pattern>/mylib/paginas/*</url-pattern>
 	</filter-mapping>
 </web-app>

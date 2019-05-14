@@ -1,6 +1,6 @@
 $(document).ready(
 		function() {
-			var segundoGrafico = document.getElementById("#segundoGrafico")
+			var segundoGrafico = document.getElementById("#primeiroGrafico")
 
 			let chart = new Chart(primeiroGrafico, {
 				type : 'line',

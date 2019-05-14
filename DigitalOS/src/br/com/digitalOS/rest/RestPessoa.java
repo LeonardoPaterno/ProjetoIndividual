@@ -32,7 +32,7 @@ public class RestPessoa extends UtilRest{
 		System.out.println(pessoa);
 		try {
 			PessoaObj pessoaNova = new ObjectMapper().readValue(pessoa, PessoaObj.class);
-			System.out.println(pessoaNova.getNome());
+			System.out.println(pessoaNova);
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);

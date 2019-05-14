@@ -8,7 +8,7 @@ function loginOS() {
 		$.ajax({
 			type : 'POST',
 			url : 'ServletConsultaLogin',
-			data : 'user=' + user + '&passCoded=' + passCoded,
+			data : {'user':user, 'passCoded':passCoded},
 
 			success : function(url) {
 				location.href = url.url;
@@ -23,16 +23,16 @@ function loginOS() {
 }
 
 function CadastroAparelho() {
-	obj.nome = $("input[name=nomeaparelho]").val();
-	obj.categoria = $("#categoriaaparelho").val();
-	obj.marca = $("#marcaaparelho").val();
-	obj.modelo = $("input[name=modeloaparelho]").val();
-	obj.nsaparelho = $("input[name=nsaparelho]").val();
-	obj.ativo = $("#statusaparelho").val();
+	var nome = $("#nomeaparelho").val();
+	var categoria = $("#categoriaaparelho").val();
+	var marca = $("#marcaaparelho").val();
+	var modelo = $("#modeloaparelho").val();
+	var nsaparelho = $("#nsaparelho").val();
+	var ativo = $("#statusaparelho").val();
 
 	$.ajax({
 		type : 'POST',
-		url : '../ServletCadastroAparelho',
+		url : '../../../ServletCadastroAparelho',
 		data : {
 			'nome' : nome,
 			'marca' : marca,
@@ -43,20 +43,20 @@ function CadastroAparelho() {
 		},
 		success : function(resposta) {
 			alert(resposta);
+			buscarAparelho();
 		},
 		error : function(resposta) {
 			alert(resposta);
 		}
 	});
-	buscarAparelho();
 }
 
 
 function buscarAparelho(){
-	obj.valorBusca = $('#buscaAparelhoInput').val();
+	var valorBusca = $('#buscaAparelhoInput').val();
 	$.ajax({
 		type: 'POST',
-		url: '../ServletBuscarAparelho',
+		url: '../../../ServletBuscarAparelho',
 		data: {'valorBusca': valorBusca},
 		success: function(listaAparelhosAchados){
 			carregarTabela(listaAparelhosAchados);
@@ -68,12 +68,12 @@ function buscarAparelho(){
 };
 
 function carregarTabela(listaAparelhosAchados){
-	obj.html = "<div class='teble-reponsive'>" +
+	var html = "<div class='teble-reponsive'>" +
 			   "<table class='table table-striped table-condensed table-bordered'>";
 		html += "<tr>" +
 				"<th># ID</th> <th>Nome</th> <th>Categoria</th> <th>Marca</th> <th>Modelo</th> <th>Número Série</th> <th>Ativo</th> <th>Edição</th>" +
 				"</tr>"
-	for(obj.i = 0; i < listaAparelhosAchados.length; i++){
+	for(var i = 0; i < listaAparelhosAchados.length; i++){
 		html += "<tr>" +
 					"<td>" + listaAparelhosAchados[i].idaparelho + "</td>" +
 					"<td>" + listaAparelhosAchados[i].nome + "</td>" +
@@ -95,7 +95,7 @@ function carregarTabela(listaAparelhosAchados){
 function exibirEdicaoAparelho(idaparelho){
 	$.ajax({
 		type : 'POST',
-		url : '../ServletBuscarPorId',
+		url : '../../../ServletBuscarPorId',
 		data:{'idaparelho':idaparelho},
 		success: function(aparelho){
 			console.log(aparelho);
@@ -106,7 +106,7 @@ function exibirEdicaoAparelho(idaparelho){
 			$("#EditModeloAparelho").val(aparelho.modelo);
 			$("#EditNsAparelho").val(aparelho.nsaparelho);
 			$("#EditStatusAparelho").val(aparelho.ativo);
-			obj.cfg = {
+			var cfg = {
 					heigth : 600,
 					width : 400,
 					modal : true,
@@ -125,20 +125,20 @@ function exibirEdicaoAparelho(idaparelho){
 }
 
 function editarAparelho(){
-	obj.idaparelho = $("#EditIdAparelho").val();
-	obj.nome = $("#EditNomeAparelho").val();
-	obj.categoria = $("#EditCategoriaAparelho").val();
-	obj.marca = $("#EditMarcaAparelho").val();
-	obj.modelo = $("#EditModeloAparelho").val();
-	obj.nsaparelho = $("#EditNsAparelho").val();
-	obj.ativo = $("#EditStatusAparelho").val();
+	var idaparelho = $("#EditIdAparelho").val();
+	var nome = $("#EditNomeAparelho").val();
+	var categoria = $("#EditCategoriaAparelho").val();
+	var marca = $("#EditMarcaAparelho").val();
+	var modelo = $("#EditModeloAparelho").val();
+	var nsaparelho = $("#EditNsAparelho").val();
+	var ativo = $("#EditStatusAparelho").val();
 	$.ajax({
 		type : 'POST',
-		url : '../ServletEditarAparelho',
+		url : '../../../ServletEditarAparelho',
 		data:{'idaparelho': idaparelho, 'nome':nome, 'categoria':categoria, 'marca':marca, 'modelo':modelo, 'nsaparelho':nsaparelho, 'ativo':ativo},
 		success: function(resposta){
-			buscarAparelho();
 			alert("Atualizado");
+			buscarAparelho();
 		},
 		error:function(){
 			alert("Erro ao Atualizar");
@@ -147,10 +147,10 @@ function editarAparelho(){
 }
 
 function filtroAparelhosAtivos(){
-	obj.ativo = $("#filtroAtivoOpc").val();
+	var ativo = $("#filtroAtivoOpc").val();
 	$.ajax({
 		type:'POST',
-		url: '../ServletFiltroAtivos',
+		url: '../../../ServletFiltroAtivos',
 		data: {'ativo':ativo},
 		success: function(listaAparelhosAchados){
 			carregarTabela(listaAparelhosAchados);
@@ -162,33 +162,23 @@ function filtroAparelhosAtivos(){
 }
 
 function inserirPessoa(){
-/*	var obj = new Object;
-	obj.nome = $("#nomecliente").val();
-	obj.cpf = $("#cpfcliente").val();
-	obj.rg = $("#rgcliente").val();
-	obj.datanascimento = $("#datanascimento").val();
-	obj.email = $("#emailcliente").val();
-	obj.telefone = $("#celularcliente").val();
-	obj.endereco = $("#enderecocliente").val();
-	obj.numero = $("#numerocliente").val();
-	obj.complemento = $("#complementocliente").val();
-	obj.estado = $("#estadocliente").val();
-	obj.cidade = $("#cidadecliente").val();
-	obj.ativo = $("#statuspessoa").val();*/
-		var nome = $("#nomecliente").val();
-		var cpf = $("#cpfcliente").val();
-		var rg = $("#rgcliente").val();
+		var nome = 			 $("#nomecliente").val();
+		var cpf = 			 $("#cpfcliente").val();
+		var rg = 			 $("#rgcliente").val();
 		var datanascimento = $("#datanascimento").val();
-		var email = $("#emailcliente").val();
-		var telefone = $("#celularcliente").val();
-		var endereco = $("#enderecocliente").val();
-		var numero = $("#numerocliente").val();
-		var complemento = $("#complementocliente").val();
-		var estado = $("#estadocliente").val();
-		var cidade = $("#cidadecliente").val();
-		var ativo = $("#statuspessoa").val();
+		var email = 		 $("#emailcliente").val();
+		var telefone = 		 $("#celularcliente").val();
+		var endereco = 		 $("#enderecocliente").val();
+		var numero = 		 $("#numerocliente").val();
+		var complemento = 	 $("#complementocliente").val();
+		var estado = 		 $("#estadocliente").val();
+		var cidade = 		 $("#cidadecliente").val();
+		var ativo = 		 $("#statuspessoa").val();
 
-		var pessoa = ('{"nome":'+nome, '"cpf":'+cpf,'"rg":'+rg, '"datanascimento":'+ datanascimento +"}'");
+		var pessoaNova = ({'nome':nome, 'cpf':cpf, 'rg':rg, 'datanascimento':datanascimento});
+		var pessoa = JSON.stringify(pessoaNova);
+		console.log(pessoa);
+		console.log(pessoaNova);
 	$.ajax({
 		type:'POST',
 		url: '/DigitalOS/rest/RestPessoa/addPessoaObj',

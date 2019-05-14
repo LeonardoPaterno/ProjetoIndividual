@@ -60,7 +60,7 @@ public class ServletConsultaLogin extends HttpServlet {
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCDigitalOSLoginDAO jdbclogin = new JDBCDigitalOSLoginDAO(conexao);
-			boolean retorno = jdbclogin.consultarLogin(login);
+ 			boolean retorno = jdbclogin.consultarLogin(login);
 			conec.fecharConexao();
 			String json = null;
 			String context = request.getServletContext().getContextPath();
@@ -69,7 +69,7 @@ public class ServletConsultaLogin extends HttpServlet {
 			if (retorno != false) {
 				HttpSession sessao = request.getSession();
 				sessao.setAttribute("login", request.getParameter("user"));
-				msg.put("url", context + "/paginas/menu.html");
+				msg.put("url", context + "/resources/mylib/paginas/menu.html");
 				json = new Gson().toJson(msg);
 
 				out = response.getWriter();
