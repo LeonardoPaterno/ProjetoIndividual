@@ -33,3 +33,6 @@
 2019-05-13 19:23:16,338 [Worker-22: Debug Source Lookup] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-catalina/7.0.47/tomcat-catalina-7.0.47-sources.jar
 2019-05-13 19:23:17,389 [Worker-20: Debug Source Lookup] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat7-websocket/7.0.47/tomcat7-websocket-7.0.47-sources.jar
 2019-05-13 19:23:18,046 [Worker-20: Debug Source Lookup] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat7-websocket/7.0.47/tomcat7-websocket-7.0.47-sources.jar
+2019-05-14 19:15:27,045 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is not available. Remote download required.
+2019-05-14 20:29:11,844 [Worker-44: Debug Source Lookup] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/com/sun/jersey/jersey-server/1.4/jersey-server-1.4-sources.jar
+2019-05-14 20:29:12,749 [Worker-44: Debug Source Lookup] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/com/sun/jersey/jersey-server/1.4/jersey-server-1.4-sources.jar

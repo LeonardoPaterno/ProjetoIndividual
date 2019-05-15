@@ -175,8 +175,9 @@ function inserirPessoa(){
 		var cidade = 		 $("#cidadecliente").val();
 		var ativo = 		 $("#statuspessoa").val();
 
-		var pessoaNova = ({'nome':nome, 'cpf':cpf, 'rg':rg, 'datanascimento':datanascimento});
-		var pessoa = JSON.stringify(pessoaNova);
+		var pessoaNova = ({'nome':nome, 'cpf':cpf, 'rg':rg});
+		var pessoa = JSON.parse(pessoaNova);
+		alert(pessoa);
 		console.log(pessoa);
 		console.log(pessoaNova);
 	$.ajax({

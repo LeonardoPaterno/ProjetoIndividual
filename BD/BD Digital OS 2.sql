@@ -63,11 +63,11 @@ CREATE TABLE IF NOT EXISTS `pessoa` (
   `idpessoa` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
   `cpf` VARCHAR(11) NOT NULL,
-  `datanascimento` DATE NOT NULL,
+  `datanascimento` DATE NULL,
   `rg` VARCHAR(7) NULL,
   `profissao` VARCHAR(75) NULL,
-  `endereco_idendereco` INT NOT NULL,
-  `funcionario_idfuncionario` INT NOT NULL,
+  `endereco_idendereco` INT NULL,
+  `funcionario_idfuncionario` INT NULL,
   PRIMARY KEY (`idpessoa`))
 ENGINE = InnoDB;
 

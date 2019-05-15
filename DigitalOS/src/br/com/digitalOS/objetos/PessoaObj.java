@@ -1,13 +1,14 @@
 package br.com.digitalOS.objetos;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class PessoaObj implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private int id;
 	private String nome;
-	private String datanascimento;
+	private Date datanascimento;
 	private String cpf;
 	private String rg;
 	private String email;
@@ -93,11 +94,11 @@ public class PessoaObj implements Serializable{
 		this.cidade = cidade;
 	} 
 	
-	public String getDataNascimento() {
+	public Date getDataNascimento() {
 		return datanascimento;
 	}
 	
-	public void setDataNascimento(String datanascimento) {
+	public void setDataNascimento(Date datanascimento) {
 		this.datanascimento = datanascimento;
 	}
 	public String getAtivo() {

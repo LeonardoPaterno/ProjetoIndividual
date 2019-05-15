@@ -196,17 +196,14 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 
 	@Override
 	public boolean inserirPessoa(PessoaObj pessoa) {
-		String data = pessoa.getDataNascimento();
-		System.out.println(data);
 		String comando = "insert into pessoa " + 
-		"(nome, cpf, datanascimento, rg)" + "values(?,?,?,?)";
+		"(nome, cpf, rg)" + "values(?,?,?)";
 		PreparedStatement p;
 		try {
 			p = this.conexao.prepareStatement(comando);
 			p.setString(1, pessoa.getNome());
 			p.setString(2, pessoa.getCpf());
-			p.setString(3, pessoa.getDataNascimento());
-			p.setString(4, pessoa.getRg());
+			p.setString(3, pessoa.getRg());
 			p.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
