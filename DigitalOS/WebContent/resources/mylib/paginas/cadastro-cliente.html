@@ -89,7 +89,7 @@
 		      </div>
 		      
 		      <div class="modal-body">
-			  	<form id="formCadastroCliente">
+			  	<form id="formulario-pessoa">
 		        <div class="form">     	
 		        	<div class="row">
 		        		<div class="col-md-12">
@@ -109,7 +109,7 @@
 			        	
 			        	<div class="form-group col-md-3">
 			        		<label>CPF</label>
-			        		<input class="form-control" type="text" id="cpfcliente" name="cpfcliente" placeholder="000.000.000-00">
+			        		<input class="form-control" type="text" id="cpfcliente" name="cpfcliente" maxlength="14" placeholder="000.000.000-00">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-3">
@@ -153,15 +153,15 @@
 			      	</div><!-- /.ROW -->
 			      
 			      	<div class="row">
-			      		<div class="form-group col-md-4">
+			      		<div class="form-group col-md-5">
 			        		<label>Complemento</label>
 			        		<input class="form-control" type="text" id="complementocliente" name="complementocliente" placeholder="Proximo a lanhouse">
 			        	</div><!-- /. FORM-GROUP -->
 			      	
-			        	<div class="form-group col-md-3">
+			        	<div class="form-group col-md-2">
 			        		<label>Estado</label>
-			        		<input class="form-control" type="text" id="estadocliente" name="estadocliente" placeholder="Santa Catarina">
-			        		<!-- <select class="form-control" id="UF">
+			        		<!-- <input class="form-control" type="text" id="estadocliente" name="estadocliente" placeholder="Santa Catarina"> -->
+			        		<select class="form-control" id="estadocliente">
 			        			<option value="0">UF</option>
 			        			<option value="1">AC</option>
 			        			<option value="2">AL</option>
@@ -190,15 +190,19 @@
 			        			<option value="25">SP</option>
 			        			<option value="26">SE</option>
 			        			<option value="27">TO</option>
-			        		</select> -->
+			        		</select>
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-3">
 			        		<label>Cidade</label>
-			        		<input class="form-control" type="text" id="cidadecliente" name="cidadecliente" placeholder="Joinville">
-			        		<!-- <select class="form-control" id="cidade" onchange="cidadeEstado(this.value)">
+			        		<!-- <input class="form-control" type="text" id="cidadecliente" name="cidadecliente" placeholder="Joinville"> -->
+			        		<select class="form-control" id="cidadecliente" onchange="cidadeEstado(this.value)">
 			        			<option value="0">cidades</option>
-			        		</select> -->
+			        			<option value="1">Joinville</option>
+			        			<option value="2">Araquari</option>
+			        			<option value="3">Belo Horizonte</option>
+			        			<option value="4">Vila Bela da Santíssima Trindade</option>
+			        		</select>
 			        	</div><!-- /. FORM-GROUP -->
 			        	<div class="form-group col-md-2">
 			        		<label>Status</label>
@@ -240,7 +244,9 @@
 						</select>
 					</div>
 				</div>
-				<div class="panel-body"></div>
+				<div class="panel-body">
+					<div id="resultadoPessoa" class="resultadoPessoa"></div>
+				</div>
 			</div>
 		</div>
 	</div><!-- geral-menu -->

@@ -162,10 +162,10 @@ function filtroAparelhosAtivos(){
 }
 
 function inserirPessoa(){
-		var nome = 			 $("#nomecliente").val();
+/*		var nome = 			 $("#nomecliente").val();
 		var cpf = 			 $("#cpfcliente").val();
 		var rg = 			 $("#rgcliente").val();
-		var datanascimento = $("#datanascimento").val();
+		var dataNascimento = $("#datanascimento").val();
 		var email = 		 $("#emailcliente").val();
 		var telefone = 		 $("#celularcliente").val();
 		var endereco = 		 $("#enderecocliente").val();
@@ -175,20 +175,64 @@ function inserirPessoa(){
 		var cidade = 		 $("#cidadecliente").val();
 		var ativo = 		 $("#statuspessoa").val();
 
-		var pessoaNova = ({'nome':nome, 'cpf':cpf, 'rg':rg});
-		var pessoa = JSON.parse(pessoaNova);
+		var pessoaNova = {'nome':nome, 'cpf':cpf, 'rg':rg, 'dataNascimento':dataNascimento, 'email':email, 'telefone':telefone, 
+						  'endereco':endereco, 'numero':numero, 'complemento':complemento,	'estado':estado, 'cidade':cidade, 'ativo':ativo
+		};
+		var pessoa = JSON.stringify(pessoaNova);
 		alert(pessoa);
-		console.log(pessoa);
-		console.log(pessoaNova);
+		console.log(pessoa);*/
+	var pessoa = $("#formulario-pessoa").serialize();
 	$.ajax({
 		type:'POST',
 		url: '/DigitalOS/rest/RestPessoa/addPessoaObj',
 		data: pessoa,
-		success: function(listaAparelhosAchados){
-			carregarTabela(listaAparelhosAchados);
+		success: function(listaPessoasAchadas){
+			carregarTabela(listaPessoasAchadas);
 		},
 		error: function(){
 			alert("Erro ao cadastrar nova pessoa");
 		}
 	});
+}
+
+function buscarPessoa(){
+	var valorBusca = $('#buscaPessoaInput').val();
+	alert(valorBusca);
+	var buscapessoa = JSON.stringify(valorBusca);
+	alert(buscapessoa);
+	$.ajax({
+		type: 'POST',
+		url: '/DigitalOS/rest/RestPessoa/buscarPessoaPorNome',
+		data: buscapessoa,
+		success: function(listaAparelhosAchados){
+			carregarTabela(listaAparelhosAchados);
+		},
+		error: function(){
+			alert("Error, nenhuma pessoa achada");
+		}
+	});
+};
+
+function tabelaPessoa(listaPessoasAchadas){
+	var html = "<div class='teble-reponsive'>" +
+			   "<table class='table table-striped table-condensed table-bordered'>";
+		html += "<tr>" +
+				"<th># ID</th> <th>Nome</th> <th>CPF</th> <th>RG</th> <th>Data de Nascimento</th> <th>Ativo</th> <th>Edição</th>" +
+				"</tr>"
+	for(var i = 0; i < listaPessoasAchadas.length; i++){
+		html += "<tr>" +
+					"<td>" + listaPessoasAchadas[i].idpessoa + "</td>" +
+					"<td>" + listaPessoasAchadas[i].nome + "</td>" +
+					"<td>" + listaPessoasAchadas[i].cpf + "</td>" +
+					"<td>" + listaPessoasAchadas[i].rg + "</td>" +
+					"<td>" + listaPessoasAchadas[i].datanascimento + "</td>" +
+					"<td>" + listaPessoasAchadas[i].ativo + "</td>" +
+					"<td>" +
+						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoPessoa("+listaPessoasAchadas[i].idpessoa+")'></div>" +
+					"</td>" +
+				"</tr>"
+	}
+	html += "</table>" +
+			"</div>"
+	$("#resultadoPessoa").html(html);
 }

@@ -9,6 +9,6 @@
 <fullyQualifiedTypeName name="br.com.digitalOS.jdbc.JDBCDigitalOSLoginDAO"/>
 <fullyQualifiedTypeName name="br.com.digitalOS.Rest.UtilRest"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
-<fullyQualifiedTypeName name="java.sql.Date"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
 </qualifiedTypeNameHistroy>

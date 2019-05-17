@@ -1,6 +1,7 @@
 package br.com.digitalOS.jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -197,13 +198,15 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	@Override
 	public boolean inserirPessoa(PessoaObj pessoa) {
 		String comando = "insert into pessoa " + 
-		"(nome, cpf, rg)" + "values(?,?,?)";
+		"(nome, cpf, datanascimento, rg)" + "values(?,?,?,?)";
 		PreparedStatement p;
 		try {
 			p = this.conexao.prepareStatement(comando);
 			p.setString(1, pessoa.getNome());
 			p.setString(2, pessoa.getCpf());
-			p.setString(3, pessoa.getRg());
+			p.setDate(3, pessoa.getDataNascimento());
+			p.setString(4, pessoa.getRg());
+			System.out.println(p);
 			p.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -226,6 +229,33 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 
 	public List<PessoaObj> buscarPessoaPorNome(String nome) {
-		return null;
+		String comando = "select idpessoa, nome, cpf, rg,  datanascimento from pessoa";
+		if (nome != "") {
+			comando += " where nome like '" + nome + "%';";
+			}
+		List<PessoaObj> ListaPessoa = new ArrayList<PessoaObj>();
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while (rs.next()) {
+				PessoaObj pessoa = new PessoaObj();
+				int idpessoa = rs.getInt("idpessoa");
+				String nomepessoa = rs.getString("nome");
+				String cpf = rs.getString("cpf");
+				String rg = rs.getString("rg");
+				Date dataNascimento = rs.getDate("datanascimento");
+
+				pessoa.setId(idpessoa);
+				pessoa.setNome(nomepessoa);
+				pessoa.setCpf(cpf);
+				pessoa.setRg(rg);
+				pessoa.setDataNascimento(dataNascimento);
+
+				ListaPessoa.add(pessoa);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ListaPessoa;
 	}
 }

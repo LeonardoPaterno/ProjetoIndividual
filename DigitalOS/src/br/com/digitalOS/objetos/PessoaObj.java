@@ -1,14 +1,13 @@
 package br.com.digitalOS.objetos;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class PessoaObj implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private int id;
 	private String nome;
-	private Date datanascimento;
+	private java.sql.Date dataNascimento;
 	private String cpf;
 	private String rg;
 	private String email;
@@ -17,9 +16,10 @@ public class PessoaObj implements Serializable{
 	private String endereco;
 	private int numero;
 	private String complemento;
-	private String UF;
-	private String cidade;
+	private String estado;
+	private int cidade;
 	private String ativo;
+	private int tipocliente;
 	
 	public int getId() {
 		return id;
@@ -81,30 +81,37 @@ public class PessoaObj implements Serializable{
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
-	public String getUF() {
-		return UF;
-	}
-	public void setUF(String uF) {
-		UF = uF;
-	}
-	public String getCidade() {
+
+	public int getCidade() {
 		return cidade;
 	}
-	public void setCidade(String cidade) {
+	public void setCidade(int cidade) {
 		this.cidade = cidade;
 	} 
 	
-	public Date getDataNascimento() {
-		return datanascimento;
+	public java.sql.Date getDataNascimento() {
+		return dataNascimento;
 	}
 	
-	public void setDataNascimento(Date datanascimento) {
-		this.datanascimento = datanascimento;
+	public void setDataNascimento(java.sql.Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 	public String getAtivo() {
 		return ativo;
 	}
 	public void setAtivo(String ativo) {
 		this.ativo = ativo;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	public int getTipocliente() {
+		return tipocliente;
+	}
+	public void setTipocliente(int tipocliente) {
+		this.tipocliente = tipocliente;
 	}
 }

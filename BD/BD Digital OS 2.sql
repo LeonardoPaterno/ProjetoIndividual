@@ -61,13 +61,13 @@ DROP TABLE IF EXISTS `pessoa` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `pessoa` (
   `idpessoa` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(50) NOT NULL,
+  `nome` VARCHAR(80) NOT NULL,
   `cpf` VARCHAR(11) NOT NULL,
-  `datanascimento` DATE NULL,
-  `rg` VARCHAR(7) NULL,
-  `profissao` VARCHAR(75) NULL,
-  `endereco_idendereco` INT NULL,
-  `funcionario_idfuncionario` INT NULL,
+  `datanascimento` DATE NOT NULL,
+  `rg` VARCHAR(7) NOT NULL,
+  `profissao` VARCHAR(75),
+  `endereco_idendereco` INT,
+  `funcionario_idfuncionario` INT,
   PRIMARY KEY (`idpessoa`))
 ENGINE = InnoDB;
 
