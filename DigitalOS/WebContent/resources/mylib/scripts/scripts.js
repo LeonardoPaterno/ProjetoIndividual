@@ -162,7 +162,7 @@ function filtroAparelhosAtivos(){
 }
 
 function inserirPessoa(){
-/*		var nome = 			 $("#nomecliente").val();
+		var nome = 			 $("#nomecliente").val();
 		var cpf = 			 $("#cpfcliente").val();
 		var rg = 			 $("#rgcliente").val();
 		var dataNascimento = $("#datanascimento").val();
@@ -175,13 +175,13 @@ function inserirPessoa(){
 		var cidade = 		 $("#cidadecliente").val();
 		var ativo = 		 $("#statuspessoa").val();
 
-		var pessoaNova = {'nome':nome, 'cpf':cpf, 'rg':rg, 'dataNascimento':dataNascimento, 'email':email, 'telefone':telefone, 
+		var pessoaNova = {'nome':nome, 'cpf':cpf, 'dataNascimento':dataNascimento, 'rg':rg, 'email':email, 'telefone':telefone, 
 						  'endereco':endereco, 'numero':numero, 'complemento':complemento,	'estado':estado, 'cidade':cidade, 'ativo':ativo
 		};
 		var pessoa = JSON.stringify(pessoaNova);
 		alert(pessoa);
-		console.log(pessoa);*/
-	var pessoa = $("#formulario-pessoa").serialize();
+		console.log(pessoa);
+	/*var pessoa = $("#formulario-pessoa").serialize();*/
 	$.ajax({
 		type:'POST',
 		url: '/DigitalOS/rest/RestPessoa/addPessoaObj',
@@ -198,17 +198,20 @@ function inserirPessoa(){
 function buscarPessoa(){
 	var valorBusca = $('#buscaPessoaInput').val();
 	alert(valorBusca);
-	var buscapessoa = JSON.stringify(valorBusca);
-	alert(buscapessoa);
+	/*var buscapessoa = JSON.stringify(valorBusca);
+	alert(buscapessoa);*/
 	$.ajax({
 		type: 'POST',
-		url: '/DigitalOS/rest/RestPessoa/buscarPessoaPorNome',
-		data: buscapessoa,
-		success: function(listaAparelhosAchados){
-			carregarTabela(listaAparelhosAchados);
+		url: '/DigitalOS/rest/RestPessoa/buscarPessoaPorNome/'+ valorBusca,
+		data: valorBusca,
+		success: function(listaPessoasAchadas){
+			alert(listaPessoasAchadas);
+			tabelaPessoa
+			(listaPessoasAchadas);
 		},
 		error: function(){
 			alert("Error, nenhuma pessoa achada");
+			tabelaPessoa(listaAparelhosAchados);
 		}
 	});
 };

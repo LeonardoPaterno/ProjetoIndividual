@@ -19,7 +19,7 @@ public class PessoaObj implements Serializable{
 	private String estado;
 	private int cidade;
 	private String ativo;
-	private int tipocliente;
+	/* private int tipocliente; */
 	
 	public int getId() {
 		return id;
@@ -108,10 +108,8 @@ public class PessoaObj implements Serializable{
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public int getTipocliente() {
-		return tipocliente;
-	}
-	public void setTipocliente(int tipocliente) {
-		this.tipocliente = tipocliente;
-	}
+	/*
+	 * public int getTipocliente() { return tipocliente; } public void
+	 * setTipocliente(int tipocliente) { this.tipocliente = tipocliente; }
+	 */
 }

@@ -5,19 +5,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
+
+import com.google.gson.Gson;
 
 import br.com.digitalOS.bd.conexao.Conexao;
 import br.com.digitalOS.jdbc.JDBCDigitalOSLoginDAO;
 import br.com.digitalOS.objetos.PessoaObj;
-import br.com.digitalOS.rest.UtilRest;
 
 @Path("RestPessoa")
 public class RestPessoa extends UtilRest{
@@ -57,8 +58,11 @@ public class RestPessoa extends UtilRest{
 			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);
 			PessoaObjs = jdbcPessoaObj.buscarPessoaPorNome(nome);
 			conec.fecharConexao();
+			
+			String json = new Gson().toJson(PessoaObjs);
+			System.out.println(json);
 
-			return this.buildResponse(PessoaObjs);
+			return this.buildResponse(json);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
@@ -91,6 +95,7 @@ public class RestPessoa extends UtilRest{
 			Connection conexao = conec.abrirConexao();
 			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);
 			PessoaObj PessoaObj = jdbcPessoaObj.buscarPessoaPorId(id);
+			
 			return this.buildResponse(PessoaObj);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -109,6 +114,7 @@ public class RestPessoa extends UtilRest{
 			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);
 			jdbcPessoaObj.atualizar(PessoaObj);
 			conec.fecharConexao();
+			
 			return this.buildResponse("Pessoa editado com sucesso!");
 		} catch (Exception e) {
 			e.printStackTrace();
