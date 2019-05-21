@@ -230,7 +230,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 
 	public List<PessoaObj> buscarPessoaPorNome(String nome) {
 		String comando = "select idpessoa, nome, cpf, rg,  datanascimento from pessoa";
-		if (nome != "") {
+		if (nome != "" || nome != null) {
 			comando += " where nome like '" + nome + "%';";
 			}
 		List<PessoaObj> ListaPessoa = new ArrayList<PessoaObj>();

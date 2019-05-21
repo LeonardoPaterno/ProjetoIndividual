@@ -203,15 +203,13 @@ function buscarPessoa(){
 	$.ajax({
 		type: 'POST',
 		url: '/DigitalOS/rest/RestPessoa/buscarPessoaPorNome/'+ valorBusca,
-		data: valorBusca,
 		success: function(listaPessoasAchadas){
-			alert(listaPessoasAchadas);
-			tabelaPessoa
-			(listaPessoasAchadas);
+			console.log(listaPessoasAchadas);
+			tabelaPessoa(listaPessoasAchadas);
 		},
-		error: function(){
-			alert("Error, nenhuma pessoa achada");
-			tabelaPessoa(listaAparelhosAchados);
+		error: function(listaPessoasAchadas){
+			console.log(listaPessoasAchadas);
+			tabelaPessoa(listaPessoasAchadas);
 		}
 	});
 };

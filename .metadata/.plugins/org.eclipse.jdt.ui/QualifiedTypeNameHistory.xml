@@ -11,4 +11,5 @@
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="org.codehaus.jackson.map.ObjectMapper"/>
 </qualifiedTypeNameHistroy>

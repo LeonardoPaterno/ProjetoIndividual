@@ -14,8 +14,6 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-import com.google.gson.Gson;
-
 import br.com.digitalOS.bd.conexao.Conexao;
 import br.com.digitalOS.jdbc.JDBCDigitalOSLoginDAO;
 import br.com.digitalOS.objetos.PessoaObj;
@@ -58,11 +56,8 @@ public class RestPessoa extends UtilRest{
 			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);
 			PessoaObjs = jdbcPessoaObj.buscarPessoaPorNome(nome);
 			conec.fecharConexao();
-			
-			String json = new Gson().toJson(PessoaObjs);
-			System.out.println(json);
 
-			return this.buildResponse(json);
+			return this.buildResponse(PessoaObjs);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());

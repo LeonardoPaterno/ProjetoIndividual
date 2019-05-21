@@ -8,7 +8,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 public class UtilRest {
 
 	public Response buildResponse(Object result) {
-
 		StringWriter fw = new StringWriter();
 		try {
 			ObjectMapper mapper = new ObjectMapper();
@@ -23,7 +22,6 @@ public class UtilRest {
 	public Response buildErrorResponse(String str) {
 		ResponseBuilder rb = Response.status(Response.Status.INTERNAL_SERVER_ERROR);
 		rb = rb.entity(str);
-
 		rb = rb.type("text/plain");
 
 		return rb.build();
