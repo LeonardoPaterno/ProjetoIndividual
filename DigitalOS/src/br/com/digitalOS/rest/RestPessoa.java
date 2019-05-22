@@ -37,7 +37,7 @@ public class RestPessoa extends UtilRest{
 			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);
 			jdbcPessoaObj.inserirPessoa(pessoaNova);
 			conec.fecharConexao();
-			return this.buildResponse("Pessoa cadastrada com sucesso!");
+			return Response.ok(this.buildResponse("Pessoa cadastrada com sucesso!")).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
@@ -46,7 +46,7 @@ public class RestPessoa extends UtilRest{
 
 	@POST
 	@Path("/buscarPessoaPorNome/{nome}")
-	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	@Produces({MediaType.APPLICATION_JSON })
 	public Response buscarPessoaObjsPorNome(@PathParam("nome") String nome) {
 		try {
 			List<PessoaObj> PessoaObjs = new ArrayList<PessoaObj>();
@@ -56,8 +56,7 @@ public class RestPessoa extends UtilRest{
 			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);
 			PessoaObjs = jdbcPessoaObj.buscarPessoaPorNome(nome);
 			conec.fecharConexao();
-
-			return this.buildResponse(PessoaObjs);
+			return Response.ok(this.buildResponse(PessoaObjs)).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
@@ -74,7 +73,7 @@ public class RestPessoa extends UtilRest{
 			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);
 			jdbcPessoaObj.deletarPessoaObj(id);
 			conec.fecharConexao();
-			return this.buildResponse("PessoaObj deletado com sucesso.");
+			return Response.ok(this.buildResponse("Pessoa deletado com sucesso!")).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
@@ -91,7 +90,7 @@ public class RestPessoa extends UtilRest{
 			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);
 			PessoaObj PessoaObj = jdbcPessoaObj.buscarPessoaPorId(id);
 			
-			return this.buildResponse(PessoaObj);
+			return Response.ok(this.buildResponse(PessoaObj)).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
@@ -110,7 +109,7 @@ public class RestPessoa extends UtilRest{
 			jdbcPessoaObj.atualizar(PessoaObj);
 			conec.fecharConexao();
 			
-			return this.buildResponse("Pessoa editado com sucesso!");
+			return Response.ok(this.buildResponse("Pessoa editado com sucesso!")).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());

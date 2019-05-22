@@ -7,15 +7,16 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class UtilRest {
 
-	public Response buildResponse(Object result) {
+	public String buildResponse(Object result) {
 		StringWriter fw = new StringWriter();
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 
 			mapper.writeValue(fw, result);
-			return Response.ok(fw.toString()).build();
+			System.out.println(fw);
+			return fw.toString();
 		} catch (Exception ex) {
-			return this.buildErrorResponse(ex.getMessage());
+			return null;
 		}
 	}
 

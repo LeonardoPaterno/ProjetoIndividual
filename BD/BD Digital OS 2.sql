@@ -66,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `pessoa` (
   `datanascimento` DATE NOT NULL,
   `rg` VARCHAR(7) NOT NULL,
   `profissao` VARCHAR(75),
+  `ativo` varchar(1) not null,
   `endereco_idendereco` INT,
   `funcionario_idfuncionario` INT,
   PRIMARY KEY (`idpessoa`))

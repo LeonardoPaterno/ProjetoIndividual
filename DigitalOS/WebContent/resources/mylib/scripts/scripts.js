@@ -202,6 +202,7 @@ function buscarPessoa(){
 	alert(buscapessoa);*/
 	$.ajax({
 		type: 'POST',
+		async: false,
 		url: '/DigitalOS/rest/RestPessoa/buscarPessoaPorNome/'+ valorBusca,
 		success: function(listaPessoasAchadas){
 			console.log(listaPessoasAchadas);
@@ -222,18 +223,61 @@ function tabelaPessoa(listaPessoasAchadas){
 				"</tr>"
 	for(var i = 0; i < listaPessoasAchadas.length; i++){
 		html += "<tr>" +
-					"<td>" + listaPessoasAchadas[i].idpessoa + "</td>" +
+					"<td>" + listaPessoasAchadas[i].id + "</td>" +
 					"<td>" + listaPessoasAchadas[i].nome + "</td>" +
 					"<td>" + listaPessoasAchadas[i].cpf + "</td>" +
 					"<td>" + listaPessoasAchadas[i].rg + "</td>" +
-					"<td>" + listaPessoasAchadas[i].datanascimento + "</td>" +
+					"<td>" + listaPessoasAchadas[i].dataNascimento + "</td>" +
 					"<td>" + listaPessoasAchadas[i].ativo + "</td>" +
 					"<td>" +
-						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoPessoa("+listaPessoasAchadas[i].idpessoa+")'></div>" +
+						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoPessoa("+listaPessoasAchadas[i].id+")'></div>" +					
 					"</td>" +
 				"</tr>"
 	}
 	html += "</table>" +
 			"</div>"
 	$("#resultadoPessoa").html(html);
+}
+
+function exibirEdicaoPessoa(id){
+	alert(id);
+	$.ajax({
+		type : 'POST',
+		url : '/DigitalOS/rest/RestPessoa/buscarPessoaPeloId/'+id,
+		success: function(pessoa){
+			console.log(pessoa);
+			$("#EditIdPessoa").val(pessoa.idpessoa);
+			var cfg = {
+					heigth : 600,
+					width : 400,
+					modal : true,
+					buttons : {
+						"Ok" : function() {
+							$(this).modal("close");
+						}
+					}
+				};
+				$("#msgEditPessoa").modal(cfg);
+		},
+		error: function(err){
+			alert("Erro ao editar Pessoa!");
+		}
+	});
+}
+
+function editarPessoa(){
+	var idaparelho = $("#EditIdPessoa").val();
+	var nome = $("#EditNomePessoa").val();
+	$.ajax({
+		type : 'POST',
+		url : '../../../ServletEditarAparelho',
+		data:{'idaparelho': idaparelho, 'nome':nome, 'categoria':categoria, 'marca':marca, 'modelo':modelo, 'nsaparelho':nsaparelho, 'ativo':ativo},
+		success: function(resposta){
+			alert("Atualizado");
+			buscarAparelho();
+		},
+		error:function(){
+			alert("Erro ao Atualizar");
+		}
+	});
 }

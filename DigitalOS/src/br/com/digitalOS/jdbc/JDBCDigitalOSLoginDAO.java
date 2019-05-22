@@ -221,7 +221,33 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 
 	public PessoaObj buscarPessoaPorId(int id) {
-		return null;
+		String comando = "SELECT idpessoa, nome, cpf, datanascimento, rg, ativo, endereco_idendereco from pessoa WHERE idpessoa = " + id;
+		PessoaObj pessoa = new PessoaObj();
+		
+		try{
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while(rs.next()){
+				int idpessoa = rs.getInt("idpessoa");
+				String nome = rs.getString("nome");
+				String cpf = rs.getString("cpf");
+				Date dataNascimento = rs.getDate("datanascimento");
+				String rg = rs.getString("rg");
+				String ativo = rs.getString("ativo");
+				String endereco = rs.getString("endereco_idendereco");
+				
+				pessoa.setId(idpessoa);
+				pessoa.setNome(nome);
+				pessoa.setCpf(cpf);
+				pessoa.setDataNascimento(dataNascimento);
+				pessoa.setRg(rg);
+				pessoa.setAtivo(ativo);
+				pessoa.setEndereco(endereco);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return pessoa;
 	}
 
 	public void deletarPessoaObj(int id) {
@@ -229,7 +255,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 
 	public List<PessoaObj> buscarPessoaPorNome(String nome) {
-		String comando = "select idpessoa, nome, cpf, rg,  datanascimento from pessoa";
+		String comando = "select idpessoa, nome, cpf, rg,  datanascimento, ativo from pessoa";
 		if (nome != "" || nome != null) {
 			comando += " where nome like '" + nome + "%';";
 			}
@@ -244,12 +270,14 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				String cpf = rs.getString("cpf");
 				String rg = rs.getString("rg");
 				Date dataNascimento = rs.getDate("datanascimento");
+				String ativo = rs.getString("ativo");
 
 				pessoa.setId(idpessoa);
 				pessoa.setNome(nomepessoa);
 				pessoa.setCpf(cpf);
 				pessoa.setRg(rg);
 				pessoa.setDataNascimento(dataNascimento);
+				pessoa.setAtivo(ativo);
 
 				ListaPessoa.add(pessoa);
 			}
