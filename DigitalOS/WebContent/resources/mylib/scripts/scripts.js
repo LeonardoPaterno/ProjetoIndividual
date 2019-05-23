@@ -42,7 +42,6 @@ function CadastroAparelho() {
 			'ativo':ativo
 		},
 		success : function(resposta) {
-			alert(resposta);
 			buscarAparelho();
 		},
 		error : function(resposta) {
@@ -98,7 +97,6 @@ function exibirEdicaoAparelho(idaparelho){
 		url : '../../../ServletBuscarPorId',
 		data:{'idaparelho':idaparelho},
 		success: function(aparelho){
-			console.log(aparelho);
 			$("#EditIdAparelho").val(aparelho.idaparelho);
 			$("#EditNomeAparelho").val(aparelho.nome);
 			$("#EditCategoriaAparelho").val(aparelho.categoria);
@@ -176,12 +174,9 @@ function inserirPessoa(){
 		var ativo = 		 $("#statuspessoa").val();
 
 		var pessoaNova = {'nome':nome, 'cpf':cpf, 'dataNascimento':dataNascimento, 'rg':rg, 'email':email, 'telefone':telefone, 
-						  'endereco':endereco, 'numero':numero, 'complemento':complemento,	'estado':estado, 'cidade':cidade, 'ativo':ativo
+					'endereco':endereco, 'numero':numero, 'complemento':complemento, 'estado':estado, 'cidade':cidade, 'ativo':ativo
 		};
 		var pessoa = JSON.stringify(pessoaNova);
-		alert(pessoa);
-		console.log(pessoa);
-	/*var pessoa = $("#formulario-pessoa").serialize();*/
 	$.ajax({
 		type:'POST',
 		url: '/DigitalOS/rest/RestPessoa/addPessoaObj',
@@ -197,19 +192,13 @@ function inserirPessoa(){
 
 function buscarPessoa(){
 	var valorBusca = $('#buscaPessoaInput').val();
-	alert(valorBusca);
-	/*var buscapessoa = JSON.stringify(valorBusca);
-	alert(buscapessoa);*/
 	$.ajax({
 		type: 'POST',
-		async: false,
 		url: '/DigitalOS/rest/RestPessoa/buscarPessoaPorNome/'+ valorBusca,
 		success: function(listaPessoasAchadas){
-			console.log(listaPessoasAchadas);
 			tabelaPessoa(listaPessoasAchadas);
 		},
 		error: function(listaPessoasAchadas){
-			console.log(listaPessoasAchadas);
 			tabelaPessoa(listaPessoasAchadas);
 		}
 	});
@@ -245,36 +234,37 @@ function exibirEdicaoPessoa(id){
 		type : 'POST',
 		url : '/DigitalOS/rest/RestPessoa/buscarPessoaPeloId/'+id,
 		success: function(pessoa){
-			console.log(pessoa);
-			$("#EditIdPessoa").val(pessoa.idpessoa);
-			var cfg = {
-					heigth : 600,
-					width : 400,
-					modal : true,
-					buttons : {
-						"Ok" : function() {
-							$(this).modal("close");
-						}
-					}
-				};
-				$("#msgEditPessoa").modal(cfg);
+			$("#EditIdPessoa").val(id);
+			$("#EditNomePessoa").val(pessoa.nome);
+			$("#EditCpfPessoa").val(pessoa.cpf);
+			$("#EditRgPessoa").val(pessoa.rg);
+			$("#EditDataNascimentoPessoa").val(pessoa.dataNascimento);
+			$("#EditEnderecoPessoa").val(pessoa.endereco);
+			$("#EditComplementoPessoa").val(pessoa.complemento);
+			$("#EditNumeroPessoa").val(pessoa.numero);
+			$("#EditEstadoPessoa").val(pessoa.estado);
+			$("#EditCidadePessoa").val(pessoa.cidade);
+			$("#EditTelefonePessoa").val(pessoa.telefone);
+			$("#EditCelularPessoa").val(pessoa.celular);
+			$("#EditStatusPessoa").val(pessoa.ativo);
+			$("#msgEditPessoa").modal(pessoa);
 		},
-		error: function(err){
+		error: function(pessoa){
 			alert("Erro ao editar Pessoa!");
 		}
 	});
 }
 
 function editarPessoa(){
-	var idaparelho = $("#EditIdPessoa").val();
-	var nome = $("#EditNomePessoa").val();
+	var pessoaEditar = $("#formEditPessoa").serialize();
+	alert(pessoaEditar);
 	$.ajax({
 		type : 'POST',
-		url : '../../../ServletEditarAparelho',
-		data:{'idaparelho': idaparelho, 'nome':nome, 'categoria':categoria, 'marca':marca, 'modelo':modelo, 'nsaparelho':nsaparelho, 'ativo':ativo},
+		url : '/DigitalOS/rest/RestPessoa/editarPessoa',
+		data:{'pessoaEditar':pessoaEditar},
 		success: function(resposta){
 			alert("Atualizado");
-			buscarAparelho();
+			buscarPessoa();
 		},
 		error:function(){
 			alert("Erro ao Atualizar");

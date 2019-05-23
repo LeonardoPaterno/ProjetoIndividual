@@ -28,7 +28,6 @@ public class RestPessoa extends UtilRest{
 	@Consumes("application/*")
 
 	public Response addPessoaObj(String pessoa) {
-		System.out.println(pessoa);
 		try {		
 			PessoaObj pessoaNova = new ObjectMapper().readValue(pessoa, PessoaObj.class);
 			System.out.println(pessoaNova.getNome());
@@ -64,6 +63,43 @@ public class RestPessoa extends UtilRest{
 	}
 
 	@POST
+	@Path("/buscarPessoaPeloId/{id}")
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	public Response buscarPessoaObjPeloId(@PathParam("id") int id) {
+		try {
+			Conexao conec = new Conexao();
+			Connection conexao = conec.abrirConexao();
+			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);
+			PessoaObj PessoaObj = jdbcPessoaObj.buscarPessoaPorId(id);
+			
+			return Response.ok(this.buildResponse(PessoaObj),MediaType.APPLICATION_JSON ).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+
+	@POST
+	@Path("/editarPessoa")
+	@Consumes("application/*")
+	public Response editarPessoaObj(String pessoa) {
+		System.out.println(pessoa);
+		try {
+			PessoaObj PessoaObj = new ObjectMapper().readValue(pessoa, PessoaObj.class);
+			Conexao conec = new Conexao();
+			Connection conexao = conec.abrirConexao();
+			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);
+			jdbcPessoaObj.atualizar(PessoaObj);
+			conec.fecharConexao();
+			
+			return Response.ok(this.buildResponse("Pessoa editado com sucesso!")).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+
+	@POST
 	@Path("/deletarPessoa/{id}")
 	@Produces("application/*")
 	public Response deletarPessoaObj(@PathParam("id") int id) {
@@ -74,42 +110,6 @@ public class RestPessoa extends UtilRest{
 			jdbcPessoaObj.deletarPessoaObj(id);
 			conec.fecharConexao();
 			return Response.ok(this.buildResponse("Pessoa deletado com sucesso!")).build();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return this.buildErrorResponse(e.getMessage());
-		}
-	}
-
-	@POST
-	@Path("/buscarPessoaPeloId/{id}")
-	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Response buscarPessoaObjPeloId(@PathParam("id") int id) {
-		try {
-			Conexao conec = new Conexao();
-			Connection conexao = conec.abrirConexao();
-			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);
-			PessoaObj PessoaObj = jdbcPessoaObj.buscarPessoaPorId(id);
-			
-			return Response.ok(this.buildResponse(PessoaObj)).build();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return this.buildErrorResponse(e.getMessage());
-		}
-	}
-
-	@POST
-	@Path("/editarPessoa")
-	@Consumes("application/*")
-	public Response editarPessoaObj(String PessoaObjParam) {
-		try {
-			PessoaObj PessoaObj = new ObjectMapper().readValue(PessoaObjParam, PessoaObj.class);
-			Conexao conec = new Conexao();
-			Connection conexao = conec.abrirConexao();
-			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);
-			jdbcPessoaObj.atualizar(PessoaObj);
-			conec.fecharConexao();
-			
-			return Response.ok(this.buildResponse("Pessoa editado com sucesso!")).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());

@@ -2,12 +2,19 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="msgEditAparelho" key="selection"/>
+		<item value="buscaAparelhoInput" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="buscaAparelhoInput"/>
+			<item value="modalaparelho"/>
+			<item value="modal"/>
+			<item value="modalEdit"/>
+			<item value="modalEdirt"/>
+			<item value="resultadoAparelho"/>
+			<item value="resultadoPessoa"/>
 			<item value="msgEditAparelho"/>
 			<item value="obj."/>
 			<item value="modalesqueciminhasenha"/>
@@ -16,13 +23,6 @@
 			<item value="statusaparelho"/>
 			<item value="icone-adicionar"/>
 			<item value="label-painel"/>
-			<item value="label-painel-cliente"/>
-			<item value="JDBCPessoaObjDAO"/>
-			<item value="Contato"/>
-			<item value="PessoaObj"/>
-			<item value="Ativoaparelho"/>
-			<item value="Status"/>
-			<item value="status"/>
 		</list>
 		<list key="replacehistory">
 			<item value="var "/>
@@ -39,7 +39,7 @@
 		<item value="263" key="DIALOG_WIDTH"/>
 		<item value="1|Tahoma|8.25|0|WINDOWS|1|-11|0|0|0|400|0|0|0|1|0|0|0|0|Tahoma" key="DIALOG_FONT_NAME"/>
 		<item value="367" key="DIALOG_HEIGHT"/>
-		<item value="964" key="DIALOG_X_ORIGIN"/>
-		<item value="121" key="DIALOG_Y_ORIGIN"/>
+		<item value="838" key="DIALOG_X_ORIGIN"/>
+		<item value="281" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

@@ -225,155 +225,6 @@
 		  </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->		
 
-		<div class="modal fade" id="msgEditPessoa">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header col-md-12">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h5 class="modal-title">Edição de Pessoa</h5>
-					</div>
-					
-					<div class="modal-body">
-						<div class="form">     	
-		        	<div class="row">
-		        		<div class="col-md-12">
-			        		<label class="titulotipo">Tipo Cliente</label><br>
-			        		<input type="radio" id="tipocliente" name="tipocliente" value="0" checked><label class="tipo1">Pessoa Física</label>
-			        		<span class="espacotipos"></span>
-			        		<input type="radio" id="tipocliente" name="tipocliente" value="1"><label class="tipo2">Pessoa Jurídica</label>
-		        		</div>
-		        	</div><!-- /.titulotipo -->
-		        	
-		        	<hr/><!-- Linha Divisoria na Modal -->
-		        	<div class="row">
-			        	<div class="form-group col-md-6">
-			        		<label>Nome</label>
-			        		<input class="form-control" type="text" id="nomecliente" name="nomecliente" placeholder="Nome">
-			        	</div><!-- /. FORM-GROUP -->
-			        	
-			        	<div class="form-group col-md-3">
-			        		<label>CPF</label>
-			        		<input class="form-control" type="text" id="cpfcliente" name="cpfcliente" maxlength="14" placeholder="000.000.000-00">
-			        	</div><!-- /. FORM-GROUP -->
-			        	
-			        	<div class="form-group col-md-3">
-			        		<label>RG</label>
-			        		<input class="form-control" type="text" id="rgcliente" name="rgcliente" placeholder="0.000.000">
-			        	</div><!-- /. FORM-GROUP -->
-		        	</div><!-- /.ROW -->
-		        
-		        	<div class="row">
-		        		<div class="form-group col-md-4">
-			        		<label>Data Nascimento</label>
-			        		<input class="form-control" type="date" id="datanascimento" name="datanascimento">
-			        	</div><!-- /. FORM-GROUP -->
-		        		
-			        	<div class="form-group col-md-5">
-			        		<label>E-mail</label>
-			        		<input class="form-control" type="email" id="emailcliente" name="emailcliente" placeholder="E-mail">
-			        	</div><!-- /. FORM-GROUP -->
-			        	
-			        	<div class="form-group col-md-3">
-			        		<label>Telefone</label>
-			        		<input class="form-control" type="text" id="telefonecliente" name="telefonecliente" placeholder="(00) 0000-0000">
-			        	</div><!-- /. FORM-GROUP -->
-		        	</div><!-- /.ROW -->
-		        	
-		        	<div class="row">
-		        		<div class="form-group col-md-4">
-			        		<label>Celular</label>
-			        		<input class="form-control" type="text" id="celularcliente" name="celularcliente" placeholder="(00) 00000-0000">
-			        	</div><!-- /. FORM-GROUP -->
-		        	
-			        	<div class="form-group col-md-5">
-			        		<label>Enderço</label>
-			        		<input class="form-control" type="text" id="enderecocliente" name="enderecocliente" placeholder="Endereço">
-			        	</div><!-- /. FORM-GROUP -->
-			        	
-						<div class="form-group col-md-3">
-			        		<label>Numero</label>
-			        		<input class="form-control" type="text" id="numerocliente" name="numerocliente" placeholder="0000">
-			        	</div><!-- /. FORM-GROUP -->		        	
-			      	</div><!-- /.ROW -->
-			      
-			      	<div class="row">
-			      		<div class="form-group col-md-5">
-			        		<label>Complemento</label>
-			        		<input class="form-control" type="text" id="complementocliente" name="complementocliente" placeholder="Proximo a lanhouse">
-			        	</div><!-- /. FORM-GROUP -->
-			      	
-			        	<div class="form-group col-md-2">
-			        		<label>Estado</label>
-			        		<!-- <input class="form-control" type="text" id="estadocliente" name="estadocliente" placeholder="Santa Catarina"> -->
-			        		<select class="form-control" id="estadocliente">
-			        			<option value="0">UF</option>
-			        			<option value="1">AC</option>
-			        			<option value="2">AL</option>
-			        			<option value="3">AP</option>
-			        			<option value="4">AM</option>
-			        			<option value="5">BA</option>
-			        			<option value="6">CE</option>
-			        			<option value="7">DF</option>
-			        			<option value="8">ES</option>
-			        			<option value="9">GO</option>
-			        			<option value="10">MA</option>
-			        			<option value="11">MT</option>
-			        			<option value="12">MS</option>
-			        			<option value="13">MG</option>
-			        			<option value="14">PA</option>
-			        			<option value="15">PB</option>
-			        			<option value="16">PR</option>
-			        			<option value="17">PE</option>
-			        			<option value="18">PI</option>
-			        			<option value="19">RJ</option>
-			        			<option value="20">RN</option>
-			        			<option value="21">RS</option>
-			        			<option value="22">RO</option>
-			        			<option value="23">RR</option>
-			        			<option value="24">SC</option>
-			        			<option value="25">SP</option>
-			        			<option value="26">SE</option>
-			        			<option value="27">TO</option>
-			        		</select>
-			        	</div><!-- /. FORM-GROUP -->
-			        	
-			        	<div class="form-group col-md-3">
-			        		<label>Cidade</label>
-			        		<!-- <input class="form-control" type="text" id="cidadecliente" name="cidadecliente" placeholder="Joinville"> -->
-			        		<select class="form-control" id="cidadecliente" onchange="cidadeEstado(this.value)">
-			        			<option value="0">cidades</option>
-			        			<option value="1">Joinville</option>
-			        			<option value="2">Araquari</option>
-			        			<option value="3">Belo Horizonte</option>
-			        			<option value="4">Vila Bela da Santíssima Trindade</option>
-			        		</select>
-			        	</div><!-- /. FORM-GROUP -->
-			        	<div class="form-group col-md-2">
-			        		<label>Status</label>
-			        		<select class="form-control" id="statuspessoa" name="statuspessoa">
-			        			<option value="S">Ativo</option>
-			        			<option value="N">Inativo</option>
-			        		</select>
-			        	</div><!-- /. FORM-GROUP -->
-		        	</div><!-- /.ROW -->
-		        	</div><!-- /.form -->
-					</div>
-					
-					<div class="modal-footer col-md-12">
-						<button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">
-							Cancelar
-						</button>
-						
-						<button type="submit" class="btn btn-primary botao-salvar" id="salvarAparelho" onclick="editarAparelho()">
-							Salvar
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
 		<div class="div-painel-clientes col-xs-5 col-sm-3 col-md-9">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
@@ -398,6 +249,140 @@
 				</div>
 			</div>
 		</div>
+		
+<div class="modal fade" id="msgEditPessoa">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content col-md-12">
+					<div class="modal-header col-md-12">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h5 class="modal-title">Edição de Aparelho</h5>
+					</div>
+					
+					<div class="modal-body col-md-12">
+						<form  id="formEditPessoa">
+							<div class="form">
+								<div class="row col-md-12">
+									<div style="display:none">
+										<label>Id</label>
+										<input class="form-control" type="text" placeholder="Id" id="EditIdPessoa">								
+									</div>
+									<div class="col-md-7">
+										<label>Nome</label>
+										<input class="form-control" type="text" placeholder="Nome" maxlength="40" id="EditNomePessoa">								
+									</div>
+									<div class="col-md-3">
+										<label>CPF</label>
+										<input class="form-control categoria" placeholder="000.000.000-00" maxlength="18" id="EditCpfPessoa">
+									</div>
+									<div class="col-md-2">
+										<label>RG</label>
+										<input class="form-control categoria" placeholder="0.000.000" maxlength="9" id="EditRgPessoa">							
+									</div>
+								</div>
+									<br><br>
+								<div class="row col-md-12">
+									<div class="col-md-3">
+										<label>Data Nascimento</label>
+										<input class="form-control" type="date" id="EditDataNascimentoPessoa">								
+									</div>
+									<div class="col-md-5">
+										<label>Endereco</label>
+										<input class="form-control" type="text" placeholder="Rua Juarez" maxlength="50" id="EditEnderecoPessoa">								
+									</div>
+									<div class="col-md-4">
+										<label>Complemento</label>
+										<input class="form-control" type="text" placeholder="rua do mercado" maxlength="30" id="EditComplementoPessoa">								
+									</div>
+									
+								</div>
+									<br><br>
+								<div class="row col-md-12">
+									<div class="col-md-2">
+										<label>Numero</label>
+										<input class="form-control" type="text" placeholder="1563" id="EditNumeroPessoa">
+									</div>
+									<div class="form-group col-md-2">
+						        		<label>Estado</label>
+						        		<select class="form-control" id="EditEstadoPessoa">
+						        			<option value="0">UF</option>
+						        			<option value="1">AC</option>
+						        			<option value="2">AL</option>
+						        			<option value="3">AP</option>
+						        			<option value="4">AM</option>
+						        			<option value="5">BA</option>
+						        			<option value="6">CE</option>
+						        			<option value="7">DF</option>
+						        			<option value="8">ES</option>
+						        			<option value="9">GO</option>
+						        			<option value="10">MA</option>
+						        			<option value="11">MT</option>
+						        			<option value="12">MS</option>
+						        			<option value="13">MG</option>
+						        			<option value="14">PA</option>
+						        			<option value="15">PB</option>
+						        			<option value="16">PR</option>
+						        			<option value="17">PE</option>
+						        			<option value="18">PI</option>
+						        			<option value="19">RJ</option>
+						        			<option value="20">RN</option>
+						        			<option value="21">RS</option>
+						        			<option value="22">RO</option>
+						        			<option value="23">RR</option>
+						        			<option value="24">SC</option>
+						        			<option value="25">SP</option>
+						        			<option value="26">SE</option>
+						        			<option value="27">TO</option>
+						        		</select>
+						        	</div>
+									<div class="form-group col-md-5">
+						        		<label>Cidade</label>
+						        		<select class="form-control" id="EditCidadePessoa">
+						        			<option value="0">cidades</option>
+						        			<option value="1">Joinville</option>
+						        			<option value="2">Araquari</option>
+						        			<option value="3">Belo Horizonte</option>
+						        			<option value="4">Vila Bela da Santíssima Trindade</option>
+						        		</select>
+					        		</div>
+					        		<div class="form-group col-md-3">
+				        				<label>Telefone</label>
+				        				<input class="form-control" type="text" id="EditTelefonePessoa" placeholder="(00) 0000-0000">
+				        			</div>
+								</div>
+									<br>
+								<div class="row col-md-12">
+									<div class="form-group col-md-3">
+				        				<label>Celular</label>
+				        				<input class="form-control" type="text" id="EditCelularPessoa" placeholder="(00) 00000-0000">
+				        			</div>
+									<div class="col-md-3">
+										<label>Status</label>
+										<select class="form-control" id="EditStatusPessoa">
+											<option value="S">Ativo</option>
+											<option value="N">Inativo</option>
+										</select>								
+									</div>
+									<div class="col-md-offset-6"></div>
+								</div>
+							</div>
+						</form>
+					</div>
+					
+					<div class="modal-footer col-md-12">
+						<button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">
+							Cancelar
+						</button>
+						
+						<button type="button" class="btn btn-primary botao-salvar" id="salvarAparelho" onclick="editarPessoa()">
+							Salvar
+						</button>
+					</div>
+				</div>
+			</div>
+		</div><!-- /DIV msgEditAparelho -->
+
 	</div><!-- geral-menu -->
 
 	<script>
