@@ -44,12 +44,12 @@ public class RestPessoa extends UtilRest{
 	}
 
 	@POST
-	@Path("/buscarPessoaPorNome/{nome}")
+	@Path("/buscarPessoaPorNome")
 	@Produces({MediaType.APPLICATION_JSON })
-	public Response buscarPessoaObjsPorNome(@PathParam("nome") String nome) {
+	public Response buscarPessoaObjsPorNome(String nome) {
 		try {
 			List<PessoaObj> PessoaObjs = new ArrayList<PessoaObj>();
-
+			System.out.println(nome);
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);

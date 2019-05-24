@@ -261,8 +261,8 @@
 					</div>
 					
 					<div class="modal-body col-md-12">
-						<form  id="formEditPessoa">
-							<div class="form">
+						<div class="form">
+							<form  id="formEditPessoa">
 								<div class="row col-md-12">
 									<div style="display:none">
 										<label>Id</label>
@@ -281,29 +281,29 @@
 										<input class="form-control categoria" placeholder="0.000.000" maxlength="9" id="EditRgPessoa">							
 									</div>
 								</div>
-									<br><br>
 								<div class="row col-md-12">
 									<div class="col-md-3">
 										<label>Data Nascimento</label>
 										<input class="form-control" type="date" id="EditDataNascimentoPessoa">								
 									</div>
-									<div class="col-md-5">
+									<div class="col-md-4">
 										<label>Endereco</label>
 										<input class="form-control" type="text" placeholder="Rua Juarez" maxlength="50" id="EditEnderecoPessoa">								
 									</div>
-									<div class="col-md-4">
-										<label>Complemento</label>
-										<input class="form-control" type="text" placeholder="rua do mercado" maxlength="30" id="EditComplementoPessoa">								
-									</div>
-									
-								</div>
-									<br><br>
-								<div class="row col-md-12">
 									<div class="col-md-2">
 										<label>Numero</label>
 										<input class="form-control" type="text" placeholder="1563" id="EditNumeroPessoa">
-									</div>
-									<div class="form-group col-md-2">
+									</div>					
+									<div class="form-group col-md-3">
+						        		<label>Tipo Morada</label>
+						        		<select class="form-control" id="EditTipoMoradaPessoa">
+						        			<option value="1">Casa</option>
+						        			<option value="0">Apartamento</option>					        		
+						        		</select>
+						        	</div>
+						        </div>
+						        <div class="row col-md-12">
+						        	<div class="form-group col-md-2">
 						        		<label>Estado</label>
 						        		<select class="form-control" id="EditEstadoPessoa">
 						        			<option value="0">UF</option>
@@ -351,7 +351,6 @@
 				        				<input class="form-control" type="text" id="EditTelefonePessoa" placeholder="(00) 0000-0000">
 				        			</div>
 								</div>
-									<br>
 								<div class="row col-md-12">
 									<div class="form-group col-md-3">
 				        				<label>Celular</label>
@@ -366,8 +365,8 @@
 									</div>
 									<div class="col-md-offset-6"></div>
 								</div>
-							</div>
-						</form>
+							</form>
+						</div>
 					</div>
 					
 					<div class="modal-footer col-md-12">
@@ -393,6 +392,10 @@
 		
 		$(".icone-adicionar-cliente").click(function(){
 			$('#modalcliente').modal('show');
+		});
+		
+		$(".botao-salvar").click(function() {
+			$('#msgEditPessoa').modal('hide');
 		});
 	</script>
 </body>

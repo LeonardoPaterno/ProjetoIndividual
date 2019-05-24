@@ -194,7 +194,8 @@ function buscarPessoa(){
 	var valorBusca = $('#buscaPessoaInput').val();
 	$.ajax({
 		type: 'POST',
-		url: '/DigitalOS/rest/RestPessoa/buscarPessoaPorNome/'+ valorBusca,
+		url: '/DigitalOS/rest/RestPessoa/buscarPessoaPorNome',
+		data: valorBusca,
 		success: function(listaPessoasAchadas){
 			tabelaPessoa(listaPessoasAchadas);
 		},
@@ -229,11 +230,11 @@ function tabelaPessoa(listaPessoasAchadas){
 }
 
 function exibirEdicaoPessoa(id){
-	alert(id);
 	$.ajax({
 		type : 'POST',
 		url : '/DigitalOS/rest/RestPessoa/buscarPessoaPeloId/'+id,
 		success: function(pessoa){
+			console.log(pessoa);
 			$("#EditIdPessoa").val(id);
 			$("#EditNomePessoa").val(pessoa.nome);
 			$("#EditCpfPessoa").val(pessoa.cpf);
@@ -261,7 +262,7 @@ function editarPessoa(){
 	$.ajax({
 		type : 'POST',
 		url : '/DigitalOS/rest/RestPessoa/editarPessoa',
-		data:{'pessoaEditar':pessoaEditar},
+		data:pessoaEditar,
 		success: function(resposta){
 			alert("Atualizado");
 			buscarPessoa();

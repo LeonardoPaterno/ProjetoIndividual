@@ -67,7 +67,8 @@ CREATE TABLE IF NOT EXISTS `pessoa` (
   `rg` VARCHAR(7) NOT NULL,
   `profissao` VARCHAR(75),
   `ativo` varchar(1) not null,
-  `endereco_idendereco` INT,
+  `endereco` varchar(50),
+  `numero_endereco` int,
   `funcionario_idfuncionario` INT,
   PRIMARY KEY (`idpessoa`))
 ENGINE = InnoDB;
