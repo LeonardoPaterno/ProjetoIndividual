@@ -30,7 +30,6 @@ public class RestPessoa extends UtilRest{
 	public Response addPessoaObj(String pessoa) {
 		try {		
 			PessoaObj pessoaNova = new ObjectMapper().readValue(pessoa, PessoaObj.class);
-			System.out.println(pessoaNova.getNome());
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);
@@ -49,7 +48,6 @@ public class RestPessoa extends UtilRest{
 	public Response buscarPessoaObjsPorNome(String nome) {
 		try {
 			List<PessoaObj> PessoaObjs = new ArrayList<PessoaObj>();
-			System.out.println(nome);
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);

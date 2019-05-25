@@ -222,7 +222,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 
 	public PessoaObj buscarPessoaPorId(int id) {
-		String comando = "SELECT idpessoa, nome, cpf, datanascimento, rg, ativo, endereco, numero_endereco from pessoa WHERE idpessoa = "+id+";";
+		String comando = "SELECT idpessoa, nome, cpf, datanascimento, rg, ativo, endereco, numero_endereco, cidade, estado from pessoa WHERE idpessoa = "+id+";";
 		PessoaObj pessoa = new PessoaObj();
 		
 		try{
@@ -237,6 +237,8 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				String ativo = rs.getString("ativo");
 				String endereco = rs.getString("endereco");
 				int numero = rs.getInt("numero_endereco");
+				String cidade = rs.getString("cidade");
+				String estado = rs.getString("estado");
 				
 				pessoa.setId(idpessoa);
 				pessoa.setNome(nome);
@@ -246,6 +248,8 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				pessoa.setAtivo(ativo);
 				pessoa.setEndereco(endereco);
 				pessoa.setNumero(numero);
+				pessoa.setCidade(cidade);
+				pessoa.setEstado(estado);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -258,7 +262,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 
 	public List<PessoaObj> buscarPessoaPorNome(String nome) {
-		String comando = "select idpessoa, nome, cpf, rg,  datanascimento, ativo, endereco, numero_endereco from pessoa";
+		String comando = "select idpessoa, nome, cpf, rg,  datanascimento, ativo, endereco, numero_endereco, cidade, estado from pessoa";
 		if (nome != "" && nome != null) {
 			comando += " where nome like '" + nome + "%';";
 			}
@@ -277,6 +281,8 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				String ativo = rs.getString("ativo");
 				String endereco = rs.getString("endereco");
 				int numero = rs.getInt("numero_endereco");
+				String cidade = rs.getString("cidade");
+				String estado = rs.getString("estado");
 
 				pessoa.setId(idpessoa);
 				pessoa.setNome(nomepessoa);
@@ -286,6 +292,8 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				pessoa.setAtivo(ativo);
 				pessoa.setEndereco(endereco);
 				pessoa.setNumero(numero);
+				pessoa.setCidade(cidade);
+				pessoa.setEstado(estado);
 
 				ListaPessoa.add(pessoa);
 			}

@@ -206,10 +206,11 @@ function buscarPessoa(){
 };
 
 function tabelaPessoa(listaPessoasAchadas){
+	console.log(listaPessoasAchadas);
 	var html = "<div class='teble-reponsive'>" +
 			   "<table class='table table-striped table-condensed table-bordered'>";
 		html += "<tr>" +
-				"<th># ID</th> <th>Nome</th> <th>CPF</th> <th>RG</th> <th>Data de Nascimento</th> <th>Ativo</th> <th>Edição</th>" +
+				"<th># ID</th> <th>Nome</th> <th>CPF</th> <th>RG</th> <th>Data de Nascimento</th> <th>Cidade</th> <th>Estado</th> <th>Ativo</th> <th>Edição</th>" +
 				"</tr>"
 	for(var i = 0; i < listaPessoasAchadas.length; i++){
 		html += "<tr>" +
@@ -218,6 +219,8 @@ function tabelaPessoa(listaPessoasAchadas){
 					"<td>" + listaPessoasAchadas[i].cpf + "</td>" +
 					"<td>" + listaPessoasAchadas[i].rg + "</td>" +
 					"<td>" + listaPessoasAchadas[i].dataNascimento + "</td>" +
+					"<td>" + listaPessoasAchadas[i].estado + "</td>" +
+					"<td>" + listaPessoasAchadas[i].cidade + "</td>" +
 					"<td>" + listaPessoasAchadas[i].ativo + "</td>" +
 					"<td>" +
 						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoPessoa("+listaPessoasAchadas[i].id+")'></div>" +					

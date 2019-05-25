@@ -17,7 +17,7 @@ public class PessoaObj implements Serializable{
 	private int numero;
 	private String complemento;
 	private String estado;
-	private int cidade;
+	private String cidade;
 	private String ativo;
 	/* private int tipocliente; */
 	
@@ -82,10 +82,10 @@ public class PessoaObj implements Serializable{
 		this.complemento = complemento;
 	}
 
-	public int getCidade() {
+	public String getCidade() {
 		return cidade;
 	}
-	public void setCidade(int cidade) {
+	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	} 
 	
