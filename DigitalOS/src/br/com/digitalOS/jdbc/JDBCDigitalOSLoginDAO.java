@@ -40,8 +40,8 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 
 	@Override
 	public boolean cadastrarAparelho(AparelhoObj novoAparelho) {
-		String comando = "INSERT INTO `ordemservico`.`registroaparelho` "
-				+ "(`nomeaparelho`, `numerodeserie`, `modelo`, `ativo`, `marca_marca`, `categoriaaparelho_categoriaaparelho`)"
+		String comando = "INSERT INTO ordemservico.registroaparelho "
+				+ "(nomeaparelho, numerodeserie, modelo, ativo, marca_marca, categoriaaparelho_categoriaaparelho)"
 				+ "values(?,?,?,?,?,?)";
 
 		PreparedStatement p;
@@ -197,17 +197,31 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 
 	@Override
 	public boolean inserirPessoa(PessoaObj pessoa) {
-		String comando = "insert into pessoa " + 
-		"(nome, cpf, datanascimento, rg, ativo)" + "values(?,?,?,?,?)";
+		String comando = "INSERT INTO pessoa " + 
+		"(idpessoa, nome, cpf, rg, datanascimento, profissao, endereco, numeroendereco, telefone, celular, email, cidade, estado, "
+		+ "tipomorada, tipopessoa, ativo, funcionario_idfuncionario)" 
+		+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		System.out.println("Insert: "+comando);
 		PreparedStatement p;
 		try {
 			p = this.conexao.prepareStatement(comando);
 			p.setString(1, pessoa.getNome());
 			p.setString(2, pessoa.getCpf());
-			p.setDate(3, pessoa.getDataNascimento());
-			p.setString(4, pessoa.getRg());
-			p.setString(5, pessoa.getAtivo());
-			System.out.println(p);
+			p.setString(3, pessoa.getRg());
+			p.setDate(4, pessoa.getDataNascimento());
+			p.setString(5, pessoa.getProfissao());
+			p.setString(6, pessoa.getEndereco());
+			p.setInt(7, pessoa.getNumero());
+			p.setString(8, pessoa.getTelefone());
+			p.setString(9, pessoa.getCelular());
+			p.setString(10, pessoa.getEmail());
+			p.setString(11, pessoa.getCidade());
+			p.setString(12, pessoa.getEstado());
+			p.setString(13, pessoa.getTipoMorada());
+			p.setInt(14, pessoa.getTipoCliente());
+			p.setString(15, pessoa.getAtivo());
+			p.setInt(16, pessoa.getFuncionario());
+			System.out.println("Insert: "+p);
 			p.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -217,14 +231,43 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 
 	
-	public void atualizar(PessoaObj pessoaObj) {
-		
+	public boolean atualizar(PessoaObj pessoa) {
+		String comando = "UPDATE pessoa SET idpessoa=?, nome=?, cpf=?, rg=?, datanascimento=?, profissao=?, endereco=?, numeroendereco=?,"
+		+ " telefone=?, celular=?, email=?, cidade=?, estado=?, tipomorada=?, tipopessoa=?, ativo=?, funcionario_idfuncionario=? "
+		+ "WHERE pessoa.id ="+pessoa.getId()+";";
+		System.out.println("Atualizar: "+comando);
+		PreparedStatement p;
+		try{
+			p = this.conexao.prepareStatement(comando);
+			p.setString(1, pessoa.getNome());
+			p.setString(2, pessoa.getCpf());
+			p.setString(3, pessoa.getRg());
+			p.setDate(4, pessoa.getDataNascimento());
+			p.setString(5, pessoa.getProfissao());
+			p.setString(6, pessoa.getEndereco());
+			p.setInt(7, pessoa.getNumero());
+			p.setString(8, pessoa.getTelefone());
+			p.setString(9, pessoa.getCelular());
+			p.setString(10, pessoa.getEmail());
+			p.setString(11, pessoa.getCidade());
+			p.setString(12, pessoa.getEstado());
+			p.setString(13, pessoa.getTipoMorada());
+			p.setInt(14, pessoa.getTipoCliente());
+			p.setString(15, pessoa.getAtivo());
+			p.setInt(16, pessoa.getFuncionario());
+			p.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	public PessoaObj buscarPessoaPorId(int id) {
-		String comando = "SELECT idpessoa, nome, cpf, datanascimento, rg, ativo, endereco, numero_endereco, cidade, estado from pessoa WHERE idpessoa = "+id+";";
+		String comando = "SELECT idpessoa, nome, cpf, rg, datanascimento, profissao, endereco, numeroendereco, telefone, celular, email,"
+				+ " cidade, estado, tipomorada, tipopessoa, ativo, funcionario_idfuncionario FROM pessoa WHERE idpessoa = "+id+";";
 		PessoaObj pessoa = new PessoaObj();
-		
+		System.out.println("Buscar ID: "+comando);
 		try{
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
@@ -232,27 +275,42 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				int idpessoa = rs.getInt("idpessoa");
 				String nome = rs.getString("nome");
 				String cpf = rs.getString("cpf");
-				Date dataNascimento = rs.getDate("datanascimento");
 				String rg = rs.getString("rg");
-				String ativo = rs.getString("ativo");
+				Date dataNascimento = rs.getDate("datanascimento");
+				String profissao = rs.getString("profissao");
 				String endereco = rs.getString("endereco");
-				int numero = rs.getInt("numero_endereco");
+				int numero = rs.getInt("numeroendereco");
+				String telefone = rs.getString("telefone");
+				String celular = rs.getString("celular");
+				String email = rs.getString("email");
 				String cidade = rs.getString("cidade");
 				String estado = rs.getString("estado");
+				String tipomorada = rs.getString("tipomorada");
+				int tipocliente = rs.getInt("tipopessoa");
+				String ativo = rs.getString("ativo");
+				int funcionario = rs.getInt("funcionario_idfuncionario");
 				
 				pessoa.setId(idpessoa);
 				pessoa.setNome(nome);
 				pessoa.setCpf(cpf);
-				pessoa.setDataNascimento(dataNascimento);
 				pessoa.setRg(rg);
-				pessoa.setAtivo(ativo);
+				pessoa.setDataNascimento(dataNascimento);
+				pessoa.setProfissao(profissao);
 				pessoa.setEndereco(endereco);
 				pessoa.setNumero(numero);
+				pessoa.setTelefone(telefone);
+				pessoa.setCelular(celular);
+				pessoa.setEmail(email);
 				pessoa.setCidade(cidade);
 				pessoa.setEstado(estado);
+				pessoa.setTipoMorada(tipomorada);
+				pessoa.setTipoCliente(tipocliente);
+				pessoa.setAtivo(ativo);
+				pessoa.setFuncionario(funcionario);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+			return pessoa;
 		}
 		return pessoa;
 	}
@@ -262,12 +320,13 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 
 	public List<PessoaObj> buscarPessoaPorNome(String nome) {
-		String comando = "select idpessoa, nome, cpf, rg,  datanascimento, ativo, endereco, numero_endereco, cidade, estado from pessoa";
+		String comando = "SELECT idpessoa, nome, cpf, rg, datanascimento, profissao, endereco, numeroendereco, telefone, celular, email,"
+				+ " cidade, estado, tipomorada, tipopessoa, ativo, funcionario_idfuncionario FROM pessoa";
 		if (nome != "" && nome != null) {
-			comando += " where nome like '" + nome + "%';";
+			comando += " WHERE nome LIKE '" + nome + "%';";
 			}
 		List<PessoaObj> ListaPessoa = new ArrayList<PessoaObj>();
-		System.out.println(comando);
+		System.out.println("Buscar Nome: "+comando);
 		try {
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
@@ -278,22 +337,36 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				String cpf = rs.getString("cpf");
 				String rg = rs.getString("rg");
 				Date dataNascimento = rs.getDate("datanascimento");
-				String ativo = rs.getString("ativo");
+				String profissao = rs.getString("profissao");
 				String endereco = rs.getString("endereco");
-				int numero = rs.getInt("numero_endereco");
+				int numero = rs.getInt("numeroendereco");
+				String telefone = rs.getString("telefone");
+				String celular = rs.getString("celular");
+				String email = rs.getString("email");
 				String cidade = rs.getString("cidade");
 				String estado = rs.getString("estado");
-
+				String tipomorada = rs.getString("tipomorada");
+				int tipocliente = rs.getInt("tipopessoa");
+				String ativo = rs.getString("ativo");
+				int funcionario = rs.getInt("funcionario_idfuncionario");
+				
 				pessoa.setId(idpessoa);
 				pessoa.setNome(nomepessoa);
 				pessoa.setCpf(cpf);
 				pessoa.setRg(rg);
 				pessoa.setDataNascimento(dataNascimento);
-				pessoa.setAtivo(ativo);
+				pessoa.setProfissao(profissao);
 				pessoa.setEndereco(endereco);
 				pessoa.setNumero(numero);
+				pessoa.setTelefone(telefone);
+				pessoa.setCelular(celular);
+				pessoa.setEmail(email);
 				pessoa.setCidade(cidade);
 				pessoa.setEstado(estado);
+				pessoa.setTipoMorada(tipomorada);
+				pessoa.setTipoCliente(tipocliente);
+				pessoa.setAtivo(ativo);
+				pessoa.setFuncionario(funcionario);
 
 				ListaPessoa.add(pessoa);
 			}

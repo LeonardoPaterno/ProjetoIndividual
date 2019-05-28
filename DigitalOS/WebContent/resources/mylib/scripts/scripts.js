@@ -160,6 +160,7 @@ function filtroAparelhosAtivos(){
 }
 
 function inserirPessoa(){
+		var tipopessoa = 	$("#tipocliente").val();
 		var nome = 			 $("#nomecliente").val();
 		var cpf = 			 $("#cpfcliente").val();
 		var rg = 			 $("#rgcliente").val();
@@ -173,7 +174,7 @@ function inserirPessoa(){
 		var cidade = 		 $("#cidadecliente").val();
 		var ativo = 		 $("#statuspessoa").val();
 
-		var pessoaNova = {'nome':nome, 'cpf':cpf, 'dataNascimento':dataNascimento, 'rg':rg, 'email':email, 'telefone':telefone, 
+		var pessoaNova = {'tipopessoa': tipopessoa,'nome':nome, 'cpf':cpf, 'dataNascimento':dataNascimento, 'rg':rg, 'email':email, 'telefone':telefone, 
 					'endereco':endereco, 'numero':numero, 'complemento':complemento, 'estado':estado, 'cidade':cidade, 'ativo':ativo
 		};
 		var pessoa = JSON.stringify(pessoaNova);
@@ -260,8 +261,20 @@ function exibirEdicaoPessoa(id){
 }
 
 function editarPessoa(){
-	var pessoaEditar = $("#formEditPessoa").serialize();
-	alert(pessoaEditar);
+	var id = $("#EditIdPessoa").val();
+	var tipopessoa = $("EditTipoPessoa#").val;
+	var nome = $("#EditNomePessoa").val();
+	var cpf = $("#EditCpfPessoa").val();
+	var rg = $("#EditRgPessoa").val(pessoa.rg);
+	var datanascimento = $("#EditDataNascimentoPessoa").val();
+	var endereco = $("#EditEnderecoPessoa").val();
+	var tipomorada = $("#EditTipoMoradaPessoa").val();
+	var numero = $("#EditNumeroPessoa").val();
+	var estado = $("#EditEstadoPessoa").val();
+	var cidade = $("#EditCidadePessoa").val();
+	var telefone = $("#EditTelefonePessoa").val();
+	var celular = $("#EditCelularPessoa").val();
+	var status = $("#EditStatusPessoa").val();
 	$.ajax({
 		type : 'POST',
 		url : '/DigitalOS/rest/RestPessoa/editarPessoa',
