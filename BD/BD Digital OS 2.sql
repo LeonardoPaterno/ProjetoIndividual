@@ -62,7 +62,7 @@ SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `pessoa` (
   `idpessoa` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(80) NOT NULL,
-  `cpf` VARCHAR(11) NOT NULL,
+  `cpf` VARCHAR(14) NOT NULL,
   `rg` VARCHAR(7),
   `datanascimento` DATE NOT NULL,
   `profissao` VARCHAR(75),
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `pessoa` (
   `cidade` varchar(50),
   `estado` varchar(2),
   `tipomorada` varchar(4),
-  `tipopessoa` int,
+  `tipopessoa` VARCHAR(2),
   `ativo` varchar(1) not null,
   `funcionario_idfuncionario` INT,
   PRIMARY KEY (`idpessoa`))

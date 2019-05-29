@@ -7,20 +7,20 @@ public class PessoaObj implements Serializable{
 	
 	private int id;
 	private String nome;
-	private java.sql.Date dataNascimento;
 	private String cpf;
 	private String rg;
-	private String email;
-	private String telefone;
-	private String celular;
+	private java.sql.Date dataNascimento;
+	private String profissao;
 	private String endereco;
 	private int numero;
-	private String tipoMorada;
-	private String estado;
+	private String telefone;
+	private String celular;
+	private String email;
 	private String cidade;
+	private String estado;
+	private String tipomorada;
+	private String tipopessoa;
 	private String ativo;
-	private int tipoCliente;
-	private String profissao;
 	private int funcionario;
 	
 	/*ID*/
@@ -128,19 +128,19 @@ public class PessoaObj implements Serializable{
 	}
 	
 	/*TIPO MORADA*/
-	public String getTipoMorada() {
-		return tipoMorada;
+	public String gettipomorada() {
+		return tipomorada;
 	}
-	public void setTipoMorada(String tipoMorada) {
-		this.tipoMorada = tipoMorada;
+	public void settipomorada(String tipomorada) {
+		this.tipomorada = tipomorada;
 	}
 	
 	/*TIPO CLIENTE*/
-	public int getTipoCliente() {
-		return tipoCliente;
+	public String gettipopessoa() {
+		return tipopessoa;
 	}
-	public void setTipoCliente(int tipoCliente) {
-		this.tipoCliente = tipoCliente;
+	public void settipopessoa(String tipopessoa) {
+		this.tipopessoa = tipopessoa;
 	}
 	
 	/*PROFISSAO*/

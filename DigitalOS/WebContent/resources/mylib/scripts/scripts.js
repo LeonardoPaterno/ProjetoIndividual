@@ -160,33 +160,39 @@ function filtroAparelhosAtivos(){
 }
 
 function inserirPessoa(){
-		var tipopessoa = 	$("#tipocliente").val();
 		var nome = 			 $("#nomecliente").val();
+		var dataNascimento = $("#datanascimento").val();
 		var cpf = 			 $("#cpfcliente").val();
 		var rg = 			 $("#rgcliente").val();
-		var dataNascimento = $("#datanascimento").val();
 		var email = 		 $("#emailcliente").val();
-		var telefone = 		 $("#celularcliente").val();
+		var telefone = 		 $("#telefonecliente").val();
+		var celular = 		 $("#celularcliente").val();
 		var endereco = 		 $("#enderecocliente").val();
 		var numero = 		 $("#numerocliente").val();
-		var complemento = 	 $("#complementocliente").val();
+		var tipomorada = 	 $("#tipomorada").val();
 		var estado = 		 $("#estadocliente").val();
 		var cidade = 		 $("#cidadecliente").val();
+		var tipopessoa = 	 $("#tipopessoa").val();
+		var profissao =  	 $("#profissaopessoa").val();
 		var ativo = 		 $("#statuspessoa").val();
+		var funcionario = 	 $("#funcionario").val();
 
-		var pessoaNova = {'tipopessoa': tipopessoa,'nome':nome, 'cpf':cpf, 'dataNascimento':dataNascimento, 'rg':rg, 'email':email, 'telefone':telefone, 
-					'endereco':endereco, 'numero':numero, 'complemento':complemento, 'estado':estado, 'cidade':cidade, 'ativo':ativo
-		};
+		var pessoaNova = {'nome':nome, 'cpf':cpf,'rg':rg,'dataNascimento':dataNascimento,'profissao':profissao,'endereco':endereco,    
+						  'numero':numero,'telefone':telefone,'celular':celular,'email':email,'cidade':cidade,'estado':estado,  
+						  'tipomorada':tipomorada,'tipopessoa':tipopessoa,'ativo':ativo,'funcionario':funcionario};
+		
 		var pessoa = JSON.stringify(pessoaNova);
+		console.log("Pessoa: "+pessoa);
 	$.ajax({
 		type:'POST',
 		url: '/DigitalOS/rest/RestPessoa/addPessoaObj',
 		data: pessoa,
-		success: function(listaPessoasAchadas){
-			carregarTabela(listaPessoasAchadas);
+		success: function(resposta){
+			alert(resposta);
+			buscarPessoa();
 		},
 		error: function(){
-			alert("Erro ao cadastrar nova pessoa");
+			alert("Erro ao cadastrar nova pessoa.");
 		}
 	});
 }
@@ -211,7 +217,7 @@ function tabelaPessoa(listaPessoasAchadas){
 	var html = "<div class='teble-reponsive'>" +
 			   "<table class='table table-striped table-condensed table-bordered'>";
 		html += "<tr>" +
-				"<th># ID</th> <th>Nome</th> <th>CPF</th> <th>RG</th> <th>Data de Nascimento</th> <th>Cidade</th> <th>Estado</th> <th>Ativo</th> <th>Edição</th>" +
+				"<th># ID</th> <th>Nome</th> <th>CPF</th> <th>RG</th> <th>Data de Nascimento</th> <th>Endereco</th> <th>Cidade</th> <th>Estado</th> <th>Celular</th> <th>Tipo Pessoa</th> <th>Ativo</th> <th>Edição</th>" +
 				"</tr>"
 	for(var i = 0; i < listaPessoasAchadas.length; i++){
 		html += "<tr>" +
@@ -220,8 +226,11 @@ function tabelaPessoa(listaPessoasAchadas){
 					"<td>" + listaPessoasAchadas[i].cpf + "</td>" +
 					"<td>" + listaPessoasAchadas[i].rg + "</td>" +
 					"<td>" + listaPessoasAchadas[i].dataNascimento + "</td>" +
-					"<td>" + listaPessoasAchadas[i].estado + "</td>" +
+					"<td>" + listaPessoasAchadas[i].endereco + "</td>" +
 					"<td>" + listaPessoasAchadas[i].cidade + "</td>" +
+					"<td>" + listaPessoasAchadas[i].estado + "</td>" +
+					"<td>" + listaPessoasAchadas[i].celular + "</td>" +
+					"<td>" + listaPessoasAchadas[i].tipopessoa + "</td>" +
 					"<td>" + listaPessoasAchadas[i].ativo + "</td>" +
 					"<td>" +
 						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoPessoa("+listaPessoasAchadas[i].id+")'></div>" +					
@@ -261,26 +270,45 @@ function exibirEdicaoPessoa(id){
 }
 
 function editarPessoa(){
+/*	var nome = 			 $("#nomecliente").val();
+	var dataNascimento = $("#datanascimento").val();
+	var cpf = 			 $("#cpfcliente").val();
+	var rg = 			 $("#rgcliente").val();
+	var email = 		 $("#emailcliente").val();
+	var telefone = 		 $("#telefonecliente").val();
+	var celular = 		 $("#celularcliente").val();
+	var endereco = 		 $("#enderecocliente").val();
+	var numero = 		 $("#numerocliente").val();
+	var tipomorada = 	 $("#tipomorada").val();
+	var estado = 		 $("#estadocliente").val();
+	var cidade = 		 $("#cidadecliente").val();
+	var tipopessoa = 	 $("#tipopessoa").val();
+	var profissao =  	 $("#profissaopessoa").val();
+	var ativo = 		 $("#statuspessoa").val();
+	var funcionario = 	 $("#funcionario").val();*/
 	var id = $("#EditIdPessoa").val();
-	var tipopessoa = $("EditTipoPessoa#").val;
+	alert("Vai atualizar" + id);
 	var nome = $("#EditNomePessoa").val();
 	var cpf = $("#EditCpfPessoa").val();
-	var rg = $("#EditRgPessoa").val(pessoa.rg);
+	var rg = $("#EditRgPessoa").val();
 	var datanascimento = $("#EditDataNascimentoPessoa").val();
 	var endereco = $("#EditEnderecoPessoa").val();
-	var tipomorada = $("#EditTipoMoradaPessoa").val();
 	var numero = $("#EditNumeroPessoa").val();
-	var estado = $("#EditEstadoPessoa").val();
 	var cidade = $("#EditCidadePessoa").val();
+	var estado = $("#EditEstadoPessoa").val();
 	var telefone = $("#EditTelefonePessoa").val();
 	var celular = $("#EditCelularPessoa").val();
-	var status = $("#EditStatusPessoa").val();
+	var tipopessoa = $("#EditTipoPessoa").val;
+	var tipomorada = $("#EditTipoMoradaPessoa").val();
+	var ativo = $("#EditStatusPessoa").val();
 	$.ajax({
 		type : 'POST',
 		url : '/DigitalOS/rest/RestPessoa/editarPessoa',
-		data:pessoaEditar,
+		data:{'id':id, 'nome':nome, 'tipopessoa':tipopessoa, 'cpf':cpf, 'rg':rg, 'datanascimento':datanascimento, 'endereco':endereco,
+			  'tipomorada':tipomorada, 'numero':numero, 'estado':estado, 'cidade':cidade, 'telefone':telefone, 'celular':celular,
+			  'ativo':ativo},
 		success: function(resposta){
-			alert("Atualizado");
+			alert(resposta);
 			buscarPessoa();
 		},
 		error:function(){

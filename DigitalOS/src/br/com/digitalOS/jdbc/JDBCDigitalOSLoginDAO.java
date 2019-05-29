@@ -198,9 +198,9 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	@Override
 	public boolean inserirPessoa(PessoaObj pessoa) {
 		String comando = "INSERT INTO pessoa " + 
-		"(idpessoa, nome, cpf, rg, datanascimento, profissao, endereco, numeroendereco, telefone, celular, email, cidade, estado, "
+		"(nome, cpf, rg, datanascimento, profissao, endereco, numeroendereco, telefone, celular, email, cidade, estado, "
 		+ "tipomorada, tipopessoa, ativo, funcionario_idfuncionario)" 
-		+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		System.out.println("Insert: "+comando);
 		PreparedStatement p;
 		try {
@@ -217,11 +217,11 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			p.setString(10, pessoa.getEmail());
 			p.setString(11, pessoa.getCidade());
 			p.setString(12, pessoa.getEstado());
-			p.setString(13, pessoa.getTipoMorada());
-			p.setInt(14, pessoa.getTipoCliente());
+			p.setString(13, pessoa.gettipomorada());
+			p.setString(14, pessoa.gettipopessoa());
 			p.setString(15, pessoa.getAtivo());
 			p.setInt(16, pessoa.getFuncionario());
-			System.out.println("Insert: "+p);
+			System.out.println("Insert P: "+p);
 			p.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -232,7 +232,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 
 	
 	public boolean atualizar(PessoaObj pessoa) {
-		String comando = "UPDATE pessoa SET idpessoa=?, nome=?, cpf=?, rg=?, datanascimento=?, profissao=?, endereco=?, numeroendereco=?,"
+		String comando = "UPDATE pessoa SET nome=?, cpf=?, rg=?, datanascimento=?, profissao=?, endereco=?, numeroendereco=?,"
 		+ " telefone=?, celular=?, email=?, cidade=?, estado=?, tipomorada=?, tipopessoa=?, ativo=?, funcionario_idfuncionario=? "
 		+ "WHERE pessoa.id ="+pessoa.getId()+";";
 		System.out.println("Atualizar: "+comando);
@@ -251,8 +251,8 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			p.setString(10, pessoa.getEmail());
 			p.setString(11, pessoa.getCidade());
 			p.setString(12, pessoa.getEstado());
-			p.setString(13, pessoa.getTipoMorada());
-			p.setInt(14, pessoa.getTipoCliente());
+			p.setString(13, pessoa.gettipomorada());
+			p.setString(14, pessoa.gettipopessoa());
 			p.setString(15, pessoa.getAtivo());
 			p.setInt(16, pessoa.getFuncionario());
 			p.executeUpdate();
@@ -286,7 +286,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				String cidade = rs.getString("cidade");
 				String estado = rs.getString("estado");
 				String tipomorada = rs.getString("tipomorada");
-				int tipocliente = rs.getInt("tipopessoa");
+				String tipopessoa = rs.getString("tipopessoa");
 				String ativo = rs.getString("ativo");
 				int funcionario = rs.getInt("funcionario_idfuncionario");
 				
@@ -303,8 +303,8 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				pessoa.setEmail(email);
 				pessoa.setCidade(cidade);
 				pessoa.setEstado(estado);
-				pessoa.setTipoMorada(tipomorada);
-				pessoa.setTipoCliente(tipocliente);
+				pessoa.settipomorada(tipomorada);
+				pessoa.settipopessoa(tipopessoa);
 				pessoa.setAtivo(ativo);
 				pessoa.setFuncionario(funcionario);
 			}
@@ -346,7 +346,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				String cidade = rs.getString("cidade");
 				String estado = rs.getString("estado");
 				String tipomorada = rs.getString("tipomorada");
-				int tipocliente = rs.getInt("tipopessoa");
+				String tipopessoa = rs.getString("tipopessoa");
 				String ativo = rs.getString("ativo");
 				int funcionario = rs.getInt("funcionario_idfuncionario");
 				
@@ -363,8 +363,8 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				pessoa.setEmail(email);
 				pessoa.setCidade(cidade);
 				pessoa.setEstado(estado);
-				pessoa.setTipoMorada(tipomorada);
-				pessoa.setTipoCliente(tipocliente);
+				pessoa.settipomorada(tipomorada);
+				pessoa.settipopessoa(tipopessoa);
 				pessoa.setAtivo(ativo);
 				pessoa.setFuncionario(funcionario);
 
