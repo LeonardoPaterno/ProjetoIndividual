@@ -201,7 +201,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		"(nome, cpf, rg, datanascimento, profissao, endereco, numeroendereco, telefone, celular, email, cidade, estado, "
 		+ "tipomorada, tipopessoa, ativo, funcionario_idfuncionario)" 
 		+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		System.out.println("Insert: "+comando);
 		PreparedStatement p;
 		try {
 			p = this.conexao.prepareStatement(comando);
@@ -221,7 +220,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			p.setString(14, pessoa.gettipopessoa());
 			p.setString(15, pessoa.getAtivo());
 			p.setInt(16, pessoa.getFuncionario());
-			System.out.println("Insert P: "+p);
 			p.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -235,7 +233,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		String comando = "UPDATE pessoa SET nome=?, cpf=?, rg=?, datanascimento=?, profissao=?, endereco=?, numeroendereco=?,"
 		+ " telefone=?, celular=?, email=?, cidade=?, estado=?, tipomorada=?, tipopessoa=?, ativo=?, funcionario_idfuncionario=? "
 		+ "WHERE pessoa.id ="+pessoa.getId()+";";
-		System.out.println("Atualizar: "+comando);
 		PreparedStatement p;
 		try{
 			p = this.conexao.prepareStatement(comando);
@@ -267,7 +264,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		String comando = "SELECT idpessoa, nome, cpf, rg, datanascimento, profissao, endereco, numeroendereco, telefone, celular, email,"
 				+ " cidade, estado, tipomorada, tipopessoa, ativo, funcionario_idfuncionario FROM pessoa WHERE idpessoa = "+id+";";
 		PessoaObj pessoa = new PessoaObj();
-		System.out.println("Buscar ID: "+comando);
 		try{
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
@@ -326,7 +322,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			comando += " WHERE nome LIKE '" + nome + "%';";
 			}
 		List<PessoaObj> ListaPessoa = new ArrayList<PessoaObj>();
-		System.out.println("Buscar Nome: "+comando);
 		try {
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);

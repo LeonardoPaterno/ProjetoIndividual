@@ -254,7 +254,7 @@ function exibirEdicaoPessoa(id){
 			$("#EditRgPessoa").val(pessoa.rg);
 			$("#EditDataNascimentoPessoa").val(pessoa.dataNascimento);
 			$("#EditEnderecoPessoa").val(pessoa.endereco);
-			$("#EditComplementoPessoa").val(pessoa.complemento);
+			$("#EditTipoPessoa").val(pessoa.tipopessoa);
 			$("#EditNumeroPessoa").val(pessoa.numero);
 			$("#EditEstadoPessoa").val(pessoa.estado);
 			$("#EditCidadePessoa").val(pessoa.cidade);
@@ -270,43 +270,31 @@ function exibirEdicaoPessoa(id){
 }
 
 function editarPessoa(){
-/*	var nome = 			 $("#nomecliente").val();
-	var dataNascimento = $("#datanascimento").val();
-	var cpf = 			 $("#cpfcliente").val();
-	var rg = 			 $("#rgcliente").val();
-	var email = 		 $("#emailcliente").val();
-	var telefone = 		 $("#telefonecliente").val();
-	var celular = 		 $("#celularcliente").val();
-	var endereco = 		 $("#enderecocliente").val();
-	var numero = 		 $("#numerocliente").val();
-	var tipomorada = 	 $("#tipomorada").val();
-	var estado = 		 $("#estadocliente").val();
-	var cidade = 		 $("#cidadecliente").val();
-	var tipopessoa = 	 $("#tipopessoa").val();
-	var profissao =  	 $("#profissaopessoa").val();
-	var ativo = 		 $("#statuspessoa").val();
-	var funcionario = 	 $("#funcionario").val();*/
 	var id = $("#EditIdPessoa").val();
-	alert("Vai atualizar" + id);
 	var nome = $("#EditNomePessoa").val();
 	var cpf = $("#EditCpfPessoa").val();
 	var rg = $("#EditRgPessoa").val();
-	var datanascimento = $("#EditDataNascimentoPessoa").val();
+	var dataNascimento = $("#EditDataNascimentoPessoa").val();
 	var endereco = $("#EditEnderecoPessoa").val();
 	var numero = $("#EditNumeroPessoa").val();
 	var cidade = $("#EditCidadePessoa").val();
 	var estado = $("#EditEstadoPessoa").val();
 	var telefone = $("#EditTelefonePessoa").val();
 	var celular = $("#EditCelularPessoa").val();
-	var tipopessoa = $("#EditTipoPessoa").val;
+	var tipopessoa = $("#EditTipoPessoa").val();
 	var tipomorada = $("#EditTipoMoradaPessoa").val();
 	var ativo = $("#EditStatusPessoa").val();
+
+	var pessoaEdit = {'id':id, 'nome':nome, 'cpf':cpf, 'rg':rg, 'dataNascimento':datanascimento, 'endereco':endereco,	
+					  'numero':numero, 'estado':estado, 'cidade':cidade, 
+					  'telefone':telefone, 'celular':celular, 'tipopessoa':tipopessoa, 'tipomorada':tipomorada, 'ativo':ativo};
+	var pessoa = JSON.stringify(pessoaEdit);
+	console.log("Pessoa: "+pessoa);
+	
 	$.ajax({
 		type : 'POST',
 		url : '/DigitalOS/rest/RestPessoa/editarPessoa',
-		data:{'id':id, 'nome':nome, 'tipopessoa':tipopessoa, 'cpf':cpf, 'rg':rg, 'datanascimento':datanascimento, 'endereco':endereco,
-			  'tipomorada':tipomorada, 'numero':numero, 'estado':estado, 'cidade':cidade, 'telefone':telefone, 'celular':celular,
-			  'ativo':ativo},
+		data:pessoa,
 		success: function(resposta){
 			alert(resposta);
 			buscarPessoa();
