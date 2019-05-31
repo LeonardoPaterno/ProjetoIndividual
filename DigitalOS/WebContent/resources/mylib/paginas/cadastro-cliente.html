@@ -241,7 +241,7 @@
 						<span class="btn input-group-addon icone-pesquisar glyphicon glyphicon-search" onclick="buscarPessoa()"></span>					
 					</div>
 					<div class="btn-group filtroAtivo">
-					    <select class="btn-default form-control" id="filtroAtivoOpc" onchange="filtroAtivos()">
+					    <select class="btn-default form-control" id="filtroPessoa" onchange="filtroAtivosPessoa()">
 							<option value="A">Todos</option>
 							<option value="S">Ativos</option>
 							<option value="N">Inativos</option>
@@ -413,7 +413,7 @@
 			$('#modalcliente').modal('show');
 		});
 		
-		$(".botao-salvar").click(function() {
+		$("#salvarPessoaEdit").click(function() {
 			$('#msgEditPessoa').modal('hide');
 		});
 	</script>

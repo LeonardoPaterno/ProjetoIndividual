@@ -217,7 +217,7 @@ function tabelaPessoa(listaPessoasAchadas){
 	var html = "<div class='teble-reponsive'>" +
 			   "<table class='table table-striped table-condensed table-bordered'>";
 		html += "<tr>" +
-				"<th># ID</th> <th>Nome</th> <th>CPF</th> <th>RG</th> <th>Data de Nascimento</th> <th>Endereco</th> <th>Cidade</th> <th>Estado</th> <th>Celular</th> <th>Tipo Pessoa</th> <th>Ativo</th> <th>Edição</th>" +
+				"<th># ID</th> <th>Nome</th> <th>CPF</th> <th>RG</th> <th>Endereco</th> <th>Cidade</th> <th>Estado</th> <th>Telefone</th> <th>Tipo Pessoa</th> <th>Ativo</th> <th>Edição</th>" +
 				"</tr>"
 	for(var i = 0; i < listaPessoasAchadas.length; i++){
 		html += "<tr>" +
@@ -225,11 +225,10 @@ function tabelaPessoa(listaPessoasAchadas){
 					"<td>" + listaPessoasAchadas[i].nome + "</td>" +
 					"<td>" + listaPessoasAchadas[i].cpf + "</td>" +
 					"<td>" + listaPessoasAchadas[i].rg + "</td>" +
-					"<td>" + listaPessoasAchadas[i].dataNascimento + "</td>" +
 					"<td>" + listaPessoasAchadas[i].endereco + "</td>" +
 					"<td>" + listaPessoasAchadas[i].cidade + "</td>" +
 					"<td>" + listaPessoasAchadas[i].estado + "</td>" +
-					"<td>" + listaPessoasAchadas[i].celular + "</td>" +
+					"<td>" + listaPessoasAchadas[i].telefone + "</td>" +
 					"<td>" + listaPessoasAchadas[i].tipopessoa + "</td>" +
 					"<td>" + listaPessoasAchadas[i].ativo + "</td>" +
 					"<td>" +
@@ -247,7 +246,7 @@ function exibirEdicaoPessoa(id){
 		type : 'POST',
 		url : '/DigitalOS/rest/RestPessoa/buscarPessoaPeloId/'+id,
 		success: function(pessoa){
-			console.log(pessoa);
+			alert(pessoa);
 			$("#EditIdPessoa").val(id);
 			$("#EditNomePessoa").val(pessoa.nome);
 			$("#EditCpfPessoa").val(pessoa.cpf);
@@ -274,7 +273,7 @@ function editarPessoa(){
 	var nome = $("#EditNomePessoa").val();
 	var cpf = $("#EditCpfPessoa").val();
 	var rg = $("#EditRgPessoa").val();
-	var dataNascimento = $("#EditDataNascimentoPessoa").val();
+	var datanascimento = $("#EditDataNascimentoPessoa").val();
 	var endereco = $("#EditEnderecoPessoa").val();
 	var numero = $("#EditNumeroPessoa").val();
 	var cidade = $("#EditCidadePessoa").val();
@@ -289,7 +288,6 @@ function editarPessoa(){
 					  'numero':numero, 'estado':estado, 'cidade':cidade, 
 					  'telefone':telefone, 'celular':celular, 'tipopessoa':tipopessoa, 'tipomorada':tipomorada, 'ativo':ativo};
 	var pessoa = JSON.stringify(pessoaEdit);
-	console.log("Pessoa: "+pessoa);
 	
 	$.ajax({
 		type : 'POST',
@@ -301,6 +299,21 @@ function editarPessoa(){
 		},
 		error:function(){
 			alert("Erro ao Atualizar");
+		}
+	});
+}
+
+function filtroAtivosPessoa(){
+	var ativo = JSON.stringify($("#filtroPessoa").val());
+	$.ajax({
+		type:'POST',
+		url: '/DigitalOS/rest/RestPessoa/filtroAtivo',
+		data: $("#filtroPessoa").val(),
+		success: function(listaPessoasAchadas){
+			tabelaPessoa(listaPessoasAchadas);
+		},
+		error: function(){
+			alert("Erro ao Filtrar");
 		}
 	});
 }

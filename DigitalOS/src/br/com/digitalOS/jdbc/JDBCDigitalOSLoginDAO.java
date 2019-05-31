@@ -232,7 +232,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	public boolean atualizar(PessoaObj pessoa) {
 		String comando = "UPDATE pessoa SET nome=?, cpf=?, rg=?, datanascimento=?, profissao=?, endereco=?, numeroendereco=?,"
 		+ " telefone=?, celular=?, email=?, cidade=?, estado=?, tipomorada=?, tipopessoa=?, ativo=?, funcionario_idfuncionario=? "
-		+ "WHERE pessoa.id ="+pessoa.getId()+";";
+		+ "WHERE idpessoa ="+pessoa.getId()+";";
 		PreparedStatement p;
 		try{
 			p = this.conexao.prepareStatement(comando);
@@ -311,10 +311,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		return pessoa;
 	}
 
-	public void deletarPessoaObj(int id) {
-		
-	}
-
 	public List<PessoaObj> buscarPessoaPorNome(String nome) {
 		String comando = "SELECT idpessoa, nome, cpf, rg, datanascimento, profissao, endereco, numeroendereco, telefone, celular, email,"
 				+ " cidade, estado, tipomorada, tipopessoa, ativo, funcionario_idfuncionario FROM pessoa";
@@ -369,5 +365,64 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			e.printStackTrace();
 		}
 		return ListaPessoa;
+	}
+
+	public List<PessoaObj> filtroPessoaAtivo(PessoaObj pessoaAtivo) {
+		List<PessoaObj> ListaAtivos = new ArrayList<PessoaObj>();
+		String comando = "";
+		String filtro = pessoaAtivo.getAtivo();
+		if(filtro.equalsIgnoreCase("N")) {
+			comando += "SELECT idpessoa, nome, cpf, rg, endereco, cidade, estado, telefone, tipopessoa, ativo FROM pessoa where ativo = 'N';";
+			System.out.println(filtro);
+			System.out.println(comando);
+		}
+		else if(filtro.equalsIgnoreCase("S")) {
+			comando += "SELECT idpessoa, nome, cpf, rg, endereco, cidade, estado, telefone, tipopessoa, ativo FROM pessoa where ativo = 'S';";
+			System.out.println(filtro);
+			System.out.println(comando);
+		}
+		else{
+			comando += "SELECT idpessoa, nome, cpf, rg, endereco, cidade, estado, telefone, tipopessoa, ativo FROM pessoa;";
+			System.out.println(filtro);
+			System.out.println(comando);
+		}
+		int vezes = 0;
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			System.out.println("RS: "+comando);
+			
+			while (rs.next()) {
+				vezes = vezes + 1;
+				PessoaObj pessoa = new PessoaObj();
+				int idpessoa = rs.getInt("idpessoa");
+				String nomepessoa = rs.getString("nome");
+				String cpf = rs.getString("cpf");
+				String rg = rs.getString("rg");
+				String endereco = rs.getString("endereco");
+				String telefone = rs.getString("telefone");
+				String cidade = rs.getString("cidade");
+				String estado = rs.getString("estado");
+				String tipopessoa = rs.getString("tipopessoa");
+				String ativo = rs.getString("ativo");
+				System.out.println(idpessoa+","+nomepessoa+","+ativo);
+				
+				pessoa.setId(idpessoa);
+				pessoa.setNome(nomepessoa);
+				pessoa.setCpf(cpf);
+				pessoa.setRg(rg);
+				pessoa.setEndereco(endereco);
+				pessoa.setTelefone(telefone);
+				pessoa.setCidade(cidade);
+				pessoa.setEstado(estado);
+				pessoa.settipopessoa(tipopessoa);
+				pessoa.setAtivo(ativo);
+
+				ListaAtivos.add(pessoa);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ListaAtivos;
 	}
 }
