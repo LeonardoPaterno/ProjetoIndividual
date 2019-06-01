@@ -79,14 +79,6 @@
 				<span class="glyphicon glyphicon-menu-hamburger"></span>
 			</a>
 		</div><!-- menu-display-xs -->
-
-		<div class="div-barra-pesquisa col-xs-3 col-sm-9 col-md-8">
-			<div class="input-group input-group-custom">
- 				<input type="text" class="form-control" placeholder="Juliano Pereira">
-  				<span class="input-group-addon icone-pesquisar glyphicon glyphicon-search" id="buscarcliente"></span>
- 			</div>
-		</div><!-- /.Div-Barra-Pesquisa -->
-
 	
 		<div class="modal fade col-xs-11 col-sm-6 col-md-12" tabindex="-1" role="dialog" id="modalfuncionario">
 		  <div class="modal-dialog modal-lg modal-dialog-custom" role="document">
@@ -101,24 +93,24 @@
 		        	<div class="row">
 			        	<div class="form-group col-md-5">
 			        		<label>Nome</label>
-			        		<input class="form-control" type="text" id="nomefuncionario" placeholder="Nome">
+			        		<input class="form-control" type="text" id="nomefuncionario" maxlength="80" placeholder="Nome">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-3">
 			        		<label>CPF</label>
-			        		<input class="form-control " type="text" id="cpffuncionario" placeholder="000.000.000-00">
+			        		<input class="form-control " type="text" id="cpffuncionario" maxlength="14" placeholder="000.000.000-00">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-2">
 			        		<label>RG</label>
-			        		<input class="form-control" type="text" id="rgfuncionario" placeholder="0.000.000">
+			        		<input class="form-control" type="text" id="rgfuncionario" maxlength="9" placeholder="0.000.000">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-2">
 			        		<label>Sexo</label>
 			        		<select class="form-control" id="sexofuncionario">
-			        			<option>Masculino</option>
-			        			<option>Feminino</option>
+			        			<option value="M">Masculino</option>
+			        			<option value="F">Feminino</option>
 			        		</select>
 			        	</div><!-- /. FORM-GROUP -->
 		        	</div><!-- /.ROW -->
@@ -126,34 +118,34 @@
 		        	<div class="row">
 			        	<div class="form-group col-md-6">
 			        		<label>E-mail</label>
-			        		<input class="form-control" type="email" id="emailfuncionario" placeholder="exemplo@gmail.com">
+			        		<input class="form-control" type="email" id="emailfuncionario" maxlength="50" placeholder="exemplo@gmail.com">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-3">
 			        		<label>Telefone</label>
-			        		<input class="form-control" type="text" id="telefonefuncionario" placeholder="(00) 0000-0000">
+			        		<input class="form-control" type="text" id="telefonefuncionario" maxlength="14" placeholder="(00) 0000-0000">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-3">
 			        		<label>Celular</label>
-			        		<input class="form-control" type="text" id="celularfuncionario" placeholder="(00) 00000-0000">
+			        		<input class="form-control" type="text" id="celularfuncionario" maxlength="15" placeholder="(00) 00000-0000">
 			        	</div><!-- /. FORM-GROUP -->
 		        	</div><!-- /.ROW -->
 		        	
 		        	<div class="row">
 			        	<div class="form-group col-md-5">
 			        		<label>Enderço</label>
-			        		<input class="form-control" type="text" id="enderecofuncionario" placeholder="Endereço">
+			        		<input class="form-control" type="text" id="enderecofuncionario" maxlength="70" placeholder="Endereço">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 						<div class="form-group col-md-2">
 			        		<label>Numero</label>
-			        		<input class="form-control" type="text" id="numerofuncionario" placeholder="0000">
+			        		<input class="form-control" type="text" id="numerofuncionario" maxlength="10" placeholder="0000">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-5">
 			        		<label>Complemento</label>
-			        		<input class="form-control" type="text" id="complementofuncionario" placeholder="Proximo a lanhouse">
+			        		<input class="form-control" type="text" id="complementofuncionario" maxlength="30" placeholder="Proximo a lanhouse">
 			        	</div><!-- /. FORM-GROUP -->
 			      	</div><!-- /.ROW -->
 			      
@@ -185,20 +177,35 @@
 		      
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">Cancelar</button>
-		        <button type="button" class="btn btn-primary botao-salvar">Salvar</button>
+		        <button type="submit" class="btn btn-primary botao-salvar" onclick="inserirFuncionario()">Salvar</button>
 		      </div>
 		      
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->		
-
+		
 		<div class="div-painel-funcionarios col-xs-5 col-sm-3 col-md-9">
-			<div class="panel panel-default">
-				<div class="panel-heading">PAINEL DE FUNCIONARIOS
-					<span class="btn btn-default glyphicon glyphicon-plus icone-adicionar-funcionario"></span>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<div>
+						<label class="label-painel-clientes">Painel de Funcionários</label> 
+						<span class="btn btn-default glyphicon glyphicon-plus icone-adicionar-funcionario"></span>
+					</div>
+					<div class="input-group input-group-barra-pesquisa">
+						<input type="text" class="form-control form-control-custom" placeholder="João Miguel" id="buscaFuncionario">
+						<span class="btn input-group-addon icone-pesquisar glyphicon glyphicon-search" onclick="buscarFuncionario()"></span>					
+					</div>
+					<div class="btn-group filtroAtivo">
+					    <select class="btn-default form-control" id="filtroFuncionario" onchange="filtroAtivosFuncionario()">
+							<option value="A">Todos</option>
+							<option value="S">Ativos</option>
+							<option value="N">Inativos</option>
+						</select>
+					</div>
 				</div>
-				<div class="panel-body"></div>
-				<div class="panel-footer"></div>
+				<div class="panel-body">
+					<div id="resultadoFuncionario" class="resultadoFuncionario"></div>
+				</div>
 			</div>
 		</div>
 	</div><!-- geral-menu -->
@@ -211,6 +218,10 @@
 		
 		$(".icone-adicionar-funcionario").click(function(){
 			$('#modalfuncionario').modal('show');
+		});
+		
+		$("#salvarPessoaEdit").click(function() {
+			$('#msgEditFuncionario').modal('hide');
 		});
 	</script>
 </body>
