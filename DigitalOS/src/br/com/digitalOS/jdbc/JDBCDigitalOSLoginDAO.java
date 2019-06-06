@@ -12,6 +12,7 @@ import br.com.digitalOS.jdbcInterface.DigitalOSInterface;
 import br.com.digitalOS.objetos.AparelhoObj;
 import br.com.digitalOS.objetos.LoginObj;
 import br.com.digitalOS.objetos.PessoaObj;
+import br.com.digitalOS.objetos.ServicoObj;
 
 public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 
@@ -425,4 +426,118 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return ListaAtivos;
 	}
+
+	public boolean inserirFuncionario(PessoaObj funcionario) {
+		String comando = "INSERT INTO pessoa " + 
+				"(nome, cpf, rg, datanascimento, profissao, endereco, numeroendereco, telefone, celular, email, cidade, estado, "
+				+ "tipomorada, tipopessoa, ativo, funcionario_idfuncionario)" 
+				+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				PreparedStatement p;
+				try {
+					p = this.conexao.prepareStatement(comando);
+					p.setString(1, funcionario.getNome());
+					p.setString(2, funcionario.getCpf());
+					p.setString(3, funcionario.getRg());
+					p.setDate(4, funcionario.getDataNascimento());
+					p.setString(5, funcionario.getProfissao());
+					p.setString(6, funcionario.getEndereco());
+					p.setInt(7, funcionario.getNumero());
+					p.setString(8, funcionario.getTelefone());
+					p.setString(9, funcionario.getCelular());
+					p.setString(10, funcionario.getEmail());
+					p.setString(11, funcionario.getCidade());
+					p.setString(12, funcionario.getEstado());
+					p.setString(13, funcionario.gettipomorada());
+					p.setString(14, funcionario.gettipopessoa());
+					p.setString(15, funcionario.getAtivo());
+					p.setInt(16, funcionario.getFuncionario());
+					p.execute();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return false;
+				}
+				return true;
+			}
+
+	public List<PessoaObj> buscarFuncionarioPorNome(String nome) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public PessoaObj buscarFuncionarioPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<PessoaObj> filtroFuncionarioAtivo(PessoaObj funcionario) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	/*SERVICO*/
+	public boolean inserirservico(ServicoObj servico) {
+		System.out.println("Teste: "+servico.getTiposervico()+""+servico.getNomeservico()+""+servico.getDescricaoservico());
+		String comando = "INSERT INTO servicos (nometiposervico, nomeservico, descricaoservico, ativo) VALUES(?,?,?,?);";
+				PreparedStatement p;
+				try {
+					p = this.conexao.prepareStatement(comando);
+					p.setString(1, servico.getTiposervico());
+					p.setString(2, servico.getNomeservico());
+					p.setString(3, servico.getDescricaoservico());
+					p.setString(4, servico.getAtivo());
+					p.execute();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return false;
+				}
+				return true;
+	}
+	public List<ServicoObj> buscarservicoPorNome(String nome) {
+		String comando = "SELECT idservico, nometiposervico, nomeservico, descricaoservico, ativo FROM servicos";
+		if (nome != "" && nome != null) {
+			comando += " WHERE nomeservico LIKE '" + nome + "%';";
+			}
+		List<ServicoObj> ListaServico = new ArrayList<ServicoObj>();
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while (rs.next()) {
+				ServicoObj servico = new ServicoObj();
+				int idservico = rs.getInt("idservico");
+				String tiposervico = rs.getString("nometiposervico");
+				String nomeservico = rs.getString("nomeservico");
+				String descricaoservico = rs.getString("descricaoservico");
+				String ativo = rs.getString("ativo");
+				
+				servico.setIdservico(idservico);
+				servico.setTiposervico(tiposervico);
+				servico.setNomeservico(nomeservico);
+				servico.setDescricaoservico(descricaoservico);
+				servico.setAtivo(ativo);
+				ListaServico.add(servico);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ListaServico;
+	}
+
+	public ServicoObj buscarservicoPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public void atualizarServico(ServicoObj servicoObj) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<ServicoObj> filtroservicoAtivo(ServicoObj servico) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
+
+

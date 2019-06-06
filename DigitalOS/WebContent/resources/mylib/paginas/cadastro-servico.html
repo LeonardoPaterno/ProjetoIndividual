@@ -80,14 +80,6 @@
 			</a>
 		</div><!-- menu-display-xs -->
 
-		<div class="div-barra-pesquisa col-xs-3 col-sm-9 col-md-8">
-			<div class="input-group input-group-custom">
- 				<input type="text" class="form-control" placeholder="Manutenção">
-  				<span class="input-group-addon icone-pesquisar glyphicon glyphicon-search" id="buscarservico"></span>
- 			</div>
-		</div><!-- /.Div-Barra-Pesquisa -->
-
-	
 		<div class="modal fade col-xs-11 col-sm-6 col-md-12" tabindex="-1" role="dialog" id="modalservico">
 		  <div class="modal-dialog modal-lg modal-dialog-custom" role="document">
 		  	<div class="modal-content">
@@ -106,9 +98,11 @@
 			        	
 			        	<div class="form-group col-md-4">
 			        		<label>Serviço</label>
-			        		<input class="form-control" type="text" id="servico" placeholder="Troca de Tela">
+			        		<input class="form-control" type="text" id="nomeservico" placeholder="Troca de Tela">
 			        	</div><!-- /. FORM-GROUP -->
-			        	<div class="col-md-offset-4"></div>
+			        	<div class="form-group" style="display:none">
+			        		<input class="form-control" type="text" id="statusservico" value="S" placeholder="S" disabled>
+			        	</div><!-- /. FORM-GROUP -->
 			        </div><!-- /.ROW -->
 			        
 			        <div class="row">
@@ -122,7 +116,7 @@
 		      
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">Cancelar</button>
-		        <button type="button" class="btn btn-primary botao-salvar">Salvar</button>
+		        <button type="button" class="btn btn-primary botao-salvar" onclick="inserirPessoa()">Salvar</button>
 		      </div>
 		      
 		    </div><!-- /.modal-content -->
@@ -130,12 +124,38 @@
 		</div><!-- /.modal -->		
 
 		<div class="div-painel-servicos col-xs-5 col-sm-3 col-md-9">
-			<div class="panel panel-default">
-				<div class="panel-heading">PAINEL DE SERVIÇOS
-					<span class="btn btn-default glyphicon glyphicon-plus icone-adicionar-servico"></span>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<div>
+						<label class="label-painel-servico">Painel de Serviço</label> 
+
+					</div>
+					
+					<div class="input-group input-group-barra-pesquisa">
+						<input type="text" class="form-control form-control-custom" placeholder="Manutenção" id="buscarservico">
+						<span class="btn input-group-addon icone-pesquisar glyphicon glyphicon-search" onclick="buscarServico()"></span>					
+					</div>
+					
+					<div class="btn-group filtroAtivo">
+						<div class="labelFiltro">
+							<label>Filtro de Serviço |</label>
+						</div>
+						<div class="botaoFiltro">
+						    <select class="btn-default form-control" id="filtroServicoAtivo" onchange="filtroServico()">
+								<option value="A">Todos</option>
+								<option value="S">Ativos</option>
+								<option value="N">Inativos</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="icone-adicionar-servico">
+						<span class="btn btn-default glyphicon glyphicon-plus"></span>
+					</div>	
 				</div>
-				<div class="panel-body"></div>
-				<div class="panel-footer"></div>
+				<div class="panel-body">
+					<div id="resultadoServico" class="resultadoServico"></div>
+				</div>
 			</div>
 		</div>
 	</div><!-- geral-menu -->

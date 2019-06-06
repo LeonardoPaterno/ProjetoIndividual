@@ -179,10 +179,8 @@ function inserirPessoa(){
 
 		var pessoaNova = {'nome':nome, 'cpf':cpf,'rg':rg,'dataNascimento':dataNascimento,'profissao':profissao,'endereco':endereco,    
 						  'numero':numero,'telefone':telefone,'celular':celular,'email':email,'cidade':cidade,'estado':estado,  
-						  'tipomorada':tipomorada,'tipopessoa':tipopessoa,'ativo':ativo,'funcionario':funcionario};
-		
+						  'tipomorada':tipomorada,'tipopessoa':tipopessoa,'ativo':ativo,'funcionario':funcionario};	
 		var pessoa = JSON.stringify(pessoaNova);
-		console.log("Pessoa: "+pessoa);
 	$.ajax({
 		type:'POST',
 		url: '/DigitalOS/rest/RestPessoa/addPessoaObj',
@@ -230,7 +228,7 @@ function tabelaPessoa(listaPessoasAchadas){
 					"<td>" + listaPessoasAchadas[i].estado + "</td>" +
 					"<td>" + listaPessoasAchadas[i].telefone + "</td>" +
 					"<td>" + listaPessoasAchadas[i].tipopessoa + "</td>" +
-					"<td>" + listaPessoasAchadas[i].ativo + "</td>" +
+					"<td id='td'>" + listaPessoasAchadas[i].ativo + "</td>" +
 					"<td>" +
 						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoPessoa("+listaPessoasAchadas[i].id+")'></div>" +					
 					"</td>" +
@@ -316,4 +314,104 @@ function filtroAtivosPessoa(){
 			alert("Erro ao Filtrar");
 		}
 	});
+}
+
+function inserirFuncionario(){
+	alert("funcionario");
+	var nome = 			 	 $("#nomefuncionario").val();
+	var cpf = 			 	 $("#cpffuncionario").val();
+	var rg = 			 	 $("#rgfuncionario").val();
+	var email = 		 	 $("#emailfuncionario").val();
+	var telefone = 		 	 $("#telefonefuncionario").val();
+	var celular = 		 	 $("#celularfuncionario").val();
+	var endereco = 		 	 $("#enderecofuncionario").val();
+	var numero = 		 	 $("#numerofuncionario").val();
+	var sexo = 	 		 	 $("#sexofuncionario").val();
+	var numeroct = 		 	 $("#estadocliente").val();
+	var estado = 		 	 $("#estadofuncionario").val();
+	var cidade = 		 	 $("#cidadefuncionario").val();
+	var cargo =  	 	 	 $("#cargofuncionario").val();
+	var ativo = 		 	 $("#statusfuncionario").val();
+
+	var funcNovo = {'nome':nome, 'cpf':cpf,'rg':rg,'endereco':endereco,'numero':numero,'sexo':sexo,'numeroct':numeroct,
+					'telefone':telefone,'celular':celular,'email':email,'cidade':cidade,'estado':estado,'cargo':cargo,
+					'ativo':ativo};	
+	alert(funcNovo);
+	var funcionario = JSON.stringify(funcNovo);
+	$.ajax({
+		type:'POST',
+		url: '/DigitalOS/rest/RestPessoa/addFuncionario',
+		data: funcionario,
+		success: function(resposta){
+			alert(resposta);
+			buscarPessoa();
+		},
+		error: function(){
+			alert("Erro ao cadastrar nova pessoa.");
+		}
+	});
+}
+
+function inserirPessoa(){
+	alert("Inserir Servico");
+	var tiposervico = 		$("#tiposervico").val();
+	var nomeservico = 	 	$("#nomeservico").val();
+	var descricaoservico = 	$("#descricaoservico").val();
+	var ativo = 			$("#statusservico").val();
+
+	var pessoaNova = {'tiposervico':tiposervico, 'nomeservico':nomeservico,'descricaoservico':descricaoservico, 'ativo':ativo};	
+	var pessoa = JSON.stringify(pessoaNova);
+	$.ajax({
+		type:'POST',
+		url: '/DigitalOS/rest/RestServico/addServico',
+		data: pessoa,
+		success: function(resposta){
+			alert(resposta);
+			buscarPessoa();
+		},
+		error: function(){
+			alert("Erro ao cadastrar nova pessoa.");
+		}
+	});
+}
+
+function buscarServico(){
+	var valorBusca = $('#buscarservico').val();
+	alert(valorBusca);
+	$.ajax({
+		type: 'POST',
+		url: '/DigitalOS/rest/RestServico/buscarServicoPorNome',
+		data: valorBusca,
+		success: function(listaServicoAchados){
+			console.log(listaServicoAchados);
+			tabelaServico(listaServicoAchados);
+		},
+		error: function(listaServicoAchados){
+			tabelaServico(listaServicoAchados);
+		}
+	});
+}
+
+function tabelaServico(listaServicoAchados){
+	console.log(listaServicoAchados);
+	var html = "<div class='teble-reponsive'>" +
+			   "<table class='table table-striped table-condensed table-bordered'>";
+		html += "<tr>" +
+				"<th># ID</th> <th>Tipo Servico</th> <th>Nome Servico</th> <th>Descricao</th> <th>Ativo</th> <th>Edição</th>" +
+				"</tr>"
+	for(var i = 0; i < listaServicoAchados.length; i++){
+		html += "<tr>" +
+					"<td>" + listaServicoAchados[i].idservico + "</td>" +
+					"<td>" + listaServicoAchados[i].tiposervico + "</td>" +
+					"<td>" + listaServicoAchados[i].nomeservico + "</td>" +
+					"<td>" + listaServicoAchados[i].descricaoservico + "</td>" +
+					"<td id='td'>" + listaServicoAchados[i].ativo + "</td>" +
+					"<td>" +
+						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoServico("+listaServicoAchados[i].idservico+")'></div>" +					
+					"</td>" +
+				"</tr>"
+	}
+	html += "</table>" +
+			"</div>"
+	$("#resultadoServico").html(html);
 }

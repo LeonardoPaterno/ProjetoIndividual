@@ -13,7 +13,6 @@ public class UtilRest {
 			ObjectMapper mapper = new ObjectMapper();
 
 			mapper.writeValue(fw, result);
-			System.out.println(fw);
 			return fw.toString();
 		} catch (Exception ex) {
 			return null;

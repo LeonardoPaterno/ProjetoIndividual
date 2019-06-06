@@ -41,7 +41,6 @@
 						</ul>
 				</div>
 
-
 				<div class="btn-group btn-group-vertical group-menu" role="group">
 					<button class="btn btn-primary dropdown-toggle"	data-toggle="dropdown">
 						Ordens de Serviço
@@ -59,9 +58,7 @@
 				</div>
 
 				<div class="btn-group btn-group-vertical group-menu" role="group">
-					<button class="btn btn-primary dropdown-toggle"	data-toggle="dropdown">
-						Relatório
-					</button>
+					<button class="btn btn-primary dropdown-toggle"	data-toggle="dropdown">Relatório</button>
 					<ul class="dropdown-menu dropdown-menu-custom div-botao-relatorio">
 						<li>
 							<div class="btn-group-vertical" role="group">
@@ -94,20 +91,28 @@
 				<div class="panel-heading">
 					<div>
 						<label class="label-painel-aparelho">Painel de Aparelhos</label> 
-						<span class="btn btn-default glyphicon glyphicon-plus icone-adicionar-aparelho"></span>
 					</div>
 					<div class="input-group input-group-barra-pesquisa">
 						<input type="text" class="form-control form-control-custom" placeholder="moto G" id="buscaAparelhoInput" name="buscaAparelhoInput">
 						<span class="btn input-group-addon icone-pesquisar glyphicon glyphicon-search" onclick="buscarAparelho()"></span>					
 					</div>
-
+					
+					<div class="icone-adicionar-aparelho">
+						<span class="btn btn-default glyphicon glyphicon-plus"></span>
+					</div>
+					
 					<div class="btn-group filtroAtivo">
-					    <select class="btn-default form-control" id="filtroAtivoOpc" onchange="filtroAparelhosAtivos()">
-							<option value="A">Todos</option>
-							<option value="S">Ativos</option>
-							<option value="N">Inativos</option>
-						</select>
-					</div>			
+						<div class="labelFiltro">
+							<label>Filtro de Aparelho |</label>
+						</div>
+						<div class="botaoFiltro">
+						    <select class="btn-default form-control" id="filtroAtivoOpc" onchange="filtroAparelhosAtivos()">
+								<option value="A">Todos</option>
+								<option value="S">Ativos</option>
+								<option value="N">Inativos</option>
+							</select>
+						</div>
+					</div>		
 				</div>
 				<div class="panel-body">
 					<div id="resultadoAparelhos" class="resultadoAparelhos"></div>

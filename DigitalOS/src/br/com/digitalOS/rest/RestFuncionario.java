@@ -24,18 +24,18 @@ public class RestFuncionario extends UtilRest{
 	}
 
 	@POST
-	@Path("/addPessoaObj")
+	@Path("/addFuncionario")
 	@Consumes("application/*")
 
-	public Response addPessoaObj(String Funcionario) {
+	public Response addFuncionario(String funcionario) {
 		try {		
-			PessoaObj FuncionarioNova = new ObjectMapper().readValue(Funcionario, PessoaObj.class);
+			PessoaObj FuncionarioNovo = new ObjectMapper().readValue(funcionario, PessoaObj.class);
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
-			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);
-			jdbcPessoaObj.inserirFuncionario(FuncionarioNova);
+			JDBCDigitalOSLoginDAO jdbcFuncionario = new JDBCDigitalOSLoginDAO(conexao);
+			jdbcFuncionario.inserirFuncionario(FuncionarioNovo);
 			conec.fecharConexao();
-			return Response.ok(this.buildResponse("Funcionario cadastrada com sucesso!")).build();
+			return Response.ok(this.buildResponse("Funcionario cadastrado com sucesso!")).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
@@ -45,15 +45,15 @@ public class RestFuncionario extends UtilRest{
 	@POST
 	@Path("/buscarFuncionarioPorNome")
 	@Produces({MediaType.APPLICATION_JSON })
-	public Response buscarPessoaObjsPorNome(String nome) {
+	public Response buscarFuncionariosPorNome(String nome) {
 		try {
-			List<PessoaObj> PessoaObjs = new ArrayList<PessoaObj>();
+			List<PessoaObj> Funcionarios = new ArrayList<PessoaObj>();
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
-			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);
-			PessoaObjs = jdbcPessoaObj.buscarFuncionarioPorNome(nome);
+			JDBCDigitalOSLoginDAO jdbcFuncionario = new JDBCDigitalOSLoginDAO(conexao);
+			Funcionarios = jdbcFuncionario.buscarFuncionarioPorNome(nome);
 			conec.fecharConexao();
-			return Response.ok(this.buildResponse(PessoaObjs)).build();
+			return Response.ok(this.buildResponse(Funcionarios)).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
@@ -63,14 +63,14 @@ public class RestFuncionario extends UtilRest{
 	@POST
 	@Path("/buscarFuncionarioPeloId/{id}")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Response buscarPessoaObjPeloId(@PathParam("id") int id) {
+	public Response buscarFuncionarioPeloId(@PathParam("id") int id) {
 		try {
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
-			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);
-			PessoaObj PessoaObj = jdbcPessoaObj.buscarFuncionarioPorId(id);
+			JDBCDigitalOSLoginDAO jdbcFuncionario = new JDBCDigitalOSLoginDAO(conexao);
+			PessoaObj Funcionario = jdbcFuncionario.buscarFuncionarioPorId(id);
 			
-			return Response.ok(this.buildResponse(PessoaObj),MediaType.APPLICATION_JSON).build();
+			return Response.ok(this.buildResponse(Funcionario),MediaType.APPLICATION_JSON).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
@@ -80,14 +80,14 @@ public class RestFuncionario extends UtilRest{
 	@POST
 	@Path("/editarFuncionario")
 	@Consumes("application/*")
-	public Response editarPessoaObj(String Funcionario) {
+	public Response editarFuncionario(String funcionario) {
 		try {
-			System.out.println("TESTE: \n"+Funcionario);
-			PessoaObj PessoaObj = new ObjectMapper().readValue(Funcionario, PessoaObj.class);
+			System.out.println("TESTE: \n"+funcionario);
+			PessoaObj Funcionario = new ObjectMapper().readValue(funcionario, PessoaObj.class);
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
-			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);
-			jdbcPessoaObj.atualizar(PessoaObj);
+			JDBCDigitalOSLoginDAO jdbcFuncionario = new JDBCDigitalOSLoginDAO(conexao);
+			jdbcFuncionario.atualizar(Funcionario);
 			conec.fecharConexao();
 			
 			return Response.ok(this.buildResponse("Funcionario editado com sucesso!")).build();
@@ -108,11 +108,11 @@ public class RestFuncionario extends UtilRest{
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			
-			JDBCDigitalOSLoginDAO jdbcPessoaObj = new JDBCDigitalOSLoginDAO(conexao);
-			List<PessoaObj> PessoaObjs = jdbcPessoaObj.filtroFuncionarioAtivo(Funcionario);
+			JDBCDigitalOSLoginDAO jdbcFuncionario = new JDBCDigitalOSLoginDAO(conexao);
+			List<PessoaObj> Funcionarios = jdbcFuncionario.filtroFuncionarioAtivo(Funcionario);
 			conec.fecharConexao();
 			
-			return Response.ok(this.buildResponse(PessoaObjs), MediaType.APPLICATION_JSON).build();
+			return Response.ok(this.buildResponse(Funcionarios), MediaType.APPLICATION_JSON).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());

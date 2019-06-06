@@ -98,7 +98,7 @@
 			        	
 			        	<div class="form-group col-md-3">
 			        		<label>CPF</label>
-			        		<input class="form-control " type="text" id="cpffuncionario" maxlength="14" placeholder="000.000.000-00">
+			        		<input class="form-control " type="text" id="cpffuncionario" maxlength="18" placeholder="000.000.000-00">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-2">
@@ -109,8 +109,8 @@
 			        	<div class="form-group col-md-2">
 			        		<label>Sexo</label>
 			        		<select class="form-control" id="sexofuncionario">
-			        			<option value="M">Masculino</option>
-			        			<option value="F">Feminino</option>
+			        			<option>Masculino</option>
+			        			<option>Feminino</option>
 			        		</select>
 			        	</div><!-- /. FORM-GROUP -->
 		        	</div><!-- /.ROW -->
@@ -118,7 +118,7 @@
 		        	<div class="row">
 			        	<div class="form-group col-md-6">
 			        		<label>E-mail</label>
-			        		<input class="form-control" type="email" id="emailfuncionario" maxlength="50" placeholder="exemplo@gmail.com">
+			        		<input class="form-control" type="email" id="emailfuncionario" maxlength="60" placeholder="exemplo@gmail.com">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-3">
@@ -135,77 +135,127 @@
 		        	<div class="row">
 			        	<div class="form-group col-md-5">
 			        		<label>Enderço</label>
-			        		<input class="form-control" type="text" id="enderecofuncionario" maxlength="70" placeholder="Endereço">
+			        		<input class="form-control" type="text" id="enderecofuncionario" maxlength="60" placeholder="Endereço">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 						<div class="form-group col-md-2">
 			        		<label>Numero</label>
-			        		<input class="form-control" type="text" id="numerofuncionario" maxlength="10" placeholder="0000">
+			        		<input class="form-control" type="text" id="numerofuncionario" maxlength="12" placeholder="0000">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
-			        	<div class="form-group col-md-5">
-			        		<label>Complemento</label>
-			        		<input class="form-control" type="text" id="complementofuncionario" maxlength="30" placeholder="Proximo a lanhouse">
+			        	<div class="form-group col-md-2">
+			        		<label>Nº Carteira Trab.</label>
+			        		<input class="form-control" type="text" id="numeroct" maxlength="8" placeholder="000000000">
+			        	</div><!-- /. FORM-GROUP -->
+			        	
+			        	<div class="form-group col-md-3">
+			        		<label>Nº PIS/PASEP</label>
+			        		<input class="form-control" type="text" id="numeropispasep" maxlength="14" placeholder="000.0000.000-0">
 			        	</div><!-- /. FORM-GROUP -->
 			      	</div><!-- /.ROW -->
 			      
 			      	<div class="row">
-			        	<div class="form-group col-md-6">
+			        	<div class="form-group col-md-2">
 			        		<label>Estado</label>
-			        		<select class="form-control" id="UF">
-			        			<option>Santa Catarina</option>
-			        			<option>Parana</option>
-			        			<option>Sao Paulo</option>
-			        			<option>Rio de Janeiro</option>
-			        			<option>Rio Grande do Sul</option>
+			        		<select class="form-control" id="estadofuncionario">
+			        			<option value="UF">UF</option>
+			        			<option value="AC">AC</option>
+			        			<option value="AL">AL</option>
+			        			<option value="AP">AP</option>
+			        			<option value="AM">AM</option>
+			        			<option value="BA">BA</option>
+			        			<option value="CE">CE</option>
+			        			<option value="DF">DF</option>
+			        			<option value="ES">ES</option>
+			        			<option value="GO">GO</option>
+			        			<option value="MA">MA</option>
+			        			<option value="MT">MT</option>
+			        			<option value="MS">MS</option>
+			        			<option value="MG">MG</option>
+			        			<option value="PA">PA</option>
+			        			<option value="PB">PB</option>
+			        			<option value="PR">PR</option>
+			        			<option value="PE">PE</option>
+			        			<option value="PI">PI</option>
+			        			<option value="RJ">RJ</option>
+			        			<option value="RN">RN</option>
+			        			<option value="RS">RS</option>
+			        			<option value="RO">RO</option>
+			        			<option value="RR">RR</option>
+			        			<option value="SC">SC</option>
+			        			<option value="SP">SP</option>
+			        			<option value="SE">SE</option>
+			        			<option value="TO">TO</option>
 			        		</select>
 			        	</div><!-- /. FORM-GROUP -->
 			        	
-			        	<div class="form-group col-md-6">
+			        	<div class="form-group col-md-4">
 			        		<label>Cidade</label>
-			        		<select class="form-control" id="cidade">
-			        			<option>Joinville</option>
-			        			<option>Araqueri</option>
-			        			<option>Itajai</option>
-			        			<option>Barra Velha</option>
-			        			<option>Barra do Sul</option>
+			        		<select class="form-control" id="cidadefuncionario">
+			        			<option value="cidades">cidades</option>
+			        			<option value="Joinville">Joinville</option>
+			        			<option value="Araquari">Araquari</option>
+			        			<option value="Belo Horizonte">Belo Horizonte</option>
+			        			<option value="Vila Bela da Santíssima Trindade">Vila Bela da Santíssima Trindade</option>
 			        		</select>
 			        	</div><!-- /. FORM-GROUP -->
+			        	<div class="form-group col-md-2">
+			        		<label>Status</label>
+			        		<select class="form-control" id="statusfuncionario" disabled>
+			        			<option value="S">Ativo</option>
+			        		</select>
+			        	</div><!-- /. FORM-GROUP -->
+			        	<div class="form-group col-md-2">
+			        		<label>Salário</label>
+			        		<div class="div-salario">
+			        		<span class="btn input-group-addon icone-salario">R$</span>
+			        		<input class="form-control" type="text" id="salario" maxlength="12" placeholder="1.820,00">
+			        		</div>
+			        	</div><!-- /. FORM-GROUP -->
+			        	<div class="col-md-offset-1"></div>
 		        	</div><!-- /.ROW -->
 		        </div><!-- /.form -->
 		      </div><!-- /.modal-body -->
 		      
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">Cancelar</button>
-		        <button type="submit" class="btn btn-primary botao-salvar" onclick="inserirFuncionario()">Salvar</button>
+		        <button type="button" class="btn btn-primary botao-salvar" onclick="inserirFuncionario()">Salvar</button>
 		      </div>
 		      
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->		
-		
+
 		<div class="div-painel-funcionarios col-xs-5 col-sm-3 col-md-9">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<div>
-						<label class="label-painel-clientes">Painel de Funcionários</label> 
-						<span class="btn btn-default glyphicon glyphicon-plus icone-adicionar-funcionario"></span>
+						<label class="label-painel-funcionario">Painel de Funcionario</label> 
 					</div>
+					
 					<div class="input-group input-group-barra-pesquisa">
 						<input type="text" class="form-control form-control-custom" placeholder="João Miguel" id="buscaFuncionario">
 						<span class="btn input-group-addon icone-pesquisar glyphicon glyphicon-search" onclick="buscarFuncionario()"></span>					
 					</div>
+					
 					<div class="btn-group filtroAtivo">
-					    <select class="btn-default form-control" id="filtroFuncionario" onchange="filtroAtivosFuncionario()">
-							<option value="A">Todos</option>
-							<option value="S">Ativos</option>
-							<option value="N">Inativos</option>
-						</select>
+						<div class="labelFiltro">
+							<label>Filtro de Funcionario |</label>
+						</div>
+						<div class="botaoFiltro">
+						    <select class="btn-default form-control" id="filtroAtivoOpc" onchange="filtroAparelhosAtivos()">
+								<option value="A">Todos</option>
+								<option value="S">Ativos</option>
+								<option value="N">Inativos</option>
+							</select>
+						</div>
 					</div>
+
+					<div class="icone-adicionar-funcionario">
+						<span class="btn btn-default glyphicon glyphicon-plus"></span>
+					</div>	
 				</div>
-				<div class="panel-body">
-					<div id="resultadoFuncionario" class="resultadoFuncionario"></div>
-				</div>
+				<div class="panel-body"></div>
 			</div>
 		</div>
 	</div><!-- geral-menu -->
@@ -218,10 +268,6 @@
 		
 		$(".icone-adicionar-funcionario").click(function(){
 			$('#modalfuncionario').modal('show');
-		});
-		
-		$("#salvarPessoaEdit").click(function() {
-			$('#msgEditFuncionario').modal('hide');
 		});
 	</script>
 </body>

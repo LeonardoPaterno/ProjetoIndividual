@@ -187,7 +187,9 @@ SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `servicos` (
   `idservico` INT NOT NULL AUTO_INCREMENT,
   `nometiposervico` VARCHAR(30) NOT NULL,
-  `nomeservico` VARCHAR(150) NOT NULL,
+  `nomeservico` VARCHAR(30) NOT NULL,
+  `descricaoservico` VARCHAR(150),
+  `ativo` varchar(1),
   PRIMARY KEY (`idservico`))
 ENGINE = InnoDB;
 

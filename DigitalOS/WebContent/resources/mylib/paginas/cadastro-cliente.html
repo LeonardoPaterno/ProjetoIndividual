@@ -222,7 +222,7 @@
 		      
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">Cancelar</button>
-		        <button type="submit" class="btn btn-primary botao-salvar" onclick="inserirFuncionario()">Salvar</button>
+		        <button type="submit" class="btn btn-primary botao-salvar" onclick="inserirPessoa()">Salvar</button>
 		      </div>
 		      
 		    </div><!-- /.modal-content -->
@@ -233,20 +233,30 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<div>
-						<label class="label-painel-clientes">Painel de Clientes</label> 
-						<span class="btn btn-default glyphicon glyphicon-plus icone-adicionar-cliente"></span>
+						<label class="label-painel-clientes">Painel de Clientes</label>
 					</div>
+					
 					<div class="input-group input-group-barra-pesquisa">
 						<input type="text" class="form-control form-control-custom" placeholder="João Miguel" id="buscaPessoaInput" name="buscaPessoaInput">
 						<span class="btn input-group-addon icone-pesquisar glyphicon glyphicon-search" onclick="buscarPessoa()"></span>					
 					</div>
+					
 					<div class="btn-group filtroAtivo">
-					    <select class="btn-default form-control" id="filtroPessoa" onchange="filtroAtivosPessoa()">
-							<option value="A">Todos</option>
-							<option value="S">Ativos</option>
-							<option value="N">Inativos</option>
-						</select>
+						<div class="labelFiltro">
+							<label>Filtro de Cliente |</label>
+						</div>
+						<div class="botaoFiltro">
+						    <select class="btn-default form-control" id="filtroPessoa" onchange="filtroAtivosPessoa()">
+								<option value="A">Todos</option>
+								<option value="S">Ativos</option>
+								<option value="N">Inativos</option>
+							</select>
+						</div>
 					</div>
+
+					<div class="icone-adicionar-cliente">
+						<span class="btn btn-default glyphicon glyphicon-plus"></span>
+					</div>	
 				</div>
 				<div class="panel-body">
 					<div id="resultadoPessoa" class="resultadoPessoa"></div>
@@ -254,7 +264,7 @@
 			</div>
 		</div>
 		
-<div class="modal fade" id="msgEditPessoa">
+<div class="modal fade" id="msgEditPessoa" tabindex="1" role="dialog">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content col-md-12">
 					<div class="modal-header col-md-12">
@@ -413,7 +423,7 @@
 			$('#modalcliente').modal('show');
 		});
 		
-		$("#salvarPessoaEdit").click(function() {
+		$(".botao-salvar").click(function() {
 			$('#msgEditPessoa').modal('hide');
 		});
 	</script>
