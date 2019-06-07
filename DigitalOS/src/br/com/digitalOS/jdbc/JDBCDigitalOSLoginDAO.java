@@ -21,7 +21,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	public JDBCDigitalOSLoginDAO(Connection conexao) {
 		this.conexao = conexao;
 	}
-
+	/*INICIO LOGIN*/
 	public boolean consultarLogin(LoginObj login) {
 		String comando = "select idlogin, email, senha from login" + " where email like '%" + login.getEmail() + "' and senha like '%" + login.getSenha() + "%'";
 		try {
@@ -38,7 +38,9 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return true;
 	}
-
+	/*FIM LOGIN*/
+	
+	/*INICIO APARELHO*/
 	@Override
 	public boolean cadastrarAparelho(AparelhoObj novoAparelho) {
 		String comando = "INSERT INTO ordemservico.registroaparelho "
@@ -195,7 +197,9 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return ListaAparelho;
 	}
-
+	/*FIM APARELHO*/
+	
+	/*INICIO PESSOA*/
 	@Override
 	public boolean inserirPessoa(PessoaObj pessoa) {
 		String comando = "INSERT INTO pessoa " + 
@@ -426,7 +430,9 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return ListaAtivos;
 	}
-
+	/*FIM PESSOA*/
+	
+	/*INICIO FUNCIONARIO*/
 	public boolean inserirFuncionario(PessoaObj funcionario) {
 		String comando = "INSERT INTO pessoa " + 
 				"(nome, cpf, rg, datanascimento, profissao, endereco, numeroendereco, telefone, celular, email, cidade, estado, "
@@ -473,11 +479,10 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	/*FIM FUNCIONARIO*/
 	
-	/*SERVICO*/
+	/*INICIO SERVICO*/
 	public boolean inserirservico(ServicoObj servico) {
-		System.out.println("Teste: "+servico.getTiposervico()+""+servico.getNomeservico()+""+servico.getDescricaoservico());
 		String comando = "INSERT INTO servicos (nometiposervico, nomeservico, descricaoservico, ativo) VALUES(?,?,?,?);";
 				PreparedStatement p;
 				try {
@@ -524,19 +529,86 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 
 	public ServicoObj buscarservicoPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		String comando = "SELECT idservico, nometiposervico, nomeservico, descricaoservico, ativo FROM servicos WHERE idservico = "+id+";";
+		ServicoObj servico = new ServicoObj();
+		try{
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while(rs.next()){
+				int idservico = rs.getInt("idservico");
+				String tiposervico = rs.getString("nometiposervico");
+				String nomeservico = rs.getString("nomeservico");
+				String descricaoservico = rs.getString("descricaoservico");
+				String ativo = rs.getString("ativo");
+				
+				servico.setIdservico(idservico);
+				servico.setTiposervico(tiposervico);
+				servico.setNomeservico(nomeservico);;
+				servico.setDescricaoservico(descricaoservico);
+				servico.setAtivo(ativo);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return servico;
+		}
+		return servico;
 	}
 
 
-	public void atualizarServico(ServicoObj servicoObj) {
-		// TODO Auto-generated method stub
-		
+	public boolean atualizarServico(ServicoObj servico) {
+		String comando = "UPDATE servicos SET nometiposervico=?, nomeservico=?, descricaoservico=?, ativo=? WHERE idservico = "+servico.getIdservico()+";";
+				PreparedStatement p;
+				try{p = this.conexao.prepareStatement(comando);
+					p.setString(1, servico.getTiposervico());
+					p.setString(2, servico.getNomeservico());
+					p.setString(3, servico.getDescricaoservico());
+					p.setString(4, servico.getAtivo());
+					p.executeUpdate();
+				}catch(SQLException e){
+					e.printStackTrace();
+					return false;
+				}
+				return true;
 	}
 
 	public List<ServicoObj> filtroservicoAtivo(ServicoObj servico) {
-		// TODO Auto-generated method stub
-		return null;
+		List<ServicoObj> ListaServicosAtivos = new ArrayList<ServicoObj>();
+		String comando = "";
+		String filtro = servico.getAtivo();
+		if(filtro.equalsIgnoreCase("N")) {
+			comando += "SELECT idservico, nometiposervico, nomeservico, descricaoservico, ativo FROM servicos WHERE ativo = 'N';";
+		}
+		else if(filtro.equalsIgnoreCase("S")) {
+			comando += "SELECT idservico, nometiposervico, nomeservico, descricaoservico, ativo FROM servicos WHERE ativo = 'S';";
+		}
+		else{
+			comando += "SELECT idservico, nometiposervico, nomeservico, descricaoservico, ativo FROM servicos;";
+		}
+		int vezes = 0;
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while (rs.next()) {
+				vezes = vezes + 1;
+				ServicoObj servicos = new ServicoObj();
+				int idservico = rs.getInt("idservico");
+				String tiposervico = rs.getString("nometiposervico");
+				String nomeservico = rs.getString("nomeservico");
+				String descricaoservico = rs.getString("descricaoservico");
+				String ativo = rs.getString("ativo");
+				
+				servicos.setIdservico(idservico);
+				servicos.setTiposervico(tiposervico);
+				servicos.setNomeservico(nomeservico);
+				servicos.setDescricaoservico(descricaoservico);
+				servicos.setAtivo(ativo);
+
+				ListaServicosAtivos.add(servicos);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ListaServicosAtivos;
 	}
 }
 

@@ -1,3 +1,4 @@
+/*INICIO LOGIN*/
 function loginOS() {
 	var user = $("input[name=usuario]").val();
 	var password = $("input[name=senha]").val();
@@ -21,7 +22,9 @@ function loginOS() {
 		alert("E-mail ou Senha Inválido!");
 	}
 }
+/*FIM LOGIN*/
 
+/*INICIO CRUD APARELHO*/
 function CadastroAparelho() {
 	var nome = $("#nomeaparelho").val();
 	var categoria = $("#categoriaaparelho").val();
@@ -158,7 +161,9 @@ function filtroAparelhosAtivos(){
 		}
 	});
 }
+/*FIM CRUD APARELHO*/
 
+/*INICIO CRUD PESSOA*/
 function inserirPessoa(){
 		var nome = 			 $("#nomecliente").val();
 		var dataNascimento = $("#datanascimento").val();
@@ -315,7 +320,9 @@ function filtroAtivosPessoa(){
 		}
 	});
 }
+/*FIM CRUD PESSOA*/
 
+/*INICIO CRUD FUNCIONARIO*/
 function inserirFuncionario(){
 	alert("funcionario");
 	var nome = 			 	 $("#nomefuncionario").val();
@@ -351,39 +358,45 @@ function inserirFuncionario(){
 		}
 	});
 }
+/*FIM CRUD FUNCIONARIO*/
 
-function inserirPessoa(){
-	alert("Inserir Servico");
+/*INICIO CRUD SERVICO*/
+function inserirServico(){
 	var tiposervico = 		$("#tiposervico").val();
 	var nomeservico = 	 	$("#nomeservico").val();
 	var descricaoservico = 	$("#descricaoservico").val();
 	var ativo = 			$("#statusservico").val();
-
-	var pessoaNova = {'tiposervico':tiposervico, 'nomeservico':nomeservico,'descricaoservico':descricaoservico, 'ativo':ativo};	
-	var pessoa = JSON.stringify(pessoaNova);
-	$.ajax({
-		type:'POST',
-		url: '/DigitalOS/rest/RestServico/addServico',
-		data: pessoa,
-		success: function(resposta){
-			alert(resposta);
-			buscarPessoa();
-		},
-		error: function(){
-			alert("Erro ao cadastrar nova pessoa.");
-		}
-	});
+	
+	if(tiposervico == "" || nomeservico == "" || descricaoservico == ""){
+		alert("Preencha todos os campos do formulário!");
+		return false;
+	}else{
+		var pessoaNova = {'tiposervico':tiposervico, 'nomeservico':nomeservico,'descricaoservico':descricaoservico, 'ativo':ativo};	
+		var pessoa = JSON.stringify(pessoaNova);
+		$.ajax({
+			type:'POST',
+			url: '/DigitalOS/rest/RestServico/addServico',
+			data: pessoa,
+			success: function(resposta){
+				alert(resposta);
+				buscarServico();
+					$('#modalservico').modal('hide');
+			},
+			error: function(){
+				alert("Erro ao cadastrar nova pessoa.");
+				buscarServico();
+			}
+		});
+	}
 }
 
 function buscarServico(){
 	var valorBusca = $('#buscarservico').val();
-	alert(valorBusca);
 	$.ajax({
 		type: 'POST',
 		url: '/DigitalOS/rest/RestServico/buscarServicoPorNome',
 		data: valorBusca,
 		success: function(listaServicoAchados){
-			console.log(listaServicoAchados);
 			tabelaServico(listaServicoAchados);
 		},
 		error: function(listaServicoAchados){
@@ -393,7 +406,6 @@ function buscarServico(){
 }
 
 function tabelaServico(listaServicoAchados){
-	console.log(listaServicoAchados);
 	var html = "<div class='teble-reponsive'>" +
 			   "<table class='table table-striped table-condensed table-bordered'>";
 		html += "<tr>" +
@@ -415,3 +427,63 @@ function tabelaServico(listaServicoAchados){
 			"</div>"
 	$("#resultadoServico").html(html);
 }
+
+function exibirEdicaoServico(idservico){
+	alert("Exibe Edicao");
+	$.ajax({
+		type : 'POST',
+		url : '/DigitalOS/rest/RestServico/buscarServicoPeloId/'+idservico,
+		success: function(servico){
+			alert(servico);
+			$("#EditIdServico").val(idservico);
+			$("#EditNomeTipoServico").val(servico.tiposervico);
+			$("#EditNomeServico").val(servico.nomeservico);
+			$("#EditDescricaoServico").val(servico.descricaoservico);
+			$("#EditStatusServico").val(servico.ativo);
+			$("#msgEditServico").modal(servico);
+		},
+		error: function(servico){
+			alert("Erro ao editar Servico!");
+		}
+	});
+}
+
+function editarServico(){
+	var idservico = 		$("#EditIdServico").val();
+	var tiposervico = 		$("#EditNomeTipoServico").val();
+	var nomeservico = 		$("#EditNomeServico").val();
+	var descricaoservico = 	$("#EditDescricaoServico").val();
+	var ativo = 			$("#EditStatusServico").val();
+	
+	var servicoEdit = {'idservico':idservico, 'tiposervico':tiposervico, 'nomeservico':nomeservico,'descricaoservico':descricaoservico, 'ativo':ativo};
+	var servico = JSON.stringify(servicoEdit);
+	
+	$.ajax({
+		type : 'POST',
+		url : '/DigitalOS/rest/RestServico/editarServico',
+		data:servico,
+		success: function(resposta){
+			alert(resposta);
+			$('#msgEditServico').modal('hide');
+			buscarServico();
+		},
+		error:function(){
+			alert("Erro ao Atualizar Servico");
+		}
+	});
+}
+
+function filtroServico(){
+	$.ajax({
+		type:'POST',
+		url: '/DigitalOS/rest/RestServico/filtroServicoAtivo',
+		data: $("#filtroServicoAtivo").val(),
+		success: function(listaServicoAchados){
+			tabelaServico(listaServicoAchados);
+		},
+		error: function(){
+			alert("Erro ao Filtrar Servicos");
+		}
+	});
+}
+/*FIM CRUD SERVICO*/

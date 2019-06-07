@@ -116,7 +116,7 @@
 		      
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">Cancelar</button>
-		        <button type="button" class="btn btn-primary botao-salvar" onclick="inserirPessoa()">Salvar</button>
+		        <button type="button" class="btn btn-primary botao-salvar" onclick="inserirServico()">Salvar</button>
 		      </div>
 		      
 		    </div><!-- /.modal-content -->
@@ -158,6 +158,61 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal fade" id="msgEditServico" tabindex="1" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content col-md-12">
+					<div class="modal-header col-md-12">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h5 class="modal-title">Edição de Servico</h5>
+					</div>
+					
+						<div class="modal-body col-md-12">
+							<div class="form">
+								<div class="row col-md-12">						
+									<div style="display:none">
+										<label>Id</label>
+										<input class="form-control" type="text" id="EditIdServico">								
+									</div>
+									<div class="col-md-4">
+										<label>Tipo Servico</label>
+										<input class="form-control" type="text" maxlength="20" id="EditNomeTipoServico">								
+									</div>								
+									<div class="col-md-4">
+										<label>Nome Servico</label>
+										<input class="form-control" maxlength="30" id="EditNomeServico">
+									</div>
+									<div class="col-md-3">
+										<label>Ativo</label>
+										<select class="form-control" id="EditStatusServico">
+												<option value="S">Ativo</option>
+												<option value="N">Inativo</option>
+										</select>
+									</div>
+									<div class="col-md-offset-1"></div>
+								</div>
+								<div class="row col-md-12">
+									<div class="col-md-12">
+										<label>Descricao</label>
+										<textarea class="form-control" id="EditDescricaoServico"></textarea>						
+									</div>
+								</div>
+							</div>
+						</div>
+					
+					<div class="modal-footer col-md-12">
+						<button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">
+							Cancelar
+						</button>
+	
+						<button type="button" class="btn btn-primary botao-salvar" id="salvarServicoEdit" onclick="editarServico()">
+							Salvar
+						</button>
+					</div>
+				</div>
+			</div>
+		</div><!-- /DIV msgEditServico -->
 	</div><!-- geral-menu -->
 
 	<script>
