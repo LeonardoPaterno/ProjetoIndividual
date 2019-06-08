@@ -1,6 +1,7 @@
 package br.com.digitalOS.objetos;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class FuncionarioObj implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -9,18 +10,25 @@ public class FuncionarioObj implements Serializable{
 	private String nome;
 	private String cpf;
 	private String rg;
-	private java.sql.Date dataNascimento;
+	private String sexo;
+	private java.sql.Date datanascimento;
 	private String cargo;
+	private String setor;
+	private String numeropis;
+	private String numeroct;
+	private BigDecimal salario;
+	private java.sql.Date dataadmissao;
+	private String email;
 	private String endereco;
 	private int numero;
 	private String telefone;
 	private String celular;
-	private String email;
-	private String cidade;
 	private String estado;
+	private String cidade;
 	private String ativo;
+	private java.sql.Date datademissao;
+	private int idfuncionario;
 	
-	/*ID*/
 	public int getId() {
 		return id;
 	}
@@ -28,7 +36,6 @@ public class FuncionarioObj implements Serializable{
 		this.id = id;
 	}
 	
-	/*NOME*/
 	public String getNome() {
 		return nome;
 	}
@@ -36,15 +43,6 @@ public class FuncionarioObj implements Serializable{
 		this.nome = nome;
 	}
 	
-	/*CPF*/
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-	
-	/*RG*/
 	public String getRg() {
 		return rg;
 	}
@@ -52,7 +50,69 @@ public class FuncionarioObj implements Serializable{
 		this.rg = rg;
 	}
 	
-	/*EMAIL*/
+	public String getCpf() {
+		return cpf;
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+	
+	public String getSexo() {
+		return sexo;
+	}
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+	
+	public java.sql.Date getDatanascimento() {
+		return datanascimento;
+	}
+	public void setDatanascimento(java.sql.Date datanascimento) {
+		this.datanascimento = datanascimento;
+	}
+	
+	public String getCargo() {
+		return cargo;
+	}
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
+	
+	public String getSetor() {
+		return setor;
+	}
+	public void setSetor(String setor) {
+		this.setor = setor;
+	}
+	
+	public String getNumeropis() {
+		return numeropis;
+	}
+	public void setNumeropis(String numeropis) {
+		this.numeropis = numeropis;
+	}
+	
+	public String getNumeroct() {
+		return numeroct;
+	}
+	public void setNumeroct(String numeroct) {
+		this.numeroct = numeroct;
+	}
+	
+	public BigDecimal getSalario() {
+		return salario;
+	}
+	public void setSalario(BigDecimal salario) {
+		this.salario = salario;
+	}
+	
+	public java.sql.Date getDataadmissao() {
+		return dataadmissao;
+	}
+	public void setDataadmissao(java.sql.Date dataadmissao) {
+		this.dataadmissao = dataadmissao;
+	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -60,23 +120,6 @@ public class FuncionarioObj implements Serializable{
 		this.email = email;
 	}
 	
-	/*TELEFONE*/
-	public String getTelefone() {
-		return telefone;
-	}
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-	
-	/*CELULAR*/
-	public String getCelular() {
-		return celular;
-	}
-	public void setCelular(String celular) {
-		this.celular = celular;
-	}
-	
-	/*ENDEREÇO*/
 	public String getEndereco() {
 		return endereco;
 	}
@@ -84,7 +127,6 @@ public class FuncionarioObj implements Serializable{
 		this.endereco = endereco;
 	}
 	
-	/*NUMERO ENDEREÇO*/
 	public int getNumero() {
 		return numero;
 	}
@@ -92,31 +134,20 @@ public class FuncionarioObj implements Serializable{
 		this.numero = numero;
 	}
 	
-	/*CIDADE*/
-	public String getCidade() {
-		return cidade;
+	public String getTelefone() {
+		return telefone;
 	}
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	} 
-	
-	/*DATA NASCIMENTO*/
-	public java.sql.Date getDataNascimento() {
-		return dataNascimento;
-	}
-	public void setDataNascimento(java.sql.Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 	
-	/*ATIVO*/
-	public String getAtivo() {
-		return ativo;
+	public String getCelular() {
+		return celular;
 	}
-	public void setAtivo(String ativo) {
-		this.ativo = ativo;
+	public void setCelular(String celular) {
+		this.celular = celular;
 	}
 	
-	/*ESTADO*/
 	public String getEstado() {
 		return estado;
 	}
@@ -124,11 +155,32 @@ public class FuncionarioObj implements Serializable{
 		this.estado = estado;
 	}
 	
-	/*CARGO*/
-	public String getCargo() {
-		return cargo;
+	public String getCidade() {
+		return cidade;
 	}
-	public void setCargo(String cargo) {
-		this.cargo = cargo;
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
+	
+	public String getAtivo() {
+		return ativo;
+	}
+	public void setAtivo(String ativo) {
+		this.ativo = ativo;
+	}
+	
+	public java.sql.Date getDatademissao() {
+		return datademissao;
+	}
+	public void setDatademissao(java.sql.Date datademissao) {
+		this.datademissao = datademissao;
+	}
+	
+	public int getIdfuncionario() {
+		return idfuncionario;
+	}
+	public void setIdfuncionario(int idfuncionario) {
+		this.idfuncionario = idfuncionario;
+	}
+	
 }

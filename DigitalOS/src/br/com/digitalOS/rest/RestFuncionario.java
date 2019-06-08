@@ -16,6 +16,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import br.com.digitalOS.bd.conexao.Conexao;
 import br.com.digitalOS.jdbc.JDBCDigitalOSLoginDAO;
+import br.com.digitalOS.objetos.FuncionarioObj;
 import br.com.digitalOS.objetos.PessoaObj;
 
 @Path("RestFuncionario")
@@ -28,8 +29,9 @@ public class RestFuncionario extends UtilRest{
 	@Consumes("application/*")
 
 	public Response addFuncionario(String funcionario) {
+		System.out.println(funcionario);
 		try {		
-			PessoaObj FuncionarioNovo = new ObjectMapper().readValue(funcionario, PessoaObj.class);
+			FuncionarioObj FuncionarioNovo = new ObjectMapper().readValue(funcionario, FuncionarioObj.class);
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCDigitalOSLoginDAO jdbcFuncionario = new JDBCDigitalOSLoginDAO(conexao);

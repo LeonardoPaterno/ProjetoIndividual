@@ -328,30 +328,36 @@ function inserirFuncionario(){
 	var nome = 			 	 $("#nomefuncionario").val();
 	var cpf = 			 	 $("#cpffuncionario").val();
 	var rg = 			 	 $("#rgfuncionario").val();
+	var sexo = 	 		 	 $("#sexofuncionario").val();
+	var datanascimento = 	 $("#datanascimentofuncionario").val();
+	var cargo =  	 	 	 $("#cargofuncionario").val();
+	var setor =  	 	 	 $("#setorfuncionario").val();
+	var numeropis =		 	 $("#numeropispasep").val();
+	var numeroct = 		 	 $("#numeroct").val();
+	var salario = 			 $("#salariofuncionario").val();
+	var dataadmissao = 	 	 $("#dataadmissaofuncionario").val();
 	var email = 		 	 $("#emailfuncionario").val();
-	var telefone = 		 	 $("#telefonefuncionario").val();
-	var celular = 		 	 $("#celularfuncionario").val();
 	var endereco = 		 	 $("#enderecofuncionario").val();
 	var numero = 		 	 $("#numerofuncionario").val();
-	var sexo = 	 		 	 $("#sexofuncionario").val();
-	var numeroct = 		 	 $("#estadocliente").val();
+	var telefone = 		 	 $("#telefonefuncionario").val();
+	var celular = 		 	 $("#celularfuncionario").val();
 	var estado = 		 	 $("#estadofuncionario").val();
 	var cidade = 		 	 $("#cidadefuncionario").val();
-	var cargo =  	 	 	 $("#cargofuncionario").val();
 	var ativo = 		 	 $("#statusfuncionario").val();
 
-	var funcNovo = {'nome':nome, 'cpf':cpf,'rg':rg,'endereco':endereco,'numero':numero,'sexo':sexo,'numeroct':numeroct,
-					'telefone':telefone,'celular':celular,'email':email,'cidade':cidade,'estado':estado,'cargo':cargo,
-					'ativo':ativo};	
+	var funcNovo = {'nome':nome, 'cpf':cpf, 'rg':rg, 'sexo':sexo, 'datanascimento':datanascimento, 'cargo':cargo, 'setor':setor, 'numeropis':numeropis,
+					'numeroct':numeroct, 'salario':salario, 'dataadmissao':dataadmissao, 'email':email, 'endereco':endereco, 'numero':numero, 
+					'telefone':telefone, 'celular':celular, 'estado':estado, 'cidade':cidade, 'ativo':ativo};	
 	alert(funcNovo);
 	var funcionario = JSON.stringify(funcNovo);
 	$.ajax({
 		type:'POST',
-		url: '/DigitalOS/rest/RestPessoa/addFuncionario',
+		url: '/DigitalOS/rest/RestFuncionario/addFuncionario',
 		data: funcionario,
 		success: function(resposta){
 			alert(resposta);
 			buscarPessoa();
+			$('#modalfuncionario').modal('close');
 		},
 		error: function(){
 			alert("Erro ao cadastrar nova pessoa.");
