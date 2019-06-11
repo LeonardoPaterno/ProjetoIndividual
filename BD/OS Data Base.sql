@@ -58,12 +58,12 @@ DROP TABLE IF EXISTS `endereco` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `endereco` (
   `idendereco` INT NOT NULL AUTO_INCREMENT COMMENT 'Atributo chave primária responsável por identificar os atributos da tabela.',
-  `rua` VARCHAR(60) NOT NULL COMMENT 'Atributo responsável  por receber o nome da rua.',
-  `bairro` VARCHAR(45) NOT NULL COMMENT 'Atributo responsável por receber o nome do Bairro.',
-  `cidade` VARCHAR(50) NOT NULL COMMENT 'Atrituo responsável por receber o nome da Cidade',
-  `numero` VARCHAR(4) NOT NULL COMMENT 'Atrituo responsável por receber o numero do endereço.',
-  `cep` VARCHAR(8) NOT NULL COMMENT 'Atrituo responsável por receber o número do CEP.',
-  `estado` VARCHAR(70) NOT NULL,
+  `rua` VARCHAR(60) COMMENT 'Atributo responsável  por receber o nome da rua.',
+  `bairro` VARCHAR(45) COMMENT 'Atributo responsável por receber o nome do Bairro.',
+  `cidade` VARCHAR(50)  COMMENT 'Atrituo responsável por receber o nome da Cidade',
+  `numero` VARCHAR(4) COMMENT 'Atrituo responsável por receber o numero do endereço.',
+  `cep` VARCHAR(8) COMMENT 'Atrituo responsável por receber o número do CEP.',
+  `estado` VARCHAR(70),
   PRIMARY KEY (`idendereco`))
 ENGINE = InnoDB;
 
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `funcionario` (
   `PIS` VARCHAR(11) NOT NULL,
   `cargo` VARCHAR(30) NULL,
   `setor` VARCHAR(30) NULL,
-  `salario` DOUBLE NULL,
+  `salario` varchar(30) NULL,
   `dataadmissao` DATE NULL,
   `datademissao` DATE NULL,
   PRIMARY KEY (`idfuncionario`))
@@ -235,18 +235,19 @@ DROP TABLE IF EXISTS `pessoa` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `pessoa` (
   `idpessoa` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(50) NOT NULL,
-  `cpf` VARCHAR(11) NOT NULL,
-  `datanascimento` VARCHAR(8) NOT NULL,
-  `rg` VARCHAR(7) NULL,
-  `endereco_idendereco` INT NOT NULL,
-  `funcionario_idfuncionario` INT NOT NULL,
-  `sexo` VARCHAR(1) NULL,
-  `telefone` VARCHAR(14) NULL,
-  `celular` VARCHAR(16) NULL,
-  `email` VARCHAR(50) NULL,
-  `profissao` VARCHAR(45) NULL,
-  `tipomorada` VARCHAR(4) NULL,
+  `nome` VARCHAR(80) NOT NULL,
+  `cpf` VARCHAR(14) NOT NULL,
+  `rg` VARCHAR(7),
+  `datanascimento` DATE NOT NULL,
+  `profissao` VARCHAR(75),
+  `telefone` varchar(13) not null,
+  `celular` varchar(14),
+  `email`  varchar(76),
+  `tipomorada` varchar(4),
+  `tipopessoa` VARCHAR(2),
+  `sexo` varchar(1),
+  `ativo` varchar(1) not null,
+  `funcionario_idfuncionario` INT,
   PRIMARY KEY (`idpessoa`))
 ENGINE = InnoDB;
 

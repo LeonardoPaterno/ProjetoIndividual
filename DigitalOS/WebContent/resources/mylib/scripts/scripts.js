@@ -330,8 +330,8 @@ function inserirFuncionario(){
 	var rg = 			 	 $("#rgfuncionario").val();
 	var sexo = 	 		 	 $("#sexofuncionario").val();
 	var datanascimento = 	 $("#datanascimentofuncionario").val();
-	var cargo =  	 	 	 $("#cargofuncionario").val();
-	var setor =  	 	 	 $("#setorfuncionario").val();
+	var cargo =  	 	 	 $("#cargo").val();
+	var setor =  	 	 	 $("#setor").val();
 	var numeropis =		 	 $("#numeropispasep").val();
 	var numeroct = 		 	 $("#numeroct").val();
 	var salario = 			 $("#salariofuncionario").val();
@@ -348,8 +348,8 @@ function inserirFuncionario(){
 	var funcNovo = {'nome':nome, 'cpf':cpf, 'rg':rg, 'sexo':sexo, 'datanascimento':datanascimento, 'cargo':cargo, 'setor':setor, 'numeropis':numeropis,
 					'numeroct':numeroct, 'salario':salario, 'dataadmissao':dataadmissao, 'email':email, 'endereco':endereco, 'numero':numero, 
 					'telefone':telefone, 'celular':celular, 'estado':estado, 'cidade':cidade, 'ativo':ativo};	
-	alert(funcNovo);
 	var funcionario = JSON.stringify(funcNovo);
+	alert(funcionario);
 	$.ajax({
 		type:'POST',
 		url: '/DigitalOS/rest/RestFuncionario/addFuncionario',

@@ -1,7 +1,6 @@
 package br.com.digitalOS.objetos;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 public class FuncionarioObj implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -16,7 +15,7 @@ public class FuncionarioObj implements Serializable{
 	private String setor;
 	private String numeropis;
 	private String numeroct;
-	private BigDecimal salario;
+	private String salario;
 	private java.sql.Date dataadmissao;
 	private String email;
 	private String endereco;
@@ -99,10 +98,10 @@ public class FuncionarioObj implements Serializable{
 		this.numeroct = numeroct;
 	}
 	
-	public BigDecimal getSalario() {
+	public String getSalario() {
 		return salario;
 	}
-	public void setSalario(BigDecimal salario) {
+	public void setSalario(String salario) {
 		this.salario = salario;
 	}
 	
