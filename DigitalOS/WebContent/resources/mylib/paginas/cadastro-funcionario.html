@@ -268,7 +268,7 @@
 							<label>Filtro de Funcionario |</label>
 						</div>
 						<div class="botaoFiltro">
-						    <select class="btn-default form-control" id="filtroAtivoOpc" onchange="filtroAparelhosAtivos()">
+						    <select class="btn-default form-control" id="filtroAtivoOpc" onchange="filtroFuncionariosAtivos()">
 								<option value="A">Todos</option>
 								<option value="S">Ativos</option>
 								<option value="N">Inativos</option>
@@ -280,7 +280,9 @@
 						<span class="btn btn-default glyphicon glyphicon-plus"></span>
 					</div>	
 				</div>
-				<div class="panel-body"></div>
+				<div class="panel-body">
+					<div id="resultadoFuncionario" class="resultadoFuncionario"></div>
+				</div>
 			</div>
 		</div>
 	</div><!-- geral-menu -->

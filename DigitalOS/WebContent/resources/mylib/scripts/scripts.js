@@ -324,6 +324,7 @@ function filtroAtivosPessoa(){
 
 /*INICIO CRUD FUNCIONARIO*/
 function inserirFuncionario(){
+
 	alert("funcionario");
 	var nome = 			 	 $("#nomefuncionario").val();
 	var cpf = 			 	 $("#cpffuncionario").val();
@@ -349,20 +350,65 @@ function inserirFuncionario(){
 					'numeroct':numeroct, 'salario':salario, 'dataadmissao':dataadmissao, 'email':email, 'endereco':endereco, 'numero':numero, 
 					'telefone':telefone, 'celular':celular, 'estado':estado, 'cidade':cidade, 'ativo':ativo};	
 	var funcionario = JSON.stringify(funcNovo);
-	alert(funcionario);
+	console.log(funcionario);
 	$.ajax({
 		type:'POST',
 		url: '/DigitalOS/rest/RestFuncionario/addFuncionario',
 		data: funcionario,
 		success: function(resposta){
 			alert(resposta);
-			buscarPessoa();
-			$('#modalfuncionario').modal('close');
+			buscarFuncionario();
+			$('#modalfuncionario').modal('hide');
 		},
 		error: function(){
 			alert("Erro ao cadastrar nova pessoa.");
 		}
 	});
+}
+
+function buscarFuncionario(){
+	var valorBusca = $('#buscaFuncionario').val();
+	$.ajax({
+		type: 'POST',
+		url: '/DigitalOS/rest/RestFuncionario/buscarFuncionarioPorNome',
+		data: valorBusca,
+		success: function(listaFuncionariosAchadas){
+			console.log(listaFuncionariosAchadas);
+			tabelaFuncionario(listaFuncionariosAchadas);
+		},
+		error: function(listaFuncionariosAchadas){
+			alert("Erro ao procurar funcionario")
+			tabelaFuncionario();
+		}
+	});
+}
+
+function tabelaFuncionario(listaFuncionariosAchadas){
+	console.log(listaFuncionariosAchadas);
+	var html = "<div class='teble-reponsive'>" +
+			   "<table class='table table-striped table-condensed table-bordered'>";
+		html += "<tr>" +
+				"<th># ID</th> <th>Nome</th> <th>CPF</th> <th>Cargo</th> <th>Setor</th> <th>Salario</th> <th>Sexo</th> <th>Id Funcionario</th> <th>Ativo</th> <th>Edição</th>" +
+				"</tr>"
+	for(var i = 0; i < listaFuncionariosAchadas.length; i++){
+		html += "<tr>" +
+					"<td>" + listaFuncionariosAchadas[i].idfuncionario + "</td>" +
+					"<td>" + listaFuncionariosAchadas[i].nome + "</td>" +
+					"<td>" + listaFuncionariosAchadas[i].cpf + "</td>" +
+					"<td>" + listaFuncionariosAchadas[i].cargo + "</td>" +
+					"<td>" + listaFuncionariosAchadas[i].setor + "</td>" +
+					"<td>" + listaFuncionariosAchadas[i].salario + "</td>" +
+					"<td>" + listaFuncionariosAchadas[i].sexo + "</td>" +
+					"<td>" + listaFuncionariosAchadas[i].idfuncionario + "</td>" +
+					"<td>" + listaFuncionariosAchadas[i].ativo + "</td>" +
+					"<td>" +
+						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoPessoa("+listaFuncionariosAchadas[i].idfuncionario+")'></div>" +					
+					"</td>" +
+				"</tr>"
+	}
+	html += "</table>" +
+			"</div>"
+	$("#resultadoFuncionario").html(html);
 }
 /*FIM CRUD FUNCIONARIO*/
 

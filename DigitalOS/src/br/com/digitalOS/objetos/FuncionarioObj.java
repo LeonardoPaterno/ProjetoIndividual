@@ -6,27 +6,33 @@ public class FuncionarioObj implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private int id;
+	private int numero;
+	private int idfuncionario;
+	private int idendereco;
 	private String nome;
 	private String cpf;
 	private String rg;
 	private String sexo;
-	private java.sql.Date datanascimento;
 	private String cargo;
 	private String setor;
 	private String numeropis;
 	private String numeroct;
 	private String salario;
-	private java.sql.Date dataadmissao;
 	private String email;
 	private String endereco;
-	private int numero;
+	private String bairro;
+	private String cep;
 	private String telefone;
 	private String celular;
 	private String estado;
 	private String cidade;
 	private String ativo;
+	private String profissao;
+	private String Tipomorada;
+	private java.sql.Date datanascimento;
+	private java.sql.Date dataadmissao;
 	private java.sql.Date datademissao;
-	private int idfuncionario;
+	
 	
 	public int getId() {
 		return id;
@@ -180,6 +186,41 @@ public class FuncionarioObj implements Serializable{
 	}
 	public void setIdfuncionario(int idfuncionario) {
 		this.idfuncionario = idfuncionario;
+	}
+	
+	public int getIdendereco() {
+		return idendereco;
+	}
+	public void setIdendereco(int idendereco) {
+		this.idendereco = idendereco;
+	}
+	
+	public String getBairro() {
+		return bairro;
+	}
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+	
+	public String getCep() {
+		return cep;
+	}
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+	
+	public String getProfissao() {
+		return profissao;
+	}
+	public void setProfissao(String profissao) {
+		this.profissao = profissao;
+	}
+	
+	public String getTipomorada() {
+		return Tipomorada;
+	}
+	public void setTipomorada(String tipomorada) {
+		Tipomorada = tipomorada;
 	}
 	
 }
