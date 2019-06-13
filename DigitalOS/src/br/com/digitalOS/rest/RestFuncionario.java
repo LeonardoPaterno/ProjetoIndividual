@@ -65,15 +65,15 @@ public class RestFuncionario extends UtilRest{
 
 	@POST
 	@Path("/buscarFuncionarioPeloId/{id}")
-	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	@Produces({MediaType.APPLICATION_JSON})
 	public Response buscarFuncionarioPeloId(@PathParam("id") int id) {
 		try {
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCDigitalOSLoginDAO jdbcFuncionario = new JDBCDigitalOSLoginDAO(conexao);
-			PessoaObj Funcionario = jdbcFuncionario.buscarFuncionarioPorId(id);
+			FuncionarioObj Funcionario = jdbcFuncionario.buscarFuncionarioPorId(id);
 			
-			return Response.ok(this.buildResponse(Funcionario),MediaType.APPLICATION_JSON).build();
+			return Response.ok(this.buildResponse(Funcionario)).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());

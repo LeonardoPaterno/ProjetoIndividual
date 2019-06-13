@@ -52,8 +52,6 @@ function CadastroAparelho() {
 		}
 	});
 }
-
-
 function buscarAparelho(){
 	var valorBusca = $('#buscaAparelhoInput').val();
 	$.ajax({
@@ -68,7 +66,6 @@ function buscarAparelho(){
 		}
 	});
 };
-
 function carregarTabela(listaAparelhosAchados){
 	var html = "<div class='teble-reponsive'>" +
 			   "<table class='table table-striped table-condensed table-bordered'>";
@@ -93,7 +90,6 @@ function carregarTabela(listaAparelhosAchados){
 			"</div>"
 	$("#resultadoAparelhos").html(html);
 }
-
 function exibirEdicaoAparelho(idaparelho){
 	$.ajax({
 		type : 'POST',
@@ -124,7 +120,6 @@ function exibirEdicaoAparelho(idaparelho){
 		}
 	});
 }
-
 function editarAparelho(){
 	var idaparelho = $("#EditIdAparelho").val();
 	var nome = $("#EditNomeAparelho").val();
@@ -146,7 +141,6 @@ function editarAparelho(){
 		}
 	});
 }
-
 function filtroAparelhosAtivos(){
 	var ativo = $("#filtroAtivoOpc").val();
 	$.ajax({
@@ -199,7 +193,6 @@ function inserirPessoa(){
 		}
 	});
 }
-
 function buscarPessoa(){
 	var valorBusca = $('#buscaPessoaInput').val();
 	$.ajax({
@@ -214,7 +207,6 @@ function buscarPessoa(){
 		}
 	});
 };
-
 function tabelaPessoa(listaPessoasAchadas){
 	console.log(listaPessoasAchadas);
 	var html = "<div class='teble-reponsive'>" +
@@ -243,7 +235,6 @@ function tabelaPessoa(listaPessoasAchadas){
 			"</div>"
 	$("#resultadoPessoa").html(html);
 }
-
 function exibirEdicaoPessoa(id){
 	$.ajax({
 		type : 'POST',
@@ -270,7 +261,6 @@ function exibirEdicaoPessoa(id){
 		}
 	});
 }
-
 function editarPessoa(){
 	var id = $("#EditIdPessoa").val();
 	var nome = $("#EditNomePessoa").val();
@@ -305,7 +295,6 @@ function editarPessoa(){
 		}
 	});
 }
-
 function filtroAtivosPessoa(){
 	var ativo = JSON.stringify($("#filtroPessoa").val());
 	$.ajax({
@@ -324,7 +313,6 @@ function filtroAtivosPessoa(){
 
 /*INICIO CRUD FUNCIONARIO*/
 function inserirFuncionario(){
-
 	alert("funcionario");
 	var nome = 			 	 $("#nomefuncionario").val();
 	var cpf = 			 	 $("#cpffuncionario").val();
@@ -365,7 +353,6 @@ function inserirFuncionario(){
 		}
 	});
 }
-
 function buscarFuncionario(){
 	var valorBusca = $('#buscaFuncionario').val();
 	$.ajax({
@@ -382,7 +369,6 @@ function buscarFuncionario(){
 		}
 	});
 }
-
 function tabelaFuncionario(listaFuncionariosAchadas){
 	console.log(listaFuncionariosAchadas);
 	var html = "<div class='teble-reponsive'>" +
@@ -402,7 +388,7 @@ function tabelaFuncionario(listaFuncionariosAchadas){
 					"<td>" + listaFuncionariosAchadas[i].idfuncionario + "</td>" +
 					"<td>" + listaFuncionariosAchadas[i].ativo + "</td>" +
 					"<td>" +
-						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoPessoa("+listaFuncionariosAchadas[i].idfuncionario+")'></div>" +					
+						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoFuncionario("+listaFuncionariosAchadas[i].idfuncionario+")'></div>" +					
 					"</td>" +
 				"</tr>"
 	}
@@ -410,6 +396,44 @@ function tabelaFuncionario(listaFuncionariosAchadas){
 			"</div>"
 	$("#resultadoFuncionario").html(html);
 }
+function exibirEdicaoFuncionario(idfuncionario){
+	$.ajax({
+		type : 'POST',
+		url : '/DigitalOS/rest/RestFuncionario/buscarFuncionarioPeloId/'+idfuncionario,
+		success: function(funcionario){
+			console.log(funcionario);
+			$("#EditIdFuncionario").val(idfuncionario);
+			$("#EditNomeFuncionario").val(funcionario.nome);
+			$("#EditCpfFuncionario").val(funcionario.cpf);
+			$("#EditRgFuncionario").val(funcionario.rg);
+			$("#EditDataNascimentoFuncionario").val(funcionario.datanascimento);
+			$("#EditSexoFuncionario").val(funcionario.sexo);
+			$("#EditTelefoneFuncionario").val(funcionario.telefone);
+			$("#EditCelularFuncionario").val(funcionario.celular);
+			$("#EditEmailFuncionario").val(funcionario.email);
+			$("#EditTipoMoradaFuncionario").val(funcionario.tipomorada);
+			$("#EditStatusFuncionario").val(funcionario.ativo);
+			$("#EditCepFuncionario").val(funcionario.cep);
+			$("#EditNumeroFuncionario").val(funcionario.numero);
+			$("#EditEnderecoFuncionario").val(funcionario.endereco);
+			$("#EditBairroFuncionario").val(funcionario.bairro);
+			$("#EditCidadeFuncionario").val(funcionario.cidade);
+			$("#EditEstadoFuncionario").val(funcionario.estado);
+			$("#EditNumeroCtFuncionario").val(funcionario.numeroct);
+			$("#EditNumeroPisFuncionario").val(funcionario.numeropis);
+			$("#EditCargoFuncionario").val(funcionario.cargo);
+			$("#EditSetorFuncionario").val(funcionario.setor);
+			$("#EditSalarioFuncionario").val(funcionario.salario);
+			$("#EditDataAdmissaoFuncionario").val(funcionario.dataadmissao);
+			$("#EditDataDemissaoFuncionario").val(funcionario.datademissao);
+			$("#msgEditFuncionario").modal(funcionario);
+		},
+		error: function(pessoa){
+			alert("Erro ao editar Funcionario!");
+		}
+	});
+}
+function atualizarFuncionario(){}
 /*FIM CRUD FUNCIONARIO*/
 
 /*INICIO CRUD SERVICO*/
@@ -441,7 +465,6 @@ function inserirServico(){
 		});
 	}
 }
-
 function buscarServico(){
 	var valorBusca = $('#buscarservico').val();
 	$.ajax({
@@ -456,7 +479,6 @@ function buscarServico(){
 		}
 	});
 }
-
 function tabelaServico(listaServicoAchados){
 	var html = "<div class='teble-reponsive'>" +
 			   "<table class='table table-striped table-condensed table-bordered'>";
@@ -479,7 +501,6 @@ function tabelaServico(listaServicoAchados){
 			"</div>"
 	$("#resultadoServico").html(html);
 }
-
 function exibirEdicaoServico(idservico){
 	alert("Exibe Edicao");
 	$.ajax({
@@ -499,7 +520,6 @@ function exibirEdicaoServico(idservico){
 		}
 	});
 }
-
 function editarServico(){
 	var idservico = 		$("#EditIdServico").val();
 	var tiposervico = 		$("#EditNomeTipoServico").val();
@@ -524,7 +544,6 @@ function editarServico(){
 		}
 	});
 }
-
 function filtroServico(){
 	$.ajax({
 		type:'POST',

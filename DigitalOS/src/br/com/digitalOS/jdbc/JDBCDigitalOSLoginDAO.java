@@ -64,7 +64,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return true;
 	}
-
 	public List<AparelhoObj> buscarAparelho(AparelhoObj aparelho) {
 
 		String nome = aparelho.getNome();
@@ -103,8 +102,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return ListaAparelho;
 	}
-	
-	@Override
+		@Override
 	public AparelhoObj buscarPorId(int id){
 		String comando = "SELECT * from registroaparelho WHERE idregistroaparelho= " + id;
 		AparelhoObj aparelho = new AparelhoObj();
@@ -134,7 +132,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return aparelho;
 	}
-
 	@Override
 	public boolean editarAparelho(AparelhoObj aparelho) {
 	String comando = "update registroaparelho set nomeaparelho=?, numerodeserie=?, modelo=?, ativo=?, marca_marca=?, categoriaaparelho_categoriaaparelho=? ";
@@ -155,7 +152,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 	return true;
 	}
-	
 	@Override
 	public List<AparelhoObj> filtrarAparelhosAtivos(AparelhoObj aparelho) {
 		List<AparelhoObj> ListaAparelho = new ArrayList<AparelhoObj>();
@@ -233,8 +229,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return true;
 	}
-
-	
 	public boolean atualizar(PessoaObj pessoa) {
 		String comando = "UPDATE pessoa SET nome=?, cpf=?, rg=?, datanascimento=?, profissao=?, endereco=?, numeroendereco=?,"
 		+ " telefone=?, celular=?, email=?, cidade=?, estado=?, tipomorada=?, tipopessoa=?, ativo=?, funcionario_idfuncionario=? "
@@ -265,7 +259,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return true;
 	}
-
 	public PessoaObj buscarPessoaPorId(int id) {
 		String comando = "SELECT idpessoa, nome, cpf, rg, datanascimento, profissao, endereco, numeroendereco, telefone, celular, email,"
 				+ " cidade, estado, tipomorada, tipopessoa, ativo, funcionario_idfuncionario FROM pessoa WHERE idpessoa = "+id+";";
@@ -280,7 +273,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				String rg = rs.getString("rg");
 				Date dataNascimento = rs.getDate("datanascimento");
 				String profissao = rs.getString("profissao");
-				String endereco = rs.getString("endereco");
+				String endereco = rs.getString("rua");
 				int numero = rs.getInt("numeroendereco");
 				String telefone = rs.getString("telefone");
 				String celular = rs.getString("celular");
@@ -316,7 +309,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return pessoa;
 	}
-
 	public List<PessoaObj> buscarPessoaPorNome(String nome) {
 		String comando = "SELECT idpessoa, nome, cpf, rg, datanascimento, profissao, telefone, celular, email,"
 				+ "tipomorada, tipopessoa, ativo, funcionario_idfuncionario FROM pessoa";
@@ -372,7 +364,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return ListaPessoa;
 	}
-
 	public List<PessoaObj> filtroPessoaAtivo(PessoaObj pessoaAtivo) {
 		List<PessoaObj> ListaAtivos = new ArrayList<PessoaObj>();
 		String comando = "";
@@ -482,7 +473,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				}
 				return true;
 			}
-
 	public List<FuncionarioObj> buscarFuncionarioPorNome(String nome) {
 		String comando = "SELECT idpessoa, nome, cpf, cargo, setor, salario, sexo, ativo, funcionario_idfuncionario FROM pessoa";
 		if (nome != "" && nome != null) {
@@ -523,14 +513,129 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return ListaFuncionario;
 	}
-
-	public PessoaObj buscarFuncionarioPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public FuncionarioObj buscarFuncionarioPorId(int id) {
+		String comando = "SELECT idpessoa, nome, cpf, rg, datanascimento, sexo, telefone, celular, email, profissao, tipomorada, ativo, "
+					   + "funcionario_idfuncionario, endereco.cep, endereco.numero, endereco.rua, endereco.bairro, endereco.cidade, "
+					   + "endereco.estado, funcionario.numerocarteiratrabalho, funcionario.pis, funcionario.cargo, funcionario.setor, "
+					   + "funcionario.salario, funcionario.dataadmissao, funcionario.datademissao FROM pessoa "
+					   + "INNER JOIN endereco on endereco.idendereco = pessoa.endereco_idendereco "
+					   + "INNER JOIN funcionario on funcionario.idfuncionario = pessoa.funcionario_idfuncionario "
+					   + "WHERE idpessoa = "+id+";";
+		FuncionarioObj funcionario = new FuncionarioObj();
+		try{
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while(rs.next()){
+				int idpessoa = rs.getInt("idpessoa");
+				String nome = rs.getString("nome");
+				String cpf = rs.getString("cpf");
+				String rg = rs.getString("rg");
+				Date datanascimento = rs.getDate("datanascimento");
+				String sexo = rs.getString("sexo");
+				String telefone = rs.getString("telefone");
+				String celular = rs.getString("celular");
+				String email = rs.getString("email");
+				String profissao = rs.getString("profissao");
+				String tipomorada = rs.getString("tipomorada");
+				String ativo = rs.getString("ativo");
+				int idfuncionario = rs.getInt("funcionario_idfuncionario");
+				String cep = rs.getString("cep");
+				int numero = rs.getInt("numero");
+				String endereco = rs.getString("rua");
+				String bairro = rs.getString("bairro");
+				String cidade = rs.getString("cidade");
+				String estado = rs.getString("estado");
+				String numeroct = rs.getString("numerocarteiratrabalho");
+				String numeropis = rs.getString("pis");
+				String cargo = rs.getString("cargo");
+				String setor = rs.getString("setor"); 
+				String salario = rs.getString("salario"); 
+				Date dataadmissao = rs.getDate("dataadmissao"); 
+				Date datademissao = rs.getDate("datademissao");				
+				
+				funcionario.setId(idpessoa);
+				funcionario.setNome(nome);
+				funcionario.setCpf(cpf);
+				funcionario.setRg(rg);
+				funcionario.setDatanascimento(datanascimento);
+				funcionario.setProfissao(profissao);
+				funcionario.setSexo(sexo);
+				funcionario.setTelefone(telefone);
+				funcionario.setCelular(celular);
+				funcionario.setEmail(email);
+				funcionario.setProfissao(profissao);
+				funcionario.setTipomorada(tipomorada);
+				funcionario.setAtivo(ativo);
+				funcionario.setIdfuncionario(idfuncionario);
+				funcionario.setCep(cep);
+				funcionario.setNumero(numero);
+				funcionario.setEndereco(endereco);
+				funcionario.setBairro(bairro);
+				funcionario.setCidade(cidade);
+				funcionario.setEstado(estado);
+				funcionario.setNumeroct(numeroct);
+				funcionario.setNumeropis(numeropis);
+				funcionario.setCargo(cargo);
+				funcionario.setSetor(setor);
+				funcionario.setSalario(salario);
+				funcionario.setDataadmissao(dataadmissao);
+				funcionario.setDatademissao(datademissao);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return funcionario;
+		}
+		return funcionario;
 	}
-
+	public boolean atualizarFuncionario(FuncionarioObj funcionario) {
+		String comando1 = "INSERT INTO endereco (estado, cidade, bairro, rua, numero, cep) VALUES(?,?,?,?,?,?);";
+		String comando2 = "INSERT INTO funcionario (numerocarteiratrabalho, pis, cargo, setor, salario, dataadmissao) VALUES (?,?,?,?,?,?);";				
+		String comando3 = "INSERT INTO pessoa (nome, cpf, rg, datanascimento, sexo, telefone, celular, email, profissao, tipomorada, ativo, funcionario_idfuncionario, endereco_idendereco) "
+						 + "VALUES(?,?,?,?,?,?,?,?,?,?,?, (select max(idfuncionario) from funcionario), (select max(idendereco) from endereco));";
+		
+				PreparedStatement p1;
+				PreparedStatement p2;
+				PreparedStatement p3;
+		try{
+			p1 = this.conexao.prepareStatement(comando1);
+			p1.setString(1, funcionario.getEstado());
+			p1.setString(2, funcionario.getCidade());
+			p1.setString(3, funcionario.getBairro());
+			p1.setString(4, funcionario.getEndereco());
+			p1.setInt(5, funcionario.getNumero());
+			p1.setString(6, funcionario.getCep());
+			p1.executeUpdate(); /* System.out.println("P1: "+p1); */
+			
+			p2 = this.conexao.prepareStatement(comando2);
+			p2.setString(1, funcionario.getNumeroct());
+			p2.setString(2, funcionario.getNumeropis());
+			p2.setString(3, funcionario.getCargo());
+			p2.setString(4, funcionario.getSetor());
+			p2.setString(5, funcionario.getSalario());
+			p2.setDate(6, funcionario.getDataadmissao());
+			p2.executeUpdate(); /* System.out.println("P2: "+p2); */
+			
+			p3 = this.conexao.prepareStatement(comando3);
+			p3.setString(1, funcionario.getNome());
+			p3.setString(2, funcionario.getCpf());
+			p3.setString(3, funcionario.getRg());
+			p3.setDate(4, funcionario.getDatanascimento());
+			p3.setString(5, funcionario.getSexo());
+			p3.setString(6, funcionario.getTelefone());
+			p3.setString(7, funcionario.getCelular());
+			p3.setString(8, funcionario.getEmail());
+			p3.setString(9, funcionario.getProfissao());
+			p3.setString(10, funcionario.getTipomorada());
+			p3.setString(11, funcionario.getAtivo());
+			p3.execute();/* System.out.println("P3: "+p3); */
+			p3.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 	public List<PessoaObj> filtroFuncionarioAtivo(PessoaObj funcionario) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	/*FIM FUNCIONARIO*/
@@ -581,7 +686,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return ListaServico;
 	}
-
 	public ServicoObj buscarservicoPorId(int id) {
 		String comando = "SELECT idservico, nometiposervico, nomeservico, descricaoservico, ativo FROM servicos WHERE idservico = "+id+";";
 		ServicoObj servico = new ServicoObj();
@@ -607,8 +711,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return servico;
 	}
-
-
 	public boolean atualizarServico(ServicoObj servico) {
 		String comando = "UPDATE servicos SET nometiposervico=?, nomeservico=?, descricaoservico=?, ativo=? WHERE idservico = "+servico.getIdservico()+";";
 				PreparedStatement p;
@@ -624,7 +726,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				}
 				return true;
 	}
-
 	public List<ServicoObj> filtroservicoAtivo(ServicoObj servico) {
 		List<ServicoObj> ListaServicosAtivos = new ArrayList<ServicoObj>();
 		String comando = "";
@@ -664,6 +765,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return ListaServicosAtivos;
 	}
+	/*FIM SERVICO*/
 }
 
 

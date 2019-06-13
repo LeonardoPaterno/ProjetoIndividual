@@ -79,3 +79,4 @@
 2019-06-11 20:05:02,977 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is not available. Remote download required.
 2019-06-11 21:17:52,522 [Worker-47: Debug Source Lookup] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-coyote/7.0.47/tomcat-coyote-7.0.47-sources.jar
 2019-06-11 21:17:53,465 [Worker-47: Debug Source Lookup] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-coyote/7.0.47/tomcat-coyote-7.0.47-sources.jar
+2019-06-12 19:12:31,275 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is not available. Remote download required.
