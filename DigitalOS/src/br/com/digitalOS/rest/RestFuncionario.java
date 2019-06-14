@@ -17,7 +17,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 import br.com.digitalOS.bd.conexao.Conexao;
 import br.com.digitalOS.jdbc.JDBCDigitalOSLoginDAO;
 import br.com.digitalOS.objetos.FuncionarioObj;
-import br.com.digitalOS.objetos.PessoaObj;
 
 @Path("RestFuncionario")
 public class RestFuncionario extends UtilRest{
@@ -29,7 +28,6 @@ public class RestFuncionario extends UtilRest{
 	@Consumes("application/*")
 
 	public Response addFuncionario(String funcionario) {
-		System.out.println(funcionario);
 		try {		
 			FuncionarioObj FuncionarioNovo = new ObjectMapper().readValue(funcionario, FuncionarioObj.class);
 			Conexao conec = new Conexao();
@@ -54,7 +52,6 @@ public class RestFuncionario extends UtilRest{
 			Connection conexao = conec.abrirConexao();
 			JDBCDigitalOSLoginDAO jdbcFuncionario = new JDBCDigitalOSLoginDAO(conexao);
 			Funcionarios = jdbcFuncionario.buscarFuncionarioPorNome(nome);
-			System.out.println(Funcionarios);
 			conec.fecharConexao();
 			return Response.ok(this.buildResponse(Funcionarios), MediaType.APPLICATION_JSON).build();
 		} catch (Exception e) {
@@ -85,12 +82,11 @@ public class RestFuncionario extends UtilRest{
 	@Consumes("application/*")
 	public Response editarFuncionario(String funcionario) {
 		try {
-			System.out.println("TESTE: \n"+funcionario);
-			PessoaObj Funcionario = new ObjectMapper().readValue(funcionario, PessoaObj.class);
+			FuncionarioObj Funcionario = new ObjectMapper().readValue(funcionario, FuncionarioObj.class);
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCDigitalOSLoginDAO jdbcFuncionario = new JDBCDigitalOSLoginDAO(conexao);
-			jdbcFuncionario.atualizar(Funcionario);
+			jdbcFuncionario.atualizarFuncionario(Funcionario);
 			conec.fecharConexao();
 			
 			return Response.ok(this.buildResponse("Funcionario editado com sucesso!")).build();
@@ -101,18 +97,18 @@ public class RestFuncionario extends UtilRest{
 	}
 
 	@POST
-	@Path("/filtroAtivo")
+	@Path("/filtroFuncionarioAtivo")
 	@Produces("application/*")
 	public Response filtrarAparelhosAtivos(String ativo) {
 		try {
-			PessoaObj Funcionario = new PessoaObj();
+			FuncionarioObj Funcionario = new FuncionarioObj();
 			Funcionario.setAtivo(ativo);
 			
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			
 			JDBCDigitalOSLoginDAO jdbcFuncionario = new JDBCDigitalOSLoginDAO(conexao);
-			List<PessoaObj> Funcionarios = jdbcFuncionario.filtroFuncionarioAtivo(Funcionario);
+			List<FuncionarioObj> Funcionarios = jdbcFuncionario.filtroFuncionarioAtivo(Funcionario);
 			conec.fecharConexao();
 			
 			return Response.ok(this.buildResponse(Funcionarios), MediaType.APPLICATION_JSON).build();

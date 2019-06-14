@@ -313,7 +313,6 @@ function filtroAtivosPessoa(){
 
 /*INICIO CRUD FUNCIONARIO*/
 function inserirFuncionario(){
-	alert("funcionario");
 	var nome = 			 	 $("#nomefuncionario").val();
 	var cpf = 			 	 $("#cpffuncionario").val();
 	var rg = 			 	 $("#rgfuncionario").val();
@@ -401,7 +400,6 @@ function exibirEdicaoFuncionario(idfuncionario){
 		type : 'POST',
 		url : '/DigitalOS/rest/RestFuncionario/buscarFuncionarioPeloId/'+idfuncionario,
 		success: function(funcionario){
-			console.log(funcionario);
 			$("#EditIdFuncionario").val(idfuncionario);
 			$("#EditNomeFuncionario").val(funcionario.nome);
 			$("#EditCpfFuncionario").val(funcionario.cpf);
@@ -426,6 +424,8 @@ function exibirEdicaoFuncionario(idfuncionario){
 			$("#EditSalarioFuncionario").val(funcionario.salario);
 			$("#EditDataAdmissaoFuncionario").val(funcionario.dataadmissao);
 			$("#EditDataDemissaoFuncionario").val(funcionario.datademissao);
+			$("#EditIdEndereco").val(funcionario.idendereco);
+			$("#EditFuncionarioIdFuncionario").val(funcionario.idfuncionario);
 			$("#msgEditFuncionario").modal(funcionario);
 		},
 		error: function(pessoa){
@@ -433,7 +433,69 @@ function exibirEdicaoFuncionario(idfuncionario){
 		}
 	});
 }
-function atualizarFuncionario(){}
+function atualizarFuncionario(){
+	var id = $("#EditIdFuncionario").val();
+	var nome = $("#EditNomeFuncionario").val();
+	var cpf = $("#EditCpfFuncionario").val();
+	var rg = $("#EditRgFuncionario").val();
+	var datanascimento = $("#EditDataNascimentoFuncionario").val();
+	var sexo = $("#EditSexoFuncionario").val();
+	var telefone = $("#EditTelefoneFuncionario").val();
+	var celular = $("#EditCelularFuncionario").val();
+	var email = $("#EditEmailFuncionario").val();
+	var tipomorada = $("#EditTipoMoradaFuncionario").val();
+	var statusfuncionario = $("#EditStatusFuncionario").val();
+	var cep = $("#EditCepFuncionario").val();
+	var numero = $("#EditNumeroFuncionario").val();
+	var endereco = $("#EditEnderecoFuncionario").val();
+	var bairro = $("#EditBairroFuncionario").val();
+	var cidade = $("#EditCidadeFuncionario").val();
+	var estado = $("#EditEstadoFuncionario").val();
+	var numeroct = $("#EditNumeroCtFuncionario").val();
+	var numeropis = $("#EditNumeroPisFuncionario").val();
+	var cargo = $("#EditCargoFuncionario").val();
+	var setor = $("#EditSetorFuncionario").val();
+	var salario = $("#EditSalarioFuncionario").val();
+	var dataadmissao = $("#EditDataAdmissaoFuncionario").val();
+	var datademissao = $("#EditDataDemissaoFuncionario").val();
+	var idendereco = $("#EditIdEndereco").val();
+	var funcionarioidfuncionario = $("#EditFuncionarioIdFuncionario").val();
+	
+	var funcionarioEdit = {'id':id, 'nome':nome, 'cpf':cpf, 'rg':rg, 'datanascimento':datanascimento, 'sexo':sexo, 
+						   'telefone':telefone, 'celular':celular, 'email':email, 'tipomorada':tipomorada, 'ativo':statusfuncionario, 'cep':cep, 
+						   'numero':numero, 'endereco':endereco, 'bairro':bairro, 'cidade':cidade, 'estado':estado, 'numeroct':numeroct, 
+						   'numeropis':numeropis, 'cargo':cargo, 'setor':setor, 'salario':salario, 'dataadmissao':dataadmissao, 
+						   'datademissao':datademissao, 'idendereco':idendereco, 'idfuncionario':funcionarioidfuncionario};
+	var funcionario = JSON.stringify(funcionarioEdit);
+	alert(funcionario);
+	$.ajax({
+		type:'POST',
+		url: '/DigitalOS/rest/RestFuncionario/editarFuncionario',
+		data: funcionario,
+		success: function(resposta){
+			alert(resposta);
+			$("#msgEditFuncionario").modal('hide');
+			buscarFuncionario();
+		},
+		error: function(){
+			alert("Erro ao editar funcionario.");
+		}
+	});
+}
+function filtroFuncionariosAtivos(){
+	alert($("#filtroAtivoOpc").val());
+	$.ajax({
+		type:'POST',
+		url: '/DigitalOS/rest/RestFuncionario/filtroFuncionarioAtivo',
+		data: $("#filtroAtivoOpc").val(),
+		success: function(listaFuncionariosAchados){
+			tabelaFuncionario(listaFuncionariosAchados);
+		},
+		error: function(){
+			alert("Erro ao Filtrar Servicos");
+		}
+	});
+}
 /*FIM CRUD FUNCIONARIO*/
 
 /*INICIO CRUD SERVICO*/
