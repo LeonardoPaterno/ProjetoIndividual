@@ -33,6 +33,7 @@
 								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-funcionario.html'">Funcionario</a>
 								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-itens-servico.html'">Itens de Serviço</a>
 								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-servico.html'">Serviços</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='aberturaOs.html'">Ordem de Serviço</a>
 							</div>
 						</li>
 					</ul>
@@ -44,10 +45,10 @@
 					<ul class="dropdown-menu dropdown-menu-custom div-botao-ordem-servico">
 						<li>
 							<div class="btn-group-vertical" role="group">
-								<a class="btn btn-primary btn-primary-custom" onclick="location.href='#'">Aberta</a>
-								<a class="btn btn-primary btn-primary-custom" onclick="location.href='#'">Concluida</a>
-								<a class="btn btn-primary btn-primary-custom" onclick="location.href='#'">Em Andamento</a>
-								<a class="btn btn-primary btn-primary-custom" onclick="location.href='#'">Cancelada</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href= OsAberta.html">Aberta</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='OsConcluida'">Concluida</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='OsAndamento'">Em Andamento</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='OsCancelada'">Cancelada</a>
 							</div>
 						</li>
 					</ul>
@@ -79,14 +80,6 @@
 				<span class="glyphicon glyphicon-menu-hamburger"></span>
 			</a>
 		</div><!-- menu-display-xs -->
-
-		<div class="div-barra-pesquisa col-xs-3 col-sm-9 col-md-8">
-			<div class="input-group input-group-custom">
- 					<input type="text" class="form-control barra-pesquisa" placeholder="Juliano Pereira">
- 					<span class="btn btn-default btn-busca-ordemservico glyphicon glyphicon-search" id="buscarordemservico"></span>
- 				</div>
-		</div><!-- /.Div-Barra-Pesquisa -->
-
 	
 		<div class="modal fade col-xs-11 col-sm-6 col-md-12" tabindex="-1" role="dialog" id="modalordemservico">
 		  <div class="modal-dialog modal-lg modal-dialog-custom" role="document">
@@ -106,36 +99,39 @@
 			        			      
 			        	<div class="form-group col-md-3">
 			        		<label>Marca</label>
-			        		<select class="form-control" id="marcaaparelhoos">
+			        		<input class="form-control" type="text" id="marcaaparelhoos" maxlength="25" placeholder="Motorola">
+			        		<!-- <select class="form-control" id="marcaaparelhoos">
 			        			<option>Sansumg </option>
 			        			<option>Motorola</option>
 			        			<option>Nokia</option>
-			        		</select>
+			        		</select> -->
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-3">
 			        		<label>Modelo</label>
-			        		<select class="form-control" id="modeloaparelhoos">
+			        		<input class="form-control" type="text" id="modeloaparelhoos" maxlength="25" placeholder="Moto X Play">
+			        		<!-- <select class="form-control" id="modeloaparelhoos">
 			        			<option>Moto X</option>
 			        			<option>Moto E</option>
 			        			<option>Moto Snap</option>
-			        		</select>
+			        		</select> -->
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-3">
 			        		<label>Categoria</label>
-			        		<select class="form-control" id="categriaaparelhoos">
+			        		<input class="form-control" type="text" id="categriaaparelhoos" maxlength="25" placeholder="Smarthphone">
+			        		<!-- <select class="form-control" id="categriaaparelhoos">
 			        			<option>Eletronico</option>
 			        			<option>Smartphone</option>
 			        			<option>Televisor</option>
-			        		</select>
+			        		</select> -->
 			        	</div><!-- /. FORM-GROUP -->
 		        	</div><!-- /.ROW -->
 		        	
 		        	<div class="row">
 		        		<div class="form-group col-md-3">
 			        		<label>Status OS</label>
-			        		<select class="form-control" id="statusos">
+			        		<select class="form-control" id="statusos" disabled>
 			        			<option>Aberta</option>
 			        			<option>Fechada</option>
 			        			<option>Atrasada</option>
@@ -144,42 +140,42 @@
 			        	
 			        	<div class="form-group col-md-3">
 			        		<label>Data Abertura</label>
-			        		<input class="form-control" type="date">
+			        		<input class="form-control" id="dataabertura" type="date">
 			        	</div>
 			        	
 			        	<div class="form-group col-md-3">
 			        		<label>Data Fechamento</label>
-			        		<input class="form-control" type="date">
+			        		<input class="form-control" id="datafechamento" type="date">
 			        	</div>
 			        	
 			        	<div class="form-group col-md-3">
 			        		<label>Data Prazo</label>
-			        		<input class="form-control" type="date">
+			        		<input class="form-control" id="dataprazo" type="date">
 			        	</div>
 		        	</div><!-- /.ROW -->
-		        	
+		        	<hr>
 		        	<div class="row">
 		        		<div class="form-group col-md-3">
 			        		<label>Nome Cliente</label>
-			        		<input class="form-control" type="text">
+			        		<input class="form-control" id="nomeclienteos" type="text" maxlength="80" placeholder="Leonardo Paterno">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-3">
 			        		<label>CPF</label>
-			        		<input class="form-control" type="text">
+			        		<input class="form-control" id="cpfclienteos" type="text" maxlength="14" placeholder="000000000000">
 			        	</div>
 			        	
 			        	<div class="form-group col-md-3">
 			        		<label>Endereco</label>
-			        		<input class="form-control" type="text">
+			        		<input class="form-control" id="enderecoclienteos" type="text" maxlength="60" placeholder="Rua Manoel Antonio">
 			        	</div>
 			        	
 			        	<div class="form-group col-md-3">
 			        		<label>Contato</label>
-			        		<input class="form-control" type="text">
+			        		<input class="form-control" id="contatoclienteos" type="text" maxlength="60" placeholder="exemplo@email.com">
 			        	</div>
 		        	</div><!-- /.ROW -->
-		        	
+		        	<hr>
 		        	<div class="row">
 			        	<div class="form-group col-md-12">
 			        		<label>Descricao Problema</label>
@@ -198,7 +194,7 @@
 		      
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">Cancelar</button>
-		        <button type="button" class="btn btn-primary botao-salvar">Salvar</button>
+		        <button type="button" class="btn btn-primary botao-salvar" onclick="abrirOs">Salvar</button>
 		      </div>
 		      
 		    </div><!-- /.modal-content -->
@@ -206,12 +202,39 @@
 		</div><!-- /.modal -->		
 
 		<div class="div-painel-ordemservicos col-xs-5 col-sm-3 col-md-9">
-			<div class="panel panel-default">
-				<div class="panel-heading">PAINEL DE ORDENS DE SERVICOS
-					<span class="btn btn-default glyphicon glyphicon-plus icone-adicionar-ordem-servico"></span>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<div>
+						<label class="label-painel-os">Painel de Odens de Serviço</label> 
+					</div>
+					
+					<div class="input-group input-group-barra-pesquisa">
+						<input type="text" class="form-control form-control-custom" placeholder="João Miguel" id="buscaOS">
+						<span class="btn input-group-addon icone-pesquisar glyphicon glyphicon-search" onclick="buscarOS()"></span>					
+					</div>
+					
+					<div class="btn-group filtroAtivo">
+						<div class="labelFiltro">
+							<label>Filtro de Funcionario |</label>
+						</div>
+						<div class="botaoFiltro">
+						    <select class="btn-default form-control" id="filtrarOS" onchange="filtroOS()">
+						    	<option value="OP">Opção</option>
+								<option value="AB">Aberta</option>
+								<option value="CO">Concluida</option>
+								<option value="EA">Em Andamento</option>
+								<option value="CA">Em Andamento</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="icone-adicionar-os">
+						<span class="btn btn-default glyphicon glyphicon-plus"></span>
+					</div>	
 				</div>
-				<div class="panel-body"></div>
-				<div class="panel-footer"></div>
+				<div class="panel-body">
+					<div class="resultadoOS" id="resultadoOs"></div>
+				</div>
 			</div>
 		</div>
 	</div><!-- geral-menu -->
@@ -222,7 +245,7 @@
 			$("#barra-lateral").toggle();
 		});
 		
-		$(".icone-adicionar-ordem-servico").click(function(){
+		$(".icone-adicionar-os").click(function(){
 			$('#modalordemservico').modal('show');
 		});
 	</script>

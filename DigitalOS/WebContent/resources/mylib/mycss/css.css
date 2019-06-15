@@ -58,7 +58,7 @@ h4 {
 	border-color: black;
 }
 
-.label-painel-aparelho, .label-painel-clientes, .label-painel-funcionario, .label-painel-servico{
+.label-painel-aparelho, .label-painel-clientes, .label-painel-funcionario, .label-painel-servico, .label-painel-os{
 	font-size: medium;
 }
 
@@ -303,7 +303,8 @@ h4 {
 	/* width: 1130px !important; */
 }
 
-.icone-adicionar-funcionario, .icone-adicionar-cliente, .icone-adicionar-servico, .icone-adicionar-itens-servico, .icone-adicionar-aparelho {
+.icone-adicionar-funcionario, .icone-adicionar-cliente, .icone-adicionar-servico, .icone-adicionar-itens-servico, 
+.icone-adicionar-aparelho, .icone-adicionar-os {
     display: inline-block;
     left: 30px;
     top: 40px;

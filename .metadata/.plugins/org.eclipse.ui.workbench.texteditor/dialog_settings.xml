@@ -2,12 +2,16 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="PessoaObj" key="selection"/>
+		<item value="icone" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="icone"/>
+			<item value="filtroAtivo"/>
+			<item value="filtro"/>
+			<item value="label"/>
 			<item value="FuncionarioObj"/>
 			<item value="Pessoa"/>
 			<item value="Funcionario"/>
@@ -19,10 +23,6 @@
 			<item value="modalEdit"/>
 			<item value="modalEdirt"/>
 			<item value="resultadoAparelho"/>
-			<item value="resultadoPessoa"/>
-			<item value="msgEditAparelho"/>
-			<item value="obj."/>
-			<item value="modalesqueciminhasenha"/>
 		</list>
 		<list key="replacehistory">
 			<item value="PessoaObj"/>
@@ -41,7 +41,7 @@
 		<item value="263" key="DIALOG_WIDTH"/>
 		<item value="1|Tahoma|8.25|0|WINDOWS|1|-11|0|0|0|400|0|0|0|1|0|0|0|0|Tahoma" key="DIALOG_FONT_NAME"/>
 		<item value="367" key="DIALOG_HEIGHT"/>
-		<item value="838" key="DIALOG_X_ORIGIN"/>
-		<item value="281" key="DIALOG_Y_ORIGIN"/>
+		<item value="788" key="DIALOG_X_ORIGIN"/>
+		<item value="395" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

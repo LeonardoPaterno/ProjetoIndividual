@@ -205,12 +205,12 @@ CREATE TABLE IF NOT EXISTS `login` (
     REFERENCES `pessoa` (`idpessoa`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_login_ordemservico1`
+  CONSTRAINT `fk_login_ordemservico`
     FOREIGN KEY (`ordemservico_numeroos`)
     REFERENCES `ordemservico` (`numeroos`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_login_perfil1`
+  CONSTRAINT `fk_login_perfil`
     FOREIGN KEY (`perfil_idperfil`)
     REFERENCES `perfil` (`idperfil`)
     ON DELETE NO ACTION

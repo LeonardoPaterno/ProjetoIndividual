@@ -620,3 +620,9 @@ function filtroServico(){
 	});
 }
 /*FIM CRUD SERVICO*/
+
+/*INICIO ORDEM DE SERVICO*/
+function abrirOS(){
+	
+}
+/*FIM ORDEM DE SERVICO*/
