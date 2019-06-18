@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="icone" key="selection"/>
+		<item value="modal" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="modal"/>
 			<item value="icone"/>
 			<item value="filtroAtivo"/>
 			<item value="filtro"/>
@@ -19,7 +20,6 @@
 			<item value="contato"/>
 			<item value="buscaAparelhoInput"/>
 			<item value="modalaparelho"/>
-			<item value="modal"/>
 			<item value="modalEdit"/>
 			<item value="modalEdirt"/>
 			<item value="resultadoAparelho"/>
@@ -42,6 +42,6 @@
 		<item value="1|Tahoma|8.25|0|WINDOWS|1|-11|0|0|0|400|0|0|0|1|0|0|0|0|Tahoma" key="DIALOG_FONT_NAME"/>
 		<item value="367" key="DIALOG_HEIGHT"/>
 		<item value="788" key="DIALOG_X_ORIGIN"/>
-		<item value="395" key="DIALOG_Y_ORIGIN"/>
+		<item value="361" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>
