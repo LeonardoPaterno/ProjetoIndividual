@@ -17,14 +17,15 @@
 
 <body>
 	<div class="container container-fluid geral-menu" id="menu">
-		<div class="hidden-xs col-sm-3 col-md-2 col-lg-2 barra-lateral"
-			data-toggle="collapse" role="navigation" id="barra-lateral">
+		<div class="hidden-xs col-sm-3 col-md-2 col-lg-2 barra-lateral" data-toggle="collapse" role="navigation" id="barra-lateral">
 			<div class="navbar-header">
 				<div class="navbar-brand titulo">
 					<img src="../imagens/logoteste2.png" class="img-responsive">
 				</div>
 			</div> <!-- navbar-header -->
-
+			
+			<button class="btn btn-primary btn-group-custom" id="painelUsuario">Painel Usuario</button>
+			
 			<div class="btn-group btn-group-vertical btn-group-custom" role="group">
 				<div class="btn-group btn-group-vertical group-menu" role="group">
 					<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Cadastrar</button>
@@ -78,9 +79,53 @@
 
 			</div><!-- btn-group-vertical -->
 		</div><!-- barra-lateral -->
-
+		
+		<div class="modal fade ModalPainelUsuario col-md-12" id="ModalPainelUsuario">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content col-md-12">
+					<div class="modal-header col-md-12">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+						</button>
+						<h5 class="modal-title">Painel Usuario</h5>
+					</div>
+					
+					<div class="modal-body col-md-12">
+					 	<ul class="nav nav-tabs nav-justified">
+						  <li role="representation" data-toggle="tab" class="active"><a href="#dadospessoais">Dados pessoais</a></li>
+						  <li role="representation" data-toggle="tab"><a href="#dadoslogin">Dados de login</a></li>
+						  <li role="representation" data-toggle="tab"><a href="#alterarsenha">Alterar senha</a></li>
+						</ul>
+						
+						<div class="tab-content">
+						    <div id="dadospessoais" class="tab-pane fade in active">
+						      teste	
+						    </div>
+						    <div id="dadoslogin" class="tab-pane fade">
+						      teste 2
+						    </div>
+						    <div id="alterarsenha" class="tab-pane fade">
+						      teste 3
+						    </div>
+					  </div>
+					</div>
+					
+					<div class="modal-footer col-md-12">
+						<button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">
+							Cancelar
+						</button>
+						
+						<button type="submit" class="btn btn-primary botao-salvar" id="salvarAparelho" onclick="editarAparelho()">
+							Salvar
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+			
 		<div class="btn-group visible-xs col-xs-1 col-sm-1 col-xs1-custom botao-barra-lateral-xs" id="div-botao-barra-lateral-xs">
-			<a class="btn btn-default btn-lg" type="button" aria-haspopup="true" aria-expanded="false" id="botao-icone-menu"> <span class="glyphicon glyphicon-menu-hamburger"></span></a>
+			<a class="btn btn-default btn-lg" type="button" aria-haspopup="true" aria-expanded="false" id="botao-icone-menu"> 
+				<span class="glyphicon glyphicon-menu-hamburger"></span>
+			</a>
 		</div> <!-- menu-display-xs -->
 
 		<div class="panel panel-default" style="position: absolute; left: 14%; top: 2%; width: 55%; height: 80%;">
@@ -110,6 +155,13 @@
 		$("#botao-icone-menu").click(function(e) {
 			e.preventDefault();
 			$("#barra-lateral").toggle();
+		});
+	</script>
+	
+	<script>
+		$("#painelUsuario").click(function(e) {
+			e.preventDefault();
+			$("#ModalPainelUsuario").modal('show');
 		});
 	</script>
 </body>
