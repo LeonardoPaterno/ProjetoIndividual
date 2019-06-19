@@ -24,12 +24,12 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 	/*INICIO LOGIN*/
 	public boolean consultarLogin(LoginObj login) {
-		String comando = "select idlogin, email, senha from login" + " where email like '%" + login.getEmail() + "' and senha like '%" + login.getSenha() + "%'";
+		String comando = "select id, email, senha from login" + " where email like '%" + login.getEmail() + "' and senha like '%" + login.getSenha() + "%'";
 		try {
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
 			while (rs.next()) {
-				login.setId(rs.getInt("idlogin"));
+				login.setId(rs.getInt("id"));
 				login.setEmail(rs.getString("email"));
 				login.setSenha(rs.getString("senha"));
 			}
@@ -199,30 +199,35 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	/*INICIO PESSOA*/
 	@Override
 	public boolean inserirPessoa(PessoaObj pessoa) {
-		String comando = "INSERT INTO pessoa " + 
-		"(nome, cpf, rg, datanascimento, profissao, endereco, numeroendereco, telefone, celular, email, cidade, estado, "
-		+ "tipomorada, tipopessoa, ativo, funcionario_idfuncionario)" 
-		+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		PreparedStatement p;
+		String comando1 = "INSERT INTO endereco (estado, cidade, bairro, rua, numero, cep) VALUES(?,?,?,?,?,?);";				
+		String comando2 = "INSERT INTO pessoa (nome, cpf, rg, datanascimento, sexo, telefone, celular, email, profissao, tipomorada, tipopessoa, ativo, funcionario_id, endereco_id) "
+						 + "VALUES(?,?,?,?,?,?,?,?,?,?,?, (select max(id) from funcionario), (select max(id) from endereco));";
+		PreparedStatement p1;
+		PreparedStatement p2;		
 		try {
-			p = this.conexao.prepareStatement(comando);
-			p.setString(1, pessoa.getNome());
-			p.setString(2, pessoa.getCpf());
-			p.setString(3, pessoa.getRg());
-			p.setDate(4, pessoa.getDataNascimento());
-			p.setString(5, pessoa.getProfissao());
-			p.setString(6, pessoa.getEndereco());
-			p.setInt(7, pessoa.getNumero());
-			p.setString(8, pessoa.getTelefone());
-			p.setString(9, pessoa.getCelular());
-			p.setString(10, pessoa.getEmail());
-			p.setString(11, pessoa.getCidade());
-			p.setString(12, pessoa.getEstado());
-			p.setString(13, pessoa.gettipomorada());
-			p.setString(14, pessoa.gettipopessoa());
-			p.setString(15, pessoa.getAtivo());
-			p.setInt(16, pessoa.getFuncionario());
-			p.execute();
+			p1 = this.conexao.prepareStatement(comando1);
+				p1.setString(1, pessoa.getEstado());
+				p1.setString(2, pessoa.getCidade());
+				p1.setString(3, pessoa.getBairro());
+				p1.setString(4, pessoa.getEndereco());
+				p1.setInt(5, pessoa.getNumero());
+				p1.setString(6, pessoa.getCep());
+			p1.execute();
+			
+			p2 = this.conexao.prepareStatement(comando2);
+				p2.setString(1, pessoa.getNome());
+				p2.setString(2, pessoa.getCpf());
+				p2.setString(3, pessoa.getRg());
+				p2.setDate(4, pessoa.getDatanascimento());
+				p2.setString(5, pessoa.getSexo());
+				p2.setString(6, pessoa.getTelefone());
+				p2.setString(7, pessoa.getCelular());
+				p2.setString(8, pessoa.getEmail());
+				p2.setString(9, pessoa.getProfissao());
+				p2.setString(10, pessoa.getTipomorada());
+				p2.setString(11, pessoa.getTipopessoa());
+				p2.setString(12, pessoa.getAtivo());
+			p2.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -230,28 +235,24 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		return true;
 	}
 	public boolean atualizar(PessoaObj pessoa) {
-		String comando = "UPDATE pessoa SET nome=?, cpf=?, rg=?, datanascimento=?, profissao=?, endereco=?, numeroendereco=?,"
-		+ " telefone=?, celular=?, email=?, cidade=?, estado=?, tipomorada=?, tipopessoa=?, ativo=?, funcionario_idfuncionario=? "
-		+ "WHERE idpessoa ="+pessoa.getId()+";";
+		String comando = "UPDATE pessoa SET nome=?, cpf=?, rg=?, datanascimento=?, sexo=?, telefone=?, celular=?, "
+					   + "email=?, profissao=?, tipomorada=?, tipopessoa=?, ativo=?"
+					   + "WHERE id ="+pessoa.getId()+";";
 		PreparedStatement p;
 		try{
 			p = this.conexao.prepareStatement(comando);
 			p.setString(1, pessoa.getNome());
 			p.setString(2, pessoa.getCpf());
 			p.setString(3, pessoa.getRg());
-			p.setDate(4, pessoa.getDataNascimento());
-			p.setString(5, pessoa.getProfissao());
-			p.setString(6, pessoa.getEndereco());
-			p.setInt(7, pessoa.getNumero());
-			p.setString(8, pessoa.getTelefone());
-			p.setString(9, pessoa.getCelular());
-			p.setString(10, pessoa.getEmail());
-			p.setString(11, pessoa.getCidade());
-			p.setString(12, pessoa.getEstado());
-			p.setString(13, pessoa.gettipomorada());
-			p.setString(14, pessoa.gettipopessoa());
-			p.setString(15, pessoa.getAtivo());
-			p.setInt(16, pessoa.getFuncionario());
+			p.setDate(4, pessoa.getDatanascimento());
+			p.setString(5, pessoa.getSexo());
+			p.setString(6, pessoa.getTelefone());
+			p.setString(7, pessoa.getCelular());
+			p.setString(8, pessoa.getEmail());
+			p.setString(9, pessoa.getProfissao());
+			p.setString(10, pessoa.getTipomorada());
+			p.setString(11, pessoa.getTipopessoa());
+			p.setString(12, pessoa.getAtivo());
 			p.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -260,48 +261,43 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		return true;
 	}
 	public PessoaObj buscarPessoaPorId(int id) {
-		String comando = "SELECT idpessoa, nome, cpf, rg, datanascimento, profissao, endereco, numeroendereco, telefone, celular, email,"
-				+ " cidade, estado, tipomorada, tipopessoa, ativo, funcionario_idfuncionario FROM pessoa WHERE idpessoa = "+id+";";
+		String comando = "SELECT pessoa.id, nome, cpf, rg, datanascimento, profissao, telefone, celular, email, tipopessoa, ativo, "
+				   + "funcionario_id, endereco.cep, endereco.numero, endereco.rua, endereco.cidade, endereco.estado "
+				   +"FROM pessoa INNER JOIN endereco ON endereco.id = pessoa.endereco_id WHERE pessoa.id = "+id+";";
 		PessoaObj pessoa = new PessoaObj();
 		try{
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
 			while(rs.next()){
-				int idpessoa = rs.getInt("idpessoa");
+				int idpessoa = rs.getInt("id");
+				int idfuncionario = rs.getInt("funcionario_id");
+				int numero = rs.getInt("endereco.numero");
 				String nome = rs.getString("nome");
 				String cpf = rs.getString("cpf");
 				String rg = rs.getString("rg");
-				Date dataNascimento = rs.getDate("datanascimento");
 				String profissao = rs.getString("profissao");
-				String endereco = rs.getString("rua");
-				int numero = rs.getInt("numeroendereco");
 				String telefone = rs.getString("telefone");
-				String celular = rs.getString("celular");
 				String email = rs.getString("email");
-				String cidade = rs.getString("cidade");
-				String estado = rs.getString("estado");
-				String tipomorada = rs.getString("tipomorada");
 				String tipopessoa = rs.getString("tipopessoa");
 				String ativo = rs.getString("ativo");
-				int funcionario = rs.getInt("funcionario_idfuncionario");
+				String endereco = rs.getString("endereco.rua");
+				String cidade = rs.getString("endereco.cidade");
+				String estado = rs.getString("endereco.estado");
+				String cep = rs.getString("endereco.cep");
+				Date datanascimento = rs.getDate("datanascimento");
 				
 				pessoa.setId(idpessoa);
 				pessoa.setNome(nome);
 				pessoa.setCpf(cpf);
 				pessoa.setRg(rg);
-				pessoa.setDataNascimento(dataNascimento);
+				pessoa.setDatanascimento(datanascimento);
 				pessoa.setProfissao(profissao);
-				pessoa.setEndereco(endereco);
-				pessoa.setNumero(numero);
 				pessoa.setTelefone(telefone);
-				pessoa.setCelular(celular);
 				pessoa.setEmail(email);
-				pessoa.setCidade(cidade);
-				pessoa.setEstado(estado);
-				pessoa.settipomorada(tipomorada);
-				pessoa.settipopessoa(tipopessoa);
 				pessoa.setAtivo(ativo);
-				pessoa.setFuncionario(funcionario);
+				pessoa.setEndereco(endereco);
+				pessoa.setTipopessoa(tipopessoa);
+				pessoa.setIdfuncionario(idfuncionario);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -310,10 +306,11 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		return pessoa;
 	}
 	public List<PessoaObj> buscarPessoaPorNome(String nome) {
-		String comando = "SELECT idpessoa, nome, cpf, rg, datanascimento, profissao, telefone, celular, email,"
-				+ "tipomorada, tipopessoa, ativo, funcionario_idfuncionario FROM pessoa";
-		if (nome != "" && nome != null) {
-			comando += " WHERE nome LIKE '" + nome + "%';";
+		String comando = "SELECT pessoa.id, nome, cpf, rg, datanascimento, profissao, telefone, celular, email, tipopessoa, ativo, "
+					   + "funcionario_id, endereco.rua, endereco.cidade, endereco.estado "
+					   +"FROM pessoa INNER JOIN endereco ON endereco.id = pessoa.endereco_id ";
+		if (nome != "") {
+			comando += "WHERE nome LIKE '" + nome + "%';";
 			}
 		List<PessoaObj> ListaPessoa = new ArrayList<PessoaObj>();
 		try {
@@ -321,41 +318,37 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			ResultSet rs = stmt.executeQuery(comando);
 			while (rs.next()) {
 				PessoaObj pessoa = new PessoaObj();
-				int idpessoa = rs.getInt("idpessoa");
-				String nomepessoa = rs.getString("nome");
-				String cpf = rs.getString("cpf");
-				String rg = rs.getString("rg");
-				Date dataNascimento = rs.getDate("datanascimento");
-				String profissao = rs.getString("profissao");
-				String endereco = rs.getString("endereco");
-				int numero = rs.getInt("numeroendereco");
-				String telefone = rs.getString("telefone");
-				String celular = rs.getString("celular");
-				String email = rs.getString("email");
-				String cidade = rs.getString("cidade"); 
-				String estado = rs.getString("estado");
-				String tipomorada = rs.getString("tipomorada");
-				String tipopessoa = rs.getString("tipopessoa");
-				String ativo = rs.getString("ativo");
-				int funcionario = rs.getInt("funcionario_idfuncionario");
+					int idpessoa = rs.getInt("id");
+					String nomepessoa = rs.getString("nome");
+					String cpf = rs.getString("cpf");
+					String rg = rs.getString("rg");
+					Date dataNascimento = rs.getDate("datanascimento");
+					String profissao = rs.getString("profissao");
+					String telefone = rs.getString("telefone");
+					String celular = rs.getString("celular");
+					String email = rs.getString("email");
+					String tipopessoa = rs.getString("tipopessoa");
+					String ativo = rs.getString("ativo");
+					int funcionario = rs.getInt("funcionario_id");
+					String endereco = rs.getString("endereco.rua");
+					String cidade = rs.getString("endereco.cidade");
+					String estado = rs.getString("endereco.estado");
 				
 				pessoa.setId(idpessoa);
 				pessoa.setNome(nomepessoa);
 				pessoa.setCpf(cpf);
 				pessoa.setRg(rg);
-				pessoa.setDataNascimento(dataNascimento);
+				pessoa.setDatanascimento(dataNascimento);
 				pessoa.setProfissao(profissao);
 				pessoa.setEndereco(endereco);
-				pessoa.setNumero(numero);
 				pessoa.setTelefone(telefone);
 				pessoa.setCelular(celular);
 				pessoa.setEmail(email);
 				pessoa.setCidade(cidade); 
 				pessoa.setEstado(estado);
-				pessoa.settipomorada(tipomorada);
-				pessoa.settipopessoa(tipopessoa);
+				pessoa.setTipopessoa(tipopessoa);
 				pessoa.setAtivo(ativo);
-				pessoa.setFuncionario(funcionario);
+				pessoa.setIdfuncionario(funcionario);
 
 				ListaPessoa.add(pessoa);
 			}
@@ -418,9 +411,9 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	/*INICIO FUNCIONARIO*/
 	public boolean inserirFuncionario(FuncionarioObj funcionario) {
 		String comando1 = "INSERT INTO endereco (estado, cidade, bairro, rua, numero, cep) VALUES(?,?,?,?,?,?);";
-		String comando2 = "INSERT INTO funcionario (numerocarteiratrabalho, pis, cargo, setor, salario, dataadmissao) VALUES (?,?,?,?,?,?);";				
-		String comando3 = "INSERT INTO pessoa (nome, cpf, rg, datanascimento, sexo, telefone, celular, email, profissao, tipomorada, ativo, funcionario_idfuncionario, endereco_idendereco) "
-						 + "VALUES(?,?,?,?,?,?,?,?,?,?,?, (select max(idfuncionario) from funcionario), (select max(idendereco) from endereco));";
+		String comando2 = "INSERT INTO funcionario (cargo, setor, salario, dataadmissao, numeroct, pis, datademissao) VALUES (?,?,?,?,?,?,?);";				
+		String comando3 = "INSERT INTO pessoa (nome, cpf, rg, datanascimento, sexo, telefone, celular, email, profissao, tipomorada, tipopessoa, ativo, funcionario_id, endereco_id) "
+						 + "VALUES(?,?,?,?,?,?,?,?,?,?,?, (select max(id) from funcionario), (select max(id) from endereco));";
 		
 		PreparedStatement p1;
 		PreparedStatement p2;

@@ -6,24 +6,27 @@ public class PessoaObj implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private int id;
+	private int numero;
+	private int idfuncionario;
+	private int idendereco;
 	private String nome;
 	private String cpf;
 	private String rg;
-	private java.sql.Date dataNascimento;
-	private String profissao;
+	private String sexo;
+	private String email;
 	private String endereco;
-	private int numero;
+	private String bairro;
+	private String cep;
 	private String telefone;
 	private String celular;
-	private String email;
-	private String cidade;
 	private String estado;
-	private String tipomorada;
-	private String tipopessoa;
+	private String cidade;
 	private String ativo;
-	private int funcionario;
+	private String profissao;
+	private String Tipomorada;
+	private String Tipopessoa;
+	private java.sql.Date datanascimento;
 	
-	/*ID*/
 	public int getId() {
 		return id;
 	}
@@ -31,7 +34,6 @@ public class PessoaObj implements Serializable{
 		this.id = id;
 	}
 	
-	/*NOME*/
 	public String getNome() {
 		return nome;
 	}
@@ -39,15 +41,6 @@ public class PessoaObj implements Serializable{
 		this.nome = nome;
 	}
 	
-	/*CPF*/
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-	
-	/*RG*/
 	public String getRg() {
 		return rg;
 	}
@@ -55,7 +48,27 @@ public class PessoaObj implements Serializable{
 		this.rg = rg;
 	}
 	
-	/*EMAIL*/
+	public String getCpf() {
+		return cpf;
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+	
+	public String getSexo() {
+		return sexo;
+	}
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+	
+	public java.sql.Date getDatanascimento() {
+		return datanascimento;
+	}
+	public void setDatanascimento(java.sql.Date datanascimento) {
+		this.datanascimento = datanascimento;
+	}
+		
 	public String getEmail() {
 		return email;
 	}
@@ -63,23 +76,6 @@ public class PessoaObj implements Serializable{
 		this.email = email;
 	}
 	
-	/*TELEFONE*/
-	public String getTelefone() {
-		return telefone;
-	}
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-	
-	/*CELULAR*/
-	public String getCelular() {
-		return celular;
-	}
-	public void setCelular(String celular) {
-		this.celular = celular;
-	}
-	
-	/*ENDEREÇO*/
 	public String getEndereco() {
 		return endereco;
 	}
@@ -87,7 +83,6 @@ public class PessoaObj implements Serializable{
 		this.endereco = endereco;
 	}
 	
-	/*NUMERO ENDEREÇO*/
 	public int getNumero() {
 		return numero;
 	}
@@ -95,31 +90,20 @@ public class PessoaObj implements Serializable{
 		this.numero = numero;
 	}
 	
-	/*CIDADE*/
-	public String getCidade() {
-		return cidade;
+	public String getTelefone() {
+		return telefone;
 	}
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	} 
-	
-	/*DATA NASCIMENTO*/
-	public java.sql.Date getDataNascimento() {
-		return dataNascimento;
-	}
-	public void setDataNascimento(java.sql.Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 	
-	/*ATIVO*/
-	public String getAtivo() {
-		return ativo;
+	public String getCelular() {
+		return celular;
 	}
-	public void setAtivo(String ativo) {
-		this.ativo = ativo;
+	public void setCelular(String celular) {
+		this.celular = celular;
 	}
 	
-	/*ESTADO*/
 	public String getEstado() {
 		return estado;
 	}
@@ -127,23 +111,48 @@ public class PessoaObj implements Serializable{
 		this.estado = estado;
 	}
 	
-	/*TIPO MORADA*/
-	public String gettipomorada() {
-		return tipomorada;
+	public String getCidade() {
+		return cidade;
 	}
-	public void settipomorada(String tipomorada) {
-		this.tipomorada = tipomorada;
-	}
-	
-	/*TIPO CLIENTE*/
-	public String gettipopessoa() {
-		return tipopessoa;
-	}
-	public void settipopessoa(String tipopessoa) {
-		this.tipopessoa = tipopessoa;
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 	
-	/*PROFISSAO*/
+	public String getAtivo() {
+		return ativo;
+	}
+	public void setAtivo(String ativo) {
+		this.ativo = ativo;
+	}
+	
+	public int getIdfuncionario() {
+		return idfuncionario;
+	}
+	public void setIdfuncionario(int idfuncionario) {
+		this.idfuncionario = idfuncionario;
+	}
+	
+	public int getIdendereco() {
+		return idendereco;
+	}
+	public void setIdendereco(int idendereco) {
+		this.idendereco = idendereco;
+	}
+	
+	public String getBairro() {
+		return bairro;
+	}
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+	
+	public String getCep() {
+		return cep;
+	}
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+	
 	public String getProfissao() {
 		return profissao;
 	}
@@ -151,11 +160,16 @@ public class PessoaObj implements Serializable{
 		this.profissao = profissao;
 	}
 	
-	/*FUNCIONARIO*/
-	public int getFuncionario() {
-		return funcionario;
+	public String getTipomorada() {
+		return Tipomorada;
 	}
-	public void setFuncionario(int funcionario) {
-		this.funcionario = funcionario;
+	public void setTipomorada(String tipomorada) {
+		Tipomorada = tipomorada;
+	}
+	public String getTipopessoa() {
+		return Tipopessoa;
+	}
+	public void setTipopessoa(String tipopessoa) {
+		Tipopessoa = tipopessoa;
 	}
 }
