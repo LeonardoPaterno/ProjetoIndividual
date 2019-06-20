@@ -201,7 +201,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	public boolean inserirPessoa(PessoaObj pessoa) {
 		String comando1 = "INSERT INTO endereco (estado, cidade, bairro, rua, numero, cep) VALUES(?,?,?,?,?,?);";				
 		String comando2 = "INSERT INTO pessoa (nome, cpf, rg, datanascimento, sexo, telefone, celular, email, profissao, tipomorada, tipopessoa, ativo, funcionario_id, endereco_id) "
-						 + "VALUES(?,?,?,?,?,?,?,?,?,?,?, (select max(id) from funcionario), (select max(id) from endereco));";
+						 + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?, (select max(id) from funcionario), (select max(id) from endereco));";
 		PreparedStatement p1;
 		PreparedStatement p2;		
 		try {
@@ -227,6 +227,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				p2.setString(10, pessoa.getTipomorada());
 				p2.setString(11, pessoa.getTipopessoa());
 				p2.setString(12, pessoa.getAtivo());
+				System.out.println(p2);
 			p2.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -235,25 +236,35 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		return true;
 	}
 	public boolean atualizar(PessoaObj pessoa) {
-		String comando = "UPDATE pessoa SET nome=?, cpf=?, rg=?, datanascimento=?, sexo=?, telefone=?, celular=?, "
+		String comando1 = "UPDATE endereco SET estado=?, cidade=?, bairro=?, rua=?, numero=?, cep=? WHERE id = "+pessoa.getIdendereco()+";";
+		String comando2 = "UPDATE pessoa SET nome=?, cpf=?, rg=?, datanascimento=?, sexo=?, telefone=?, celular=?, "
 					   + "email=?, profissao=?, tipomorada=?, tipopessoa=?, ativo=?"
-					   + "WHERE id ="+pessoa.getId()+";";
-		PreparedStatement p;
-		try{
-			p = this.conexao.prepareStatement(comando);
-			p.setString(1, pessoa.getNome());
-			p.setString(2, pessoa.getCpf());
-			p.setString(3, pessoa.getRg());
-			p.setDate(4, pessoa.getDatanascimento());
-			p.setString(5, pessoa.getSexo());
-			p.setString(6, pessoa.getTelefone());
-			p.setString(7, pessoa.getCelular());
-			p.setString(8, pessoa.getEmail());
-			p.setString(9, pessoa.getProfissao());
-			p.setString(10, pessoa.getTipomorada());
-			p.setString(11, pessoa.getTipopessoa());
-			p.setString(12, pessoa.getAtivo());
-			p.executeUpdate();
+					   + "WHERE id = "+pessoa.getId()+";";
+		PreparedStatement p1;
+		PreparedStatement p2;
+		try{p1 = this.conexao.prepareStatement(comando1);
+				p1.setString(1, pessoa.getEstado());
+				p1.setString(2, pessoa.getCidade());
+				p1.setString(3, pessoa.getBairro());
+				p1.setString(4, pessoa.getEndereco());
+				p1.setInt(5, pessoa.getNumero());
+				p1.setString(6, pessoa.getCep());
+			p1.executeUpdate(); System.out.println(p1);
+			
+			p2 = this.conexao.prepareStatement(comando2);
+				p2.setString(1, pessoa.getNome());
+				p2.setString(2, pessoa.getCpf());
+				p2.setString(3, pessoa.getRg());
+				p2.setDate(4, pessoa.getDatanascimento());
+				p2.setString(5, pessoa.getSexo());
+				p2.setString(6, pessoa.getTelefone());
+				p2.setString(7, pessoa.getCelular());
+				p2.setString(8, pessoa.getEmail());
+				p2.setString(9, pessoa.getProfissao());
+				p2.setString(10, pessoa.getTipomorada());
+				p2.setString(11, pessoa.getTipopessoa());
+				p2.setString(12, pessoa.getAtivo());
+			p2.executeUpdate();System.out.println(p2);
 		}catch(SQLException e){
 			e.printStackTrace();
 			return false;
@@ -261,8 +272,8 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		return true;
 	}
 	public PessoaObj buscarPessoaPorId(int id) {
-		String comando = "SELECT pessoa.id, nome, cpf, rg, datanascimento, profissao, telefone, celular, email, tipopessoa, ativo, "
-				   + "funcionario_id, endereco.cep, endereco.numero, endereco.rua, endereco.cidade, endereco.estado "
+		String comando = "SELECT pessoa.id, nome, cpf, rg, datanascimento, profissao, telefone, celular, email, tipopessoa, tipomorada, ativo, "
+				   + "sexo, funcionario_id, endereco.id, endereco.cep, endereco.numero, endereco.rua, endereco.bairro, endereco.cidade, endereco.estado "
 				   +"FROM pessoa INNER JOIN endereco ON endereco.id = pessoa.endereco_id WHERE pessoa.id = "+id+";";
 		PessoaObj pessoa = new PessoaObj();
 		try{
@@ -272,11 +283,13 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				int idpessoa = rs.getInt("id");
 				int idfuncionario = rs.getInt("funcionario_id");
 				int numero = rs.getInt("endereco.numero");
+				int idendereco = rs.getInt("endereco.id");
 				String nome = rs.getString("nome");
 				String cpf = rs.getString("cpf");
 				String rg = rs.getString("rg");
 				String profissao = rs.getString("profissao");
 				String telefone = rs.getString("telefone");
+				String celular = rs.getString("celular");
 				String email = rs.getString("email");
 				String tipopessoa = rs.getString("tipopessoa");
 				String ativo = rs.getString("ativo");
@@ -284,6 +297,9 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				String cidade = rs.getString("endereco.cidade");
 				String estado = rs.getString("endereco.estado");
 				String cep = rs.getString("endereco.cep");
+				String bairro = rs.getString("endereco.bairro");
+				String tipomorada = rs.getString("tipomorada");
+				String sexo = rs.getString("sexo");
 				Date datanascimento = rs.getDate("datanascimento");
 				
 				pessoa.setId(idpessoa);
@@ -298,6 +314,15 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				pessoa.setEndereco(endereco);
 				pessoa.setTipopessoa(tipopessoa);
 				pessoa.setIdfuncionario(idfuncionario);
+				pessoa.setEstado(estado);
+				pessoa.setCidade(cidade);
+				pessoa.setCep(cep);
+				pessoa.setBairro(bairro);
+				pessoa.setNumero(numero);
+				pessoa.setCelular(celular);
+				pessoa.setTipomorada(tipomorada);
+				pessoa.setSexo(sexo);
+				pessoa.setIdendereco(idendereco);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -396,7 +421,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				pessoa.setTelefone(telefone);
 				pessoa.setCidade(cidade);
 				pessoa.setEstado(estado);
-				pessoa.settipopessoa(tipopessoa);
+				pessoa.setTipopessoa(tipopessoa);
 				pessoa.setAtivo(ativo);
 
 				ListaAtivos.add(pessoa);

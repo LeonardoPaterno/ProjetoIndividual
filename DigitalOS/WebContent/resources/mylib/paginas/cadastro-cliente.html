@@ -96,7 +96,7 @@
 		        		<div class="col-md-3">
 						    <label>Tipo Pessoa</label>
 						    <select class="form-control" id=tipopessoa>
-						     <option value="TP">Tipo de Pessoa</option>
+						     <option>Tipo de Pessoa</option>
 						      <option value="PF">Pessoa Física</option>
 						      <option value="PJ">Pessoa Jurídica</option>					        		
 						    </select>
@@ -106,65 +106,54 @@
 		        	
 		        	<hr/><!-- Linha Divisoria na Modal -->
 		        	<div class="row">
-			        	<div class="form-group col-md-6">
+			        	<div class="form-group col-md-5">
 			        		<label>Nome</label>
-			        		<input class="form-control" type="text" id="nomecliente" name="nomecliente" placeholder="Nome">
+			        		<input class="form-control" type="text" id="nomecliente" maxlength="80" placeholder="Nome">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-3">
 			        		<label>CPF</label>
-			        		<input class="form-control" type="text" id="cpfcliente" name="cpfcliente" maxlength="14" placeholder="000.000.000-00">
+			        		<input class="form-control" type="text" id="cpfcliente" maxlength="14" placeholder="000.000.000-00">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
-			        	<div class="form-group col-md-3">
+			        	<div class="form-group col-md-2">
 			        		<label>RG</label>
-			        		<input class="form-control" type="text" id="rgcliente" name="rgcliente" maxlength="7" placeholder="0.000.000">
+			        		<input class="form-control" type="text" id="rgcliente" maxlength="7" placeholder="0.000.000">
 			        	</div><!-- /. FORM-GROUP -->
+			        	
+			        	<div class="col-md-2">
+						    <label>Sexo</label>
+						    <select class="form-control" id=sexocliente>
+						     <option>Sexo</option>
+						      <option value="M">Masculino</option>
+						      <option value="F">Feminio</option>					        		
+						    </select>
+						 </div>
 		        	</div><!-- /.ROW -->
 		        
 		        	<div class="row">
-		        		<div class="form-group col-md-4">
+		        		<div class="form-group col-md-3">
 			        		<label>Data Nascimento</label>
-			        		<input class="form-control" type="date" id="datanascimento" name="datanascimento">
+			        		<input class="form-control" type="date" id="datanascimento">
 			        	</div><!-- /. FORM-GROUP -->
 		        		
-			        	<div class="form-group col-md-5">
+			        	<div class="form-group col-md-3">
 			        		<label>E-mail</label>
-			        		<input class="form-control" type="email" id="emailcliente" name="emailcliente" placeholder="E-mail">
+			        		<input class="form-control" type="email" id="emailcliente" maxlength="50" placeholder="E-mail">
 			        	</div><!-- /. FORM-GROUP -->
 			        	
 			        	<div class="form-group col-md-3">
 			        		<label>Telefone</label>
-			        		<input class="form-control" type="text" id="telefonecliente" name="telefonecliente" placeholder="(00) 0000-0000">
+			        		<input class="form-control" type="text" id="telefonecliente" maxlength="14" placeholder="(00) 0000-0000">
+			        	</div><!-- /. FORM-GROUP -->
+			        	
+			        	<div class="form-group col-md-3">
+			        		<label>Celular</label>
+			        		<input class="form-control" type="text" id="celularcliente" maxlength="16" placeholder="(00) 00000-0000">
 			        	</div><!-- /. FORM-GROUP -->
 		        	</div><!-- /.ROW -->
 		        	
-		        	<div class="row">
-		        		<div class="form-group col-md-4">
-			        		<label>Celular</label>
-			        		<input class="form-control" type="text" id="celularcliente" name="celularcliente" placeholder="(00) 00000-0000">
-			        	</div><!-- /. FORM-GROUP -->
-		        	
-			        	<div class="form-group col-md-6">
-			        		<label>Enderço</label>
-			        		<input class="form-control" type="text" id="enderecocliente" name="enderecocliente" placeholder="Endereço">
-			        	</div><!-- /. FORM-GROUP -->
-			        	
-						<div class="form-group col-md-2">
-			        		<label>Numero</label>
-			        		<input class="form-control" type="text" id="numerocliente" name="numerocliente" placeholder="0000">
-			        	</div><!-- /. FORM-GROUP -->		        	
-			      	</div><!-- /.ROW -->
-			      
-			      	<div class="row">
-			      		<div class="form-group col-md-3">
-						    <label>Tipo Morada</label>
-						    <select class="form-control" id="tipomorada">
-						      <option value="casa">Casa</option>
-						      <option value="apto">Apartamento</option>					        		
-						    </select>
-						 </div><!-- /. FORM-GROUP -->
-			      	
+		        	<div class="row">			      	
 			        	<div class="form-group col-md-2">
 			        		<label>Estado</label>
 			        		<select class="form-control" id="estadocliente">
@@ -209,17 +198,52 @@
 			        			<option value="Vila Bela da Santíssima Trindade">Vila Bela da Santíssima Trindade</option>
 			        		</select>
 			        	</div><!-- /. FORM-GROUP -->
-			        	<div class="form-group col-md-2">
+			        	
+			        	<div class="form-group col-md-6">
+			        		<label>Bairro</label>
+			        		<input class="form-control" type="text" id="bairrocliente" placeholder="Petropolis">
+			        	</div><!-- /. FORM-GROUP -->
+		        	</div><!-- /.ROW -->
+		        	
+		        	<div class="row">	
+		        		<div class="form-group col-md-5">
+			        		<label>Endereco</label>
+			        		<input class="form-control" type="text" id="enderecocliente" placeholder="Rua Manoel de Souza">
+			        	</div><!-- /. FORM-GROUP -->
+			        		        	
+						<div class="form-group col-md-2">
+			        		<label>Numero</label>
+			        		<input class="form-control" type="text" id="numerocliente" placeholder="1526">
+			        	</div><!-- /. FORM-GROUP -->		        	
+
+			      		<div class="form-group col-md-2">
+			      			<label>CEP</label>
+			        		<input class="form-control" type="text" id="cepcliente" placeholder="89.208-782">
+			      		</div>
+			      		
+			      		<div class="form-group col-md-3">
+						    <label>Tipo Morada</label>
+						    <select class="form-control" id="tipomorada">
+						      <option value="casa">Casa</option>
+						      <option value="apto">Apartamento</option>					        		
+						    </select>
+						 </div><!-- /. FORM-GROUP -->
+						 
+						 <div class="form-group col-md-4">
+			      			<label>Profissao</label>
+			        		<input class="form-control" type="text" id="profissaocliente" placeholder="Suporte">
+			      		</div>
+						 
+						 <div class="form-group col-md-2">
 			        		<label>Status</label>
-			        		<select class="form-control" id="statuspessoa" name="statuspessoa" disabled>
+			        		<select class="form-control" id="statuspessoa" disabled>
 			        			<option value="S">Ativo</option>
 			        		</select>
 			        	</div><!-- /. FORM-GROUP -->
-			        	<div class="col-md-offset-1"></div>
-		        	</div><!-- /.ROW -->
-		        	</div><!-- /.form -->
-		        </form>
-		      </div><!-- /.modal-body -->
+			      	</div>
+		        </div><!-- /.form -->
+		    </form>
+		</div><!-- /.modal-body -->
 		      
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">Cancelar</button>
@@ -276,129 +300,167 @@
 					</div>
 					
 					<div class="modal-body col-md-12">
-						<div class="form">
-							<form  id="formEditPessoa">
-								<div class="row col-md-12">
-									<div class="col-md-3">
-			        					<label>Tipo Cliente</label>
-			        					<select class="form-control" id="EditTipoPessoa">
-			        						<option value="TP">Tipo Pessoa</option>
-			        						<option value="PF">Pessoa Física</option>
-			        						<option value="PJ">Pessoa Jurídica</option>
-			        					</select>
-			        				</div>
-			        				<div class="col-md-offset-9"></div>
-								</div>
+						<div class="form">     	
+			        	<div class="row">
+			        		<div class="col-md-3">
+							    <label>Tipo Pessoa</label>
+							    <select class="form-control" id=tipopessoaedit>
+							     <option>Tipo de Pessoa</option>
+							      <option value="PF">Pessoa Física</option>
+							      <option value="PJ">Pessoa Jurídica</option>					        		
+							    </select>
+							 </div>
+							 <div class="col-md-offset-9"></div>
+			        	</div><!-- /.tipopessoa -->
+			        	
+			        	<hr/><!-- Linha Divisoria na Modal -->
+			        	<div class="row">
+				        	<div class="form-group col-md-5">
+				        		<label>Nome</label>
+				        		<input class="form-control" type="text" id="nomeclienteedit" maxlength="80" placeholder="Nome">
+				        	</div><!-- /. FORM-GROUP -->
+				        	
+				        	<div class="form-group col-md-3">
+				        		<label>CPF</label>
+				        		<input class="form-control" type="text" id="cpfclienteedit" maxlength="14" placeholder="000.000.000-00">
+				        	</div><!-- /. FORM-GROUP -->
+				        	
+				        	<div class="form-group col-md-2">
+				        		<label>RG</label>
+				        		<input class="form-control" type="text" id="rgclienteedit" maxlength="7" placeholder="0.000.000">
+				        	</div><!-- /. FORM-GROUP -->
+				        	
+				        	<div class="col-md-2">
+							    <label>Sexo</label>
+							    <select class="form-control" id=sexoclienteedit>
+							     <option>Sexo</option>
+							      <option value="M">Masculino</option>
+							      <option value="F">Feminio</option>					        		
+							    </select>
+							 </div>
+			        	</div><!-- /.ROW -->
+			        
+			        	<div class="row">
+			        		<div class="form-group col-md-3">
+				        		<label>Data Nascimento</label>
+				        		<input class="form-control" type="date" id="datanascimentoedit">
+				        	</div><!-- /. FORM-GROUP -->
+			        		
+				        	<div class="form-group col-md-3">
+				        		<label>E-mail</label>
+				        		<input class="form-control" type="email" id="emailclienteedit" maxlength="50" placeholder="E-mail">
+				        	</div><!-- /. FORM-GROUP -->
+				        	
+				        	<div class="form-group col-md-3">
+				        		<label>Telefone</label>
+				        		<input class="form-control" type="text" id="telefoneclienteedit" maxlength="14" placeholder="(00) 0000-0000">
+				        	</div><!-- /. FORM-GROUP -->
+				        	
+				        	<div class="form-group col-md-3">
+				        		<label>Celular</label>
+				        		<input class="form-control" type="text" id="celularclienteedit" maxlength="16" placeholder="(00) 00000-0000">
+				        	</div><!-- /. FORM-GROUP -->
+			        	</div><!-- /.ROW -->
+			        	
+			        	<div class="row">			      	
+				        	<div class="form-group col-md-2">
+				        		<label>Estado</label>
+				        		<select class="form-control" id="estadoclienteedit">
+				        			<option value="UF">UF</option>
+				        			<option value="AC">AC</option>
+				        			<option value="AL">AL</option>
+				        			<option value="AP">AP</option>
+				        			<option value="AM">AM</option>
+				        			<option value="BA">BA</option>
+				        			<option value="CE">CE</option>
+				        			<option value="DF">DF</option>
+				        			<option value="ES">ES</option>
+				        			<option value="GO">GO</option>
+				        			<option value="MA">MA</option>
+				        			<option value="MT">MT</option>
+				        			<option value="MS">MS</option>
+				        			<option value="MG">MG</option>
+				        			<option value="PA">PA</option>
+				        			<option value="PB">PB</option>
+				        			<option value="PR">PR</option>
+				        			<option value="PE">PE</option>
+				        			<option value="PI">PI</option>
+				        			<option value="RJ">RJ</option>
+				        			<option value="RN">RN</option>
+				        			<option value="RS">RS</option>
+				        			<option value="RO">RO</option>
+				        			<option value="RR">RR</option>
+				        			<option value="SC">SC</option>
+				        			<option value="SP">SP</option>
+				        			<option value="SE">SE</option>
+				        			<option value="TO">TO</option>
+				        		</select>
+				        	</div><!-- /. FORM-GROUP -->
+				        	
+				        	<div class="form-group col-md-4">
+				        		<label>Cidade</label>
+				        		<select class="form-control" id="cidadeclienteedit">
+				        			<option value="cidades">cidades</option>
+				        			<option value="Joinville">Joinville</option>
+				        			<option value="Araquari">Araquari</option>
+				        			<option value="Belo Horizonte">Belo Horizonte</option>
+				        			<option value="Vila Bela da Santíssima Trindade">Vila Bela da Santíssima Trindade</option>
+				        		</select>
+				        	</div><!-- /. FORM-GROUP -->
+				        	
+				        	<div class="form-group col-md-6">
+				        		<label>Bairro</label>
+				        		<input class="form-control" type="text" id="bairroclienteedit" placeholder="Petropolis">
+				        	</div><!-- /. FORM-GROUP -->
+				        	</div><!-- /.ROW -->
+				        	
+				        	<div class="row">	
+				        		<div class="form-group col-md-5">
+					        		<label>Endereco</label>
+					        		<input class="form-control" type="text" id="enderecoclienteedit" placeholder="Rua Manoel de Souza">
+					        	</div><!-- /. FORM-GROUP -->
+					        		        	
+								<div class="form-group col-md-2">
+					        		<label>Numero</label>
+					        		<input class="form-control" type="text" id="numeroclienteedit" placeholder="1526">
+					        	</div><!-- /. FORM-GROUP -->		        	
+		
+					      		<div class="form-group col-md-2">
+					      			<label>CEP</label>
+					        		<input class="form-control" type="text" id="cepclienteedit" placeholder="89.208-782">
+					      		</div>
+					      		
+					      		<div class="form-group col-md-3">
+								    <label>Tipo Morada</label>
+								    <select class="form-control" id="tipomoradaedit">
+								      <option value="casa">Casa</option>
+								      <option value="apto">Apartamento</option>					        		
+								    </select>
+								 </div><!-- /. FORM-GROUP -->
+								 
+								 <div class="form-group col-md-4">
+					      			<label>Profissao</label>
+					        		<input class="form-control" type="text" id="profissaoclienteedit" placeholder="Suporte">
+					      		</div>
+								 
+								 <div class="form-group col-md-2">
+					        		<label>Status</label>
+					        		<select class="form-control" id="statuspessoaedit">
+					        			<option value="S">Ativo</option>
+					        			<option value="N">Inativo</option>
+					        		</select>
+					        	</div><!-- /. FORM-GROUP -->
 								
-								<div class="row col-md-12">
-									<div style="display:none">
-										<label>Id</label>
-										<input class="form-control" type="text" placeholder="Id" id="EditIdPessoa">								
-									</div>
-									<div class="col-md-7">
-										<label>Nome</label>
-										<input class="form-control" type="text" placeholder="Nome" maxlength="40" id="EditNomePessoa">								
-									</div>
-									<div class="col-md-3">
-										<label>CPF</label>
-										<input class="form-control categoria" placeholder="000.000.000-00" maxlength="18" id="EditCpfPessoa">
-									</div>
-									<div class="col-md-2">
-										<label>RG</label>
-										<input class="form-control categoria" placeholder="0.000.000" maxlength="9" id="EditRgPessoa">							
-									</div>
-								</div>
-								
-								<div class="row col-md-12">
-									<div class="col-md-3">
-										<label>Data Nascimento</label>
-										<input class="form-control" type="date" id="EditDataNascimentoPessoa">								
-									</div>
-									<div class="col-md-3">
-						        		<label>Tipo Morada</label>
-						        		<select class="form-control" id="EditTipoMoradaPessoa">
-						        			<option value="casa">Casa</option>
-						        			<option value="apto">Apartamento</option>					        		
-						        		</select>
-						        	</div>
-									<div class="col-md-6">
-										<label>Endereco</label>
-										<input class="form-control" type="text" placeholder="Rua Juarez" maxlength="50" id="EditEnderecoPessoa">								
-									</div>					
-						        </div>
-						        
-						        <div class="row col-md-12">
-						        	<div class="col-md-2">
-										<label>Numero</label>
-										<input class="form-control" type="text" placeholder="1563" id="EditNumeroPessoa">
-									</div>
-						        	<div class="col-md-2">
-						        		<label>Estado</label>
-						        		<select class="form-control" id="EditEstadoPessoa">
-						        			<option value="UF">UF</option>
-						        			<option value="AC">AC</option>
-						        			<option value="AL">AL</option>
-						        			<option value="AP">AP</option>
-						        			<option value="AM">AM</option>
-						        			<option value="BA">BA</option>
-						        			<option value="CE">CE</option>
-						        			<option value="DF">DF</option>
-						        			<option value="ES">ES</option>
-						        			<option value="GO">GO</option>
-						        			<option value="MA">MA</option>
-						        			<option value="MT">MT</option>
-						        			<option value="MS">MS</option>
-						        			<option value="MG">MG</option>
-						        			<option value="PA">PA</option>
-						        			<option value="PB">PB</option>
-						        			<option value="PR">PR</option>
-						        			<option value="PE">PE</option>
-						        			<option value="PI">PI</option>
-						        			<option value="RJ">RJ</option>
-						        			<option value="RN">RN</option>
-						        			<option value="RS">RS</option>
-						        			<option value="RO">RO</option>
-						        			<option value="RR">RR</option>
-						        			<option value="SC">SC</option>
-						        			<option value="SP">SP</option>
-						        			<option value="SE">SE</option>
-						        			<option value="TO">TO</option>
-						        		</select>
-						        	</div>
-									<div class="col-md-5">
-						        		<label>Cidade</label>
-						        		<select class="form-control" id="EditCidadePessoa">
-						        			<option value="cidades">cidades</option>
-						        			<option value="Joinville">Joinville</option>
-						        			<option value="Araquari">Araquari</option>
-						        			<option value="Belo Horizonte">Belo Horizonte</option>
-						        			<option value="Vila Bela da Santíssima Trindade">Vila Bela da Santíssima Trindade</option>
-						        		</select>
-					        		</div>
-					        		<div class="col-md-3">
-				        				<label>Telefone</label>
-				        				<input class="form-control" type="text" id="EditTelefonePessoa" placeholder="(00) 0000-0000">
-				        			</div>
-								</div>
-								
-								<div class="row col-md-12">
-									<div class="form-group col-md-3">
-				        				<label>Celular</label>
-				        				<input class="form-control" type="text" id="EditCelularPessoa" placeholder="(00) 00000-0000">
-				        			</div>
-									<div class="col-md-3">
-										<label>Status</label>
-										<select class="form-control" id="EditStatusPessoa">
-											<option value="S">Ativo</option>
-											<option value="N">Inativo</option>
-										</select>								
-									</div>
-									<div class="col-md-offset-6"></div>
-								</div>
-							</form>
-						</div>
+								<div class="form-group col-md-2">
+						        	<label>ID Pessoa</label><input  class="form-control" id="idpessoaedit" disabled>
+					        	</div>
+					        	<div class="form-group col-md-2">
+						        	<label>ID Endereco</label><input  class="form-control" id="idenderecoedit" disabled>
+					        	</div>
+					      	</div>
+		        		</div><!-- /.form -->
 					</div>
-					
+									
 					<div class="modal-footer col-md-12">
 						<button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">
 							Cancelar
@@ -410,7 +472,7 @@
 					</div>
 				</div>
 			</div>
-		</div><!-- /DIV msgEditCliente -->
+</div><!-- /DIV msgEditCliente -->
 
 	</div><!-- geral-menu -->
 

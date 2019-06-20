@@ -81,6 +81,7 @@ public class RestPessoa extends UtilRest{
 	@Path("/editarPessoa")
 	@Consumes("application/*")
 	public Response editarPessoaObj(String pessoa) {
+		System.out.println(pessoa);
 		try {
 			PessoaObj PessoaObj = new ObjectMapper().readValue(pessoa, PessoaObj.class);
 			Conexao conec = new Conexao();
