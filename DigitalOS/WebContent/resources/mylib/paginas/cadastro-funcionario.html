@@ -7,9 +7,9 @@
 		<link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css" >
 		<link rel="stylesheet" href="../mycss/css.css" >
 		
+		<script type="text/javascript" src="../scripts/scripts.js"></script>
 		<script type="text/javascript" src="../../lib/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="../../lib/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../scripts/scripts.js"></script>
 	</head>
 
 <body>
@@ -90,6 +90,7 @@
 		      </div>
 		      
 		      <div class="modal-body">
+		      	<form id="formFuncionario">
 		        <div class="form">     	
 		        	<div class="row">
 			        	<div class="form-group col-md-5">
@@ -119,63 +120,22 @@
 			        		<label>Data Nascimento</label>
 			        		<input class="form-control" type="date" id="datanascimentofuncionario">
 			        	</div>		        		
-			        	<div class="form-group col-md-3">
-			        		<label>Cargo</label>
-			        		<input class="form-control" type="text" id="cargo" maxlength="30" placeholder="Atendente">
-			        	</div>			        	
-			        	<div class="form-group col-md-3">
-			        		<label>Setor</label>
-			        		<input class="form-control" type="text" id="setor" maxlength="30" placeholder="Recepção">
-			        	</div>			        	
-			        	<div class="form-group col-md-3">
-			        		<label>Nº PIS/PASEP</label>
-			        		<input class="form-control" type="text" id="numeropispasep" maxlength="14" placeholder="000.0000.000-0">
-			        	</div>			        	
-		        	</div><!-- /.ROW -->
-		        
-		        	<div class="row">
-			        	<div class="form-group col-md-2">
-			        		<label>Nº Carteira Trab.</label>
-			        		<input class="form-control" type="text" id="numeroct" maxlength="8" placeholder="000000000">
-			        	</div>			        	
-			        	<div class="form-group col-md-2">
-			        		<label>Salário</label>
-			        		<div class="div-salario">
-			        		<span class="btn input-group-addon icone-salario">R$</span>
-			        		<input class="form-control" type="text" id="salariofuncionario" maxlength="12" placeholder="1.820,00">
-			        		</div>
-			        	</div>			        	
-			        	<div class="form-group col-md-3">
-			        		<label>Data Admissão</label>
-			        		<input class="form-control" type="date" id="dataadmissaofuncionario">
-			        	</div>			        	
 			        	<div class="form-group col-md-5">
 			        		<label>E-mail</label>
 			        		<input class="form-control" type="email" id="emailfuncionario" maxlength="60" placeholder="exemplo@gmail.com">
-			        	</div>
+			        	</div>	
+			        	<div class="form-group col-md-2">
+			        		<label>Telefone</label>
+			        		<input class="form-control" type="text" id="telefonefuncionario" maxlength="14" placeholder="(00) 0000-0000">
+			        	</div>        
+			        	<div class="form-group col-md-2">
+			        		<label>Celular</label>
+			        		<input class="form-control" type="text" id="celularfuncionario" maxlength="16" placeholder="(00) 00000-0000">
+			        	</div>	
 		        	</div><!-- /.ROW -->
 		        	
 		        	<div class="row">
-			        	<div class="form-group col-md-7">
-			        		<label>Enderço</label>
-			        		<input class="form-control" type="text" id="enderecofuncionario" maxlength="60" placeholder="Ex.: Rua dos Comerciarios de Guarujá">
-			        	</div>			        	
-						<div class="form-group col-md-2">
-			        		<label>Numero</label>
-			        		<input class="form-control" type="text" id="numerofuncionario" maxlength="12" placeholder="0000">
-			        	</div>			        	
-			        	<div class="form-group col-md-3">
-			        		<label>Telefone</label>
-			        		<input class="form-control" type="text" id="telefonefuncionario" maxlength="14" placeholder="(00) 0000-0000">
-			        	</div>
-			      	</div><!-- /.ROW -->
-			      
-			      	<div class="row">
-			      		<div class="form-group col-md-3">
-			        		<label>Celular</label>
-			        		<input class="form-control" type="text" id="celularfuncionario" maxlength="16" placeholder="(00) 00000-0000">
-			        	</div>			      	
-			        	<div class="form-group col-md-2">
+		        		<div class="form-group col-md-2">
 			        		<label>Estado</label>
 			        		<select class="form-control" id="estadofuncionario">
 			        			<option value="UF">UF</option>
@@ -208,7 +168,7 @@
 			        			<option value="TO">TO</option>
 			        		</select>
 			        	</div>			        	
-			        	<div class="form-group col-md-4">
+			        	<div class="form-group col-md-3">
 			        		<label>Cidade</label>
 			        		<select class="form-control" id="cidadefuncionario">
 			        			<option value="cidades">cidades</option>
@@ -217,6 +177,52 @@
 			        			<option value="Belo Horizonte">Belo Horizonte</option>
 			        			<option value="Vila Bela da Santíssima Trindade">Vila Bela da Santíssima Trindade</option>
 			        		</select>
+			        	</div>
+			        	<div class="form-group col-md-3">
+			        		<label>Enderço</label>
+			        		<input class="form-control" type="text" id="enderecofuncionario" maxlength="60" placeholder="Ex.: Rua dos Comerciarios de Guarujá">
+			        	</div>			        	
+				      	<div class="form-group col-md-2">
+				        		<label>Numero</label>
+				        		<input class="form-control" type="text" id="numerofuncionario" maxlength="12" placeholder="0000">
+				        </div>
+				        <div class="form-group col-md-2">
+				        		<label>CEP</label>
+				        		<input class="form-control" type="text" id="cepfuncionario" maxlength="8" placeholder="89.208-782">
+				        </div>
+				   </div><!-- /ROW -->
+		        	
+		        	<div class="row">
+		        	<div class="form-group col-md-3">
+			        		<label>Data Admissão</label>
+			        		<input class="form-control" type="date" id="dataadmissaofuncionario">
+			        	</div>
+		        		<div class="form-group col-md-2">
+			        		<label>Cargo</label>
+			        		<input class="form-control" type="text" id="cargofuncionario" maxlength="30" placeholder="Atendente">
+			        	</div>			        	
+			        	<div class="form-group col-md-2">
+			        		<label>Setor</label>
+			        		<input class="form-control" type="text" id="setorfuncionario" maxlength="30" placeholder="Recepção">
+			        	</div>			        	
+			        	<div class="form-group col-md-3">
+			        		<label>Nº PIS/PASEP</label>
+			        		<input class="form-control" type="text" id="numeropis" maxlength="14" placeholder="000.0000.000-0">
+			        	</div>
+		        	
+			        	<div class="form-group col-md-2">
+			        		<label>Nº Carteira Trab.</label>
+			        		<input class="form-control" type="text" id="numeroct" maxlength="8" placeholder="000000000">
+			        	</div>			        				        	 				        	
+		        	</div><!-- /.ROW -->
+		        
+			      	<div class="row">
+			        	<div class="form-group col-md-2">
+			        		<label>Salário</label>
+			        		<div class="div-salario">
+				        		<span class="btn input-group-addon icone-salario">R$</span>
+				        		<input class="form-control" type="text" id="salario" maxlength="12" placeholder="1.820,00">
+			        		</div>
 			        	</div>
 			        	<div class="form-group col-md-2">
 			        		<label>Status</label>
@@ -227,6 +233,7 @@
 			        	<div class="col-md-offset-1"></div>
 		        	</div><!-- /.ROW -->
 		        </div><!-- /.form -->
+		        </form>
 		      </div><!-- /.modal-body -->
 		      
 		      <div class="modal-footer">

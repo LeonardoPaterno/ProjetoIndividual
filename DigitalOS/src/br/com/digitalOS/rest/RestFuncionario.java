@@ -28,6 +28,7 @@ public class RestFuncionario extends UtilRest{
 	@Consumes("application/*")
 
 	public Response addFuncionario(String funcionario) {
+		System.out.println(funcionario);
 		try {		
 			FuncionarioObj FuncionarioNovo = new ObjectMapper().readValue(funcionario, FuncionarioObj.class);
 			Conexao conec = new Conexao();

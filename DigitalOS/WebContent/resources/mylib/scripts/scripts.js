@@ -190,6 +190,8 @@ function inserirPessoa(){
 		data: pessoa,
 		success: function(resposta){
 			alert(resposta);
+			$("#modalcliente").find('form')[0].reset();
+			$("#modalcliente").modal('hide');
 			buscarPessoa();
 		},
 		error: function(){
@@ -244,7 +246,6 @@ function exibirEdicaoPessoa(id){
 		type : 'POST',
 		url : '/DigitalOS/rest/RestPessoa/buscarPessoaPeloId/'+id,
 		success: function(pessoa){
-			console.log(pessoa);
 			$("#idpessoaedit").val(id);
 			$("#tipopessoaedit").val(pessoa.tipopessoa);
 			$("#nomeclienteedit").val(pessoa.nome);
@@ -335,14 +336,15 @@ function inserirFuncionario(){
 	var rg = 			 	 $("#rgfuncionario").val();
 	var sexo = 	 		 	 $("#sexofuncionario").val();
 	var datanascimento = 	 $("#datanascimentofuncionario").val();
-	var cargo =  	 	 	 $("#cargo").val();
-	var setor =  	 	 	 $("#setor").val();
-	var numeropis =		 	 $("#numeropispasep").val();
+	var cargo =  	 	 	 $("#cargofuncionario").val();
+	var setor =  	 	 	 $("#setorfuncionario").val();
+	var numeropis =		 	 $("#numeropis").val();
 	var numeroct = 		 	 $("#numeroct").val();
-	var salario = 			 $("#salariofuncionario").val();
+	var salario = 			 $("#salario").val();
 	var dataadmissao = 	 	 $("#dataadmissaofuncionario").val();
 	var email = 		 	 $("#emailfuncionario").val();
 	var endereco = 		 	 $("#enderecofuncionario").val();
+	var cep = 			 	 $("#cepfuncionario").val();
 	var numero = 		 	 $("#numerofuncionario").val();
 	var telefone = 		 	 $("#telefonefuncionario").val();
 	var celular = 		 	 $("#celularfuncionario").val();
@@ -361,8 +363,9 @@ function inserirFuncionario(){
 		data: funcionario,
 		success: function(resposta){
 			alert(resposta);
+			$("#modalfuncionario").find('form')[0].reset();
+			$("#modalfuncionario").modal('hide');
 			buscarFuncionario();
-			$('#modalfuncionario').modal('hide');
 		},
 		error: function(){
 			alert("Erro ao cadastrar nova pessoa.");
