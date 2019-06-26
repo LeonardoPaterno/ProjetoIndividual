@@ -182,8 +182,6 @@ function inserirPessoa(){
 						  'email':email,'telefone':telefone,'celular':celular,'cep':cep,'endereco':endereco,'numero':numero,'bairro':bairro,
 						  'cidade':cidade,'estado':estado,'tipomorada':tipomorada, 'profissao':profissao, 'ativo':ativo};	
 		var pessoa = JSON.stringify(pessoaNova);
-		
-		console.log(pessoa);
 	$.ajax({
 		type:'POST',
 		url: '/DigitalOS/rest/RestPessoa/addPessoaObj',
@@ -214,7 +212,6 @@ function buscarPessoa(){
 	});
 };
 function tabelaPessoa(listaPessoasAchadas){
-	console.log(listaPessoasAchadas);
 	var html = "<div class='teble-reponsive'>" +
 			   "<table class='table table-striped table-condensed table-bordered'>";
 		html += "<tr>" +
@@ -356,7 +353,6 @@ function inserirFuncionario(){
 					'numeroct':numeroct, 'salario':salario, 'dataadmissao':dataadmissao, 'email':email, 'endereco':endereco, 'numero':numero, 
 					'telefone':telefone, 'celular':celular, 'estado':estado, 'cidade':cidade, 'ativo':ativo};	
 	var funcionario = JSON.stringify(funcNovo);
-	console.log(funcionario);
 	$.ajax({
 		type:'POST',
 		url: '/DigitalOS/rest/RestFuncionario/addFuncionario',
@@ -379,17 +375,15 @@ function buscarFuncionario(){
 		url: '/DigitalOS/rest/RestFuncionario/buscarFuncionarioPorNome',
 		data: valorBusca,
 		success: function(listaFuncionariosAchadas){
-			console.log(listaFuncionariosAchadas);
 			tabelaFuncionario(listaFuncionariosAchadas);
 		},
 		error: function(listaFuncionariosAchadas){
 			alert("Erro ao procurar funcionario")
-			tabelaFuncionario();
+			tabelaFuncionario(listaFuncionariosAchadas);
 		}
 	});
 }
 function tabelaFuncionario(listaFuncionariosAchadas){
-	console.log(listaFuncionariosAchadas);
 	var html = "<div class='teble-reponsive'>" +
 			   "<table class='table table-striped table-condensed table-bordered'>";
 		html += "<tr>" +
@@ -493,7 +487,6 @@ function atualizarFuncionario(){
 		url: '/DigitalOS/rest/RestFuncionario/editarFuncionario',
 		data: funcionario,
 		success: function(resposta){
-			alert(resposta);
 			$("#msgEditFuncionario").modal('hide');
 			buscarFuncionario();
 		},
@@ -537,11 +530,13 @@ function inserirServico(){
 			data: pessoa,
 			success: function(resposta){
 				alert(resposta);
+				$("#modalservico").find('form')[0].reset();
+				$("#modalservico").modal('hide');
 				buscarServico();
-					$('#modalservico').modal('hide');
 			},
 			error: function(){
 				alert("Erro ao cadastrar nova pessoa.");
+				$("#modalservico").modal('hide');
 				buscarServico();
 			}
 		});
