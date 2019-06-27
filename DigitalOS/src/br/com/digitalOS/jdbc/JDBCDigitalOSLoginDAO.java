@@ -44,10 +44,8 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	/*INICIO APARELHO*/
 	@Override
 	public boolean cadastrarAparelho(AparelhoObj novoAparelho) {
-		String comando = "INSERT INTO ordemservico.registroaparelho "
-				+ "(nomeaparelho, numerodeserie, modelo, ativo, marca_marca, categoriaaparelho_categoriaaparelho)"
-				+ "values(?,?,?,?,?,?)";
-
+		String comando = "INSERT INTO aparelho (nome, numeroserie, modelo, ativo, marca_id, categoriaaparelho_id)"
+					   + "values(?,?,?,?,(select id from marca where marca.id = "+novoAparelho.getMarca()+"), (select id from categoriaaparelho where id = "+novoAparelho.getCategoria()+"))";
 		PreparedStatement p;
 		try {
 			p = this.conexao.prepareStatement(comando);
@@ -55,8 +53,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			p.setString(2, novoAparelho.getNsaparelho());
 			p.setString(3, novoAparelho.getModelo());
 			p.setString(4, novoAparelho.getAtivo());
-			p.setInt(5, novoAparelho.getMarca());
-			p.setInt(6, novoAparelho.getCategoria());
 			p.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -67,10 +63,9 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	public List<AparelhoObj> buscarAparelho(AparelhoObj aparelho) {
 
 		String nome = aparelho.getNome();
-		String comando = "select idregistroaparelho, nomeaparelho, numerodeserie, modelo,  ativo,marca_marca, categoriaaparelho_categoriaaparelho "
-				+ "from registroaparelho";
+		String comando = "select id, nome, numeroserie, modelo, ativo, marca_id, categoriaaparelho_id from aparelho";
 		if (nome != "") {
-			comando += " where nomeaparelho like '" + nome + "%';";
+			comando += " where nome like '" + nome + "%';";
 		}
 
 		List<AparelhoObj> ListaAparelho = new ArrayList<AparelhoObj>();
@@ -79,13 +74,13 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			ResultSet rs = stmt.executeQuery(comando);
 			while (rs.next()) {
 				AparelhoObj aparelhoAux = new AparelhoObj();
-				int idaparelho = rs.getInt("idregistroaparelho");
-				String nomeaparelho = rs.getString("nomeaparelho");
-				String nsaparelho = rs.getString("numerodeserie");
+				int idaparelho = rs.getInt("id");
+				String nomeaparelho = rs.getString("nome");
+				String nsaparelho = rs.getString("numeroserie");
 				String modelo = rs.getString("modelo");
 				String ativo = rs.getString("ativo");
-				int marca = Integer.parseInt(rs.getString("marca_marca"));
-				int categoria = Integer.parseInt(rs.getString("categoriaaparelho_categoriaaparelho"));
+				int marca = Integer.parseInt(rs.getString("marca_id"));
+				int categoria = Integer.parseInt(rs.getString("categoriaaparelho_id"));
 
 				aparelhoAux.setIdaparelho(idaparelho);
 				aparelhoAux.setNome(nomeaparelho);
@@ -104,20 +99,20 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 		@Override
 	public AparelhoObj buscarPorId(int id){
-		String comando = "SELECT * from registroaparelho WHERE idregistroaparelho= " + id;
+		String comando = "SELECT * from aparelho WHERE id = " + id;
 		AparelhoObj aparelho = new AparelhoObj();
 		
 		try{
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
 			while(rs.next()){
-				int idaparelho = rs.getInt("idregistroaparelho");
-				String nome = rs.getString("nomeaparelho");
-				String nsaparelho = rs.getString("numerodeserie");
+				int idaparelho = rs.getInt("id");
+				String nome = rs.getString("nome");
+				String nsaparelho = rs.getString("numeroserie");
 				String modelo = rs.getString("modelo");
 				String ativo = rs.getString("ativo");
-				String marca = rs.getString("marca_marca");
-				String categoria = rs.getString("categoriaaparelho_categoriaaparelho");
+				String marca = rs.getString("marca_id");
+				String categoria = rs.getString("categoriaaparelho_id");
 				
 				aparelho.setIdaparelho(idaparelho);
 				aparelho.setNome(nome);
@@ -134,8 +129,8 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 	@Override
 	public boolean editarAparelho(AparelhoObj aparelho) {
-	String comando = "update registroaparelho set nomeaparelho=?, numerodeserie=?, modelo=?, ativo=?, marca_marca=?, categoriaaparelho_categoriaaparelho=? ";
-	comando += "WHERE idregistroaparelho= " + aparelho.getIdaparelho();
+	String comando = "update aparelho set nome=?, numeroserie=?, modelo=?, ativo=?, marca_id=?, categoriaaparelho_id=? ";
+	comando += "WHERE id = " + aparelho.getIdaparelho();
 	PreparedStatement p;
 	try{
 		p = this.conexao.prepareStatement(comando);
@@ -158,26 +153,26 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		String comando = "";
 		
 		if(aparelho.getAtivo().equals("N")) {
-			comando = "select * from registroaparelho  where ativo = 'N';";
+			comando = "select * from aparelho  where ativo = 'N';";
 		}
 		else if(aparelho.getAtivo().equals("S")) {
-			comando = "select * from registroaparelho  where ativo = 'S';";
+			comando = "select * from aparelho  where ativo = 'S';";
 		}
 		else{
-			comando = "select * from registroaparelho;";
+			comando = "select * from aparelho;";
 		}
 		try {
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
 			while (rs.next()) {
 				AparelhoObj aparelhofiltrado = new AparelhoObj();
-				int idaparelho = rs.getInt("idregistroaparelho");
-				String nomeaparelho = rs.getString("nomeaparelho");
-				String nsaparelho = rs.getString("numerodeserie");
+				int idaparelho = rs.getInt("id");
+				String nomeaparelho = rs.getString("nome");
+				String nsaparelho = rs.getString("numeroserie");
 				String modelo = rs.getString("modelo");
 				String ativo = rs.getString("ativo");
-				int marca = Integer.parseInt(rs.getString("marca_marca"));
-				int categoria = Integer.parseInt(rs.getString("categoriaaparelho_categoriaaparelho"));
+				int marca = Integer.parseInt(rs.getString("marca_id"));
+				int categoria = Integer.parseInt(rs.getString("categoriaaparelho_id"));
 
 				aparelhofiltrado.setIdaparelho(idaparelho);
 				aparelhofiltrado.setNome(nomeaparelho);

@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css" >
+<link rel="stylesheet" href="../mycss/css.css" >
+
+<script type="text/javascript" src="../../lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../../lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../scripts/scripts.js"></script>
+
+<div class="div-painel-aparelhos col-sm-12 col-md-10 col-lg-10">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<div>
+				<label class="label-painel-aparelho">Painel de Aparelhos</label> 
+			</div>
+			<div class="input-group input-group-barra-pesquisa">
+				<input type="text" class="form-control form-control-custom" placeholder="moto G" id="buscaAparelhoInput" name="buscaAparelhoInput">
+				<span class="btn input-group-addon icone-pesquisar glyphicon glyphicon-search" onclick="buscarAparelho()"></span>					
+			</div>
+			
+			<div class="icone-adicionar-aparelho">
+				<span class="btn btn-default glyphicon glyphicon-plus"></span>
+			</div>
+			
+			<div class="btn-group filtroAtivo">
+				<div class="labelFiltro">
+					<label>Filtro de Aparelho |</label>
+				</div>
+				<div class="botaoFiltro">
+				    <select class="btn-default form-control" id="filtroAtivoOpc" onchange="filtroAparelhosAtivos()">
+						<option value="A">Todos</option>
+						<option value="S">Ativos</option>
+						<option value="N">Inativos</option>
+					</select>
+				</div>
+			</div>		
+		</div>
+		<div class="panel-body">
+			<div id="resultadoAparelhos" class="resultadoAparelhos"></div>
+		</div>
+	</div>
+</div>

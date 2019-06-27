@@ -36,14 +36,7 @@ function CadastroAparelho() {
 	$.ajax({
 		type : 'POST',
 		url : '../../../ServletCadastroAparelho',
-		data : {
-			'nome' : nome,
-			'marca' : marca,
-			'modelo' : modelo,
-			'nsaparelho' : nsaparelho,
-			'categoria' : categoria,
-			'ativo':ativo
-		},
+		data : {'nome' : nome,'marca' : marca,'modelo' : modelo,'nsaparelho' : nsaparelho,'categoria' : categoria,'ativo':ativo },
 		success : function(resposta) {
 			buscarAparelho();
 		},
@@ -635,6 +628,11 @@ function filtroServico(){
 	});
 }
 /*FIM CRUD SERVICO*/
+
+
+function carregarHTML(){
+	$("#categoriaAparelho").load("categoriaAparelho.html");
+}
 
 /*INICIO ORDEM DE SERVICO*/
 function abrirOS(){

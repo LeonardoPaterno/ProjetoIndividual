@@ -7,9 +7,9 @@ public class AparelhoObj implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private int idaparelho;
-	private String nome;
 	private int categoria;
 	private int marca;
+	private String nome;
 	private String modelo;
 	private String nsaparelho;
 	private String ativo;
