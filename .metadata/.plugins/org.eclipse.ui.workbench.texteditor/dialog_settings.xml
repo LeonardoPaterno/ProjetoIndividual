@@ -2,12 +2,18 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="modal" key="selection"/>
+		<item value="ModalPainelUsuario" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="modalPainelUsuario"/>
+			<item value="painelUsuario"/>
+			<item value="form-control-custom"/>
+			<item value="icone-adicionar-"/>
+			<item value="div-painel-"/>
+			<item value="label-painel"/>
 			<item value="modal"/>
 			<item value="icone"/>
 			<item value="filtroAtivo"/>
@@ -17,12 +23,6 @@
 			<item value="Pessoa"/>
 			<item value="Funcionario"/>
 			<item value="`"/>
-			<item value="contato"/>
-			<item value="buscaAparelhoInput"/>
-			<item value="modalaparelho"/>
-			<item value="modalEdit"/>
-			<item value="modalEdirt"/>
-			<item value="resultadoAparelho"/>
 		</list>
 		<list key="replacehistory">
 			<item value="PessoaObj"/>

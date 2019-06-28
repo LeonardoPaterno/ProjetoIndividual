@@ -629,13 +629,7 @@ function filtroServico(){
 }
 /*FIM CRUD SERVICO*/
 
-
-function carregarHTML(){
-	$("#categoriaAparelho").load("categoriaAparelho.html");
-}
-
 /*INICIO ORDEM DE SERVICO*/
 function abrirOS(){
-	
 }
 /*FIM ORDEM DE SERVICO*/

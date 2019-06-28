@@ -1,3 +1,7 @@
+body{
+	background-color: #c7c9cb;
+}
+
 .custom-background-login {
 	background-image: url("../imagens/pc.jpg");
 	position: relative;
@@ -58,7 +62,7 @@ h4 {
 	border-color: black;
 }
 
-.label-painel-aparelho, .label-painel-clientes, .label-painel-funcionario, .label-painel-servico, .label-painel-os{
+.label-painel-aparelho, .label-painel-clientes, .label-painel-funcionario, .label-painel-servico, .label-painel-os, .label-painel-categoriaAparelho{
 	font-size: medium;
 }
 
@@ -304,7 +308,7 @@ h4 {
 }
 
 .icone-adicionar-funcionario, .icone-adicionar-cliente, .icone-adicionar-servico, .icone-adicionar-itens-servico, 
-.icone-adicionar-aparelho, .icone-adicionar-os {
+.icone-adicionar-aparelho, .icone-adicionar-os, .icone-adicionar-categoriaAparelho {
     display: inline-block;
     left: 30px;
     top: 40px;
@@ -330,7 +334,8 @@ h4 {
 }
 
 .div-painel-clientes, .div-painel-funcionarios, .div-painel-aparelhos,
-.div-painel-servicos, .div-painel-itemservicos,	.div-painel-ordemservicos {
+.div-painel-servicos, .div-painel-itemservicos,	.div-painel-ordemservicos,
+.div-painel-categoriaAparelho {
 	margin-top: 10px;
 	font-weight: bold;
 	width: 87%;
