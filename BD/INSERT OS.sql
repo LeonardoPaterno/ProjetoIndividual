@@ -1,6 +1,6 @@
 insert into endereco (estado, cidade, bairro, rua, numero, cep) values('SC', 'Joinville', 'Petropolis', 'Manoel de Souza', 100, 89208782);
 insert into marca (nomemarca, ativo) values('Motorola', 'S');
-insert into categoriaaparelho (nome) values('Smartphone');
+insert into categoriaaparelho (nome, ativo) values('Smartphone', 'S');
 insert into aparelho (nome, numeroserie, modelo, ativo, marca_id, categoriaaparelho_id) values('Moto E', 'XT589', 'Moto E 5 Plus', 'S', 1, 1);
 insert into servicos (tiposervico, nomeservico, descricao, ativo) values('Manutencao', 'Troca de tela', 'Desmontagem e troca da tela, remontagem e teste do aparelho.', 'S');
 insert into orcamento (total) values(526.85);

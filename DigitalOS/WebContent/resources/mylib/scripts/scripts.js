@@ -629,6 +629,26 @@ function filtroServico(){
 }
 /*FIM CRUD SERVICO*/
 
+/*INICIO CRUD CATERGORIA APARELHO*/
+function addCategoriaAparelho(){
+	var nome = $("#nomecategoria").val();
+	var ativo = $("#statuscategoria").val();
+	var categoriaNova = {'nome':nome, 'ativo':ativo};
+	var categoria = JSON.stringify(categoriaNova);
+	$.ajax({
+		type:'POST',
+		url: '/DigitalOS/rest/RestCategoriaAparelho/addCategoriaAparelho',
+		data: categoria,
+		sucess: function(resposta){
+			alert(resposta);
+		},
+		erro: function(resposta){
+			alert("Erro ao salvar categoria de aparelho");
+		}
+	});
+}
+/*FIM CRUD CATEGORIA APARELHO*/
+
 /*INICIO ORDEM DE SERVICO*/
 function abrirOS(){
 }

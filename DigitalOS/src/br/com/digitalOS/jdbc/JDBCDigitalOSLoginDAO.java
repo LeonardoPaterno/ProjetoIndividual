@@ -10,6 +10,7 @@ import java.util.List;
 
 import br.com.digitalOS.jdbcInterface.DigitalOSInterface;
 import br.com.digitalOS.objetos.AparelhoObj;
+import br.com.digitalOS.objetos.CategoriaAparelhoObj;
 import br.com.digitalOS.objetos.FuncionarioObj;
 import br.com.digitalOS.objetos.LoginObj;
 import br.com.digitalOS.objetos.PessoaObj;
@@ -820,6 +821,36 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		return ListaServicosAtivos;
 	}
 	/*FIM SERVICO*/
+	public boolean inserirCategoriaAparelho(CategoriaAparelhoObj categoria) {
+		String comando = "INSERT INTO categoriaaparelho (nome, ativo) values(?,?);";
+		PreparedStatement p;
+		try {
+			p = this.conexao.prepareStatement(comando);
+			p.setString(1, categoria.getNome());
+			p.setString(2, categoria.getAtivo());
+			p.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	public List<CategoriaAparelhoObj> buscarCategoriaAparelhoPorNome(String nome) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public CategoriaAparelhoObj buscarCategoriaAparelhoPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public void atualizarCategoriaAparelho(CategoriaAparelhoObj categoriaAparelhoObj) {
+		// TODO Auto-generated method stub
+		
+	}
+	public List<CategoriaAparelhoObj> filtroCategoriaAparelhoAtivo(CategoriaAparelhoObj categoriaAparelho) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
 
