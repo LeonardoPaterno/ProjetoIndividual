@@ -639,11 +639,102 @@ function addCategoriaAparelho(){
 		type:'POST',
 		url: '/DigitalOS/rest/RestCategoriaAparelho/addCategoriaAparelho',
 		data: categoria,
-		sucess: function(resposta){
+		success: function(resposta){
 			alert(resposta);
+			/*$("#modalcategoriaaparelho").find('form')[0].reset();
+			$("#modalcategoriaaparelho").modal('hide');*/
+			buscarCatergoria();
 		},
-		erro: function(resposta){
+		error: function(){
 			alert("Erro ao salvar categoria de aparelho");
+		}
+	});
+}
+
+function buscarCatergoria(){
+	var valorBusca = $('#buscaCategoria').val();
+	$.ajax({
+		type: 'POST',
+		url: '/DigitalOS/rest/RestCategoriaAparelho/buscarCategoriaAparelhoPorNome',
+		data: valorBusca,
+		success: function(listaCategoriaAchados){
+			tabelaCategoria(listaCategoriaAchados);
+		},
+		error: function(listaCategoriaAchados){
+			tabelaCategoria();
+		}
+	});
+}
+
+function tabelaCategoria(listaCategoriaAchados){
+	var html = "<div class='teble-reponsive'>" +
+			   "<table class='table table-striped table-condensed table-bordered'>";
+		html += "<tr>" +
+				"<th># ID</th> <th>Nome Categoria</th> <th>Ativo</th> <th>Edição</th>" +
+				"</tr>"
+	for(var i = 0; i < listaCategoriaAchados.length; i++){
+		html += "<tr>" +
+					"<td>" + listaCategoriaAchados[i].id + "</td>" +
+					"<td>" + listaCategoriaAchados[i].nome + "</td>" +
+					"<td id='td'>" + listaCategoriaAchados[i].ativo + "</td>" +
+					"<td>" +
+						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoCategoria("+listaCategoriaAchados[i].id+")'></div>" +					
+					"</td>" +
+				"</tr>"
+	}
+	html += "</table>" +
+			"</div>"
+	$("#resultadoCategoria").html(html);
+}
+function exibirEdicaoCategoria(id){
+	alert(id);
+	$.ajax({
+		type : 'POST',
+		url : '/DigitalOS/rest/RestCategoriaAparelho/buscarCategoriaAparelhoPeloId/'+id,
+		success: function(categoria){
+			console.log(categoria);
+			$("#EditIdCategoria").val(categoria.id);
+			$("#EditNomeCategoria").val(categoria.nome);
+			$("#EditStatusCategoria").val(categoria.ativo);
+			$("#msgEditCategoria").modal(categoria);
+		},
+		error: function(servico){
+			alert("Erro ao editar Categoria!");
+		}
+	});
+}
+function editarCategoria(){
+	var id = 	$("#EditIdCategoria").val();
+	var nome = 	$("#EditNomeCategoria").val();
+	var ativo = $("#EditStatusCategoria").val();
+	
+	var categoriaEdit = {'id':id, 'nome':nome,'ativo':ativo};
+	var categoria = JSON.stringify(categoriaEdit);
+	
+	$.ajax({
+		type : 'POST',
+		url : '/DigitalOS/rest/RestCategoriaAparelho/editarCategoriaAparelho',
+		data:categoria,
+		success: function(resposta){
+			alert(resposta);
+			$('#msgEditCategoria').modal('hide');
+			buscarCatergoria();
+		},
+		error:function(){
+			alert("Erro ao Atualizar Servico");
+		}
+	});
+}
+function filtroCategoria(){
+	$.ajax({
+		type:'POST',
+		url: '/DigitalOS/rest/RestCategoriaAparelho/filtroCategoriaAparelhoAtivo',
+		data: $("#filtroAtivoOpc").val(),
+		success: function(listaCategoriaAchados){
+			tabelaCategoria(listaCategoriaAchados);
+		},
+		error: function(){
+			alert("Erro ao Filtrar Vategorias");
 		}
 	});
 }

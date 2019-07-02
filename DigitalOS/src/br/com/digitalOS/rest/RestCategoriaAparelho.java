@@ -26,7 +26,6 @@ public class RestCategoriaAparelho extends UtilRest{
 	@POST
 	@Path("/addCategoriaAparelho")
 	@Consumes("application/*")
-
 	public Response addCategoriaAparelhoObj(String CategoriaAparelho) {
 		try {		
 			CategoriaAparelhoObj CategoriaAparelhoNova = new ObjectMapper().readValue(CategoriaAparelho, CategoriaAparelhoObj.class);
@@ -36,8 +35,7 @@ public class RestCategoriaAparelho extends UtilRest{
 			JDBCDigitalOSLoginDAO jdbcCategoriaAparelhoObj = new JDBCDigitalOSLoginDAO(conexao);
 			jdbcCategoriaAparelhoObj.inserirCategoriaAparelho(CategoriaAparelhoNova);
 			conec.fecharConexao();
-			
-			return Response.ok(this.buildResponse("Categoria Aparelho cadastrada com sucesso!")).build();
+			return Response.ok(this.buildResponse("Cadastrou")).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
@@ -64,15 +62,16 @@ public class RestCategoriaAparelho extends UtilRest{
 
 	@POST
 	@Path("/buscarCategoriaAparelhoPeloId/{id}")
-	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	@Produces({MediaType.APPLICATION_JSON })
 	public Response buscarCategoriaAparelhoObjPeloId(@PathParam("id") int id) {
+		System.out.println(id);
 		try {
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCDigitalOSLoginDAO jdbcCategoriaAparelhoObj = new JDBCDigitalOSLoginDAO(conexao);
 			CategoriaAparelhoObj CategoriaAparelhoObj = jdbcCategoriaAparelhoObj.buscarCategoriaAparelhoPorId(id);
 			
-			return Response.ok(this.buildResponse(CategoriaAparelhoObj),MediaType.APPLICATION_JSON).build();
+			return Response.ok(this.buildResponse(CategoriaAparelhoObj), MediaType.APPLICATION_JSON).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
@@ -102,6 +101,7 @@ public class RestCategoriaAparelho extends UtilRest{
 	@Path("/filtroCategoriaAparelhoAtivo")
 	@Produces("application/*")
 	public Response filtrarAparelhosAtivos(String ativo) {
+		System.out.println(ativo);
 		try {
 			CategoriaAparelhoObj CategoriaAparelho = new CategoriaAparelhoObj();
 			CategoriaAparelho.setAtivo(ativo);

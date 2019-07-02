@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="ISO-8859-1">
+		<meta charset="UTF-8">
 		<title>Categoria Aparelho</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,9 +36,9 @@
 									<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Cliente</a> 
 									<a class="btn btn-primary btn-primary-custom" onclick="location.href='categoriaAparelho.html'">Categoria Aparelho</a>
 									<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-funcionario.html'">Funcionario</a>
-									<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-itens-servico.html'">Itens de Serviço</a> 
-									<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-servico.html'">Serviços</a>
-									<a class="btn btn-primary btn-primary-custom" onclick="location.href='aberturaOs.html'">Ordem de Serviço</a>
+									<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-itens-servico.html'">Itens de ServiÃ§o</a> 
+									<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-servico.html'">ServiÃ§os</a>
+									<a class="btn btn-primary btn-primary-custom" onclick="location.href='aberturaOs.html'">Ordem de ServiÃ§o</a>
 								</div>
 							</li>
 						</ul>
@@ -59,14 +59,14 @@
 					</div>
 	
 					<div class="btn-group btn-group-vertical group-menu" role="group">
-						<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Relatório</button>
+						<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">RelatÃ³rio</button>
 						<ul class="dropdown-menu dropdown-menu-custom div-botao-relatorio">
 							<li>
 								<div class="btn-group-vertical" role="group">
 									<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Funcionario</a>
 									<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Cliente</a> 
-									<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Ordem de Serviço</a> 
-									<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Itens de Serviço</a>
+									<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Ordem de ServiÃ§o</a> 
+									<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Itens de ServiÃ§o</a>
 								</div>
 							</li>
 						</ul>
@@ -77,53 +77,9 @@
 							Sair <span class="glyphicon glyphicon-log-out icone-sair"></span>
 						</button>
 					</div>
-	
 				</div>
 			</div>
-
 			<div id="divCategoriaAparelho" class="divCategoriaAparelho"></div>
-			
-			<div class="modal fade col-md-12" id="ModalPainelCategoriaAparelho">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content col-md-12">
-						<div class="modal-header col-md-12">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-							</button>
-							<h6 class="modal-title">Painel Categoria Aparelho</h6>
-						</div>
-						
-						<div class="modal-body col-md-12">
-						 	<ul class="nav nav-tabs nav-justified">
-							  <li role="representation" data-toggle="tab" class="active"><a href="#dadospessoais">Dados pessoais</a></li>
-							  <li role="representation" data-toggle="tab"><a href="#dadoslogin">Dados de login</a></li>
-							  <li role="representation" data-toggle="tab"><a href="#alterarsenha">Alterar senha</a></li>
-							</ul>
-							
-							<div class="tab-content">
-							    <div id="dadospessoais" class="tab-pane fade in active">
-							      teste	
-							    </div>
-							    <div id="dadoslogin" class="tab-pane fade">
-							      teste 2
-							    </div>
-							    <div id="alterarsenha" class="tab-pane fade">
-							      teste 3
-							    </div>
-						  </div>
-						</div>
-						
-						<div class="modal-footer col-md-12">
-							<button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">
-								Cancelar
-							</button>
-							
-							<button type="submit" class="btn btn-primary botao-salvar" id="salvarpainelUsuario" onclick="salvarPainelUsuario()">
-								Salvar
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 		
 		<script>

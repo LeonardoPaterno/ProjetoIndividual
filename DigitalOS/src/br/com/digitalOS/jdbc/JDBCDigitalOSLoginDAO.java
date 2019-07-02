@@ -828,6 +828,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			p = this.conexao.prepareStatement(comando);
 			p.setString(1, categoria.getNome());
 			p.setString(2, categoria.getAtivo());
+			System.out.println(p);
 			p.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -836,20 +837,100 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		return true;
 	}
 	public List<CategoriaAparelhoObj> buscarCategoriaAparelhoPorNome(String nome) {
-		// TODO Auto-generated method stub
-		return null;
+		String comando = "SELECT * FROM categoriaaparelho ";
+		if(nome != "" && nome != null) {
+			comando += "WHERE nome like '"+nome+"%'";
+		}
+		
+		List<CategoriaAparelhoObj> ListaCategoria = new ArrayList<CategoriaAparelhoObj>();
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while (rs.next()) {
+				CategoriaAparelhoObj categoria = new CategoriaAparelhoObj();
+				int id = rs.getInt("id");
+				String nomecategoria = rs.getString("nome");
+				String ativo = rs.getString("ativo");
+				System.out.println(rs);
+				categoria.setId(id);
+				categoria.setNome(nomecategoria);
+				categoria.setAtivo(ativo);
+				ListaCategoria.add(categoria);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ListaCategoria;
 	}
 	public CategoriaAparelhoObj buscarCategoriaAparelhoPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		String comando = "SELECT id, nome, ativo FROM categoriaaparelho WHERE id = "+id+";";
+		CategoriaAparelhoObj categoria = new CategoriaAparelhoObj();
+		try{
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while(rs.next()){
+				int idservico = rs.getInt("id");
+				String nome = rs.getString("nome");
+				String ativo = rs.getString("ativo");
+				
+				categoria.setId(idservico);
+				categoria.setNome(nome);;
+				categoria.setAtivo(ativo);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return categoria;
+		}
+		return categoria;
 	}
-	public void atualizarCategoriaAparelho(CategoriaAparelhoObj categoriaAparelhoObj) {
-		// TODO Auto-generated method stub
-		
+	public boolean atualizarCategoriaAparelho(CategoriaAparelhoObj categoria) {
+		String comando = "UPDATE categoriaaparelho SET nome = ?, ativo = ? WHERE id = "+categoria.getId()+";";
+		PreparedStatement p;
+		try{p = this.conexao.prepareStatement(comando);
+			p.setString(1, categoria.getNome());
+			p.setString(2, categoria.getAtivo());
+			p.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;		
 	}
-	public List<CategoriaAparelhoObj> filtroCategoriaAparelhoAtivo(CategoriaAparelhoObj categoriaAparelho) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CategoriaAparelhoObj> filtroCategoriaAparelhoAtivo(CategoriaAparelhoObj categoria) {
+		List<CategoriaAparelhoObj> ListaCategoriasAtivos = new ArrayList<CategoriaAparelhoObj>();
+		String comando = "";
+		String filtro = categoria.getAtivo();
+		if(filtro.equalsIgnoreCase("N")) {
+			comando += "SELECT id, nome, ativo FROM categoriaaparelho WHERE ativo = 'N';";
+		}
+		else if(filtro.equalsIgnoreCase("S")) {
+			comando += "SELECT id, nome, ativo FROM categoriaaparelho WHERE ativo = 'S';";
+		}
+		else{
+			comando += "SELECT id, nome, ativo FROM categoriaaparelho;";
+		}
+		int vezes = 0;
+		try {
+			System.out.println(comando);
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while (rs.next()) {
+				vezes = vezes + 1;
+				CategoriaAparelhoObj categorias = new CategoriaAparelhoObj();
+				int id = rs.getInt("id");
+				String nome = rs.getString("nome");
+				String ativo = rs.getString("ativo");
+				
+				categorias.setId(id);
+				categorias.setNome(nome);
+				categorias.setAtivo(ativo);
+
+				ListaCategoriasAtivos.add(categorias);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ListaCategoriasAtivos;
 	}
 }
 
