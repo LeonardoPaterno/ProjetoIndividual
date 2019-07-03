@@ -13,6 +13,7 @@ import br.com.digitalOS.objetos.AparelhoObj;
 import br.com.digitalOS.objetos.CategoriaAparelhoObj;
 import br.com.digitalOS.objetos.FuncionarioObj;
 import br.com.digitalOS.objetos.LoginObj;
+import br.com.digitalOS.objetos.MarcaObj;
 import br.com.digitalOS.objetos.PessoaObj;
 import br.com.digitalOS.objetos.ServicoObj;
 
@@ -821,6 +822,8 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		return ListaServicosAtivos;
 	}
 	/*FIM SERVICO*/
+	
+	/*INICIO CATEGORIA APARELHO*/
 	public boolean inserirCategoriaAparelho(CategoriaAparelhoObj categoria) {
 		String comando = "INSERT INTO categoriaaparelho (nome, ativo) values(?,?);";
 		PreparedStatement p;
@@ -828,7 +831,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			p = this.conexao.prepareStatement(comando);
 			p.setString(1, categoria.getNome());
 			p.setString(2, categoria.getAtivo());
-			System.out.println(p);
 			p.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -851,7 +853,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				int id = rs.getInt("id");
 				String nomecategoria = rs.getString("nome");
 				String ativo = rs.getString("ativo");
-				System.out.println(rs);
+				
 				categoria.setId(id);
 				categoria.setNome(nomecategoria);
 				categoria.setAtivo(ativo);
@@ -911,7 +913,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		int vezes = 0;
 		try {
-			System.out.println(comando);
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
 			while (rs.next()) {
@@ -932,6 +933,118 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return ListaCategoriasAtivos;
 	}
+	/*FIM CATEGORIA APARELHO*/
+	
+	/*INICIO MARCA*/
+	public boolean inserirMarca(MarcaObj marca) {
+		String comando = "insert into marca (nomemarca, ativo) values(?, ?);";
+		PreparedStatement p;
+		try {
+			p = this.conexao.prepareStatement(comando);
+			p.setString(1, marca.getNome());
+			p.setString(2, marca.getAtivo());
+			p.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	public List<MarcaObj> buscarMarcaPorNome(String nome) {
+		String comando = "SELECT * FROM marca ";
+		if(nome != "" || nome != null) {
+			comando += "WHERE nomemarca like '"+ nome +"%'";
+		}
+		List<MarcaObj> ListaMarca = new ArrayList<MarcaObj>();
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while (rs.next()) {
+				MarcaObj marca = new MarcaObj();
+				int id = rs.getInt("id");
+				String nomemarca = rs.getString("nomemarca");
+				String ativo = rs.getString("ativo");
+				marca.setId(id);
+				marca.setNome(nomemarca);
+				marca.setAtivo(ativo);
+				ListaMarca.add(marca);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ListaMarca;
+	}
+	public MarcaObj buscarMarcaPorId(int id) {
+		String comando = "SELECT id, nomemarca, ativo FROM marca WHERE id = "+id+";";
+		MarcaObj marca = new MarcaObj();
+		try{
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while(rs.next()){
+				int idservico = rs.getInt("id");
+				String nomemarca = rs.getString("nomemarca");
+				String ativo = rs.getString("ativo");
+				
+				marca.setId(idservico);
+				marca.setNome(nomemarca);;
+				marca.setAtivo(ativo);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return marca;
+		}
+		return marca;
+	}
+	public boolean atualizarMarca(MarcaObj marca) {
+		String comando = "UPDATE marca SET nomemarca = ?, ativo = ? WHERE id = "+marca.getId()+";";
+		PreparedStatement p;
+		try{p = this.conexao.prepareStatement(comando);
+			p.setString(1, marca.getNome());
+			p.setString(2, marca.getAtivo());
+			p.executeUpdate();
+			System.out.println(p);
+		}catch(SQLException e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;		
+	}
+	public List<MarcaObj> filtroMarcaAtivo(MarcaObj marca) {
+		List<MarcaObj> ListaMarcaAtivos = new ArrayList<MarcaObj>();
+		String comando = "";
+		String filtro = marca.getAtivo();
+		if(filtro.equalsIgnoreCase("N")) {
+			comando += "SELECT id, nomemarca, ativo FROM marca WHERE ativo = 'N';";
+		}
+		else if(filtro.equalsIgnoreCase("S")) {
+			comando += "SELECT id, nomemarca, ativo FROM marca WHERE ativo = 'S';";
+		}
+		else{
+			comando += "SELECT id, nomemarca, ativo FROM marca;";
+		}
+		int vezes = 0;
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while (rs.next()) {
+				vezes = vezes + 1;
+				MarcaObj marcas = new MarcaObj();
+				int id = rs.getInt("id");
+				String nomemarca = rs.getString("nomemarca");
+				String ativo = rs.getString("ativo");
+				
+				marcas.setId(id);
+				marcas.setNome(nomemarca);
+				marcas.setAtivo(ativo);
+
+				ListaMarcaAtivos.add(marcas);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ListaMarcaAtivos;
+	}
+	/*FIM MARCA*/
 }
 
 

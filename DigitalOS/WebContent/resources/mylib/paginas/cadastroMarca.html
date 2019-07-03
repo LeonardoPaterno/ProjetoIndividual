@@ -1,15 +1,16 @@
-<div class="div-painel-categoriaAparelho col-md-10">
+<div class="div-painel-marca col-md-10">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<div>
-				<label class="label-painel-categoriaAparelho">Painel de Categoria de Aparelhos</label> 
-			</div>
-			<div class="input-group input-group-barra-pesquisa">
-				<input type="text" class="form-control form-control-custom" placeholder="Televisor" id="buscaCategoria" name="buscaCategoria">
-				<span class="btn input-group-addon icone-pesquisar glyphicon glyphicon-search" onclick="buscarCatergoria()"></span>					
+				<label class="label-painel-marca">Painel de Marca</label> 
 			</div>
 			
-			<div class="icone-adicionar-categoriaAparelho">
+			<div class="input-group input-group-barra-pesquisa">
+				<input type="text" class="form-control form-control-custom" placeholder="Motorola" id="buscaMarca">
+				<span class="btn input-group-addon icone-pesquisar glyphicon glyphicon-search" onclick="buscarMarca()"></span>					
+			</div>
+			
+			<div class="icone-adicionar-marca">
 				<span class="btn btn-default glyphicon glyphicon-plus"></span>
 			</div>
 			
@@ -18,7 +19,7 @@
 					<label>Filtro de Categoria |</label>
 				</div>
 				<div class="botaoFiltro">
-				    <select class="btn-default form-control" id="filtroAtivoOpc" onchange="filtroCategoria()">
+				    <select class="btn-default form-control" id="filtroAtivoOpc" onchange="filtroMarca()">
 						<option value="A">Todos</option>
 						<option value="S">Ativos</option>
 						<option value="N">Inativos</option>
@@ -27,7 +28,7 @@
 			</div>		
 		</div>
 		<div class="panel-body">
-			<div id="resultadoCategoria" class="resultadoCategoria"></div>
+			<div id="resultadoMarca" class="resultadoMarca"></div>
 		</div>
 	</div>
 </div>
@@ -74,7 +75,7 @@
 	</div>
 </div>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="modalcategoriaaparelho">
+<div class="modal fade" tabindex="-1" role="dialog" id="modalmarca">
   <div class="modal-dialog modalmd modal-dialog-custom" role="document">
   	<div class="modal-content">
       <div class="modal-header">
@@ -87,29 +88,29 @@
         	<div class="row">		        					        	   	
 	        	<div class="form-group col-md-4">
 	        		<label>Nome Categoria</label>
-	        		<input class="form-control" type="text" id="nomecategoria" placeholder="Televisor">
+	        		<input class="form-control" type="text" id="nomemarca" placeholder="Motorola">
 	        	</div>        	
 	        	<div class="form-group col-md-2">
 	        		<label>Ativo</label>
-	        		<input class="form-control" type="text" id="statuscategoria" value="S" placeholder="S" disabled>
+	        		<input class="form-control" type="text" id="statusmarca" value="S" placeholder="S" disabled>
 	        	</div>
 	        </div>
         </div>
       </div> 
       <div class="modal-footer">
         <button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary botao-salvar" onclick="addCategoriaAparelho()">Salvar</button>
+        <button type="button" class="btn btn-primary botao-salvar" onclick="addMarca()">Salvar</button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="msgEditCategoria">
+<div class="modal fade" tabindex="-1" role="dialog" id="msgEditMarca">
   <div class="modal-dialog modalmd modal-dialog-custom" role="document">
   	<div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title">Edicao de Categoria de Aparelho</h3>
+        <h3 class="modal-title">Edicao de Marca</h3>
       </div>
       
       <div class="modal-body">
@@ -117,15 +118,15 @@
         	<div class="row">
         		<div class="form-group col-md-2">	
         			<label>Id</label>	    
-        			<input class="form-control" id="EditIdCategoria" disabled>
+        			<input class="form-control" id="EditIdMarca" disabled>
         		</div>    					        	   	
 	        	<div class="form-group col-md-4">
-	        		<label>Nome Categoria</label>
-	        		<input class="form-control" type="text" id="EditNomeCategoria" placeholder="Televisor">
+	        		<label>Nome Marca</label>
+	        		<input class="form-control" type="text" id="EditNomeMarca">
 	        	</div>        	
 	        	<div class="form-group col-md-3">
 	        		<label>Ativo</label>
-	        		<select class="form-control" id="EditStatusCategoria">
+	        		<select class="form-control" id="EditStatusMarca">
 	        			<option value="S">Ativo</option>
 	        			<option value="N">Inativo</option>
 	        		</select>
@@ -135,14 +136,14 @@
       </div> 
       <div class="modal-footer">
         <button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary botao-salvar" onclick="editarCategoria()">Salvar</button>
+        <button type="button" class="btn btn-primary botao-salvar" onclick="editarMarca()">Salvar</button>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-	$(".icone-adicionar-categoriaAparelho").click(function(){
-		$('#modalcategoriaaparelho').modal('show');
+	$(".icone-adicionar-marca").click(function(){
+		$('#modalmarca').modal('show');
 	});
 </script>

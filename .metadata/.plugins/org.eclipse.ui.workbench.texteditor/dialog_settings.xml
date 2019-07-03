@@ -2,29 +2,30 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="ModalPainel" key="selection"/>
+		<item value="Marca" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="CategoriaAparelho"/>
+			<item value="Marca"/>
+			<item value="icone-adicionar-marca"/>
+			<item value="labelFiltro"/>
+			<item value="icone-adiciona"/>
+			<item value="div-painel-categoria"/>
+			<item value="categoria"/>
+			<item value="filtroAtivo"/>
+			<item value="EditStatusMarca"/>
+			<item value="modalcategoriaaparelho"/>
+			<item value="modalmarca"/>
 			<item value="ModalPainel"/>
 			<item value="Servico"/>
 			<item value="modalPainelUsuario"/>
 			<item value="painelUsuario"/>
-			<item value="form-control-custom"/>
-			<item value="icone-adicionar-"/>
-			<item value="div-painel-"/>
-			<item value="label-painel"/>
-			<item value="modal"/>
-			<item value="icone"/>
-			<item value="filtroAtivo"/>
-			<item value="filtro"/>
-			<item value="label"/>
-			<item value="FuncionarioObj"/>
-			<item value="Pessoa"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Marca"/>
 			<item value="CategoriaAparelho"/>
 			<item value="PessoaObj"/>
 			<item value="Funcionario"/>

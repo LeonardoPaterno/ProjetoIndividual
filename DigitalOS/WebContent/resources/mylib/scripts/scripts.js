@@ -734,11 +734,120 @@ function filtroCategoria(){
 			tabelaCategoria(listaCategoriaAchados);
 		},
 		error: function(){
-			alert("Erro ao Filtrar Vategorias");
+			alert("Erro ao Filtrar Categorias");
 		}
 	});
 }
 /*FIM CRUD CATEGORIA APARELHO*/
+
+
+
+
+
+/*INICIO CRUD CATERGORIA APARELHO*/
+function addMarca(){
+	var nome = $("#nomemarca").val();
+	var ativo = $("#statusmarca").val();
+	var marcaNova = {'nome':nome, 'ativo':ativo};
+	var marca = JSON.stringify(marcaNova);
+	$.ajax({
+		type:'POST',
+		url: '/DigitalOS/rest/RestMarca/addMarca',
+		data: marca,
+		success: function(resposta){
+			alert(resposta);
+			$("#modalmarca").modal('hide');
+			buscarMarca();
+		},
+		error: function(){
+			alert("Erro ao salvar marca de aparelho");
+		}
+	});
+}
+function buscarMarca(){
+	var valorBusca = $('#buscaMarca').val();
+	$.ajax({
+		type: 'POST',
+		url: '/DigitalOS/rest/RestMarca/buscarMarcaPorNome',
+		data: valorBusca,
+		success: function(listaMarcaAchados){
+			tabelaMarca(listaMarcaAchados);
+		},
+		error: function(listaMarcaAchados){
+			tabelaMarca();
+		}
+	});
+}
+function tabelaMarca(listaMarcaAchados){
+	var html = "<div class='teble-reponsive'>" +
+			   "<table class='table table-striped table-condensed table-bordered'>";
+		html += "<tr>" +
+				"<th># ID</th> <th>Nome Marca</th> <th>Ativo</th> <th>Edição</th>" +
+				"</tr>"
+	for(var i = 0; i < listaMarcaAchados.length; i++){
+		html += "<tr>" +
+					"<td>" + listaMarcaAchados[i].id + "</td>" +
+					"<td>" + listaMarcaAchados[i].nome + "</td>" +
+					"<td id='td'>" + listaMarcaAchados[i].ativo + "</td>" +
+					"<td>" +
+						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoMarca("+listaMarcaAchados[i].id+")'></div>" +					
+					"</td>" +
+				"</tr>"
+	}
+	html += "</table>" +
+			"</div>"
+	$("#resultadoMarca").html(html);
+}
+function exibirEdicaoMarca(id){
+	$.ajax({
+		type : 'POST',
+		url : '/DigitalOS/rest/RestMarca/buscarMarcaPeloId/'+id,
+		success: function(marca){
+			console.log(marca);
+			$("#EditIdMarca").val(id);
+			$("#EditNomeMarca").val(marca.nome);
+			$("#EditStatusMarca").val(marca.ativo);
+			$("#msgEditMarca").modal(marca);
+		},
+		error: function(servico){
+			alert("Erro ao editar marca!");
+		}
+	});
+}
+function editarMarca(){
+	var id = 	$("#EditIdMarca").val();
+	var nome = 	$("#EditNomeMarca").val();
+	var ativo = $("#EditStatusMarca").val();	
+	var marca = JSON.stringify({'id':id,'nome':nome,'ativo':ativo});
+	console.log(marca);
+	$.ajax({
+		type : 'POST',
+		url : '/DigitalOS/rest/RestMarca/editarMarca',
+		data: marca,
+		success: function(resposta){
+			alert(resposta);
+			$('#msgEditMarca').modal('hide');
+			buscarMarca();
+		},
+		error:function(){
+			alert("Erro ao atualizar marca!");
+		}
+	});
+}
+function filtroMarca(){
+	$.ajax({
+		type:'POST',
+		url: '/DigitalOS/rest/RestMarca/filtroMarcaAtivo',
+		data: $("#filtroAtivoOpc").val(),
+		success: function(listaMarcaAchados){
+			tabelaMarca(listaMarcaAchados);
+		},
+		error: function(){
+			alert("Erro ao filtrar marca!");
+		}
+	});
+}
+/*FIM CRUD CATEGORIA MARCA*/
 
 /*INICIO ORDEM DE SERVICO*/
 function abrirOS(){

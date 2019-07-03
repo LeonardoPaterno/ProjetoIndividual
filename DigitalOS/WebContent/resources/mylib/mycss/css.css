@@ -308,7 +308,7 @@ h4 {
 }
 
 .icone-adicionar-funcionario, .icone-adicionar-cliente, .icone-adicionar-servico, .icone-adicionar-itens-servico, 
-.icone-adicionar-aparelho, .icone-adicionar-os, .icone-adicionar-categoriaAparelho {
+.icone-adicionar-aparelho, .icone-adicionar-os, .icone-adicionar-categoriaAparelho, .icone-adicionar-marca {
     display: inline-block;
     left: 30px;
     top: 40px;
@@ -335,7 +335,7 @@ h4 {
 
 .div-painel-clientes, .div-painel-funcionarios, .div-painel-aparelhos,
 .div-painel-servicos, .div-painel-itemservicos,	.div-painel-ordemservicos,
-.div-painel-categoriaAparelho {
+.div-painel-categoriaAparelho, .div-painel-marca {
 	margin-top: 10px;
 	font-weight: bold;
 	width: 87%;
@@ -440,7 +440,7 @@ h4 {
 
 .filtroAtivo{
 	left: 85px;
-    top: 3px;
+	top: 3px;
 }
 
 .labelFiltro{

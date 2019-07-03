@@ -64,7 +64,6 @@ public class RestCategoriaAparelho extends UtilRest{
 	@Path("/buscarCategoriaAparelhoPeloId/{id}")
 	@Produces({MediaType.APPLICATION_JSON })
 	public Response buscarCategoriaAparelhoObjPeloId(@PathParam("id") int id) {
-		System.out.println(id);
 		try {
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
@@ -101,7 +100,6 @@ public class RestCategoriaAparelho extends UtilRest{
 	@Path("/filtroCategoriaAparelhoAtivo")
 	@Produces("application/*")
 	public Response filtrarAparelhosAtivos(String ativo) {
-		System.out.println(ativo);
 		try {
 			CategoriaAparelhoObj CategoriaAparelho = new CategoriaAparelhoObj();
 			CategoriaAparelho.setAtivo(ativo);
