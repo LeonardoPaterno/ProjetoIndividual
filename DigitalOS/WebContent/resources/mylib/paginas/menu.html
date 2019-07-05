@@ -28,7 +28,7 @@
 			
 			<div class="btn-group btn-group-vertical btn-group-custom" role="group">
 				<div class="btn-group btn-group-vertical group-menu" role="group">
-					<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Cadastrar</button>
+					<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Cadastrar <span class="caret"></span></button>
 					<ul class="dropdown-menu dropdown-menu-custom div-botao-cadastrar">
 						<li>
 							<div class="btn-group-vertical" role="group">
@@ -56,7 +56,7 @@
 				</div>
 
 				<div class="btn-group btn-group-vertical group-menu" role="group">
-					<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Relatório</button>
+					<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Relatório <span class="caret"></span></button>
 					<ul class="dropdown-menu dropdown-menu-custom div-botao-relatorio">
 						<li>
 							<div class="btn-group-vertical" role="group">
@@ -89,32 +89,63 @@
 					
 					<div class="modal-body col-md-12">
 					 	<ul class="nav nav-tabs nav-justified">
-						  <li role="representation" data-toggle="tab" class="active"><a href="#dadospessoais">Dados pessoais</a></li>
-						  <li role="representation" data-toggle="tab"><a href="#dadoslogin">Dados de login</a></li>
-						  <li role="representation" data-toggle="tab"><a href="#alterarsenha">Alterar senha</a></li>
+						   <li class="active"><a role="presentation" href="#dadosPessoais" data-toggle="tab" aria-expanded="true">Dados Pessoais</a></li>
+						   <li><a role="presentation" href="#dadosLogin" data-toggle="tab">Dados de Login</a></li>
 						</ul>
 						
 						<div class="tab-content">
-						    <div id="dadospessoais" class="tab-pane fade in active">
-						      teste	
-						    </div>
-						    <div id="dadoslogin" class="tab-pane fade">
-						      teste 2
-						    </div>
-						    <div id="alterarsenha" class="tab-pane fade">
-						      teste 3
-						    </div>
-					  </div>
-					</div>
-					
-					<div class="modal-footer col-md-12">
-						<button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">
-							Cancelar
-						</button>
-						
-						<button type="submit" class="btn btn-primary botao-salvar" id="salvarAparelho" onclick="editarAparelho()">
-							Salvar
-						</button>
+						   <div class="tab-pane" id="dadosPessoais">
+							   <div class="row col-md-12">
+							   		<div class="col-md-6">
+							   			<label>Nome Completo</label><input class="form-control" type="text" placeholder="Nome Completo" maxlength="80">
+							   		</div>
+							   		<div class="col-md-2">
+							   			<label>CEP</label><input class="form-control" type="text" placeholder="00000-000" maxlength="5">
+							   		</div>
+							   		<div class="col-md-4">
+							   			<label>Endereco</label><input class="form-control" type="text" placeholder="Endereco" maxlength="50">
+							   		</div>
+							   	</div>
+
+							   	<div class="row col-md-12">
+							   	<hr>
+							   		<div class="col-md-2">
+							   			<label>DDD</label><input class="form-control" type="text" placeholder="00" maxlength="2">
+							   		</div>
+							   		<div class="col-md-2">
+							   			<label>Numero</label><input class="form-control" type="text" placeholder="0000 0000" maxlength="4">
+							   		</div>
+							   		<div class="col-md-2">
+							   			<label>DDD</label><input class="form-control" type="text" placeholder="00" maxlength="2">
+							   		</div>
+							   		<div class="col-md-2">
+							   			<label>Celular</label><input class="form-control" type="text" placeholder="0000 0000" maxlength="5">
+							   		</div>
+							   	</div>
+						   </div>
+						   <div class="tab-pane" id="dadosLogin">
+						   		<div class="row col-md-12">
+							   		<div class="col-md-12">
+							   			<label>E-mail</label><input class="form-control" type="text" placeholder="exemplo@exemplo.com" maxlength="50">
+							   		</div>
+							   	</div>
+							   	
+							   	<div class="row col-md-12">
+							   	<hr>
+							   		<p><b>Alterar Senha</b></p>
+							   		<div class="col-md-6">
+							   			<label>Senha Atual</label>
+							   			<input class="form-control" type="password" placeholder="****************" maxlength="16">
+							   		</div>
+							   		<div class="col-md-6">
+							   			<label>Nova Senha</label>
+							   			<input class="form-control" type="password" placeholder="****************" maxlength="16">
+							   			<label>Confirmar Senha</label>
+							   			<input class="form-control" type="password" placeholder="****************" maxlength="16">
+							   		</div>
+							   	</div>
+						   </div>
+						</div>
 					</div>
 				</div>
 			</div>
