@@ -49,7 +49,6 @@
 						<li>
 							<div class="btn-group-vertical" role="group">
 								<a class="btn btn-primary btn-primary-custom" onclick="location.href='ordemServico.html'">Ordens de Serviços</a>
-								<a class="btn btn-primary btn-primary-custom" onclick="location.href='OsConcluida'">Localizar</a>
 							</div>
 						</li>
 					</ul>
@@ -82,23 +81,25 @@
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content col-md-12">
 					<div class="modal-header col-md-12">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="verificaFechar()"><span aria-hidden="true">&times;</span>
 						</button>
 						<h5 class="modal-title">Painel Usuario</h5>
 					</div>
 					
 					<div class="modal-body col-md-12">
 					 	<ul class="nav nav-tabs nav-justified">
-						   <li class="active"><a role="presentation" href="#dadosPessoais" data-toggle="tab" aria-expanded="true">Dados Pessoais</a></li>
-						   <li><a role="presentation" href="#dadosLogin" data-toggle="tab">Dados de Login</a></li>
+						   <li id="dadosPessoaisTab"><a role="presentation" id='dadosPessoaisTabA'href="#dadosPessoais" data-toggle="tab" aria-expanded="true">Dados Pessoais</a></li>
+						   <li id="dadosLoginTab"> <a role="presentation" href="#dadosLogin" data-toggle="tab">Dados de Login</a></li>
 						</ul>
 						
 						<div class="tab-content">
 						   <div class="tab-pane" id="dadosPessoais">
-							   <div class="row col-md-12">
+							   <div class="row col-md-12 divNomeCompleto">
 							   		<div class="col-md-6">
 							   			<label>Nome Completo</label><input class="form-control" type="text" placeholder="Nome Completo" maxlength="80">
 							   		</div>
+							   	</div>
+							   	<div class="row col-md-12">
 							   		<div class="col-md-2">
 							   			<label>CEP</label><input class="form-control" type="text" placeholder="00000-000" maxlength="5">
 							   		</div>
@@ -108,18 +109,22 @@
 							   	</div>
 
 							   	<div class="row col-md-12">
-							   	<hr>
-							   		<div class="col-md-2">
-							   			<label>DDD</label><input class="form-control" type="text" placeholder="00" maxlength="2">
+							   	<hr class="col-md-6">
+							   		<div class="row col-md-12 divTelefone">
+								   		<div class="col-md-2">
+								   			<label>DDD</label><input class="form-control" type="text" placeholder="00" maxlength="2">
+								   		</div>
+								   		<div class="col-md-2">
+								   			<label>Numero</label><input class="form-control" type="text" placeholder="0000 0000" maxlength="4">
+								   		</div>
 							   		</div>
-							   		<div class="col-md-2">
-							   			<label>Numero</label><input class="form-control" type="text" placeholder="0000 0000" maxlength="4">
-							   		</div>
-							   		<div class="col-md-2">
-							   			<label>DDD</label><input class="form-control" type="text" placeholder="00" maxlength="2">
-							   		</div>
-							   		<div class="col-md-2">
-							   			<label>Celular</label><input class="form-control" type="text" placeholder="0000 0000" maxlength="5">
+							   		<div class="row col-md-12 divCelular">
+								   		<div class="col-md-2">
+								   			<label>DDD</label><input class="form-control" type="text" placeholder="00" maxlength="2">
+								   		</div>
+								   		<div class="col-md-2">
+								   			<label>Celular</label><input class="form-control" type="text" placeholder="0000 0000" maxlength="5">
+								   		</div>
 							   		</div>
 							   	</div>
 						   </div>
@@ -146,7 +151,14 @@
 							   	</div>
 						   </div>
 						</div>
-					</div>
+						<div class="row col-md-12">
+					   		<hr> 
+						   	<div id="divBotaoDadosPessoais">
+						   		<input type="button" value="Cancelar" class="btn btn-danger">
+						   		<input type="button" value="Cancelar" class="btn btn-success">
+						   	</div>
+					   	</div>
+					</div><!-- /Modal Body -->
 				</div>
 			</div>
 		</div>
@@ -178,20 +190,43 @@
 			<div class="panel-body">	
 			</div>
 		</div> <!-- <canvas class="segundografico" id="segundoGrafico"></canvas> -->
+	
 	</div> <!-- menu -->
 
 	<script>
 		$("#botao-icone-menu").click(function(e) {
 			e.preventDefault();
 			$("#barra-lateral").toggle();
-		});
-	</script>
-	
-	<script>
+		});		
+
 		$("#painelUsuario").click(function(e) {
 			e.preventDefault();
 			$("#ModalPainelUsuario").modal('show');
+			
+			$("#dadosPessoaisTabA").trigger('click')
+			
 		});
+		$("#dadosLoginTab").click(function(e) {
+			if ($("#dadosPessoaisTab")[0].classList.contains('active')){
+				$("#dadosPessoais").modal('hide');
+		    }
+		    $("#dadosLogin").modal('show');
+		});
+		$("#dadosPessoaisTab").click(function(e){
+			if ($("#dadosLoginTab")[0].classList.contains('active')){
+			   $("#dadosLogin").modal('hide');
+		    }
+		    $("#dadosPessoais").modal('show');
+		});
+		
+		function verificaFechar(){
+			if ($("#dadosPessoaisTab")[0].classList.contains('active')){
+				$("#dadosPessoais").modal('hide');
+		    }
+			if ($("#dadosLoginTab")[0].classList.contains('active')){
+			    $("#dadosLogin").modal('hide');
+		    }
+		}
 	</script>
 </body>
 </html>

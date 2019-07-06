@@ -57,6 +57,15 @@ h4 {
 	padding-top: 7px;
 }
 
+#divBotaoDadosPessoais{
+	left: 630px;
+    position: relative;
+}
+
+.divTelefone, .divNomeCompleto{
+	padding-bottom: 10px;
+}
+
 .form-control:focus {
 	box-shadow: 1px 2px 10px #8d8b8b;
 	border-color: black;
