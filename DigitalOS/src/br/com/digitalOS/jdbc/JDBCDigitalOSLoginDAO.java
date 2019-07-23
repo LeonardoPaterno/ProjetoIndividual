@@ -26,12 +26,20 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 	/*INICIO LOGIN*/
 	public boolean consultarLogin(LoginObj login) {
-		String comando = "select id, email, senha from login" + " where email like '%" + login.getEmail() + "' and senha like '%" + login.getSenha() + "%'";
+		String comando = "SELECT login.id, nome, telefone, celular, rua, numero, cep, login.email, senha from login "
+					   + "inner join pessoa on pessoa.id = login.pessoa_id "
+					   + "inner join endereco on endereco.id = pessoa.endereco_id "
+					   + "where login.email like '"+login.getEmail()+"%';";
 		try {
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
 			while (rs.next()) {
 				login.setId(rs.getInt("id"));
+				login.setEmail(rs.getString("email"));
+				login.setSenha(rs.getString("senha"));
+				login.setNome(rs.getString("nome"));
+				login.setTelefone(rs.getString("telefone"));
+				login.setCelular(rs.getString("celular"));			
 				login.setEmail(rs.getString("email"));
 				login.setSenha(rs.getString("senha"));
 			}

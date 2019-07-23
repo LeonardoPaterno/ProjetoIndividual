@@ -86,7 +86,7 @@
 						<h5 class="modal-title">Painel Usuario</h5>
 					</div>
 					
-					<div class="modal-body col-md-12">
+					<div class="modal-body col-md-12" onload="carregaPerfil()">
 					 	<ul class="nav nav-tabs nav-justified">
 						   <li id="dadosPessoaisTab"><a role="presentation" id='dadosPessoaisTabA'href="#dadosPessoais" data-toggle="tab" aria-expanded="true">Dados Pessoais</a></li>
 						   <li id="dadosLoginTab"> <a role="presentation" href="#dadosLogin" data-toggle="tab">Dados de Login</a></li>
@@ -96,15 +96,20 @@
 						   <div class="tab-pane" id="dadosPessoais">
 							   <div class="row col-md-12 divNomeCompleto">
 							   		<div class="col-md-6">
-							   			<label>Nome Completo</label><input class="form-control" type="text" placeholder="Nome Completo" maxlength="80">
+							   			<label>Nome Completo</label><input id="nome" class="form-control" type="text" placeholder="Nome Completo" maxlength="80">
 							   		</div>
 							   	</div>
 							   	<div class="row col-md-12">
 							   		<div class="col-md-2">
-							   			<label>CEP</label><input class="form-control" type="text" placeholder="00000-000" maxlength="5">
+							   			<label>CEP</label><input id="cep" class="form-control" type="text" placeholder="00000-000" maxlength="5">
 							   		</div>
 							   		<div class="col-md-4">
-							   			<label>Endereco</label><input class="form-control" type="text" placeholder="Endereco" maxlength="50">
+							   			<label>Endereco</label><input id="endereco" class="form-control" type="text" placeholder="Endereco" maxlength="50">
+							   		</div>
+							   	</div>
+							   	<div class="row col-md-12">
+							   		<div class="col-md-2">
+							   			<label>Numero</label><input id="numero" class="form-control" type="text" placeholder="1000" maxlength="6">
 							   		</div>
 							   	</div>
 
@@ -115,7 +120,7 @@
 								   			<label>DDD</label><input class="form-control" type="text" placeholder="00" maxlength="2">
 								   		</div>
 								   		<div class="col-md-2">
-								   			<label>Numero</label><input class="form-control" type="text" placeholder="0000 0000" maxlength="4">
+								   			<label>Telefone</label><input class="form-control" type="text" placeholder="0000 0000" maxlength="4">
 								   		</div>
 							   		</div>
 							   		<div class="row col-md-12 divCelular">
@@ -155,7 +160,7 @@
 					   		<hr> 
 						   	<div id="divBotaoDadosPessoais">
 						   		<input type="button" value="Cancelar" class="btn btn-danger">
-						   		<input type="button" value="Cancelar" class="btn btn-success">
+						   		<input type="button" value="Salvar" class="btn btn-success">
 						   	</div>
 					   	</div>
 					</div><!-- /Modal Body -->

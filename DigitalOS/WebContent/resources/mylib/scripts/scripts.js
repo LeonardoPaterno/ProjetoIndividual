@@ -2,7 +2,6 @@
 function loginOS() {
 	var user = $("input[name=usuario]").val();
 	var password = $("input[name=senha]").val();
-
 	if (user != "" && user != null && password != "" && password != null) {
 		var passCoded = btoa(password);
 
@@ -21,6 +20,11 @@ function loginOS() {
 	} else {
 		alert("E-mail ou Senha Inválido!");
 	}
+}
+
+function carregaPerfil(){
+	$("#nome").val(document.cookie());
+
 }
 /*FIM LOGIN*/
 

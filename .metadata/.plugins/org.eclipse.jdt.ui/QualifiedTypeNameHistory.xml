@@ -15,4 +15,9 @@
 <fullyQualifiedTypeName name="br.com.digitalOS.objetos.FuncionarioObj"/>
 <fullyQualifiedTypeName name="java.math.BigDecimal"/>
 <fullyQualifiedTypeName name="javax.ws.rs.core.MediaType"/>
+<fullyQualifiedTypeName name="java.util.spi.LocaleServiceProvider"/>
+<fullyQualifiedTypeName name="com.google.gwt.storage.client.Storage"/>
+<fullyQualifiedTypeName name="java.net.CookieManager"/>
+<fullyQualifiedTypeName name="java.net.CookieHandler"/>
+<fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
 </qualifiedTypeNameHistroy>

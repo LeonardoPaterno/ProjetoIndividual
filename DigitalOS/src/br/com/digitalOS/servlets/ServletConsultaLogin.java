@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -71,6 +72,8 @@ public class ServletConsultaLogin extends HttpServlet {
 				sessao.setAttribute("login", request.getParameter("user"));
 				msg.put("url", context + "/resources/mylib/paginas/menu.html");
 				json = new Gson().toJson(msg);
+				Cookie ck = new Cookie("coockie", json);
+				response.addCookie(ck);
 
 				out = response.getWriter();
 				response.setContentType("application/json");
