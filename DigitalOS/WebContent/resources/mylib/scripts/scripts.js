@@ -23,7 +23,26 @@ function loginOS() {
 }
 
 function carregaPerfil(){
-	$("#nome").val(document.cookie());
+	var id = document.cookie.split('=')[1];
+	console.log(id);
+	$.ajax({
+		type : 'POST',
+		url : '/DigitalOS/rest/RestPerfil/buscarPerfilPeloId/'+id,
+		success : function(perfil) {
+			console.log(perfil);
+			$("#nome").val(perfil.nome);
+			$("#cep").val(perfil.cep);
+			$("#numero").val(perfil.numero);
+			$("#endereco").val(perfil.endereco);
+			$("#telefone").val(perfil.telefone);
+			$("#celular").val(perfil.celular);
+			$("#email").val(perfil.email);
+			$("#senha").val(perfil.senha);
+		},
+		error : function(url) {
+
+		}
+	});
 
 }
 /*FIM LOGIN*/
@@ -654,7 +673,6 @@ function addCategoriaAparelho(){
 		}
 	});
 }
-
 function buscarCatergoria(){
 	var valorBusca = $('#buscaCategoria').val();
 	$.ajax({
@@ -669,7 +687,6 @@ function buscarCatergoria(){
 		}
 	});
 }
-
 function tabelaCategoria(listaCategoriaAchados){
 	var html = "<div class='teble-reponsive'>" +
 			   "<table class='table table-striped table-condensed table-bordered'>";
@@ -743,10 +760,6 @@ function filtroCategoria(){
 	});
 }
 /*FIM CRUD CATEGORIA APARELHO*/
-
-
-
-
 
 /*INICIO CRUD CATERGORIA APARELHO*/
 function addMarca(){

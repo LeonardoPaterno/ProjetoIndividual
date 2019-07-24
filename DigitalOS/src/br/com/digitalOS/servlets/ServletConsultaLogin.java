@@ -63,18 +63,24 @@ public class ServletConsultaLogin extends HttpServlet {
 			JDBCDigitalOSLoginDAO jdbclogin = new JDBCDigitalOSLoginDAO(conexao);
  			boolean retorno = jdbclogin.consultarLogin(login);
 			conec.fecharConexao();
+			
+			String cookie = new Gson().toJson(login);
 			String json = null;
+			String id = Integer.toString(login.getId());
+			
 			String context = request.getServletContext().getContextPath();
 			PrintWriter out = response.getWriter();
 			Map<String, String> msg = new HashMap<String, String>();
+			
 			if (retorno != false) {
+				Cookie ck = new Cookie("id", id);
+				response.addCookie(ck);
+				
 				HttpSession sessao = request.getSession();
 				sessao.setAttribute("login", request.getParameter("user"));
 				msg.put("url", context + "/resources/mylib/paginas/menu.html");
 				json = new Gson().toJson(msg);
-				Cookie ck = new Cookie("coockie", json);
-				response.addCookie(ck);
-
+				
 				out = response.getWriter();
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");

@@ -26,22 +26,12 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 	/*INICIO LOGIN*/
 	public boolean consultarLogin(LoginObj login) {
-		String comando = "SELECT login.id, nome, telefone, celular, rua, numero, cep, login.email, senha from login "
-					   + "inner join pessoa on pessoa.id = login.pessoa_id "
-					   + "inner join endereco on endereco.id = pessoa.endereco_id "
-					   + "where login.email like '"+login.getEmail()+"%';";
+		String comando = "SELECT login.id from login where login.email like '"+login.getEmail()+"%';";
 		try {
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
 			while (rs.next()) {
-				login.setId(rs.getInt("id"));
-				login.setEmail(rs.getString("email"));
-				login.setSenha(rs.getString("senha"));
-				login.setNome(rs.getString("nome"));
-				login.setTelefone(rs.getString("telefone"));
-				login.setCelular(rs.getString("celular"));			
-				login.setEmail(rs.getString("email"));
-				login.setSenha(rs.getString("senha"));
+				login.setId(rs.getInt("id"));		
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1053,6 +1043,35 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		return ListaMarcaAtivos;
 	}
 	/*FIM MARCA*/
+	
+	/*INICIO PERFIL*/
+	public LoginObj perfil(int id) {
+		String comando = "SELECT login.id, nome, telefone, celular, rua, endereco.numero, cep, login.email, senha from login "
+				       + "inner join pessoa on pessoa.id = login.pessoa_id "
+				       + "inner join endereco on endereco.id = pessoa.endereco_id "
+				       + "where login.id = "+id+";";
+		LoginObj login = new LoginObj();
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while (rs.next()) {
+				login.setId(rs.getInt("id"));
+				login.setNome(rs.getString("nome"));
+				login.setTelefone(rs.getString("telefone"));
+				login.setCelular(rs.getString("celular"));	
+				login.setEndereco(rs.getString("rua"));
+				login.setNumero(rs.getString("numero"));
+				login.setCep(rs.getString("cep"));
+				login.setEmail(rs.getString("email"));
+				login.setSenha(rs.getString("senha"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return login;
+	}
+	/*FIM PERFIL*/
 }
+
 
 
