@@ -38,12 +38,48 @@ function carregaPerfil(){
 			$("#celular").val(perfil.celular);
 			$("#email").val(perfil.email);
 			$("#senha").val(perfil.senha);
+			$("#id").val(perfil.id);
 		},
 		error : function(url) {
 
 		}
 	});
 
+}
+
+function editarPerfil(){
+	var novasenha = $("#novaSenha").val();
+	var confirmasenha = $("#confirmaSenha").val();
+	if(novasenha == confirmasenha){
+		alert("TESTE");
+		var id       = 	$("#id").val();
+		var nome     = 	$("#nome").val();
+		var cep      =	$("#cep").val();
+		var numero 	 = 	$("#numero").val();
+		var endereco = 	$("#endereco").val();
+		var telefone = 	$("#telefone").val();
+		var celular  = 	$("#celular").val();
+		var email    = 	$("#email").val();
+		var senha    = 	$("#novaSenha").val();
+		
+		var perfilNovo = {'id':id, 'nome':nome, 'cep':cep, 'numero':numero, 'endereco':endereco, 'telefone':telefone, 'celular':celular, 'email':email, 'senha':senha};	
+		var perfil = JSON.stringify(perfilNovo);
+		console.log(perfil);
+		$.ajax({
+			type: 'POST',
+			url: '/DigitalOS/rest/RestPerfil/editarPerfil',
+			data: perfil,
+			success: function(resposta){
+				alert(resposta);
+			},
+			error: function(){
+				alert("Error!");
+			}
+		});
+	}else{
+		alert("A nova senha informada difere da senha de confirmação!");
+	}
+	
 }
 /*FIM LOGIN*/
 

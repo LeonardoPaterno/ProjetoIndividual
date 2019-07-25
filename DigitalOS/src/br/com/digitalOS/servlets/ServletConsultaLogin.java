@@ -64,7 +64,6 @@ public class ServletConsultaLogin extends HttpServlet {
  			boolean retorno = jdbclogin.consultarLogin(login);
 			conec.fecharConexao();
 			
-			String cookie = new Gson().toJson(login);
 			String json = null;
 			String id = Integer.toString(login.getId());
 			

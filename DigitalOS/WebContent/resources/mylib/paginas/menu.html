@@ -102,7 +102,7 @@
 							   	</div>
 							   	<div class="row col-md-12">
 							   		<div class="col-md-2">
-							   			<label>CEP</label><input id="cep" class="form-control" type="text" placeholder="00000-000" maxlength="5">
+							   			<label>CEP</label><input id="cep" class="form-control" type="text" placeholder="00000-000" maxlength="8">
 							   		</div>
 							   		<div class="col-md-4">
 							   			<label>Endereco</label><input id="endereco" class="form-control" type="text" placeholder="Endereco" maxlength="50">
@@ -143,6 +143,7 @@
 							   			<label>Confirmar Senha</label>
 							   			<input id="confirmaSenha" class="form-control" type="password" placeholder="****************" maxlength="16">
 							   		</div>
+							   		<input id="id">
 							   	</div>
 						   </div>
 						</div>
@@ -150,7 +151,7 @@
 					   		<hr> 
 						   	<div id="divBotaoDadosPessoais">
 						   		<input type="button" value="Cancelar" class="btn btn-danger">
-						   		<input type="button" value="Salvar" class="btn btn-success">
+						   		<input type="button" value="Salvar" class="btn btn-success" onclick="editarPerfil()">
 						   	</div>
 					   	</div>
 					</div><!-- /Modal Body -->

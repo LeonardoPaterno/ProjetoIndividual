@@ -15,7 +15,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 import br.com.digitalOS.bd.conexao.Conexao;
 import br.com.digitalOS.jdbc.JDBCDigitalOSLoginDAO;
 import br.com.digitalOS.objetos.LoginObj;
-import br.com.digitalOS.objetos.MarcaObj;
 
 @Path("RestPerfil")
 public class RestPerfil extends UtilRest{
@@ -40,19 +39,18 @@ public class RestPerfil extends UtilRest{
 	}
 
 	@POST
-	@Path("/editarMarca")
+	@Path("/editarPerfil")
 	@Consumes("application/*")
-	public Response editarMarcaObj(String marca) {
-		System.out.println("Mara Editar: "+marca);
+	public Response editarMarcaObj(String perfil) {
 		try {
-			MarcaObj MarcaObj = new ObjectMapper().readValue(marca, MarcaObj.class);
+			LoginObj login = new ObjectMapper().readValue(perfil, LoginObj.class);
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
-			JDBCDigitalOSLoginDAO jdbcMarcaObj = new JDBCDigitalOSLoginDAO(conexao);
-			jdbcMarcaObj.atualizarMarca(MarcaObj);
+			JDBCDigitalOSLoginDAO jdbcPerfilObj = new JDBCDigitalOSLoginDAO(conexao);
+			jdbcPerfilObj.atualizarPerfil(login);
 			conec.fecharConexao();
 			
-			return Response.ok(this.buildResponse("Marca editado com sucesso!")).build();
+			return Response.ok(this.buildResponse("Perfil editado com sucesso!")).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());
