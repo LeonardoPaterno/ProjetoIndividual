@@ -533,7 +533,6 @@ function atualizarFuncionario(){
 						   'numeropis':numeropis, 'cargo':cargo, 'setor':setor, 'salario':salario, 'dataadmissao':dataadmissao, 
 						   'datademissao':datademissao, 'idendereco':idendereco, 'idfuncionario':funcionarioidfuncionario};
 	var funcionario = JSON.stringify(funcionarioEdit);
-	alert(funcionario);
 	$.ajax({
 		type:'POST',
 		url: '/DigitalOS/rest/RestFuncionario/editarFuncionario',
@@ -548,7 +547,6 @@ function atualizarFuncionario(){
 	});
 }
 function filtroFuncionariosAtivos(){
-	alert($("#filtroAtivoOpc").val());
 	$.ajax({
 		type:'POST',
 		url: '/DigitalOS/rest/RestFuncionario/filtroFuncionarioAtivo',

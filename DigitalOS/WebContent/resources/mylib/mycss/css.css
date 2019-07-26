@@ -180,6 +180,12 @@ h4 {
 	height: 400px !important;
 }
 
+#myDiv {
+  margin: 0 auto;
+  height: 85vh;
+  min-height: 300px;
+}
+
 .segundografico {
 	display: block !important;
 	position: relative;
