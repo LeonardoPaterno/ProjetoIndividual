@@ -81,7 +81,6 @@ public class RestMarca extends UtilRest{
 	@Path("/editarMarca")
 	@Consumes("application/*")
 	public Response editarMarcaObj(String marca) {
-		System.out.println("Mara Editar: "+marca);
 		try {
 			MarcaObj MarcaObj = new ObjectMapper().readValue(marca, MarcaObj.class);
 			Conexao conec = new Conexao();
@@ -101,7 +100,6 @@ public class RestMarca extends UtilRest{
 	@Path("/filtroMarcaAtivo")
 	@Produces("application/*")
 	public Response filtrarAparelhosAtivos(String ativo) {
-		System.out.println(ativo);
 		try {
 			MarcaObj Marca = new MarcaObj();
 			Marca.setAtivo(ativo);

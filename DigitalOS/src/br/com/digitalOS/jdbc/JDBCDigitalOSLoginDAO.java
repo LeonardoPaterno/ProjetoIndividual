@@ -1011,7 +1011,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			p.setString(1, marca.getNome());
 			p.setString(2, marca.getAtivo());
 			p.executeUpdate();
-			System.out.println(p);
 		}catch(SQLException e){
 			e.printStackTrace();
 			return false;
