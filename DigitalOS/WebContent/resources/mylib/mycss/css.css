@@ -172,26 +172,48 @@ h4 {
 	}
 } /* FIM @media */
 
-/* GRAFICO */
-.primeirografico{
-	display: block !important;
-	position: relative;
-	width: 700px !important;
-	height: 400px !important;
-}
+/* GRAFICO 1 */
 
-#myDiv {
+.divGrafico{
+	position: absolute; 
+	left: 14%; 
+	top: 2%; 
+	width: 525px; 
+	height: 456px;
+	background-color: #c7c9cb;
+}
+.divTituloGrafico{
+	background-color: #2e6da4; 
+	border:none;
+}
+.myDiv {
   margin: 0 auto;
-  height: 85vh;
+  height: 60vh;
   min-height: 300px;
 }
 
-.segundografico {
-	display: block !important;
-	position: relative;
-	width: 700px !important;
-	height: 400px !important;
+/* GRAFICO 2 */
+
+.divGrafico2{
+	position: absolute; 
+	left: 825px; 
+	top: 2%; 
+	width: 525px; 
+	height: 456px;
+	background-color: #c7c9cb;
 }
+.divTituloGrafico2{
+	background-color: #2e6da4; 
+	border:none;
+}
+
+.myDiv2 {
+	position: relative; 
+ 	margin: 0 auto;
+ 	height: 60vh;
+  	min-height: 300px;
+}
+
 /* FIM GRAFICO */
 .dropdown-menu {
 	border-radius: 0px !important;
