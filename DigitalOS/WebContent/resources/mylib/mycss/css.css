@@ -321,8 +321,6 @@ h4 {
 .dashboard-custom {
 	margin-top: 30px;
 	margin-bottom: -30px;
-	/* width: 400px;
-    heigth: 400px; */
 }
 
 /*-------------------------------*/
@@ -341,7 +339,6 @@ h4 {
 	border-collapse: separate;
 	margin-left: -150px !important;
 	margin-right: -8px !important;
-	/* width: 1130px !important; */
 }
 
 .icone-adicionar-funcionario, .icone-adicionar-cliente, .icone-adicionar-servico, .icone-adicionar-itens-servico, 
@@ -454,15 +451,6 @@ h4 {
 	margin-left: 5px;
 }
 
-/* TELA DE APARELHOS */
-/* .icone-adicionar-aparelho {
-	display: inline-block;
-    left: 2%;
-    position: absolute !important;
-    top: 36px;
-    font-size: 16px;
-} */
-
 .resultadoAparelhos{
 	left: 15px;
 }
@@ -487,8 +475,9 @@ h4 {
 .botaoFiltro{
     display: table;
     top: -1px;
-    left: 152px;
+    left: 140px;
     position: absolute;
+    width: 92px;
 }
 
 .panel-primary>.panel-heading {

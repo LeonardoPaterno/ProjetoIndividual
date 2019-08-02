@@ -15,6 +15,7 @@ import br.com.digitalOS.objetos.FuncionarioObj;
 import br.com.digitalOS.objetos.LoginObj;
 import br.com.digitalOS.objetos.MarcaObj;
 import br.com.digitalOS.objetos.PessoaObj;
+import br.com.digitalOS.objetos.SelectObj;
 import br.com.digitalOS.objetos.ServicoObj;
 
 public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
@@ -1143,6 +1144,27 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 	}
 	/*FIM PERFIL*/
+	public List<SelectObj> buscarSelectCategoria() {
+		String comando = "SELECT id, nome FROM categoriaaparelho;";
+
+		List<SelectObj> ListaSelect = new ArrayList<SelectObj>();
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while (rs.next()) {
+				SelectObj lista = new SelectObj();
+				int id = rs.getInt("id");
+				String nome = rs.getString("nome");
+				
+				lista.setId(id);
+				lista.setNome(nome);
+				ListaSelect.add(lista);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ListaSelect;
+	}
 }
 
 

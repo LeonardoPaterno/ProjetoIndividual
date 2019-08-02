@@ -21,4 +21,5 @@
 <fullyQualifiedTypeName name="java.net.CookieHandler"/>
 <fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
 <fullyQualifiedTypeName name="br.com.digitalOS.objetos.LoginObj"/>
+<fullyQualifiedTypeName name="java.util.List"/>
 </qualifiedTypeNameHistroy>

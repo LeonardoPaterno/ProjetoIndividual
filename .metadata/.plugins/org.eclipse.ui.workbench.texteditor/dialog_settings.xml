@@ -2,29 +2,30 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="GRAFICO" key="selection"/>
+		<item value="Select" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="Marca"/>
+			<item value="botaoFiltro"/>
+			<item value="Filtro"/>
 			<item value="grafico"/>
 			<item value="myDiv"/>
 			<item value="usuario"/>
 			<item value="painel"/>
 			<item value="&lt;hr&gt;"/>
 			<item value="CategoriaAparelho"/>
-			<item value="Marca"/>
 			<item value="icone-adicionar-marca"/>
 			<item value="labelFiltro"/>
 			<item value="icone-adiciona"/>
 			<item value="div-painel-categoria"/>
 			<item value="categoria"/>
 			<item value="filtroAtivo"/>
-			<item value="EditStatusMarca"/>
-			<item value="modalcategoriaaparelho"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Select"/>
 			<item value="Marca"/>
 			<item value="CategoriaAparelho"/>
 			<item value="PessoaObj"/>

@@ -901,6 +901,36 @@ function filtroMarca(){
 /*FIM CRUD CATEGORIA MARCA*/
 
 /*INICIO ORDEM DE SERVICO*/
+function carregaSelect(){
+	$.ajax({
+		type:'POST',
+		url: '/DigitalOS/rest/RestSelect/buscarSelectCategoria',
+		success: function(select){
+			console.log(select);
+			var lista = JSON.stringify({select});
+			console.log(lista);
+			$.each(lista, function(i, value) {
+	            $('#categoria').append($('<option>').text(value).attr('value', value));
+	        });
+		},
+		error: function(){
+			alert("Erro ao encontrar categoria");
+		}
+	});
+	
+	$.ajax({
+		type:'POST',
+		url: '/DigitalOS/rest/RestSelect/buscarSelectMarca',
+		success: function(listaSelect){
+			
+		},
+		error: function(){
+			alert("Erro ao encontrar categoria");
+		}
+	});
+}
+
 function abrirOS(){
+	
 }
 /*FIM ORDEM DE SERVICO*/
