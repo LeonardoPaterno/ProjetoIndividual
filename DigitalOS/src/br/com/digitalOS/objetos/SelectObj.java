@@ -8,7 +8,6 @@ public class SelectObj implements Serializable{
 	
 	private int id;
 	private String nome;
-	private String ativo;
 	
 	public int getId() {
 		return id;
@@ -22,13 +21,6 @@ public class SelectObj implements Serializable{
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	
-	public String getAtivo() {
-		return ativo;
-	}
-	public void setAtivo(String ativo) {
-		this.ativo = ativo;
 	}
 	
 	

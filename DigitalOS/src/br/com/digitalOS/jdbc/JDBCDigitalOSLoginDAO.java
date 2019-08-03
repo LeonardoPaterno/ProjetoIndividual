@@ -1154,8 +1154,28 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			while (rs.next()) {
 				SelectObj lista = new SelectObj();
 				int id = rs.getInt("id");
-				String nome = rs.getString("nome");
-				
+				String nome = (rs.getString("nome"));
+				lista.setId(id);
+				lista.setNome(nome);
+				ListaSelect.add(lista);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ListaSelect;
+	}
+	
+	public List<SelectObj> buscarSelectMarca() {
+		String comando = "SELECT id, nome FROM marca;";
+
+		List<SelectObj> ListaSelect = new ArrayList<SelectObj>();
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while (rs.next()) {
+				SelectObj lista = new SelectObj();
+				int id = rs.getInt("id");
+				String nome = (rs.getString("nome"));
 				lista.setId(id);
 				lista.setNome(nome);
 				ListaSelect.add(lista);

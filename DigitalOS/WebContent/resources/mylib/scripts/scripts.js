@@ -901,16 +901,16 @@ function filtroMarca(){
 /*FIM CRUD CATEGORIA MARCA*/
 
 /*INICIO ORDEM DE SERVICO*/
-function carregaSelect(){
+function carregarSelect(){
 	$.ajax({
 		type:'POST',
 		url: '/DigitalOS/rest/RestSelect/buscarSelectCategoria',
-		success: function(select){
-			console.log(select);
-			var lista = JSON.stringify({select});
-			console.log(lista);
-			$.each(lista, function(i, value) {
-	            $('#categoria').append($('<option>').text(value).attr('value', value));
+		success: function(lista){
+			console.log(JSON.parse(lista));
+			listosa = JSON.parse(lista);
+			console.log(listosa);
+			$.each(listosa, function (i,v){
+	            $('#categoria').append($('<option>').text(v.nome).attr('value', v.id));
 	        });
 		},
 		error: function(){
@@ -921,13 +921,22 @@ function carregaSelect(){
 	$.ajax({
 		type:'POST',
 		url: '/DigitalOS/rest/RestSelect/buscarSelectMarca',
-		success: function(listaSelect){
-			
+		success: function(lista){
+			console.log(JSON.parse(lista));
+			listosa = JSON.parse(lista);
+			console.log(listosa);
+			$.each(listosa, function (i,v){
+	            $('#marca').append($('<option>').text(v.nome).attr('value', v.id));
+	        });
 		},
 		error: function(){
-			alert("Erro ao encontrar categoria");
+			alert("Erro ao encontrar marca");
 		}
 	});
+}
+
+function selecionado(){
+	alert($("#categoria").val() + "" + $("#categoria").find('option:selected').text());
 }
 
 function abrirOS(){

@@ -153,7 +153,7 @@ h4 {
 .barra-lateral {
 	background-color: #2e6da4;
 	width: 180px;
-	height: -webkit-fill-available;
+	height: 620px;
 	border-radius: 0px;
 	left: -5px;
 	margin-top: 0px;
@@ -164,13 +164,6 @@ h4 {
 	margin-left: -10px;
 	margin-top: 0px;
 }
-
-@media ( min-width :768px) {
-	.barra-lateral {
-		display: block !important;
-		height: -webkit-fill-available;
-	}
-} /* FIM @media */
 
 /* GRAFICO 1 */
 
