@@ -27,7 +27,7 @@
 			</div>
 
 			<div class="icone-adicionar-os">
-				<span class="btn btn-default glyphicon glyphicon-plus" onclick="carregarSelect()"></span>
+				<span class="btn btn-default glyphicon glyphicon-plus" onclick="numeroOS(); carregarSelect()"></span>
 			</div>	
 		</div>
 		<div class="panel-body">
@@ -43,12 +43,49 @@
         <h3 class="modal-title">Cadastro de Ordem de Servico</h3>
       </div><!-- /div modal-header -->
       <div class="modal-body">
-        <div class="form">   
-       	 	<div class="row">
-	        	<div class="form-group col-md-3">
+        <div class="form">
+        	<div class="row">
+        		<div class="col-md-offset-6"></div>
+        		<div class="form-group col-md-2">
 	        		<label>Numero OS</label>
-	        		<input class="form-control" type="text" id="idos" placeholder="0001" maxlength="6">
+	        		<input class="form-control" type="text" id="idos" maxlength="6" disabled>
 	        	</div>
+        		<div class="input-group col-md-4 divPequisaCliente">
+					<input type="text" class="form-control" placeholder="João Miguel" id="buscarCliente">
+					<span class="btn input-group-addon icone-pesquisar glyphicon glyphicon-search" onclick="buscarClienteOS()"></span>					
+				</div>
+        	</div>
+        	<hr>
+        	<div class="row">
+        		<div class="form-group col-md-6">
+	        		<label>Nome Cliente</label>
+	        		<input class="form-control" id="nome" type="text" maxlength="80" placeholder="Leonardo Paterno" disabled>
+	        	</div>
+	        	<div class="form-group col-md-3">
+	        		<label>CPF</label>
+	        		<input class="form-control" id="cpf" type="text" maxlength="14" placeholder="000000000000" disabled>
+	        	</div>
+	        	<div class="form-group col-md-3">
+	        		<label>RG</label>
+	        		<input class="form-control" id="rg" type="text" maxlength="7" placeholder="0000000" disabled>
+	        	</div>
+	        </div>
+	        <div class="row">
+	        	<div class="form-group col-md-6">
+	        		<label>Endereco</label>
+	        		<input class="form-control" id="endereco" type="text" maxlength="60" placeholder="Rua Manoel Antonio" disabled>
+	        	</div>
+	        	<div class="form-group col-md-3">
+	        		<label>Telefone</label>
+	        		<input class="form-control" id="telefone" type="text" maxlength="10" placeholder="00 0000000000" disabled>
+	        	</div>
+	        	<div class="form-group col-md-3">
+	        		<label>Celular</label>
+	        		<input class="form-control" id="celular" type="text" maxlength="11" placeholder="00 0 000000000" disabled>
+	        	</div>
+        	</div><!-- /div row -->
+        	<hr>
+       	 	<div class="row">
 	        	<div class="form-group col-md-3">
 	        		<label>Categoria</label>
 	        		<select class="form-control" id="categoria">
@@ -59,7 +96,7 @@
 	        		<select class="form-control" id="marca">
 	        		</select>
 	        	</div>
-	        	<div class="form-group col-md-3">
+	        	<div class="form-group col-md-4">
 	        		<label>Modelo</label>
 	        		<input class="form-control" type="text" id="modelo" maxlength="25" placeholder="Moto X Play">
 	        	</div>
@@ -67,12 +104,7 @@
         	<div class="row">
         		<div class="form-group col-md-3">
 	        		<label>Status OS</label>
-	        		<select class="form-control" id="statusos" disabled>
-	        			<option value="1">Aberta</option>
-	        			<option value="2">Concluida</option>
-	        			<option value="3">Atrasada</option>
-	        			<option value="4">Cancelada</option>
-	        		</select>
+	        		<input class="form-control" id="statusos" value="Aberta" disabled>
 	        	</div>
 	        	<div class="form-group col-md-3">
 	        		<label>Data Abertura</label>
@@ -85,25 +117,6 @@
 	        	<div class="form-group col-md-3">
 	        		<label>Data Prazo</label>
 	        		<input class="form-control" id="dataprazo" type="date">
-	        	</div>
-        	</div><!-- /div row -->
-        	<hr>
-        	<div class="row">
-        		<div class="form-group col-md-3">
-	        		<label>Nome Cliente</label>
-	        		<input class="form-control" id="nomeclienteos" type="text" maxlength="80" placeholder="Leonardo Paterno">
-	        	</div>
-	        	<div class="form-group col-md-3">
-	        		<label>CPF</label>
-	        		<input class="form-control" id="cpfclienteos" type="text" maxlength="14" placeholder="000000000000">
-	        	</div>
-	        	<div class="form-group col-md-3">
-	        		<label>Endereco</label>
-	        		<input class="form-control" id="enderecoclienteos" type="text" maxlength="60" placeholder="Rua Manoel Antonio">
-	        	</div>
-	        	<div class="form-group col-md-3">
-	        		<label>Contato</label>
-	        		<input class="form-control" id="contatoclienteos" type="text" maxlength="60" placeholder="exemplo@email.com">
 	        	</div>
         	</div><!-- /div row -->
         	<hr>

@@ -935,11 +935,39 @@ function carregarSelect(){
 	});
 }
 
-function selecionado(){
-	alert($("#categoria").val() + "" + $("#categoria").find('option:selected').text());
+function numeroOS(){
+	$.ajax({
+		type:'POST',
+		url: '/DigitalOS/rest/RestSelect/buscarSelectNumeroOS',
+		success: function(numero){
+			id = (JSON.parse(numero));
+			console.log(id);
+
+			numeroOS = id.id + 1;
+			$("#idos").val(numeroOS);
+		},
+		error: function(){
+			alert("Erro ao gerar numero da OS");
+		}
+	});
 }
 
 function abrirOS(){
+	$.ajax({
+		type: 'POST',
+		url: '/DigitalOS/rest/',
+		success: function(resposta){
+			alert(resposta);
+			$("#modalordemservico").find('form')[0].reset();
+			$("#modalordemservico").modal('hide');
+		},
+		error: function(resposta){
+			alert(resposta);
+		}
+	});
+}
+
+function buscarClienteOS(){
 	
 }
 /*FIM ORDEM DE SERVICO*/

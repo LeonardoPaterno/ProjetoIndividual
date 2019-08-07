@@ -50,4 +50,21 @@ public Response buscarSelectMarca() {
 			return this.buildErrorResponse(e.getMessage());
 		}
 	}
+
+@POST
+@Path("/buscarSelectNumeroOS")
+@Consumes("application/*")
+public Response buscarSelectNumeroOS() {
+		try {
+			Conexao conec = new Conexao();
+			Connection conexao = conec.abrirConexao();
+			JDBCDigitalOSLoginDAO jdbcSelectObj = new JDBCDigitalOSLoginDAO(conexao);
+			SelectObj SelectObj = jdbcSelectObj.buscarSelectNumeroOS();
+			
+			return Response.ok(this.buildResponse(SelectObj)).build();
+		}catch(Exception e) {
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
 }

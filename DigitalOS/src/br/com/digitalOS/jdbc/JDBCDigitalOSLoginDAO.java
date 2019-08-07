@@ -1166,7 +1166,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 	
 	public List<SelectObj> buscarSelectMarca() {
-		String comando = "SELECT id, nome FROM marca;";
+		String comando = "SELECT id, nomemarca FROM marca;";
 
 		List<SelectObj> ListaSelect = new ArrayList<SelectObj>();
 		try {
@@ -1175,7 +1175,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			while (rs.next()) {
 				SelectObj lista = new SelectObj();
 				int id = rs.getInt("id");
-				String nome = (rs.getString("nome"));
+				String nome = (rs.getString("nomemarca"));
 				lista.setId(id);
 				lista.setNome(nome);
 				ListaSelect.add(lista);
@@ -1184,6 +1184,23 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			e.printStackTrace();
 		}
 		return ListaSelect;
+	}
+	public SelectObj buscarSelectNumeroOS() {
+		String comando = "SELECT id FROM ordemservico WHERE id IN(SELECT MAX(id) FROM ordemservico);";
+		SelectObj numero = null;
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while(rs.next()) {
+				numero = new SelectObj();
+				int id = rs.getInt("id");
+				numero.setId(id);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return numero;
 	}
 }
 
