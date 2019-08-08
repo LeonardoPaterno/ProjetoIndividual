@@ -21,7 +21,6 @@ function loginOS() {
 		alert("E-mail ou Senha Inválido!");
 	}
 }
-
 function carregaPerfil(){
 	var id = document.cookie.split('=')[1];
 	console.log(id);
@@ -46,7 +45,6 @@ function carregaPerfil(){
 	});
 
 }
-
 function editarPerfil(){
 	var novasenha = $("#novaSenha").val();
 	var confirmasenha = $("#confirmaSenha").val();
@@ -906,9 +904,7 @@ function carregarSelect(){
 		type:'POST',
 		url: '/DigitalOS/rest/RestSelect/buscarSelectCategoria',
 		success: function(lista){
-			console.log(JSON.parse(lista));
 			listosa = JSON.parse(lista);
-			console.log(listosa);
 			$.each(listosa, function (i,v){
 	            $('#categoria').append($('<option>').text(v.nome).attr('value', v.id));
 	        });
@@ -922,9 +918,7 @@ function carregarSelect(){
 		type:'POST',
 		url: '/DigitalOS/rest/RestSelect/buscarSelectMarca',
 		success: function(lista){
-			console.log(JSON.parse(lista));
 			listosa = JSON.parse(lista);
-			console.log(listosa);
 			$.each(listosa, function (i,v){
 	            $('#marca').append($('<option>').text(v.nome).attr('value', v.id));
 	        });
@@ -934,14 +928,12 @@ function carregarSelect(){
 		}
 	});
 }
-
 function numeroOS(){
 	$.ajax({
 		type:'POST',
 		url: '/DigitalOS/rest/RestSelect/buscarSelectNumeroOS',
 		success: function(numero){
 			id = (JSON.parse(numero));
-			console.log(id);
 
 			numeroOS = id.id + 1;
 			$("#idos").val(numeroOS);
@@ -951,7 +943,6 @@ function numeroOS(){
 		}
 	});
 }
-
 function abrirOS(){
 	$.ajax({
 		type: 'POST',
@@ -966,8 +957,39 @@ function abrirOS(){
 		}
 	});
 }
-
 function buscarClienteOS(){
-	
+	var nome = $("#buscarClienteS").val();
+	$.ajax({
+		type:'POST',
+		url:'/DigitalOS/rest/RestPessoaOs/buscarPessoaOs',
+		data: nome,
+		success: function(resposta){
+			tabelaPessoaOS(resposta);
+			$('#modalselecionacliente').modal('show');
+		},
+		error: function(resposta){
+			alert("Erro ao localizar clientes");
+		}
+	});
+}
+function tabelaPessoaOS(resposta){
+	var html = "<div class='teble-reponsive'>" +
+			   "<table class='table table-striped table-condensed table-bordered'>";
+		html += "<tr>" +
+				"<th>Seleção</th> <th>Nome</th> <th>CPF</th> <th>RG</th> <th>Endereco</th> <th>Telefone</th>" +
+				"</tr>"
+	for(var i = 0; i < resposta.length; i++){
+		html += "<tr>" +
+					"<td>" +"<input type='checkbox'>"+ "</td>" +
+					"<td>" + resposta[i].nome + "</td>" +
+					"<td>" + resposta[i].cpf + "</td>" +
+					"<td>" + resposta[i].rg + "</td>" +
+					"<td>" + resposta[i].endereco + "</td>" +
+					"<td>" + resposta[i].telefone + "</td>" +
+				"</tr>"
+	}
+	html += "</table>" +
+			"</div>"
+	$("#tabelaPessoas").html(html);
 }
 /*FIM ORDEM DE SERVICO*/

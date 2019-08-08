@@ -15,6 +15,7 @@ import br.com.digitalOS.objetos.FuncionarioObj;
 import br.com.digitalOS.objetos.LoginObj;
 import br.com.digitalOS.objetos.MarcaObj;
 import br.com.digitalOS.objetos.PessoaObj;
+import br.com.digitalOS.objetos.PessoaOsObj;
 import br.com.digitalOS.objetos.SelectObj;
 import br.com.digitalOS.objetos.ServicoObj;
 
@@ -357,7 +358,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 					String endereco = rs.getString("endereco.rua");
 					String cidade = rs.getString("endereco.cidade");
 					String estado = rs.getString("endereco.estado");
-				
+					
 				pessoa.setId(idpessoa);
 				pessoa.setNome(nomepessoa);
 				pessoa.setCpf(cpf);
@@ -1201,6 +1202,38 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			return null;
 		}
 		return numero;
+	}
+	public List<PessoaOsObj> buscarPessoaOs(String nome) {
+		List<PessoaOsObj> ListaPessoaOs = new ArrayList<PessoaOsObj>();
+		String comando = "SELECT nome, cpf, rg, telefone,"
+				   + "endereco.rua FROM pessoa INNER JOIN endereco ON endereco.id = pessoa.endereco_id ";
+	if (nome != "") {
+		comando += "WHERE nome LIKE '" + nome + "%' "
+				+ "AND pessoa.ativo = 'S' AND pessoa.id IN (SELECT pessoa.id FROM pessoa WHERE pessoa.funcionario_id IS NULL);";
+		}
+	try {
+		java.sql.Statement stmt = conexao.createStatement();
+		ResultSet rs = stmt.executeQuery(comando);
+		while (rs.next()) {
+			PessoaOsObj pessoa = new PessoaOsObj();
+				String nomepessoa = rs.getString("nome");
+				String cpf = rs.getString("cpf");
+				String rg = rs.getString("rg");
+				String telefone = rs.getString("telefone");
+				String endereco = rs.getString("endereco.rua");
+				
+			pessoa.setNome(nomepessoa);
+			pessoa.setCpf(cpf);
+			pessoa.setRg(rg);
+			pessoa.setEndereco(endereco);
+			pessoa.setTelefone(telefone);
+
+			ListaPessoaOs.add(pessoa);
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return ListaPessoaOs;
 	}
 }
 
