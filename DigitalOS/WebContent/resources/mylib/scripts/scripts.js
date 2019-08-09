@@ -8,7 +8,10 @@ function loginOS() {
 		$.ajax({
 			type : 'POST',
 			url : 'ServletConsultaLogin',
-			data : {'user':user, 'passCoded':passCoded},
+			data : {
+				'user' : user,
+				'passCoded' : passCoded
+			},
 
 			success : function(url) {
 				location.href = url.url;
@@ -21,12 +24,12 @@ function loginOS() {
 		alert("E-mail ou Senha Inválido!");
 	}
 }
-function carregaPerfil(){
+function carregaPerfil() {
 	var id = document.cookie.split('=')[1];
 	console.log(id);
 	$.ajax({
 		type : 'POST',
-		url : '/DigitalOS/rest/RestPerfil/buscarPerfilPeloId/'+id,
+		url : '/DigitalOS/rest/RestPerfil/buscarPerfilPeloId/' + id,
 		success : function(perfil) {
 			console.log(perfil);
 			$("#nome").val(perfil.nome);
@@ -45,43 +48,53 @@ function carregaPerfil(){
 	});
 
 }
-function editarPerfil(){
+function editarPerfil() {
 	var novasenha = $("#novaSenha").val();
 	var confirmasenha = $("#confirmaSenha").val();
-	if(novasenha == confirmasenha){
+	if (novasenha == confirmasenha) {
 		alert("TESTE");
-		var id       = 	$("#id").val();
-		var nome     = 	$("#nome").val();
-		var cep      =	$("#cep").val();
-		var numero 	 = 	$("#numero").val();
-		var endereco = 	$("#endereco").val();
-		var telefone = 	$("#telefone").val();
-		var celular  = 	$("#celular").val();
-		var email    = 	$("#email").val();
-		var senha    = 	$("#novaSenha").val();
-		
-		var perfilNovo = {'id':id, 'nome':nome, 'cep':cep, 'numero':numero, 'endereco':endereco, 'telefone':telefone, 'celular':celular, 'email':email, 'senha':senha};	
+		var id = $("#id").val();
+		var nome = $("#nome").val();
+		var cep = $("#cep").val();
+		var numero = $("#numero").val();
+		var endereco = $("#endereco").val();
+		var telefone = $("#telefone").val();
+		var celular = $("#celular").val();
+		var email = $("#email").val();
+		var senha = $("#novaSenha").val();
+
+		var perfilNovo = {
+			'id' : id,
+			'nome' : nome,
+			'cep' : cep,
+			'numero' : numero,
+			'endereco' : endereco,
+			'telefone' : telefone,
+			'celular' : celular,
+			'email' : email,
+			'senha' : senha
+		};
 		var perfil = JSON.stringify(perfilNovo);
 		console.log(perfil);
 		$.ajax({
-			type: 'POST',
-			url: '/DigitalOS/rest/RestPerfil/editarPerfil',
-			data: perfil,
-			success: function(resposta){
+			type : 'POST',
+			url : '/DigitalOS/rest/RestPerfil/editarPerfil',
+			data : perfil,
+			success : function(resposta) {
 				alert(resposta);
 			},
-			error: function(){
+			error : function() {
 				alert("Error!");
 			}
 		});
-	}else{
+	} else {
 		alert("A nova senha informada difere da senha de confirmação!");
 	}
-	
-}
-/*FIM LOGIN*/
 
-/*INICIO CRUD APARELHO*/
+}
+/* FIM LOGIN */
+
+/* INICIO CRUD APARELHO */
 function CadastroAparelho() {
 	var nome = $("#nomeaparelho").val();
 	var categoria = $("#categoriaaparelho").val();
@@ -93,7 +106,14 @@ function CadastroAparelho() {
 	$.ajax({
 		type : 'POST',
 		url : '../../../ServletCadastroAparelho',
-		data : {'nome' : nome,'marca' : marca,'modelo' : modelo,'nsaparelho' : nsaparelho,'categoria' : categoria,'ativo':ativo },
+		data : {
+			'nome' : nome,
+			'marca' : marca,
+			'modelo' : modelo,
+			'nsaparelho' : nsaparelho,
+			'categoria' : categoria,
+			'ativo' : ativo
+		},
 		success : function(resposta) {
 			buscarAparelho();
 		},
@@ -102,50 +122,66 @@ function CadastroAparelho() {
 		}
 	});
 }
-function buscarAparelho(){
+function buscarAparelho() {
 	var valorBusca = $('#buscaAparelhoInput').val();
 	$.ajax({
-		type: 'POST',
-		url: '../../../ServletBuscarAparelho',
-		data: {'valorBusca': valorBusca},
-		success: function(listaAparelhosAchados){
+		type : 'POST',
+		url : '../../../ServletBuscarAparelho',
+		data : {
+			'valorBusca' : valorBusca
+		},
+		success : function(listaAparelhosAchados) {
 			carregarTabela(listaAparelhosAchados);
 		},
-		error: function(){
+		error : function() {
 			alert("Error, nenhum aparelho encontrado");
 		}
 	});
 };
-function carregarTabela(listaAparelhosAchados){
-	var html = "<div class='teble-reponsive'>" +
-			   "<table class='table table-striped table-condensed table-bordered'>";
-		html += "<tr>" +
-				"<th># ID</th> <th>Nome</th> <th>Categoria</th> <th>Marca</th> <th>Modelo</th> <th>Número Série</th> <th>Ativo</th> <th>Edição</th>" +
-				"</tr>"
-	for(var i = 0; i < listaAparelhosAchados.length; i++){
-		html += "<tr>" +
-					"<td>" + listaAparelhosAchados[i].idaparelho + "</td>" +
-					"<td>" + listaAparelhosAchados[i].nome + "</td>" +
-					"<td>" + listaAparelhosAchados[i].categoria + "</td>" +
-					"<td>" + listaAparelhosAchados[i].marca + "</td>" +
-					"<td>" + listaAparelhosAchados[i].modelo + "</td>" +
-					"<td>" + listaAparelhosAchados[i].nsaparelho + "</td>" +
-					"<td>" + listaAparelhosAchados[i].ativo + "</td>" +
-					"<td>" +
-						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoAparelho("+listaAparelhosAchados[i].idaparelho+")'></div>" +
-					"</td>" +
-				"</tr>"
+function carregarTabela(listaAparelhosAchados) {
+	var html = "<div class='teble-reponsive'>"
+			+ "<table class='table table-striped table-condensed table-bordered'>";
+	html += "<tr>"
+			+ "<th># ID</th> <th>Nome</th> <th>Categoria</th> <th>Marca</th> <th>Modelo</th> <th>Número Série</th> <th>Ativo</th> <th>Edição</th>"
+			+ "</tr>"
+	for (var i = 0; i < listaAparelhosAchados.length; i++) {
+		html += "<tr>" + "<td>"
+				+ listaAparelhosAchados[i].idaparelho
+				+ "</td>"
+				+ "<td>"
+				+ listaAparelhosAchados[i].nome
+				+ "</td>"
+				+ "<td>"
+				+ listaAparelhosAchados[i].categoria
+				+ "</td>"
+				+ "<td>"
+				+ listaAparelhosAchados[i].marca
+				+ "</td>"
+				+ "<td>"
+				+ listaAparelhosAchados[i].modelo
+				+ "</td>"
+				+ "<td>"
+				+ listaAparelhosAchados[i].nsaparelho
+				+ "</td>"
+				+ "<td>"
+				+ listaAparelhosAchados[i].ativo
+				+ "</td>"
+				+ "<td>"
+				+ "<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoAparelho("
+				+ listaAparelhosAchados[i].idaparelho + ")'></div>" + "</td>"
+				+ "</tr>"
 	}
-	html += "</table>" +
-			"</div>"
+	html += "</table>" + "</div>"
 	$("#resultadoAparelhos").html(html);
 }
-function exibirEdicaoAparelho(idaparelho){
+function exibirEdicaoAparelho(idaparelho) {
 	$.ajax({
 		type : 'POST',
 		url : '../../../ServletBuscarPorId',
-		data:{'idaparelho':idaparelho},
-		success: function(aparelho){
+		data : {
+			'idaparelho' : idaparelho
+		},
+		success : function(aparelho) {
 			$("#EditIdAparelho").val(aparelho.idaparelho);
 			$("#EditNomeAparelho").val(aparelho.nome);
 			$("#EditCategoriaAparelho").val(aparelho.categoria);
@@ -154,23 +190,23 @@ function exibirEdicaoAparelho(idaparelho){
 			$("#EditNsAparelho").val(aparelho.nsaparelho);
 			$("#EditStatusAparelho").val(aparelho.ativo);
 			var cfg = {
-					heigth : 600,
-					width : 400,
-					modal : true,
-					buttons : {
-						"Ok" : function() {
-							$(this).modal("close");
-						}
+				heigth : 600,
+				width : 400,
+				modal : true,
+				buttons : {
+					"Ok" : function() {
+						$(this).modal("close");
 					}
-				};
-				$("#msgEditAparelho").modal(cfg);
+				}
+			};
+			$("#msgEditAparelho").modal(cfg);
 		},
-		error: function(err){
+		error : function(err) {
 			alert("Erro ao editar aparelho!");
 		}
 	});
 }
-function editarAparelho(){
+function editarAparelho() {
 	var idaparelho = $("#EditIdAparelho").val();
 	var nome = $("#EditNomeAparelho").val();
 	var categoria = $("#EditCategoriaAparelho").val();
@@ -181,118 +217,162 @@ function editarAparelho(){
 	$.ajax({
 		type : 'POST',
 		url : '../../../ServletEditarAparelho',
-		data:{'idaparelho': idaparelho, 'nome':nome, 'categoria':categoria, 'marca':marca, 'modelo':modelo, 'nsaparelho':nsaparelho, 'ativo':ativo},
-		success: function(resposta){
+		data : {
+			'idaparelho' : idaparelho,
+			'nome' : nome,
+			'categoria' : categoria,
+			'marca' : marca,
+			'modelo' : modelo,
+			'nsaparelho' : nsaparelho,
+			'ativo' : ativo
+		},
+		success : function(resposta) {
 			alert("Atualizado");
 			buscarAparelho();
 		},
-		error:function(){
+		error : function() {
 			alert("Erro ao Atualizar");
 		}
 	});
 }
-function filtroAparelhosAtivos(){
+function filtroAparelhosAtivos() {
 	var ativo = $("#filtroAtivoOpc").val();
 	$.ajax({
-		type:'POST',
-		url: '../../../ServletFiltroAtivos',
-		data: {'ativo':ativo},
-		success: function(listaAparelhosAchados){
+		type : 'POST',
+		url : '../../../ServletFiltroAtivos',
+		data : {
+			'ativo' : ativo
+		},
+		success : function(listaAparelhosAchados) {
 			carregarTabela(listaAparelhosAchados);
 		},
-		error: function(){
+		error : function() {
 			alert("Erro ao Filtrar");
 		}
 	});
 }
-/*FIM CRUD APARELHO*/
+/* FIM CRUD APARELHO */
 
-/*INICIO CRUD PESSOA*/
-function inserirPessoa(){
-		var tipopessoa = 	 $("#tipopessoa").val();
-		var nome = 			 $("#nomecliente").val();
-		var cpf = 			 $("#cpfcliente").val();
-		var rg = 			 $("#rgcliente").val();
-		var datanascimento = $("#datanascimento").val();
-		var sexo = 			 $("#sexocliente").val();
-		var email = 		 $("#emailcliente").val();
-		var telefone = 		 $("#telefonecliente").val();
-		var celular = 		 $("#celularcliente").val();
-		var cep = 			 $("#cepcliente").val();
-		var endereco = 		 $("#enderecocliente").val();
-		var numero = 		 $("#numerocliente").val();
-		var bairro = 		 $("#bairrocliente").val();
-		var cidade = 		 $("#cidadecliente").val();
-		var estado = 		 $("#estadocliente").val();
-		var tipomorada = 	 $("#tipomorada").val();
-		var profissao =  	 $("#profissaocliente").val();
-		var ativo = 		 $("#statuspessoa").val();
+/* INICIO CRUD PESSOA */
+function inserirPessoa() {
+	var tipopessoa = $("#tipopessoa").val();
+	var nome = $("#nomecliente").val();
+	var cpf = $("#cpfcliente").val();
+	var rg = $("#rgcliente").val();
+	var datanascimento = $("#datanascimento").val();
+	var sexo = $("#sexocliente").val();
+	var email = $("#emailcliente").val();
+	var telefone = $("#telefonecliente").val();
+	var celular = $("#celularcliente").val();
+	var cep = $("#cepcliente").val();
+	var endereco = $("#enderecocliente").val();
+	var numero = $("#numerocliente").val();
+	var bairro = $("#bairrocliente").val();
+	var cidade = $("#cidadecliente").val();
+	var estado = $("#estadocliente").val();
+	var tipomorada = $("#tipomorada").val();
+	var profissao = $("#profissaocliente").val();
+	var ativo = $("#statuspessoa").val();
 
-		var pessoaNova = {'tipopessoa':tipopessoa, 'nome':nome, 'cpf':cpf,'rg':rg,'datanascimento':datanascimento, 'sexo':sexo, 
-						  'email':email,'telefone':telefone,'celular':celular,'cep':cep,'endereco':endereco,'numero':numero,'bairro':bairro,
-						  'cidade':cidade,'estado':estado,'tipomorada':tipomorada, 'profissao':profissao, 'ativo':ativo};	
-		var pessoa = JSON.stringify(pessoaNova);
+	var pessoaNova = {
+		'tipopessoa' : tipopessoa,
+		'nome' : nome,
+		'cpf' : cpf,
+		'rg' : rg,
+		'datanascimento' : datanascimento,
+		'sexo' : sexo,
+		'email' : email,
+		'telefone' : telefone,
+		'celular' : celular,
+		'cep' : cep,
+		'endereco' : endereco,
+		'numero' : numero,
+		'bairro' : bairro,
+		'cidade' : cidade,
+		'estado' : estado,
+		'tipomorada' : tipomorada,
+		'profissao' : profissao,
+		'ativo' : ativo
+	};
+	var pessoa = JSON.stringify(pessoaNova);
 	$.ajax({
-		type:'POST',
-		url: '/DigitalOS/rest/RestPessoa/addPessoaObj',
-		data: pessoa,
-		success: function(resposta){
+		type : 'POST',
+		url : '/DigitalOS/rest/RestPessoa/addPessoaObj',
+		data : pessoa,
+		success : function(resposta) {
 			alert(resposta);
 			$("#modalcliente").find('form')[0].reset();
 			$("#modalcliente").modal('hide');
 			buscarPessoa();
 		},
-		error: function(){
+		error : function() {
 			alert("Erro ao cadastrar nova pessoa.");
 		}
 	});
 }
-function buscarPessoa(){
+function buscarPessoa() {
 	var valorBusca = $('#buscaPessoaInput').val();
 	$.ajax({
-		type: 'POST',
-		url: '/DigitalOS/rest/RestPessoa/buscarPessoaPorNome',
-		data: valorBusca,
-		success: function(listaPessoasAchadas){
+		type : 'POST',
+		url : '/DigitalOS/rest/RestPessoa/buscarPessoaPorNome',
+		data : valorBusca,
+		success : function(listaPessoasAchadas) {
 			tabelaPessoa(listaPessoasAchadas);
 		},
-		error: function(listaPessoasAchadas){
+		error : function(listaPessoasAchadas) {
 			tabelaPessoa(listaPessoasAchadas);
 		}
 	});
 };
-function tabelaPessoa(listaPessoasAchadas){
-	var html = "<div class='teble-reponsive'>" +
-			   "<table class='table table-striped table-condensed table-bordered'>";
-		html += "<tr>" +
-				"<th># ID</th> <th>Nome</th> <th>CPF</th> <th>RG</th> <th>Endereco</th> <th>Cidade</th> <th>Estado</th> <th>Telefone</th> <th>Tipo Pessoa</th> <th>Ativo</th> <th>Edição</th>" +
-				"</tr>"
-	for(var i = 0; i < listaPessoasAchadas.length; i++){
-		html += "<tr>" +
-					"<td>" + listaPessoasAchadas[i].id + "</td>" +
-					"<td>" + listaPessoasAchadas[i].nome + "</td>" +
-					"<td>" + listaPessoasAchadas[i].cpf + "</td>" +
-					"<td>" + listaPessoasAchadas[i].rg + "</td>" +
-					"<td>" + listaPessoasAchadas[i].endereco + "</td>" +
-					"<td>" + listaPessoasAchadas[i].cidade + "</td>" +
-					"<td>" + listaPessoasAchadas[i].estado + "</td>" +
-					"<td>" + listaPessoasAchadas[i].telefone + "</td>" +
-					"<td>" + listaPessoasAchadas[i].tipopessoa + "</td>" +
-					"<td id='td'>" + listaPessoasAchadas[i].ativo + "</td>" +
-					"<td>" +
-						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoPessoa("+listaPessoasAchadas[i].id+")'></div>" +					
-					"</td>" +
-				"</tr>"
+function tabelaPessoa(listaPessoasAchadas) {
+	var html = "<div class='teble-reponsive'>"
+			+ "<table class='table table-striped table-condensed table-bordered'>";
+	html += "<tr>"
+			+ "<th># ID</th> <th>Nome</th> <th>CPF</th> <th>RG</th> <th>Endereco</th> <th>Cidade</th> <th>Estado</th> <th>Telefone</th> <th>Tipo Pessoa</th> <th>Ativo</th> <th>Edição</th>"
+			+ "</tr>"
+	for (var i = 0; i < listaPessoasAchadas.length; i++) {
+		html += "<tr>" + "<td>"
+				+ listaPessoasAchadas[i].id
+				+ "</td>"
+				+ "<td>"
+				+ listaPessoasAchadas[i].nome
+				+ "</td>"
+				+ "<td>"
+				+ listaPessoasAchadas[i].cpf
+				+ "</td>"
+				+ "<td>"
+				+ listaPessoasAchadas[i].rg
+				+ "</td>"
+				+ "<td>"
+				+ listaPessoasAchadas[i].endereco
+				+ "</td>"
+				+ "<td>"
+				+ listaPessoasAchadas[i].cidade
+				+ "</td>"
+				+ "<td>"
+				+ listaPessoasAchadas[i].estado
+				+ "</td>"
+				+ "<td>"
+				+ listaPessoasAchadas[i].telefone
+				+ "</td>"
+				+ "<td>"
+				+ listaPessoasAchadas[i].tipopessoa
+				+ "</td>"
+				+ "<td id='td'>"
+				+ listaPessoasAchadas[i].ativo
+				+ "</td>"
+				+ "<td>"
+				+ "<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoPessoa("
+				+ listaPessoasAchadas[i].id + ")'></div>" + "</td>" + "</tr>"
 	}
-	html += "</table>" +
-			"</div>"
+	html += "</table>" + "</div>"
 	$("#resultadoPessoa").html(html);
 }
-function exibirEdicaoPessoa(id){
+function exibirEdicaoPessoa(id) {
 	$.ajax({
 		type : 'POST',
-		url : '/DigitalOS/rest/RestPessoa/buscarPessoaPeloId/'+id,
-		success: function(pessoa){
+		url : '/DigitalOS/rest/RestPessoa/buscarPessoaPeloId/' + id,
+		success : function(pessoa) {
 			$("#idpessoaedit").val(id);
 			$("#tipopessoaedit").val(pessoa.tipopessoa);
 			$("#nomeclienteedit").val(pessoa.nome);
@@ -315,189 +395,248 @@ function exibirEdicaoPessoa(id){
 			$("#idenderecoedit").val(pessoa.idendereco);
 			$("#msgEditPessoa").modal(pessoa);
 		},
-		error: function(pessoa){
+		error : function(pessoa) {
 			alert("Erro ao editar Pessoa!");
 		}
 	});
 }
-function editarPessoa(id){
-	var id = 			 $("#idpessoaedit").val();
-	var tipopessoa = 	 $("#tipopessoaedit").val();
-	var nome = 			 $("#nomeclienteedit").val();
-	var cpf = 			 $("#cpfclienteedit").val();
-	var rg = 			 $("#rgclienteedit").val();
+function editarPessoa(id) {
+	var id = $("#idpessoaedit").val();
+	var tipopessoa = $("#tipopessoaedit").val();
+	var nome = $("#nomeclienteedit").val();
+	var cpf = $("#cpfclienteedit").val();
+	var rg = $("#rgclienteedit").val();
 	var datanascimento = $("#datanascimentoedit").val();
-	var sexo = 			 $("#sexoclienteedit").val();
-	var email = 		 $("#emailclienteedit").val();
-	var telefone = 		 $("#telefoneclienteedit").val();
-	var celular = 		 $("#celularclienteedit").val();
-	var cep = 			 $("#cepclienteedit").val();
-	var endereco = 		 $("#enderecoclienteedit").val();
-	var numero = 		 $("#numeroclienteedit").val();
-	var bairro = 		 $("#bairroclienteedit").val();
-	var cidade = 		 $("#cidadeclienteedit").val();
-	var estado = 		 $("#estadoclienteedit").val();
-	var tipomorada = 	 $("#tipomoradaedit").val();
-	var profissao = 	 $("#profissaoclienteedit").val();
-	var ativo = 		 $("#statuspessoaedit").val();
-	var idendereco = 	 $("#idenderecoedit").val();
+	var sexo = $("#sexoclienteedit").val();
+	var email = $("#emailclienteedit").val();
+	var telefone = $("#telefoneclienteedit").val();
+	var celular = $("#celularclienteedit").val();
+	var cep = $("#cepclienteedit").val();
+	var endereco = $("#enderecoclienteedit").val();
+	var numero = $("#numeroclienteedit").val();
+	var bairro = $("#bairroclienteedit").val();
+	var cidade = $("#cidadeclienteedit").val();
+	var estado = $("#estadoclienteedit").val();
+	var tipomorada = $("#tipomoradaedit").val();
+	var profissao = $("#profissaoclienteedit").val();
+	var ativo = $("#statuspessoaedit").val();
+	var idendereco = $("#idenderecoedit").val();
 
-	var pessoaEdit = {'id':id, 'tipopessoa':tipopessoa, 'nome':nome, 'cpf':cpf, 'rg':rg, 'datanascimento':datanascimento, 'sexo':sexo,
-					  'email':email, 'telefone':telefone, 'celular':celular, 'cep':cep, 'endereco':endereco, 'numero':numero, 'bairro':bairro, 
-					  'cidade':cidade, 'estado':estado, 'tipomorada':tipomorada, 'profissao':profissao, 'ativo':ativo, 'idendereco':idendereco};
+	var pessoaEdit = {
+		'id' : id,
+		'tipopessoa' : tipopessoa,
+		'nome' : nome,
+		'cpf' : cpf,
+		'rg' : rg,
+		'datanascimento' : datanascimento,
+		'sexo' : sexo,
+		'email' : email,
+		'telefone' : telefone,
+		'celular' : celular,
+		'cep' : cep,
+		'endereco' : endereco,
+		'numero' : numero,
+		'bairro' : bairro,
+		'cidade' : cidade,
+		'estado' : estado,
+		'tipomorada' : tipomorada,
+		'profissao' : profissao,
+		'ativo' : ativo,
+		'idendereco' : idendereco
+	};
 	var pessoa = JSON.stringify(pessoaEdit);
-	
+
 	$.ajax({
 		type : 'POST',
 		url : '/DigitalOS/rest/RestPessoa/editarPessoa',
-		data:pessoa,
-		success: function(resposta){
+		data : pessoa,
+		success : function(resposta) {
 			alert(resposta);
 			buscarPessoa();
 		},
-		error:function(){
+		error : function() {
 			alert("Erro ao Atualizar");
 		}
 	});
 }
-function filtroAtivosPessoa(){
+function filtroAtivosPessoa() {
 	var ativo = JSON.stringify($("#filtroPessoa").val());
 	$.ajax({
-		type:'POST',
-		url: '/DigitalOS/rest/RestPessoa/filtroAtivo',
-		data: $("#filtroPessoa").val(),
-		success: function(listaPessoasAchadas){
+		type : 'POST',
+		url : '/DigitalOS/rest/RestPessoa/filtroAtivo',
+		data : $("#filtroPessoa").val(),
+		success : function(listaPessoasAchadas) {
 			tabelaPessoa(listaPessoasAchadas);
 		},
-		error: function(){
+		error : function() {
 			alert("Erro ao Filtrar");
 		}
 	});
 }
-/*FIM CRUD PESSOA*/
+/* FIM CRUD PESSOA */
 
-/*INICIO CRUD FUNCIONARIO*/
-function inserirFuncionario(){
-	var nome = 			 	 $("#nomefuncionario").val();
-	var cpf = 			 	 $("#cpffuncionario").val();
-	var rg = 			 	 $("#rgfuncionario").val();
-	var sexo = 	 		 	 $("#sexofuncionario").val();
-	var datanascimento = 	 $("#datanascimentofuncionario").val();
-	var cargo =  	 	 	 $("#cargofuncionario").val();
-	var setor =  	 	 	 $("#setorfuncionario").val();
-	var numeropis =		 	 $("#numeropis").val();
-	var numeroct = 		 	 $("#numeroct").val();
-	var salario = 			 $("#salario").val();
-	var dataadmissao = 	 	 $("#dataadmissaofuncionario").val();
-	var email = 		 	 $("#emailfuncionario").val();
-	var endereco = 		 	 $("#enderecofuncionario").val();
-	var cep = 			 	 $("#cepfuncionario").val();
-	var numero = 		 	 $("#numerofuncionario").val();
-	var telefone = 		 	 $("#telefonefuncionario").val();
-	var celular = 		 	 $("#celularfuncionario").val();
-	var estado = 		 	 $("#estadofuncionario").val();
-	var cidade = 		 	 $("#cidadefuncionario").val();
-	var ativo = 		 	 $("#statusfuncionario").val();
+/* INICIO CRUD FUNCIONARIO */
+function inserirFuncionario() {
+	var nome = $("#nomefuncionario").val();
+	var cpf = $("#cpffuncionario").val();
+	var rg = $("#rgfuncionario").val();
+	var sexo = $("#sexofuncionario").val();
+	var datanascimento = $("#datanascimentofuncionario").val();
+	var cargo = $("#cargofuncionario").val();
+	var setor = $("#setorfuncionario").val();
+	var numeropis = $("#numeropis").val();
+	var numeroct = $("#numeroct").val();
+	var salario = $("#salario").val();
+	var dataadmissao = $("#dataadmissaofuncionario").val();
+	var email = $("#emailfuncionario").val();
+	var endereco = $("#enderecofuncionario").val();
+	var cep = $("#cepfuncionario").val();
+	var numero = $("#numerofuncionario").val();
+	var telefone = $("#telefonefuncionario").val();
+	var celular = $("#celularfuncionario").val();
+	var estado = $("#estadofuncionario").val();
+	var cidade = $("#cidadefuncionario").val();
+	var ativo = $("#statusfuncionario").val();
 
-	var funcNovo = {'nome':nome, 'cpf':cpf, 'rg':rg, 'sexo':sexo, 'datanascimento':datanascimento, 'cargo':cargo, 'setor':setor, 'numeropis':numeropis,
-					'numeroct':numeroct, 'salario':salario, 'dataadmissao':dataadmissao, 'email':email, 'endereco':endereco, 'numero':numero, 
-					'telefone':telefone, 'celular':celular, 'estado':estado, 'cidade':cidade, 'ativo':ativo};	
+	var funcNovo = {
+		'nome' : nome,
+		'cpf' : cpf,
+		'rg' : rg,
+		'sexo' : sexo,
+		'datanascimento' : datanascimento,
+		'cargo' : cargo,
+		'setor' : setor,
+		'numeropis' : numeropis,
+		'numeroct' : numeroct,
+		'salario' : salario,
+		'dataadmissao' : dataadmissao,
+		'email' : email,
+		'endereco' : endereco,
+		'numero' : numero,
+		'telefone' : telefone,
+		'celular' : celular,
+		'estado' : estado,
+		'cidade' : cidade,
+		'ativo' : ativo
+	};
 	var funcionario = JSON.stringify(funcNovo);
 	$.ajax({
-		type:'POST',
-		url: '/DigitalOS/rest/RestFuncionario/addFuncionario',
-		data: funcionario,
-		success: function(resposta){
+		type : 'POST',
+		url : '/DigitalOS/rest/RestFuncionario/addFuncionario',
+		data : funcionario,
+		success : function(resposta) {
 			alert(resposta);
 			$("#modalfuncionario").find('form')[0].reset();
 			$("#modalfuncionario").modal('hide');
 			buscarFuncionario();
 		},
-		error: function(){
+		error : function() {
 			alert("Erro ao cadastrar nova pessoa.");
 		}
 	});
 }
-function buscarFuncionario(){
+function buscarFuncionario() {
 	var valorBusca = $('#buscaFuncionario').val();
 	$.ajax({
-		type: 'POST',
-		url: '/DigitalOS/rest/RestFuncionario/buscarFuncionarioPorNome',
-		data: valorBusca,
-		success: function(listaFuncionariosAchadas){
+		type : 'POST',
+		url : '/DigitalOS/rest/RestFuncionario/buscarFuncionarioPorNome',
+		data : valorBusca,
+		success : function(listaFuncionariosAchadas) {
 			tabelaFuncionario(listaFuncionariosAchadas);
 		},
-		error: function(listaFuncionariosAchadas){
+		error : function(listaFuncionariosAchadas) {
 			alert("Erro ao procurar funcionario")
 			tabelaFuncionario(listaFuncionariosAchadas);
 		}
 	});
 }
-function tabelaFuncionario(listaFuncionariosAchadas){
-	var html = "<div class='teble-reponsive'>" +
-			   "<table class='table table-striped table-condensed table-bordered'>";
-		html += "<tr>" +
-				"<th># ID</th> <th>Nome</th> <th>CPF</th> <th>Cargo</th> <th>Setor</th> <th>Salario</th> <th>Sexo</th> <th>Id Funcionario</th> <th>Ativo</th> <th>Edição</th>" +
-				"</tr>"
-	for(var i = 0; i < listaFuncionariosAchadas.length; i++){
-		html += "<tr>" +
-					"<td>" + listaFuncionariosAchadas[i].idfuncionario + "</td>" +
-					"<td>" + listaFuncionariosAchadas[i].nome + "</td>" +
-					"<td>" + listaFuncionariosAchadas[i].cpf + "</td>" +
-					"<td>" + listaFuncionariosAchadas[i].cargo + "</td>" +
-					"<td>" + listaFuncionariosAchadas[i].setor + "</td>" +
-					"<td>" + listaFuncionariosAchadas[i].salario + "</td>" +
-					"<td>" + listaFuncionariosAchadas[i].sexo + "</td>" +
-					"<td>" + listaFuncionariosAchadas[i].idfuncionario + "</td>" +
-					"<td>" + listaFuncionariosAchadas[i].ativo + "</td>" +
-					"<td>" +
-						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoFuncionario("+listaFuncionariosAchadas[i].idfuncionario+")'></div>" +					
-					"</td>" +
-				"</tr>"
+function tabelaFuncionario(listaFuncionariosAchadas) {
+	var html = "<div class='teble-reponsive'>"
+			+ "<table class='table table-striped table-condensed table-bordered'>";
+	html += "<tr>"
+			+ "<th># ID</th> <th>Nome</th> <th>CPF</th> <th>Cargo</th> <th>Setor</th> <th>Salario</th> <th>Sexo</th> <th>Id Funcionario</th> <th>Ativo</th> <th>Edição</th>"
+			+ "</tr>"
+	for (var i = 0; i < listaFuncionariosAchadas.length; i++) {
+		html += "<tr>" + "<td>"
+				+ listaFuncionariosAchadas[i].idfuncionario
+				+ "</td>"
+				+ "<td>"
+				+ listaFuncionariosAchadas[i].nome
+				+ "</td>"
+				+ "<td>"
+				+ listaFuncionariosAchadas[i].cpf
+				+ "</td>"
+				+ "<td>"
+				+ listaFuncionariosAchadas[i].cargo
+				+ "</td>"
+				+ "<td>"
+				+ listaFuncionariosAchadas[i].setor
+				+ "</td>"
+				+ "<td>"
+				+ listaFuncionariosAchadas[i].salario
+				+ "</td>"
+				+ "<td>"
+				+ listaFuncionariosAchadas[i].sexo
+				+ "</td>"
+				+ "<td>"
+				+ listaFuncionariosAchadas[i].idfuncionario
+				+ "</td>"
+				+ "<td>"
+				+ listaFuncionariosAchadas[i].ativo
+				+ "</td>"
+				+ "<td>"
+				+ "<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoFuncionario("
+				+ listaFuncionariosAchadas[i].idfuncionario + ")'></div>"
+				+ "</td>" + "</tr>"
 	}
-	html += "</table>" +
-			"</div>"
+	html += "</table>" + "</div>"
 	$("#resultadoFuncionario").html(html);
 }
-function exibirEdicaoFuncionario(idfuncionario){
-	$.ajax({
-		type : 'POST',
-		url : '/DigitalOS/rest/RestFuncionario/buscarFuncionarioPeloId/'+idfuncionario,
-		success: function(funcionario){
-			$("#EditIdFuncionario").val(idfuncionario);
-			$("#EditNomeFuncionario").val(funcionario.nome);
-			$("#EditCpfFuncionario").val(funcionario.cpf);
-			$("#EditRgFuncionario").val(funcionario.rg);
-			$("#EditDataNascimentoFuncionario").val(funcionario.datanascimento);
-			$("#EditSexoFuncionario").val(funcionario.sexo);
-			$("#EditTelefoneFuncionario").val(funcionario.telefone);
-			$("#EditCelularFuncionario").val(funcionario.celular);
-			$("#EditEmailFuncionario").val(funcionario.email);
-			$("#EditTipoMoradaFuncionario").val(funcionario.tipomorada);
-			$("#EditStatusFuncionario").val(funcionario.ativo);
-			$("#EditCepFuncionario").val(funcionario.cep);
-			$("#EditNumeroFuncionario").val(funcionario.numero);
-			$("#EditEnderecoFuncionario").val(funcionario.endereco);
-			$("#EditBairroFuncionario").val(funcionario.bairro);
-			$("#EditCidadeFuncionario").val(funcionario.cidade);
-			$("#EditEstadoFuncionario").val(funcionario.estado);
-			$("#EditNumeroCtFuncionario").val(funcionario.numeroct);
-			$("#EditNumeroPisFuncionario").val(funcionario.numeropis);
-			$("#EditCargoFuncionario").val(funcionario.cargo);
-			$("#EditSetorFuncionario").val(funcionario.setor);
-			$("#EditSalarioFuncionario").val(funcionario.salario);
-			$("#EditDataAdmissaoFuncionario").val(funcionario.dataadmissao);
-			$("#EditDataDemissaoFuncionario").val(funcionario.datademissao);
-			$("#EditIdEndereco").val(funcionario.idendereco);
-			$("#EditFuncionarioIdFuncionario").val(funcionario.idfuncionario);
-			$("#msgEditFuncionario").modal(funcionario);
-		},
-		error: function(pessoa){
-			alert("Erro ao editar Funcionario!");
-		}
-	});
+function exibirEdicaoFuncionario(idfuncionario) {
+	$
+			.ajax({
+				type : 'POST',
+				url : '/DigitalOS/rest/RestFuncionario/buscarFuncionarioPeloId/'
+						+ idfuncionario,
+				success : function(funcionario) {
+					$("#EditIdFuncionario").val(idfuncionario);
+					$("#EditNomeFuncionario").val(funcionario.nome);
+					$("#EditCpfFuncionario").val(funcionario.cpf);
+					$("#EditRgFuncionario").val(funcionario.rg);
+					$("#EditDataNascimentoFuncionario").val(
+							funcionario.datanascimento);
+					$("#EditSexoFuncionario").val(funcionario.sexo);
+					$("#EditTelefoneFuncionario").val(funcionario.telefone);
+					$("#EditCelularFuncionario").val(funcionario.celular);
+					$("#EditEmailFuncionario").val(funcionario.email);
+					$("#EditTipoMoradaFuncionario").val(funcionario.tipomorada);
+					$("#EditStatusFuncionario").val(funcionario.ativo);
+					$("#EditCepFuncionario").val(funcionario.cep);
+					$("#EditNumeroFuncionario").val(funcionario.numero);
+					$("#EditEnderecoFuncionario").val(funcionario.endereco);
+					$("#EditBairroFuncionario").val(funcionario.bairro);
+					$("#EditCidadeFuncionario").val(funcionario.cidade);
+					$("#EditEstadoFuncionario").val(funcionario.estado);
+					$("#EditNumeroCtFuncionario").val(funcionario.numeroct);
+					$("#EditNumeroPisFuncionario").val(funcionario.numeropis);
+					$("#EditCargoFuncionario").val(funcionario.cargo);
+					$("#EditSetorFuncionario").val(funcionario.setor);
+					$("#EditSalarioFuncionario").val(funcionario.salario);
+					$("#EditDataAdmissaoFuncionario").val(
+							funcionario.dataadmissao);
+					$("#EditDataDemissaoFuncionario").val(
+							funcionario.datademissao);
+					$("#EditIdEndereco").val(funcionario.idendereco);
+					$("#EditFuncionarioIdFuncionario").val(
+							funcionario.idfuncionario);
+					$("#msgEditFuncionario").modal(funcionario);
+				},
+				error : function(pessoa) {
+					alert("Erro ao editar Funcionario!");
+				}
+			});
 }
-function atualizarFuncionario(){
+function atualizarFuncionario() {
 	var id = $("#EditIdFuncionario").val();
 	var nome = $("#EditNomeFuncionario").val();
 	var cpf = $("#EditCpfFuncionario").val();
@@ -524,65 +663,93 @@ function atualizarFuncionario(){
 	var datademissao = $("#EditDataDemissaoFuncionario").val();
 	var idendereco = $("#EditIdEndereco").val();
 	var funcionarioidfuncionario = $("#EditFuncionarioIdFuncionario").val();
-	
-	var funcionarioEdit = {'id':id, 'nome':nome, 'cpf':cpf, 'rg':rg, 'datanascimento':datanascimento, 'sexo':sexo, 
-						   'telefone':telefone, 'celular':celular, 'email':email, 'tipomorada':tipomorada, 'ativo':statusfuncionario, 'cep':cep, 
-						   'numero':numero, 'endereco':endereco, 'bairro':bairro, 'cidade':cidade, 'estado':estado, 'numeroct':numeroct, 
-						   'numeropis':numeropis, 'cargo':cargo, 'setor':setor, 'salario':salario, 'dataadmissao':dataadmissao, 
-						   'datademissao':datademissao, 'idendereco':idendereco, 'idfuncionario':funcionarioidfuncionario};
+
+	var funcionarioEdit = {
+		'id' : id,
+		'nome' : nome,
+		'cpf' : cpf,
+		'rg' : rg,
+		'datanascimento' : datanascimento,
+		'sexo' : sexo,
+		'telefone' : telefone,
+		'celular' : celular,
+		'email' : email,
+		'tipomorada' : tipomorada,
+		'ativo' : statusfuncionario,
+		'cep' : cep,
+		'numero' : numero,
+		'endereco' : endereco,
+		'bairro' : bairro,
+		'cidade' : cidade,
+		'estado' : estado,
+		'numeroct' : numeroct,
+		'numeropis' : numeropis,
+		'cargo' : cargo,
+		'setor' : setor,
+		'salario' : salario,
+		'dataadmissao' : dataadmissao,
+		'datademissao' : datademissao,
+		'idendereco' : idendereco,
+		'idfuncionario' : funcionarioidfuncionario
+	};
 	var funcionario = JSON.stringify(funcionarioEdit);
 	$.ajax({
-		type:'POST',
-		url: '/DigitalOS/rest/RestFuncionario/editarFuncionario',
-		data: funcionario,
-		success: function(resposta){
+		type : 'POST',
+		url : '/DigitalOS/rest/RestFuncionario/editarFuncionario',
+		data : funcionario,
+		success : function(resposta) {
 			$("#msgEditFuncionario").modal('hide');
 			buscarFuncionario();
 		},
-		error: function(){
+		error : function() {
 			alert("Erro ao editar funcionario.");
 		}
 	});
 }
-function filtroFuncionariosAtivos(){
+function filtroFuncionariosAtivos() {
 	$.ajax({
-		type:'POST',
-		url: '/DigitalOS/rest/RestFuncionario/filtroFuncionarioAtivo',
-		data: $("#filtroAtivoOpc").val(),
-		success: function(listaFuncionariosAchados){
+		type : 'POST',
+		url : '/DigitalOS/rest/RestFuncionario/filtroFuncionarioAtivo',
+		data : $("#filtroAtivoOpc").val(),
+		success : function(listaFuncionariosAchados) {
 			tabelaFuncionario(listaFuncionariosAchados);
 		},
-		error: function(){
+		error : function() {
 			alert("Erro ao Filtrar Servicos");
 		}
 	});
 }
-/*FIM CRUD FUNCIONARIO*/
+/* FIM CRUD FUNCIONARIO */
 
-/*INICIO CRUD SERVICO*/
-function inserirServico(){
-	var tiposervico = 		$("#tiposervico").val();
-	var nomeservico = 	 	$("#nomeservico").val();
-	var descricaoservico = 	$("#descricaoservico").val();
-	var ativo = 			$("#statusservico").val();
-	
-	if(tiposervico == "" || nomeservico == "" || descricaoservico == ""){
+/* INICIO CRUD SERVICO */
+function inserirServico() {
+	var tiposervico = $("#tiposervico").val();
+	var nomeservico = $("#nomeservico").val();
+	var descricaoservico = $("#descricaoservico").val();
+	var ativo = $("#statusservico").val();
+
+	if (tiposervico == "" || nomeservico == "" || descricaoservico == "") {
 		alert("Preencha todos os campos do formulário!");
 		return false;
-	}else{
-		var pessoaNova = {'tiposervico':tiposervico, 'nomeservico':nomeservico,'descricaoservico':descricaoservico, 'ativo':ativo};	
+	} else {
+		var pessoaNova = {
+			'tiposervico' : tiposervico,
+			'nomeservico' : nomeservico,
+			'descricaoservico' : descricaoservico,
+			'ativo' : ativo
+		};
 		var pessoa = JSON.stringify(pessoaNova);
 		$.ajax({
-			type:'POST',
-			url: '/DigitalOS/rest/RestServico/addServico',
-			data: pessoa,
-			success: function(resposta){
+			type : 'POST',
+			url : '/DigitalOS/rest/RestServico/addServico',
+			data : pessoa,
+			success : function(resposta) {
 				alert(resposta);
 				$("#modalservico").find('form')[0].reset();
 				$("#modalservico").modal('hide');
 				buscarServico();
 			},
-			error: function(){
+			error : function() {
 				alert("Erro ao cadastrar nova pessoa.");
 				$("#modalservico").modal('hide');
 				buscarServico();
@@ -590,48 +757,57 @@ function inserirServico(){
 		});
 	}
 }
-function buscarServico(){
+function buscarServico() {
 	var valorBusca = $('#buscarservico').val();
 	$.ajax({
-		type: 'POST',
-		url: '/DigitalOS/rest/RestServico/buscarServicoPorNome',
-		data: valorBusca,
-		success: function(listaServicoAchados){
+		type : 'POST',
+		url : '/DigitalOS/rest/RestServico/buscarServicoPorNome',
+		data : valorBusca,
+		success : function(listaServicoAchados) {
 			tabelaServico(listaServicoAchados);
 		},
-		error: function(listaServicoAchados){
+		error : function(listaServicoAchados) {
 			tabelaServico(listaServicoAchados);
 		}
 	});
 }
-function tabelaServico(listaServicoAchados){
-	var html = "<div class='teble-reponsive'>" +
-			   "<table class='table table-striped table-condensed table-bordered'>";
-		html += "<tr>" +
-				"<th># ID</th> <th>Tipo Servico</th> <th>Nome Servico</th> <th>Descricao</th> <th>Ativo</th> <th>Edição</th>" +
-				"</tr>"
-	for(var i = 0; i < listaServicoAchados.length; i++){
-		html += "<tr>" +
-					"<td>" + listaServicoAchados[i].idservico + "</td>" +
-					"<td>" + listaServicoAchados[i].tiposervico + "</td>" +
-					"<td>" + listaServicoAchados[i].nomeservico + "</td>" +
-					"<td>" + listaServicoAchados[i].descricaoservico + "</td>" +
-					"<td id='td'>" + listaServicoAchados[i].ativo + "</td>" +
-					"<td>" +
-						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoServico("+listaServicoAchados[i].idservico+")'></div>" +					
-					"</td>" +
-				"</tr>"
+function tabelaServico(listaServicoAchados) {
+	var html = "<div class='teble-reponsive'>"
+			+ "<table class='table table-striped table-condensed table-bordered'>";
+	html += "<tr>"
+			+ "<th># ID</th> <th>Tipo Servico</th> <th>Nome Servico</th> <th>Descricao</th> <th>Ativo</th> <th>Edição</th>"
+			+ "</tr>"
+	for (var i = 0; i < listaServicoAchados.length; i++) {
+		html += "<tr>"
+				+ "<td>"
+				+ listaServicoAchados[i].idservico
+				+ "</td>"
+				+ "<td>"
+				+ listaServicoAchados[i].tiposervico
+				+ "</td>"
+				+ "<td>"
+				+ listaServicoAchados[i].nomeservico
+				+ "</td>"
+				+ "<td>"
+				+ listaServicoAchados[i].descricaoservico
+				+ "</td>"
+				+ "<td id='td'>"
+				+ listaServicoAchados[i].ativo
+				+ "</td>"
+				+ "<td>"
+				+ "<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoServico("
+				+ listaServicoAchados[i].idservico + ")'></div>" + "</td>"
+				+ "</tr>"
 	}
-	html += "</table>" +
-			"</div>"
+	html += "</table>" + "</div>"
 	$("#resultadoServico").html(html);
 }
-function exibirEdicaoServico(idservico){
+function exibirEdicaoServico(idservico) {
 	alert("Exibe Edicao");
 	$.ajax({
 		type : 'POST',
-		url : '/DigitalOS/rest/RestServico/buscarServicoPeloId/'+idservico,
-		success: function(servico){
+		url : '/DigitalOS/rest/RestServico/buscarServicoPeloId/' + idservico,
+		success : function(servico) {
 			alert(servico);
 			$("#EditIdServico").val(idservico);
 			$("#EditNomeTipoServico").val(servico.tiposervico);
@@ -640,356 +816,421 @@ function exibirEdicaoServico(idservico){
 			$("#EditStatusServico").val(servico.ativo);
 			$("#msgEditServico").modal(servico);
 		},
-		error: function(servico){
+		error : function(servico) {
 			alert("Erro ao editar Servico!");
 		}
 	});
 }
-function editarServico(){
-	var idservico = 		$("#EditIdServico").val();
-	var tiposervico = 		$("#EditNomeTipoServico").val();
-	var nomeservico = 		$("#EditNomeServico").val();
-	var descricaoservico = 	$("#EditDescricaoServico").val();
-	var ativo = 			$("#EditStatusServico").val();
-	
-	var servicoEdit = {'idservico':idservico, 'tiposervico':tiposervico, 'nomeservico':nomeservico,'descricaoservico':descricaoservico, 'ativo':ativo};
+function editarServico() {
+	var idservico = $("#EditIdServico").val();
+	var tiposervico = $("#EditNomeTipoServico").val();
+	var nomeservico = $("#EditNomeServico").val();
+	var descricaoservico = $("#EditDescricaoServico").val();
+	var ativo = $("#EditStatusServico").val();
+
+	var servicoEdit = {
+		'idservico' : idservico,
+		'tiposervico' : tiposervico,
+		'nomeservico' : nomeservico,
+		'descricaoservico' : descricaoservico,
+		'ativo' : ativo
+	};
 	var servico = JSON.stringify(servicoEdit);
-	
+
 	$.ajax({
 		type : 'POST',
 		url : '/DigitalOS/rest/RestServico/editarServico',
-		data:servico,
-		success: function(resposta){
+		data : servico,
+		success : function(resposta) {
 			alert(resposta);
 			$('#msgEditServico').modal('hide');
 			buscarServico();
 		},
-		error:function(){
+		error : function() {
 			alert("Erro ao Atualizar Servico");
 		}
 	});
 }
-function filtroServico(){
+function filtroServico() {
 	$.ajax({
-		type:'POST',
-		url: '/DigitalOS/rest/RestServico/filtroServicoAtivo',
-		data: $("#filtroServicoAtivo").val(),
-		success: function(listaServicoAchados){
+		type : 'POST',
+		url : '/DigitalOS/rest/RestServico/filtroServicoAtivo',
+		data : $("#filtroServicoAtivo").val(),
+		success : function(listaServicoAchados) {
 			tabelaServico(listaServicoAchados);
 		},
-		error: function(){
+		error : function() {
 			alert("Erro ao Filtrar Servicos");
 		}
 	});
 }
-/*FIM CRUD SERVICO*/
+/* FIM CRUD SERVICO */
 
-/*INICIO CRUD CATERGORIA APARELHO*/
-function addCategoriaAparelho(){
+/* INICIO CRUD CATERGORIA APARELHO */
+function addCategoriaAparelho() {
 	var nome = $("#nomecategoria").val();
 	var ativo = $("#statuscategoria").val();
-	var categoriaNova = {'nome':nome, 'ativo':ativo};
+	var categoriaNova = {
+		'nome' : nome,
+		'ativo' : ativo
+	};
 	var categoria = JSON.stringify(categoriaNova);
 	$.ajax({
-		type:'POST',
-		url: '/DigitalOS/rest/RestCategoriaAparelho/addCategoriaAparelho',
-		data: categoria,
-		success: function(resposta){
+		type : 'POST',
+		url : '/DigitalOS/rest/RestCategoriaAparelho/addCategoriaAparelho',
+		data : categoria,
+		success : function(resposta) {
 			alert(resposta);
-			/*$("#modalcategoriaaparelho").find('form')[0].reset();
-			$("#modalcategoriaaparelho").modal('hide');*/
+			/*
+			 * $("#modalcategoriaaparelho").find('form')[0].reset();
+			 * $("#modalcategoriaaparelho").modal('hide');
+			 */
 			buscarCatergoria();
 		},
-		error: function(){
+		error : function() {
 			alert("Erro ao salvar categoria de aparelho");
 		}
 	});
 }
-function buscarCatergoria(){
+function buscarCatergoria() {
 	var valorBusca = $('#buscaCategoria').val();
-	$.ajax({
-		type: 'POST',
-		url: '/DigitalOS/rest/RestCategoriaAparelho/buscarCategoriaAparelhoPorNome',
-		data: valorBusca,
-		success: function(listaCategoriaAchados){
-			tabelaCategoria(listaCategoriaAchados);
-		},
-		error: function(listaCategoriaAchados){
-			tabelaCategoria();
-		}
-	});
+	$
+			.ajax({
+				type : 'POST',
+				url : '/DigitalOS/rest/RestCategoriaAparelho/buscarCategoriaAparelhoPorNome',
+				data : valorBusca,
+				success : function(listaCategoriaAchados) {
+					tabelaCategoria(listaCategoriaAchados);
+				},
+				error : function(listaCategoriaAchados) {
+					tabelaCategoria();
+				}
+			});
 }
-function tabelaCategoria(listaCategoriaAchados){
-	var html = "<div class='teble-reponsive'>" +
-			   "<table class='table table-striped table-condensed table-bordered'>";
-		html += "<tr>" +
-				"<th># ID</th> <th>Nome Categoria</th> <th>Ativo</th> <th>Edição</th>" +
-				"</tr>"
-	for(var i = 0; i < listaCategoriaAchados.length; i++){
-		html += "<tr>" +
-					"<td>" + listaCategoriaAchados[i].id + "</td>" +
-					"<td>" + listaCategoriaAchados[i].nome + "</td>" +
-					"<td id='td'>" + listaCategoriaAchados[i].ativo + "</td>" +
-					"<td>" +
-						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoCategoria("+listaCategoriaAchados[i].id+")'></div>" +					
-					"</td>" +
-				"</tr>"
+function tabelaCategoria(listaCategoriaAchados) {
+	var html = "<div class='teble-reponsive'>"
+			+ "<table class='table table-striped table-condensed table-bordered'>";
+	html += "<tr>"
+			+ "<th># ID</th> <th>Nome Categoria</th> <th>Ativo</th> <th>Edição</th>"
+			+ "</tr>"
+	for (var i = 0; i < listaCategoriaAchados.length; i++) {
+		html += "<tr>"
+				+ "<td>"
+				+ listaCategoriaAchados[i].id
+				+ "</td>"
+				+ "<td>"
+				+ listaCategoriaAchados[i].nome
+				+ "</td>"
+				+ "<td id='td'>"
+				+ listaCategoriaAchados[i].ativo
+				+ "</td>"
+				+ "<td>"
+				+ "<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoCategoria("
+				+ listaCategoriaAchados[i].id + ")'></div>" + "</td>" + "</tr>"
 	}
-	html += "</table>" +
-			"</div>"
+	html += "</table>" + "</div>"
 	$("#resultadoCategoria").html(html);
 }
-function exibirEdicaoCategoria(id){
+function exibirEdicaoCategoria(id) {
 	alert(id);
-	$.ajax({
-		type : 'POST',
-		url : '/DigitalOS/rest/RestCategoriaAparelho/buscarCategoriaAparelhoPeloId/'+id,
-		success: function(categoria){
-			console.log(categoria);
-			$("#EditIdCategoria").val(categoria.id);
-			$("#EditNomeCategoria").val(categoria.nome);
-			$("#EditStatusCategoria").val(categoria.ativo);
-			$("#msgEditCategoria").modal(categoria);
-		},
-		error: function(servico){
-			alert("Erro ao editar Categoria!");
-		}
-	});
+	$
+			.ajax({
+				type : 'POST',
+				url : '/DigitalOS/rest/RestCategoriaAparelho/buscarCategoriaAparelhoPeloId/'
+						+ id,
+				success : function(categoria) {
+					console.log(categoria);
+					$("#EditIdCategoria").val(categoria.id);
+					$("#EditNomeCategoria").val(categoria.nome);
+					$("#EditStatusCategoria").val(categoria.ativo);
+					$("#msgEditCategoria").modal(categoria);
+				},
+				error : function(servico) {
+					alert("Erro ao editar Categoria!");
+				}
+			});
 }
-function editarCategoria(){
-	var id = 	$("#EditIdCategoria").val();
-	var nome = 	$("#EditNomeCategoria").val();
+function editarCategoria() {
+	var id = $("#EditIdCategoria").val();
+	var nome = $("#EditNomeCategoria").val();
 	var ativo = $("#EditStatusCategoria").val();
-	
-	var categoriaEdit = {'id':id, 'nome':nome,'ativo':ativo};
+
+	var categoriaEdit = {
+		'id' : id,
+		'nome' : nome,
+		'ativo' : ativo
+	};
 	var categoria = JSON.stringify(categoriaEdit);
-	
+
 	$.ajax({
 		type : 'POST',
 		url : '/DigitalOS/rest/RestCategoriaAparelho/editarCategoriaAparelho',
-		data:categoria,
-		success: function(resposta){
+		data : categoria,
+		success : function(resposta) {
 			alert(resposta);
 			$('#msgEditCategoria').modal('hide');
 			buscarCatergoria();
 		},
-		error:function(){
+		error : function() {
 			alert("Erro ao Atualizar Servico");
 		}
 	});
 }
-function filtroCategoria(){
-	$.ajax({
-		type:'POST',
-		url: '/DigitalOS/rest/RestCategoriaAparelho/filtroCategoriaAparelhoAtivo',
-		data: $("#filtroAtivoOpc").val(),
-		success: function(listaCategoriaAchados){
-			tabelaCategoria(listaCategoriaAchados);
-		},
-		error: function(){
-			alert("Erro ao Filtrar Categorias");
-		}
-	});
+function filtroCategoria() {
+	$
+			.ajax({
+				type : 'POST',
+				url : '/DigitalOS/rest/RestCategoriaAparelho/filtroCategoriaAparelhoAtivo',
+				data : $("#filtroAtivoOpc").val(),
+				success : function(listaCategoriaAchados) {
+					tabelaCategoria(listaCategoriaAchados);
+				},
+				error : function() {
+					alert("Erro ao Filtrar Categorias");
+				}
+			});
 }
-/*FIM CRUD CATEGORIA APARELHO*/
+/* FIM CRUD CATEGORIA APARELHO */
 
-/*INICIO CRUD CATERGORIA APARELHO*/
-function addMarca(){
+/* INICIO CRUD CATERGORIA APARELHO */
+function addMarca() {
 	var nome = $("#nomemarca").val();
 	var ativo = $("#statusmarca").val();
-	var marcaNova = {'nome':nome, 'ativo':ativo};
+	var marcaNova = {
+		'nome' : nome,
+		'ativo' : ativo
+	};
 	var marca = JSON.stringify(marcaNova);
 	$.ajax({
-		type:'POST',
-		url: '/DigitalOS/rest/RestMarca/addMarca',
-		data: marca,
-		success: function(resposta){
+		type : 'POST',
+		url : '/DigitalOS/rest/RestMarca/addMarca',
+		data : marca,
+		success : function(resposta) {
 			alert(resposta);
 			$("#modalmarca").modal('hide');
 			buscarMarca();
 		},
-		error: function(){
+		error : function() {
 			alert("Erro ao salvar marca de aparelho");
 		}
 	});
 }
-function buscarMarca(){
+function buscarMarca() {
 	var valorBusca = $('#buscaMarca').val();
 	$.ajax({
-		type: 'POST',
-		url: '/DigitalOS/rest/RestMarca/buscarMarcaPorNome',
-		data: valorBusca,
-		success: function(listaMarcaAchados){
+		type : 'POST',
+		url : '/DigitalOS/rest/RestMarca/buscarMarcaPorNome',
+		data : valorBusca,
+		success : function(listaMarcaAchados) {
 			tabelaMarca(listaMarcaAchados);
 		},
-		error: function(listaMarcaAchados){
+		error : function(listaMarcaAchados) {
 			tabelaMarca();
 		}
 	});
 }
-function tabelaMarca(listaMarcaAchados){
-	var html = "<div class='teble-reponsive'>" +
-			   "<table class='table table-striped table-condensed table-bordered'>";
-		html += "<tr>" +
-				"<th># ID</th> <th>Nome Marca</th> <th>Ativo</th> <th>Edição</th>" +
-				"</tr>"
-	for(var i = 0; i < listaMarcaAchados.length; i++){
-		html += "<tr>" +
-					"<td>" + listaMarcaAchados[i].id + "</td>" +
-					"<td>" + listaMarcaAchados[i].nome + "</td>" +
-					"<td id='td'>" + listaMarcaAchados[i].ativo + "</td>" +
-					"<td>" +
-						"<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoMarca("+listaMarcaAchados[i].id+")'></div>" +					
-					"</td>" +
-				"</tr>"
+function tabelaMarca(listaMarcaAchados) {
+	var html = "<div class='teble-reponsive'>"
+			+ "<table class='table table-striped table-condensed table-bordered'>";
+	html += "<tr>"
+			+ "<th># ID</th> <th>Nome Marca</th> <th>Ativo</th> <th>Edição</th>"
+			+ "</tr>"
+	for (var i = 0; i < listaMarcaAchados.length; i++) {
+		html += "<tr>"
+				+ "<td>"
+				+ listaMarcaAchados[i].id
+				+ "</td>"
+				+ "<td>"
+				+ listaMarcaAchados[i].nome
+				+ "</td>"
+				+ "<td id='td'>"
+				+ listaMarcaAchados[i].ativo
+				+ "</td>"
+				+ "<td>"
+				+ "<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoMarca("
+				+ listaMarcaAchados[i].id + ")'></div>" + "</td>" + "</tr>"
 	}
-	html += "</table>" +
-			"</div>"
+	html += "</table>" + "</div>"
 	$("#resultadoMarca").html(html);
 }
-function exibirEdicaoMarca(id){
+function exibirEdicaoMarca(id) {
 	$.ajax({
 		type : 'POST',
-		url : '/DigitalOS/rest/RestMarca/buscarMarcaPeloId/'+id,
-		success: function(marca){
+		url : '/DigitalOS/rest/RestMarca/buscarMarcaPeloId/' + id,
+		success : function(marca) {
 			console.log(marca);
 			$("#EditIdMarca").val(id);
 			$("#EditNomeMarca").val(marca.nome);
 			$("#EditStatusMarca").val(marca.ativo);
 			$("#msgEditMarca").modal(marca);
 		},
-		error: function(servico){
+		error : function(servico) {
 			alert("Erro ao editar marca!");
 		}
 	});
 }
-function editarMarca(){
-	var id = 	$("#EditIdMarca").val();
-	var nome = 	$("#EditNomeMarca").val();
-	var ativo = $("#EditStatusMarca").val();	
-	var marca = JSON.stringify({'id':id,'nome':nome,'ativo':ativo});
+function editarMarca() {
+	var id = $("#EditIdMarca").val();
+	var nome = $("#EditNomeMarca").val();
+	var ativo = $("#EditStatusMarca").val();
+	var marca = JSON.stringify({
+		'id' : id,
+		'nome' : nome,
+		'ativo' : ativo
+	});
 	console.log(marca);
 	$.ajax({
 		type : 'POST',
 		url : '/DigitalOS/rest/RestMarca/editarMarca',
-		data: marca,
-		success: function(resposta){
+		data : marca,
+		success : function(resposta) {
 			alert(resposta);
 			$('#msgEditMarca').modal('hide');
 			buscarMarca();
 		},
-		error:function(){
+		error : function() {
 			alert("Erro ao atualizar marca!");
 		}
 	});
 }
-function filtroMarca(){
+function filtroMarca() {
 	$.ajax({
-		type:'POST',
-		url: '/DigitalOS/rest/RestMarca/filtroMarcaAtivo',
-		data: $("#filtroAtivoOpc").val(),
-		success: function(listaMarcaAchados){
+		type : 'POST',
+		url : '/DigitalOS/rest/RestMarca/filtroMarcaAtivo',
+		data : $("#filtroAtivoOpc").val(),
+		success : function(listaMarcaAchados) {
 			tabelaMarca(listaMarcaAchados);
 		},
-		error: function(){
+		error : function() {
 			alert("Erro ao filtrar marca!");
 		}
 	});
 }
-/*FIM CRUD CATEGORIA MARCA*/
+/* FIM CRUD CATEGORIA MARCA */
 
-/*INICIO ORDEM DE SERVICO*/
-function carregarSelect(){
+/* INICIO ORDEM DE SERVICO */
+function carregarSelect() {
 	$.ajax({
-		type:'POST',
-		url: '/DigitalOS/rest/RestSelect/buscarSelectCategoria',
-		success: function(lista){
+		type : 'POST',
+		url : '/DigitalOS/rest/RestSelect/buscarSelectCategoria',
+		success : function(lista) {
 			listosa = JSON.parse(lista);
-			$.each(listosa, function (i,v){
-	            $('#categoria').append($('<option>').text(v.nome).attr('value', v.id));
-	        });
+			$.each(listosa, function(i, v) {
+				$('#categoria').append(
+						$('<option>').text(v.nome).attr('value', v.id));
+			});
 		},
-		error: function(){
+		error : function() {
 			alert("Erro ao encontrar categoria");
 		}
 	});
-	
+
 	$.ajax({
-		type:'POST',
-		url: '/DigitalOS/rest/RestSelect/buscarSelectMarca',
-		success: function(lista){
+		type : 'POST',
+		url : '/DigitalOS/rest/RestSelect/buscarSelectMarca',
+		success : function(lista) {
 			listosa = JSON.parse(lista);
-			$.each(listosa, function (i,v){
-	            $('#marca').append($('<option>').text(v.nome).attr('value', v.id));
-	        });
+			$.each(listosa, function(i, v) {
+				$('#marca').append(
+						$('<option>').text(v.nome).attr('value', v.id));
+			});
 		},
-		error: function(){
+		error : function() {
 			alert("Erro ao encontrar marca");
 		}
 	});
 }
-function numeroOS(){
+function numeroOS() {
 	$.ajax({
-		type:'POST',
-		url: '/DigitalOS/rest/RestSelect/buscarSelectNumeroOS',
-		success: function(numero){
+		type : 'POST',
+		url : '/DigitalOS/rest/RestSelect/buscarSelectNumeroOS',
+		success : function(numero) {
 			id = (JSON.parse(numero));
 
 			numeroOS = id.id + 1;
 			$("#idos").val(numeroOS);
 		},
-		error: function(){
+		error : function() {
 			alert("Erro ao gerar numero da OS");
 		}
 	});
 }
-function abrirOS(){
+function abrirOS() {
 	$.ajax({
-		type: 'POST',
-		url: '/DigitalOS/rest/',
-		success: function(resposta){
+		type : 'POST',
+		url : '/DigitalOS/rest/',
+		success : function(resposta) {
 			alert(resposta);
 			$("#modalordemservico").find('form')[0].reset();
 			$("#modalordemservico").modal('hide');
 		},
-		error: function(resposta){
+		error : function(resposta) {
 			alert(resposta);
 		}
 	});
 }
-function buscarClienteOS(){
+function buscarClienteOS() {
+	document.getElementById('modalselecionacliente').style.display = "block";
 	var nome = $("#buscarClienteS").val();
 	$.ajax({
-		type:'POST',
-		url:'/DigitalOS/rest/RestPessoaOs/buscarPessoaOs',
-		data: nome,
-		success: function(resposta){
+		type : 'POST',
+		url : '/DigitalOS/rest/RestPessoaOs/buscarPessoaOs',
+		data : nome,
+		success : function(resposta) {
 			tabelaPessoaOS(resposta);
 			$('#modalselecionacliente').modal('show');
 		},
-		error: function(resposta){
+		error : function(resposta) {
 			alert("Erro ao localizar clientes");
 		}
 	});
 }
-function tabelaPessoaOS(resposta){
-	var html = "<div class='teble-reponsive'>" +
-			   "<table class='table table-striped table-condensed table-bordered'>";
-		html += "<tr>" +
-				"<th>Seleção</th> <th>Nome</th> <th>CPF</th> <th>RG</th> <th>Endereco</th> <th>Telefone</th>" +
-				"</tr>"
-	for(var i = 0; i < resposta.length; i++){
-		html += "<tr>" +
-					"<td>" +"<input type='checkbox'>"+ "</td>" +
-					"<td>" + resposta[i].nome + "</td>" +
-					"<td>" + resposta[i].cpf + "</td>" +
-					"<td>" + resposta[i].rg + "</td>" +
-					"<td>" + resposta[i].endereco + "</td>" +
-					"<td>" + resposta[i].telefone + "</td>" +
-				"</tr>"
+
+function Cliente(nome, cpf, rg, endereco, telefone) {
+	this.nome = nome;
+	this.cpf = cpf;
+	this.rg = rg;
+	this.endereco = endereco;
+	this.telefone = telefone;
+}
+
+clientes = [];
+
+function tabelaPessoaOS(resposta) {
+
+	var html = "<div class='table-reponsive'>"
+			+ "<table class='table table-striped table-condensed table-bordered'>";
+	html += "<tr>"
+			+ "<th>Seleção</th> <th>ID</th> <th>Nome</th> <th>CPF</th> <th>RG</th> <th>Endereco</th> <th>Telefone</th>"
+			+ "</tr>"
+
+	for (var i = 0; i < resposta.length; i++) {
+		clientes[i] = new Cliente(resposta[i].nome, resposta[i].cpf,
+				resposta[i].rg, resposta[i].endereco, resposta[i].telefone);
+		html += "<tr>"
+				+ "<td>"
+				+ "<input type='radio' id='radio' name='capiroto' onclick='carregaPessoaOS()'>"
+				+ "</td>" + "<td>" + i + "</td>" + "<td>" + resposta[i].nome
+				+ "</td>" + "<td>" + resposta[i].cpf + "</td>" + "<td>"
+				+ resposta[i].rg + "</td>" + "<td>" + resposta[i].endereco
+				+ "</td>" + "<td>" + resposta[i].telefone + "</td>" + "</tr>"
 	}
-	html += "</table>" +
-			"</div>"
+	html += "</table>" + "</div>"
 	$("#tabelaPessoas").html(html);
 }
-/*FIM ORDEM DE SERVICO*/
+
+function fechaModal() {
+	document.getElementById('modalselecionacliente').style.display = "none";
+}
+
+function carregaPessoaOS() {
+	var radioButtons = $("#tabelaPessoas input:radio[name='capiroto']");
+	var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
+	cliente = clientes[selectedIndex];
+	for ( let name in cliente) {
+		$("#"+name).val(cliente[name]);
+	}
+	fechaModal()
+}
+
+/* FIM ORDEM DE SERVICO */
