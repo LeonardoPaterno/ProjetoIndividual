@@ -11,6 +11,7 @@ import javax.ws.rs.core.Response;
 import br.com.digitalOS.bd.conexao.Conexao;
 import br.com.digitalOS.jdbc.JDBCDigitalOSLoginDAO;
 import br.com.digitalOS.objetos.SelectObj;
+import br.com.digitalOS.objetos.ServicoObj;
 
 @Path("RestSelect")
 public class RestSelect extends UtilRest{
@@ -43,6 +44,23 @@ public Response buscarSelectMarca() {
 			Connection conexao = conec.abrirConexao();
 			JDBCDigitalOSLoginDAO jdbcSelectObj = new JDBCDigitalOSLoginDAO(conexao);
 			List<SelectObj> SelectObj = (List<br.com.digitalOS.objetos.SelectObj>) jdbcSelectObj.buscarSelectMarca();
+			
+			return Response.ok(this.buildResponse(SelectObj)).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+
+@POST
+@Path("/buscarSelectTipoServico")
+@Consumes("application/*")
+public Response buscarSelectTipoServico() {
+		try {
+			Conexao conec = new Conexao();
+			Connection conexao = conec.abrirConexao();
+			JDBCDigitalOSLoginDAO jdbcSelectObj = new JDBCDigitalOSLoginDAO(conexao);
+			List<ServicoObj> SelectObj = (List<br.com.digitalOS.objetos.ServicoObj>) jdbcSelectObj.buscarSelectTipoServico();
 			
 			return Response.ok(this.buildResponse(SelectObj)).build();
 		} catch (Exception e) {

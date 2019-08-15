@@ -92,6 +92,10 @@ h4 {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.input-custom{
+	width: 260px;
+}
+
 .icone-salario{
 	display: table;
     position: absolute;
@@ -479,5 +483,30 @@ h4 {
 
 .divPequisaCliente{
 	position: relative;
-	left: 434px;
+	left: 395px;
+}
+
+.divPequisaAparelho{
+	position: relative;
+	left: 323px;
+}
+
+.icone-pesquisar-cliente{
+	height: 34px;
+    width: 20px;
+    position: relative;
+    left: 298px;
+    top: -34px;
+}
+
+.iconePesquisarSparelho{
+	height: 34px;
+    width: 20px;
+    position: relative;
+    left: 298px;
+    top: -34px;
+}
+
+.rowCustom{
+	height: 65px;
 }

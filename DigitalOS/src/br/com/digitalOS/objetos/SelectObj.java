@@ -8,7 +8,7 @@ public class SelectObj implements Serializable{
 	
 	private int id;
 	private String nome;
-	
+
 	public int getId() {
 		return id;
 	}

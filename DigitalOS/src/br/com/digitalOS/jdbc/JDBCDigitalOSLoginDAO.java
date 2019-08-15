@@ -1156,6 +1156,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				SelectObj lista = new SelectObj();
 				int id = rs.getInt("id");
 				String nome = (rs.getString("nome"));
+				
 				lista.setId(id);
 				lista.setNome(nome);
 				ListaSelect.add(lista);
@@ -1177,8 +1178,29 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				SelectObj lista = new SelectObj();
 				int id = rs.getInt("id");
 				String nome = (rs.getString("nomemarca"));
+				
 				lista.setId(id);
 				lista.setNome(nome);
+				ListaSelect.add(lista);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ListaSelect;
+	}
+	public List<ServicoObj> buscarSelectTipoServico() {
+		String comando = "SELECT id, tiposervico FROM servicos;";
+		List<ServicoObj> ListaSelect = new ArrayList<ServicoObj>();
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while (rs.next()) {
+				ServicoObj lista = new ServicoObj();
+				int id = rs.getInt("id");
+				String tiposervico = (rs.getString("tiposervico"));
+				
+				lista.setIdservico(id);
+				lista.setTiposervico(tiposervico);
 				ListaSelect.add(lista);
 			}
 		} catch (Exception e) {
@@ -1205,7 +1227,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 	public List<PessoaOsObj> buscarPessoaOs(String nome) {
 		List<PessoaOsObj> ListaPessoaOs = new ArrayList<PessoaOsObj>();
-		String comando = "SELECT nome, cpf, rg, telefone,"
+		String comando = "SELECT pessoa.id, nome, cpf, rg, telefone,"
 				   + "endereco.rua FROM pessoa INNER JOIN endereco ON endereco.id = pessoa.endereco_id ";
 	if (nome != "") {
 		comando += "WHERE nome LIKE '" + nome + "%' "
@@ -1216,12 +1238,14 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		ResultSet rs = stmt.executeQuery(comando);
 		while (rs.next()) {
 			PessoaOsObj pessoa = new PessoaOsObj();
+				int id = rs.getInt("pessoa.id");
 				String nomepessoa = rs.getString("nome");
 				String cpf = rs.getString("cpf");
 				String rg = rs.getString("rg");
 				String telefone = rs.getString("telefone");
 				String endereco = rs.getString("endereco.rua");
-				
+			
+			pessoa.setId(id);
 			pessoa.setNome(nomepessoa);
 			pessoa.setCpf(cpf);
 			pessoa.setRg(rg);
