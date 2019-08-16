@@ -15,7 +15,6 @@ import br.com.digitalOS.objetos.FuncionarioObj;
 import br.com.digitalOS.objetos.LoginObj;
 import br.com.digitalOS.objetos.MarcaObj;
 import br.com.digitalOS.objetos.PessoaObj;
-import br.com.digitalOS.objetos.PessoaOsObj;
 import br.com.digitalOS.objetos.SelectObj;
 import br.com.digitalOS.objetos.ServicoObj;
 
@@ -1225,40 +1224,37 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return numero;
 	}
-	public List<PessoaOsObj> buscarPessoaOs(String nome) {
-		List<PessoaOsObj> ListaPessoaOs = new ArrayList<PessoaOsObj>();
-		String comando = "SELECT pessoa.id, nome, cpf, rg, telefone,"
-				   + "endereco.rua FROM pessoa INNER JOIN endereco ON endereco.id = pessoa.endereco_id ";
-	if (nome != "") {
-		comando += "WHERE nome LIKE '" + nome + "%' "
-				+ "AND pessoa.ativo = 'S' AND pessoa.id IN (SELECT pessoa.id FROM pessoa WHERE pessoa.funcionario_id IS NULL);";
+	public List<AparelhoObj> buscarAparelhoOs() {
+		String comando = "select ap.id, ap.nome, numeroserie, modelo, marca.nomemarca as marca, categoriaaparelho.nome as categoria from aparelho ap "
+				       + "inner join categoriaaparelho on categoriaaparelho.id = ap.categoriaaparelho_id "
+				       + "inner join marca on marca.id = ap.marca_id";
+		List<AparelhoObj> listaAparelho = new ArrayList<AparelhoObj>();
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while (rs.next()) {
+				AparelhoObj aparelho = new AparelhoObj();
+				int idaparelho = rs.getInt("ap.id");
+				String nome = rs.getString("ap.nome");
+				String categoria = rs.getString("categoria");
+				String marca = rs.getString("marca");
+				String modelo = rs.getString("modelo");
+				String nsaparelho = rs.getString("numeroserie");
+				
+				aparelho.setIdaparelho(idaparelho);
+				aparelho.setNome(nome);
+				aparelho.setNomeCategoria(categoria);
+				aparelho.setNomeMarca(marca);
+				aparelho.setModelo(modelo);
+				aparelho.setNsaparelho(nsaparelho);
+				listaAparelho.add(aparelho);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-	try {
-		java.sql.Statement stmt = conexao.createStatement();
-		ResultSet rs = stmt.executeQuery(comando);
-		while (rs.next()) {
-			PessoaOsObj pessoa = new PessoaOsObj();
-				int id = rs.getInt("pessoa.id");
-				String nomepessoa = rs.getString("nome");
-				String cpf = rs.getString("cpf");
-				String rg = rs.getString("rg");
-				String telefone = rs.getString("telefone");
-				String endereco = rs.getString("endereco.rua");
-			
-			pessoa.setId(id);
-			pessoa.setNome(nomepessoa);
-			pessoa.setCpf(cpf);
-			pessoa.setRg(rg);
-			pessoa.setEndereco(endereco);
-			pessoa.setTelefone(telefone);
-
-			ListaPessoaOs.add(pessoa);
-		}
-	} catch (Exception e) {
-		e.printStackTrace();
+		return listaAparelho;
 	}
-	return ListaPessoaOs;
-	}
+	
 }
 
 

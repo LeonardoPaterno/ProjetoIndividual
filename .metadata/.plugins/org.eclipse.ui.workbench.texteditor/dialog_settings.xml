@@ -2,12 +2,14 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value=".divPequisaCliente" key="selection"/>
+		<item value="rowCustom" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="modalseleciona"/>
+			<item value="rowCustom"/>
 			<item value=".divPequisaCliente"/>
 			<item value="icone-pesquisar"/>
 			<item value="PessoaObj"/>
@@ -21,8 +23,6 @@
 			<item value="myDiv"/>
 			<item value="usuario"/>
 			<item value="painel"/>
-			<item value="&lt;hr&gt;"/>
-			<item value="CategoriaAparelho"/>
 		</list>
 		<list key="replacehistory">
 			<item value="PessoaOsObj"/>

@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 
 import br.com.digitalOS.bd.conexao.Conexao;
 import br.com.digitalOS.jdbc.JDBCDigitalOSLoginDAO;
+import br.com.digitalOS.objetos.AparelhoObj;
 import br.com.digitalOS.objetos.SelectObj;
 import br.com.digitalOS.objetos.ServicoObj;
 
@@ -78,6 +79,23 @@ public Response buscarSelectNumeroOS() {
 			Connection conexao = conec.abrirConexao();
 			JDBCDigitalOSLoginDAO jdbcSelectObj = new JDBCDigitalOSLoginDAO(conexao);
 			SelectObj SelectObj = jdbcSelectObj.buscarSelectNumeroOS();
+			
+			return Response.ok(this.buildResponse(SelectObj)).build();
+		}catch(Exception e) {
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+
+@POST
+@Path("/buscarAparelhoOs")
+@Consumes("application/*")
+public Response buscarAparelhoOs() {
+		try {
+			Conexao conec = new Conexao();
+			Connection conexao = conec.abrirConexao();
+			JDBCDigitalOSLoginDAO jdbcSelectObj = new JDBCDigitalOSLoginDAO(conexao);
+			List<AparelhoObj> SelectObj = (List<AparelhoObj>) jdbcSelectObj.buscarAparelhoOs();
 			
 			return Response.ok(this.buildResponse(SelectObj)).build();
 		}catch(Exception e) {

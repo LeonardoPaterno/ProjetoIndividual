@@ -106,12 +106,12 @@
        	 	<div class="row rowCustom">
 	        	<div class="form-group col-md-3">
 	        		<label>Categoria</label>
-	        		<select class="form-control" id="categoria" disabled>
+	        		<select class="form-control" id="nomeCategoria" disabled>
 	        		</select>
 	        	</div>	      
 	        	<div class="form-group col-md-3">
 	        		<label>Marca</label>
-	        		<select class="form-control" id="marca" disabled>
+	        		<select class="form-control" id="nomeMarca" disabled>
 	        		</select>
 	        	</div>
 	        	<div class="form-group col-md-3">
@@ -120,7 +120,7 @@
 	        	</div>
 	        	<div class="form-group col-md-3">
 	        		<label>N° Série</label>
-	        		<input class="form-control" type="text" id="numeroserie" maxlength="25" disabled>
+	        		<input class="form-control" type="text" id="nsaparelho" maxlength="25" disabled>
 	        	</div>
         	</div><!-- /div row -->
         	<div class="row rowCustom">
@@ -194,6 +194,43 @@
 				</button>
 	
 				<button type="button" class="btn btn-success" id="salvarPessoaEdit" onclick="carregaPessoaOS()">
+					Confirmar
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- /*-----------------------------------------------------------------*/ -->
+<div class="modal fade" id="modalselecionaAparelho" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h5 class="modal-title">Seleção de Aparelho</h5>
+			</div>
+			
+			<div class="modal-body">
+				<div class="">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<div>
+								<label class="label-painel-aparelho">Selecionar Aparelho</label>
+							</div>								
+						</div>
+						<div class="panel-body">
+							<div id="tabelaAparelhos" class="tabelaAparelhos"></div>
+						</div>
+					</div>
+				</div>	
+			</div>
+					
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" id="fechaModal" onclick="fechaModal()">
+					Fechar
+				</button>
+	
+				<button type="button" class="btn btn-success" id="salvarPessoaEdit" onclick="carregaAparelhoOS()">
 					Confirmar
 				</button>
 			</div>

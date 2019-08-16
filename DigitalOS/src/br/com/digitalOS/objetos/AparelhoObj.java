@@ -13,6 +13,8 @@ public class AparelhoObj implements Serializable{
 	private String modelo;
 	private String nsaparelho;
 	private String ativo;
+	private String NomeCategoria;
+	private String NomeMarca;
 	
 	public int getIdaparelho() {
 		return idaparelho;
@@ -55,6 +57,18 @@ public class AparelhoObj implements Serializable{
 	}
 	public void setAtivo(String ativo) {
 		this.ativo = ativo;
+	}
+	public String getNomeCategoria() {
+		return NomeCategoria;
+	}
+	public void setNomeCategoria(String nomeCategoria) {
+		NomeCategoria = nomeCategoria;
+	}
+	public String getNomeMarca() {
+		return NomeMarca;
+	}
+	public void setNomeMarca(String nomeMarca) {
+		NomeMarca = nomeMarca;
 	}
 	
 }

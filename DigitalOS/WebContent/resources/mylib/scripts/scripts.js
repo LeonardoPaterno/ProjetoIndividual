@@ -1006,7 +1006,6 @@ function addMarca() {
 		url : '/DigitalOS/rest/RestMarca/addMarca',
 		data : marca,
 		success : function(resposta) {
-			alert(resposta);
 			$("#modalmarca").modal('hide');
 			buscarMarca();
 		},
@@ -1058,7 +1057,6 @@ function exibirEdicaoMarca(id) {
 		type : 'POST',
 		url : '/DigitalOS/rest/RestMarca/buscarMarcaPeloId/' + id,
 		success : function(marca) {
-			console.log(marca);
 			$("#EditIdMarca").val(id);
 			$("#EditNomeMarca").val(marca.nome);
 			$("#EditStatusMarca").val(marca.ativo);
@@ -1084,7 +1082,6 @@ function editarMarca() {
 		url : '/DigitalOS/rest/RestMarca/editarMarca',
 		data : marca,
 		success : function(resposta) {
-			alert(resposta);
 			$('#msgEditMarca').modal('hide');
 			buscarMarca();
 		},
@@ -1139,14 +1136,12 @@ function carregarSelect() {
 			alert("Erro ao encontrar marca");
 		}
 	});
-	
-	console.log("passou");
+
 	$.ajax({
 		type : 'POST',
 		url : '/DigitalOS/rest/RestSelect/buscarSelectTipoServico',
 		success : function(lista) {
 			listosa = JSON.parse(lista);
-			console.log(listosa);
 			$.each(listosa, function(i, v) {
 				$('#tiposervico').append(
 						$('<option>').text(v.tiposervico).attr('value', v.idservico));
@@ -1210,9 +1205,7 @@ function Cliente(nome, cpf, rg, endereco, telefone) {
 	this.telefone = telefone;
 }
 clientes = [];
-
 function tabelaPessoaOS(resposta) {
-
 	var html = "<div class='table-reponsive'>"
 			+ "<table class='table table-striped table-condensed table-bordered'>";
 	html += "<tr>"
@@ -1220,8 +1213,7 @@ function tabelaPessoaOS(resposta) {
 			+ "</tr>"
 
 	for (var i = 0; i < resposta.length; i++) {
-		clientes[i] = new Cliente(resposta[i].nome, resposta[i].cpf,
-				resposta[i].rg, resposta[i].endereco, resposta[i].telefone);
+		clientes[i] = new Cliente(resposta[i].nome, resposta[i].cpf, resposta[i].rg, resposta[i].endereco, resposta[i].telefone);
 		html += "<tr>"
 					+ "<td>" + "<input type='radio' id='radio' name='capiroto' onclick='carregaPessoaOS()'>"+"</td>" 
 					+ "<td>" + resposta[i].id + "</td>" 
@@ -1237,6 +1229,7 @@ function tabelaPessoaOS(resposta) {
 }
 function fechaModal() {
 	document.getElementById('modalselecionacliente').style.display = "none";
+	document.getElementById('modalselecionaAparelho').style.display = "none";
 }
 function carregaPessoaOS() {
 	var radioButtons = $("#tabelaPessoas input:radio[name='capiroto']");
@@ -1247,15 +1240,18 @@ function carregaPessoaOS() {
 	}
 	fechaModal()
 }
+/*--------------------------------------------*/
+/*Fim Buscar P*/
 function buscarAparelhoOS() {
-	document.getElementById('modalselecionaaparelho').style.display = "block";
+	document.getElementById('modalselecionaAparelho').style.display = "block";
 	var nome = $("#buscarAparelho").val();
 	$.ajax({
 		type : 'POST',
-		url : '/DigitalOS/rest/RestAparelhoOs/buscarAparelhoOs',
+		url : '/DigitalOS/rest/RestSelect/buscarAparelhoOs',
 		data : nome,
 		success : function(resposta) {
-			tabelaPessoaOS(resposta);
+			console.log("buscarAparelhoOS: "+resposta);
+			tabelaAparelhoOS(resposta);
 			$('#modalselecionaAparelho').modal('show');
 		},
 		error : function(resposta) {
@@ -1263,34 +1259,66 @@ function buscarAparelhoOS() {
 		}
 	});
 }
-function Aparelho(categoria, marca, modelo, numeroserie) {
-	this.categoria = categoria;
-	this.marca = marca;
-	this.modelo = modelo;
-	this.numeroserie = numeroserie;
+function AparelhoBuilder(){
+	return{
+		build : function(resposta){
+					let aparelhos=[]
+					let respostaArray = JSON.parse(resposta);
+					
+					for(let i = 0; i <= respostaArray.length; i++){
+						if (respostaArray[i] == undefined || respostaArray[i] == null){
+							continue;
+						}
+						console.log(respostaArray[i]);
+						aparelhos[i] = new Aparelho(respostaArray[i]);
+					}
+					console.log(aparelhos)
+					return aparelhos;
+		}
+	}
+}
+
+function Aparelho({idaparelho, nomeCategoria, nomeMarca, modelo, nsaparelho}) {
+	return {
+		idaparelho : idaparelho,
+		nomeCategoria : nomeCategoria,
+		nomeMarca : nomeMarca,
+		modelo : modelo,
+		nsaparelho : nsaparelho
+	};
 }
 aparelhos = [];
 function tabelaAparelhoOS(resposta) {
-
+	console.log("tabelaAparelhoOS: "+resposta);
 	var html = "<div class='table-reponsive'>"
 			+ "<table class='table table-striped table-condensed table-bordered'>";
 	html += "<tr>"
 			+ "<th>Seleção</th> <th>ID</th> <th>Modelo</th> <th>Categoria</th> <th>Marca</th> <th>Número Série</th>"
 			+ "</tr>"
-
-	for (var i = 0; i < resposta.length; i++) {
-		aparelhos[i] = new Aparelho(resposta[i].categoria, resposta[i].marca,
-				resposta[i].modelo, resposta[i].numeroserie);
+	aparelhos = AparelhoBuilder().build(resposta);
+	console.log(aparelhos)
+	for (var i = 0; i < aparelhos.length; i++) {
+		let aparelho = aparelhos[i];
+//		console.log("tabelaAparelhoOS aparelhos[]: "+JSON.stringify(aparelhos[i]));
 		html += "<tr>"
-					+ "<td>" + "<input type='radio' id='checkbox' name='aparelho' onclick='carregaAparelhoOS()'>"+"</td>" 
-					+ "<td>" + resposta[i].id + "</td>" 
-					+ "<td>" + resposta[i].nome + "</td>" 
-					+ "<td>" + resposta[i].cpf + "</td>" 
-					+ "<td>" + resposta[i].rg + "</td>" 
-					+ "<td>" + resposta[i].endereco + "</td>"  
-				+ "</tr>"
+					+ "<td>" + "<input type='checkbox' id='aparelho' name='aparelhos' onclick='carregaAparelhoOS()'>"+"</td>" 
+					+ "<td>" + aparelho.idaparelho + "</td>" 
+					+ "<td>" + aparelho.modelo + "</td>" 
+					+ "<td>" + aparelho.nomeCategoria + "</td>" 
+					+ "<td>" + aparelho.nomeMarca + "</td>" 
+					+ "<td>" + aparelho.nsaparelho + "</td>"  
+			 + "</tr>"
 	}
 	html += "</table>" + "</div>"
 	$("#tabelaAparelhos").html(html);
+}
+function carregaAparelhoOS() {
+	var radioButtons = $("#tabelaAparelhos input:radio[name='aparelhos']");
+	var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
+	cliente = clientes[selectedIndex];
+	for ( let name in cliente) {
+		$("#"+name).val(cliente[name]);
+	}
+	fechaModal()
 }
 /* FIM ORDEM DE SERVICO */
