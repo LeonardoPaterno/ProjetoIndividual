@@ -1168,9 +1168,13 @@ function numeroOS() {
 	});
 }
 function abrirOS() {
+	var os = {'numeroos':$("#idos").val(), 'observacoes':$("#descricaoservico").val(),'statusos':$("#statusos").val(),'pessoa_id':$("#").val(), 'ativo':$("#ativo").val(),
+			'aparelho_id':$("#aparelho_id").val(), 'servicos_id':$("servicos_id").val()};
+	var ordemservico = JSON.stringify(os);
 	$.ajax({
 		type : 'POST',
-		url : '/DigitalOS/rest/',
+		url : '/DigitalOS/rest/RestOrdemServico/addOrdemServico',
+		data: ordemservico,
 		success : function(resposta) {
 			alert(resposta);
 			$("#modalordemservico").find('form')[0].reset();
@@ -1241,7 +1245,6 @@ function carregaPessoaOS() {
 	fechaModal()
 }
 /*--------------------------------------------*/
-/*Fim Buscar P*/
 function buscarAparelhoOS() {
 	document.getElementById('modalselecionaAparelho').style.display = "block";
 	var nome = $("#buscarAparelho").val();
@@ -1277,7 +1280,6 @@ function AparelhoBuilder(){
 		}
 	}
 }
-
 function Aparelho({idaparelho, nomeCategoria, nomeMarca, modelo, nsaparelho}) {
 	return {
 		idaparelho : idaparelho,
@@ -1290,18 +1292,17 @@ function Aparelho({idaparelho, nomeCategoria, nomeMarca, modelo, nsaparelho}) {
 aparelhos = [];
 function tabelaAparelhoOS(resposta) {
 	console.log("tabelaAparelhoOS: "+resposta);
-	var html = "<div class='table-reponsive'>"
-			+ "<table class='table table-striped table-condensed table-bordered'>";
+	var html = "<div class='table-reponsive'> " +
+			   "<table class='table table-striped table-condensed table-bordered'>";
 	html += "<tr>"
 			+ "<th>Seleção</th> <th>ID</th> <th>Modelo</th> <th>Categoria</th> <th>Marca</th> <th>Número Série</th>"
-			+ "</tr>"
+		  + "</tr>"
 	aparelhos = AparelhoBuilder().build(resposta);
 	console.log(aparelhos)
 	for (var i = 0; i < aparelhos.length; i++) {
 		let aparelho = aparelhos[i];
-//		console.log("tabelaAparelhoOS aparelhos[]: "+JSON.stringify(aparelhos[i]));
 		html += "<tr>"
-					+ "<td>" + "<input type='checkbox' id='aparelho' name='aparelhos' onclick='carregaAparelhoOS()'>"+"</td>" 
+					+ "<td>" + "<input type='checkbox' id='aparelho' name='aparelhos'>"+"</td>" 
 					+ "<td>" + aparelho.idaparelho + "</td>" 
 					+ "<td>" + aparelho.modelo + "</td>" 
 					+ "<td>" + aparelho.nomeCategoria + "</td>" 
@@ -1313,12 +1314,12 @@ function tabelaAparelhoOS(resposta) {
 	$("#tabelaAparelhos").html(html);
 }
 function carregaAparelhoOS() {
-	var radioButtons = $("#tabelaAparelhos input:radio[name='aparelhos']");
-	var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
-	cliente = clientes[selectedIndex];
-	for ( let name in cliente) {
-		$("#"+name).val(cliente[name]);
+	var inputs = $("#tabelaAparelhos input:checkbox[name='aparelhos']");
+	var selectedIndex = inputs.index(inputs.filter(':checked'));
+	aparelho = aparelhos[selectedIndex];
+	for ( let name in aparelho) {
+		$("#"+name).val(aparelho[name]);
 	}
-	fechaModal()
+	fechaModal();
 }
 /* FIM ORDEM DE SERVICO */

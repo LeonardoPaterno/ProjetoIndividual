@@ -14,7 +14,9 @@ import br.com.digitalOS.objetos.CategoriaAparelhoObj;
 import br.com.digitalOS.objetos.FuncionarioObj;
 import br.com.digitalOS.objetos.LoginObj;
 import br.com.digitalOS.objetos.MarcaObj;
+import br.com.digitalOS.objetos.OrdemServicoObj;
 import br.com.digitalOS.objetos.PessoaObj;
+import br.com.digitalOS.objetos.PessoaOsObj;
 import br.com.digitalOS.objetos.SelectObj;
 import br.com.digitalOS.objetos.ServicoObj;
 
@@ -25,6 +27,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	public JDBCDigitalOSLoginDAO(Connection conexao) {
 		this.conexao = conexao;
 	}
+	
 	/*INICIO LOGIN*/
 	public boolean consultarLogin(LoginObj login) {
 		String comando = "SELECT login.id from login where login.email like '"+login.getEmail()+"%';";
@@ -1144,6 +1147,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 	}
 	/*FIM PERFIL*/
+	/*INICIO SELECTs OS*/
 	public List<SelectObj> buscarSelectCategoria() {
 		String comando = "SELECT id, nome FROM categoriaaparelho;";
 
@@ -1165,7 +1169,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return ListaSelect;
 	}
-	
 	public List<SelectObj> buscarSelectMarca() {
 		String comando = "SELECT id, nomemarca FROM marca;";
 
@@ -1224,6 +1227,40 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return numero;
 	}
+	public List<PessoaOsObj> buscarPessoaOs(String nome) {
+		List<PessoaOsObj> ListaPessoaOs = new ArrayList<PessoaOsObj>();
+		String comando = "SELECT pessoa.id, nome, cpf, rg, telefone,"
+				   + "endereco.rua FROM pessoa INNER JOIN endereco ON endereco.id = pessoa.endereco_id ";
+	if (nome != "") {
+		comando += "WHERE nome LIKE '" + nome + "%' "
+				+ "AND pessoa.ativo = 'S' AND pessoa.id IN (SELECT pessoa.id FROM pessoa WHERE pessoa.funcionario_id IS NULL);";
+		}
+	try {
+		java.sql.Statement stmt = conexao.createStatement();
+		ResultSet rs = stmt.executeQuery(comando);
+		while (rs.next()) {
+			PessoaOsObj pessoa = new PessoaOsObj();
+				int id = rs.getInt("pessoa.id");
+				String nomepessoa = rs.getString("nome");
+				String cpf = rs.getString("cpf");
+				String rg = rs.getString("rg");
+				String telefone = rs.getString("telefone");
+				String endereco = rs.getString("endereco.rua");
+			
+			pessoa.setId(id);
+			pessoa.setNome(nomepessoa);
+			pessoa.setCpf(cpf);
+			pessoa.setRg(rg);
+			pessoa.setEndereco(endereco);
+			pessoa.setTelefone(telefone);
+
+			ListaPessoaOs.add(pessoa);
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return ListaPessoaOs;
+	}
 	public List<AparelhoObj> buscarAparelhoOs() {
 		String comando = "select ap.id, ap.nome, numeroserie, modelo, marca.nomemarca as marca, categoriaaparelho.nome as categoria from aparelho ap "
 				       + "inner join categoriaaparelho on categoriaaparelho.id = ap.categoriaaparelho_id "
@@ -1254,7 +1291,29 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return listaAparelho;
 	}
-	
+	/*FIM SELECTs OS*/
+
+	public boolean inserirOrdemServico(OrdemServicoObj os) {
+		String comando = "insert into ordemservico (numeroos, observacoes, statusos, pessoa_id, ativo, aparelho_id, servicos_id) "
+					   + "values(?, ?, ?, ?, ?, ?, ?, ?);";
+		PreparedStatement p;
+		try {
+			p = this.conexao.prepareStatement(comando);
+			p.setInt(1, os.getNumeroos());
+			p.setString(2, os.getObsproblema());
+			p.setString(3, os.getStatusos());
+			p.setInt(4, os.getPessoa_id());
+			p.setString(5, os.getAtivo());
+			p.setInt(6, os.getAparelho_id());
+			p.setInt(7, os.getServicos_id());
+			
+			p.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 }
 
 
