@@ -711,7 +711,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		
 	/*INICIO SERVICO*/
 	public boolean inserirservico(ServicoObj servico) {
-		String comando = "INSERT INTO servicos (tiposervico, nomeservico, descricao, ativo) VALUES(?,?,?,?);";
+		String comando = "INSERT INTO servicos (tiposervico, nome, descricao, ativo) VALUES(?,?,?,?);";
 				PreparedStatement p;
 				try {
 					p = this.conexao.prepareStatement(comando);
@@ -727,9 +727,9 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				return true;
 	}
 	public List<ServicoObj> buscarservicoPorNome(String nome) {
-		String comando = "SELECT id, tiposervico, nomeservico, descricao, ativo FROM servicos";
+		String comando = "SELECT id, tiposervico, nome, descricao, ativo FROM servicos";
 		if (nome != "" && nome != null) {
-			comando += " WHERE nomeservico LIKE '" + nome + "%';";
+			comando += " WHERE nome LIKE '" + nome + "%';";
 			}
 		List<ServicoObj> ListaServico = new ArrayList<ServicoObj>();
 		try {
@@ -739,7 +739,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				ServicoObj servico = new ServicoObj();
 				int idservico = rs.getInt("id");
 				String tiposervico = rs.getString("tiposervico");
-				String nomeservico = rs.getString("nomeservico");
+				String nomeservico = rs.getString("nome");
 				String descricaoservico = rs.getString("descricao");
 				String ativo = rs.getString("ativo");
 				
@@ -756,7 +756,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		return ListaServico;
 	}
 	public ServicoObj buscarservicoPorId(int id) {
-		String comando = "SELECT id, tiposervico, nomeservico, descricao, ativo FROM servicos WHERE id = "+id+";";
+		String comando = "SELECT id, tiposervico, nome, descricao, ativo FROM servicos WHERE id = "+id+";";
 		ServicoObj servico = new ServicoObj();
 		try{
 			java.sql.Statement stmt = conexao.createStatement();
@@ -764,7 +764,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			while(rs.next()){
 				int idservico = rs.getInt("id");
 				String tiposervico = rs.getString("tiposervico");
-				String nomeservico = rs.getString("nomeservico");
+				String nomeservico = rs.getString("nome");
 				String descricaoservico = rs.getString("descricao");
 				String ativo = rs.getString("ativo");
 				
@@ -781,7 +781,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		return servico;
 	}
 	public boolean atualizarServico(ServicoObj servico) {
-		String comando = "UPDATE servicos SET tiposervico=?, nomeservico=?, descricao=?, ativo=? WHERE id = "+servico.getIdservico()+";";
+		String comando = "UPDATE servicos SET tiposervico=?, nome=?, descricao=?, ativo=? WHERE id = "+servico.getIdservico()+";";
 				PreparedStatement p;
 				try{p = this.conexao.prepareStatement(comando);
 					p.setString(1, servico.getTiposervico());
@@ -800,13 +800,13 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		String comando = "";
 		String filtro = servico.getAtivo();
 		if(filtro.equalsIgnoreCase("N")) {
-			comando += "SELECT id, tiposervico, nomeservico, descricao, ativo FROM servicos WHERE ativo = 'N';";
+			comando += "SELECT id, tiposervico, nome, descricao, ativo FROM servicos WHERE ativo = 'N';";
 		}
 		else if(filtro.equalsIgnoreCase("S")) {
-			comando += "SELECT id, tiposervico, nomeservico, descricao, ativo FROM servicos WHERE ativo = 'S';";
+			comando += "SELECT id, tiposervico, nome, descricao, ativo FROM servicos WHERE ativo = 'S';";
 		}
 		else{
-			comando += "SELECT id, tiposervico, nomeservico, descricao, ativo FROM servicos;";
+			comando += "SELECT id, tiposervico, nome, descricao, ativo FROM servicos;";
 		}
 		int vezes = 0;
 		try {
@@ -817,7 +817,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				ServicoObj servicos = new ServicoObj();
 				int idservico = rs.getInt("id");
 				String tiposervico = rs.getString("tiposervico");
-				String nomeservico = rs.getString("nomeservico");
+				String nomeservico = rs.getString("nome");
 				String descricaoservico = rs.getString("descricao");
 				String ativo = rs.getString("ativo");
 				
@@ -950,7 +950,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	
 	/*INICIO MARCA*/
 	public boolean inserirMarca(MarcaObj marca) {
-		String comando = "insert into marca (nomemarca, ativo) values(?, ?);";
+		String comando = "insert into marca (nome, ativo) values(?, ?);";
 		PreparedStatement p;
 		try {
 			p = this.conexao.prepareStatement(comando);
@@ -966,7 +966,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	public List<MarcaObj> buscarMarcaPorNome(String nome) {
 		String comando = "SELECT * FROM marca ";
 		if(nome != "" || nome != null) {
-			comando += "WHERE nomemarca like '"+ nome +"%'";
+			comando += "WHERE nome like '"+ nome +"%'";
 		}
 		List<MarcaObj> ListaMarca = new ArrayList<MarcaObj>();
 		try {
@@ -975,7 +975,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			while (rs.next()) {
 				MarcaObj marca = new MarcaObj();
 				int id = rs.getInt("id");
-				String nomemarca = rs.getString("nomemarca");
+				String nomemarca = rs.getString("nome");
 				String ativo = rs.getString("ativo");
 				marca.setId(id);
 				marca.setNome(nomemarca);
@@ -988,14 +988,14 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		return ListaMarca;
 	}
 	public MarcaObj buscarMarcaPorId(int id) {
-		String comando = "SELECT id, nomemarca, ativo FROM marca WHERE id = "+id+";";
+		String comando = "SELECT id, nome, ativo FROM marca WHERE id = "+id+";";
 		MarcaObj marca = new MarcaObj();
 		try{
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
 			while(rs.next()){
 				int idservico = rs.getInt("id");
-				String nomemarca = rs.getString("nomemarca");
+				String nomemarca = rs.getString("nome");
 				String ativo = rs.getString("ativo");
 				
 				marca.setId(idservico);
@@ -1009,7 +1009,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		return marca;
 	}
 	public boolean atualizarMarca(MarcaObj marca) {
-		String comando = "UPDATE marca SET nomemarca = ?, ativo = ? WHERE id = "+marca.getId()+";";
+		String comando = "UPDATE marca SET nome = ?, ativo = ? WHERE id = "+marca.getId()+";";
 		PreparedStatement p;
 		try{p = this.conexao.prepareStatement(comando);
 			p.setString(1, marca.getNome());
@@ -1026,13 +1026,13 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		String comando = "";
 		String filtro = marca.getAtivo();
 		if(filtro.equalsIgnoreCase("N")) {
-			comando += "SELECT id, nomemarca, ativo FROM marca WHERE ativo = 'N';";
+			comando += "SELECT id, nome, ativo FROM marca WHERE ativo = 'N';";
 		}
 		else if(filtro.equalsIgnoreCase("S")) {
-			comando += "SELECT id, nomemarca, ativo FROM marca WHERE ativo = 'S';";
+			comando += "SELECT id, nome, ativo FROM marca WHERE ativo = 'S';";
 		}
 		else{
-			comando += "SELECT id, nomemarca, ativo FROM marca;";
+			comando += "SELECT id, nome, ativo FROM marca;";
 		}
 		int vezes = 0;
 		try {
@@ -1042,7 +1042,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				vezes = vezes + 1;
 				MarcaObj marcas = new MarcaObj();
 				int id = rs.getInt("id");
-				String nomemarca = rs.getString("nomemarca");
+				String nomemarca = rs.getString("nome");
 				String ativo = rs.getString("ativo");
 				
 				marcas.setId(id);
@@ -1170,7 +1170,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		return ListaSelect;
 	}
 	public List<SelectObj> buscarSelectMarca() {
-		String comando = "SELECT id, nomemarca FROM marca;";
+		String comando = "SELECT id, nome FROM marca;";
 
 		List<SelectObj> ListaSelect = new ArrayList<SelectObj>();
 		try {
@@ -1179,7 +1179,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			while (rs.next()) {
 				SelectObj lista = new SelectObj();
 				int id = rs.getInt("id");
-				String nome = (rs.getString("nomemarca"));
+				String nome = (rs.getString("nome"));
 				
 				lista.setId(id);
 				lista.setNome(nome);
@@ -1262,7 +1262,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	return ListaPessoaOs;
 	}
 	public List<AparelhoObj> buscarAparelhoOs() {
-		String comando = "select ap.id, ap.nome, numeroserie, modelo, marca.nomemarca as marca, categoriaaparelho.nome as categoria from aparelho ap "
+		String comando = "select ap.id, ap.nome, numeroserie, modelo, marca.nome as marca, categoriaaparelho.nome as categoria from aparelho ap "
 				       + "inner join categoriaaparelho on categoriaaparelho.id = ap.categoriaaparelho_id "
 				       + "inner join marca on marca.id = ap.marca_id";
 		List<AparelhoObj> listaAparelho = new ArrayList<AparelhoObj>();
@@ -1313,6 +1313,47 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			return false;
 		}
 		return true;
+	}
+	public List<OrdemServicoObj> buscarOS(int numero) {
+		List<OrdemServicoObj> listaOS = new ArrayList<OrdemServicoObj>();
+		String comando = "select id, numeroos, pessoa.nome, dataabertura, dataprazo, datafechamento, statusos, orcamento.numero, orcamento.total from ordemservico "
+				       + "inner join pessoa on pessoa.id = ordemservico.pessoa_id "
+				       + "inner join orcamento on orcamento.numero = ordemservico.orcamento_numero";
+		
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while (rs.next()) {
+				OrdemServicoObj os = new OrdemServicoObj();
+				
+				int id = rs.getInt("id");
+				int numeroos = rs.getInt("numeroos");
+				String nome = rs.getString("pessoa.nome");
+				Date abertura = rs.getDate("dataabertura");
+				Date prazo = rs.getDate("dataprazo");
+				Date fechamento = rs.getDate("datafechamento");
+				String statusos = rs.getString("statusos");
+				int orcamento = rs.getInt("orcamento.numero");
+				float total = rs.getFloat("orcamento.total");
+				
+				os.setId(id);
+				os.setNumeroos(numeroos);
+				os.setNome(nome);
+				os.setAbertura(abertura);
+				os.setPrazo(prazo);
+				os.setFechamento(fechamento);
+				os.setStatusos(statusos);
+				os.setOrcamento_numero(orcamento);
+				os.setTotal(total);
+				
+				listaOS.add(os);
+				
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return listaOS;
 	}
 }
 

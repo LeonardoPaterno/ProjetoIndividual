@@ -1024,7 +1024,7 @@ function buscarMarca() {
 			tabelaMarca(listaMarcaAchados);
 		},
 		error : function(listaMarcaAchados) {
-			tabelaMarca();
+			tabelaMarca(listaMarcaAchados);
 		}
 	});
 }
@@ -1179,6 +1179,7 @@ function abrirOS() {
 			alert(resposta);
 			$("#modalordemservico").find('form')[0].reset();
 			$("#modalordemservico").modal('hide');
+			listarOS();
 		},
 		error : function(resposta) {
 			alert(resposta);
@@ -1321,5 +1322,45 @@ function carregaAparelhoOS() {
 		$("#"+name).val(aparelho[name]);
 	}
 	fechaModal();
+}
+function buscarOS(){
+	var num = $("#buscaOS").val();
+	var numero = JSON.stringify(num);
+	alert(numero);
+	$.ajax({
+		type: 'POST',
+		url:'/DigitalOS/rest/RestOrdemServico/buscarOS/'+numero,
+		success:function(resposta){
+			alert("OS Encontrada");
+			tabelaOS(resposta);
+		},
+		error: function(){
+			alert("Erro ao localizar as ordens de servico");
+		}
+	});
+}
+function tabelaOS(resposta) {
+	var html = "<div class='teble-reponsive'>"
+				+ "<table class='table table-striped table-condensed table-bordered'>";
+			html += "<tr>"
+				  	+ "<th># numeroos</th> <th>Cliente</th> <th>Aberta</th> <th>Prazo</th> <th>Fechada</th> <th>Status OS</th> <th>N° Orcamento</th> <th>Total OS</th> <th>Edição</th>"
+				  + "</tr>"
+			for (var i = 0; i < resposta.length; i++) {
+				html += "<tr>"
+							+ "<td>"+ resposta[i].numeroos+ "</td>"
+							+ "<td>"+ resposta[i].nome+ "</td>"
+							+ "<td>"+ resposta[i].dataabertura+ "</td>"
+							+ "<td>"+ resposta[i].dataprazo+ "</td>"
+							+ "<td>"+ resposta[i].datafechamento+ "</td>"
+							+ "<td>"+ resposta[i].statusos+ "</td>"
+							+ "<td>"+ resposta[i].orcamentonumero+ "</td>"
+							+ "<td>"+ resposta[i].total+ "</td>"
+							+ "<td>"+ "<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoOS("+ resposta[i].id + ")'></div>" 
+							+ "</td>" 
+						+"</tr>"
+			}
+		 html += "</table>" 
+		    + "</div>"
+	$("#resultadoOS").html(html);
 }
 /* FIM ORDEM DE SERVICO */

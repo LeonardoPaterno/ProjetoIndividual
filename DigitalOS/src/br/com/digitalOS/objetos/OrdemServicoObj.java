@@ -1,19 +1,56 @@
 package br.com.digitalOS.objetos;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class OrdemServicoObj implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	private int id;
 	private int numeroos;
 	private int pessoa_id;
 	private int aparelho_id;
 	private int servicos_id;
 	private int orcamento_numero;
+	private float total;
+	private String nome;
 	private String obsproblema;
 	private String obssolucao;
+	private Date abertura;
+	private Date prazo;
+	private Date fechamento;
 	
+	public float getTotal() {
+		return total;
+	}
+	public void setTotal(float total) {
+		this.total = total;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public Date getAbertura() {
+		return abertura;
+	}
+	public void setAbertura(Date abertura) {
+		this.abertura = abertura;
+	}
+	public Date getPrazo() {
+		return prazo;
+	}
+	public void setPrazo(Date prazo) {
+		this.prazo = prazo;
+	}
+	public Date getFechamento() {
+		return fechamento;
+	}
+	public void setFechamento(Date fechamento) {
+		this.fechamento = fechamento;
+	}
 	public int getNumeroos() {
 		return numeroos;
 	}
@@ -67,6 +104,12 @@ public class OrdemServicoObj implements Serializable{
 	}
 	public void setAtivo(String ativo) {
 		this.ativo = ativo;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	private String statusos;
 	private String ativo;
