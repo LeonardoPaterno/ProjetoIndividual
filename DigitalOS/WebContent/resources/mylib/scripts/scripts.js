@@ -1,3 +1,11 @@
+$(document).ready(function(){
+  buscarMarca();
+  buscarCatergoria();
+  buscarAparelho();
+  buscarPessoa();
+  buscarFuncionario();
+  buscarOS();
+});
 /*INICIO LOGIN*/
 function loginOS() {
 	var user = $("input[name=usuario]").val();
@@ -25,6 +33,7 @@ function loginOS() {
 	}
 }
 function carregaPerfil() {
+	alert("oi");
 	var id = document.cookie.split('=')[1];
 	console.log(id);
 	$.ajax({
@@ -52,7 +61,6 @@ function editarPerfil() {
 	var novasenha = $("#novaSenha").val();
 	var confirmasenha = $("#confirmaSenha").val();
 	if (novasenha == confirmasenha) {
-		alert("TESTE");
 		var id = $("#id").val();
 		var nome = $("#nome").val();
 		var cep = $("#cep").val();
@@ -81,10 +89,14 @@ function editarPerfil() {
 			url : '/DigitalOS/rest/RestPerfil/editarPerfil',
 			data : perfil,
 			success : function(resposta) {
+				$("#ModalPainelUsuario").find('input').val('');
 				alert(resposta);
+				carregaPerfil();
 			},
 			error : function() {
 				alert("Error!");
+				$("#ModalPainelUsuario").find('input').val('');
+				$("#ModalPainelUsuario").modal('hide');
 			}
 		});
 	} else {
@@ -992,7 +1004,7 @@ function filtroCategoria() {
 }
 /* FIM CRUD CATEGORIA APARELHO */
 
-/* INICIO CRUD CATERGORIA APARELHO */
+/* INICIO CRUD MARCA APARELHO */
 function addMarca() {
 	var nome = $("#nomemarca").val();
 	var ativo = $("#statusmarca").val();
@@ -1103,7 +1115,7 @@ function filtroMarca() {
 		}
 	});
 }
-/* FIM CRUD CATEGORIA MARCA */
+/* FIM CRUD MARCA */
 
 /* INICIO ORDEM DE SERVICO */
 function carregarSelect() {

@@ -240,9 +240,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 	public boolean atualizar(PessoaObj pessoa) {
 		String comando1 = "UPDATE endereco SET estado=?, cidade=?, bairro=?, rua=?, numero=?, cep=? WHERE id = "+pessoa.getIdendereco()+";";
-		String comando2 = "UPDATE pessoa SET nome=?, cpf=?, rg=?, datanascimento=?, sexo=?, telefone=?, celular=?, "
-					   + "email=?, profissao=?, tipomorada=?, tipopessoa=?, ativo=?"
-					   + "WHERE id = "+pessoa.getId()+";";
+		String comando2 = "UPDATE pessoa SET nome=?, cpf=?, rg=?, datanascimento=?, sexo=?, telefone=?, celular=?, email=?, profissao=?, tipomorada=?, tipopessoa=?, ativo=? WHERE id = "+pessoa.getId()+";";
 		PreparedStatement p1;
 		PreparedStatement p2;
 		try{p1 = this.conexao.prepareStatement(comando1);
@@ -1087,38 +1085,10 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 	public boolean atualizarPerfil(LoginObj login) {
 		String senha = login.getSenha();
-		System.out.println(login.getSenha() + " " + senha );
 		if(login.getSenha().isEmpty() || senha == null || senha == "") {
-			System.out.println("if");
 			String comando = " UPDATE endereco SET rua=?, numero=?, cep=? WHERE endereco.id in (select endereco_id from pessoa where pessoa.id in (select pessoa_id from login where login.id = "+login.getId()+"));";
 			String comando2 = "UPDATE pessoa SET nome=?, telefone=?, celular=?, email=? WHERE pessoa.id in (select pessoa_id from login where login.id = "+login.getId()+");";
-			
-			PreparedStatement p;
-			PreparedStatement p2;
-			try{
-				p = this.conexao.prepareStatement(comando);
-				p.setString(1, login.getEndereco());
-				p.setString(2, login.getNumero());
-				p.setString(3, login.getCep());
-				p.executeUpdate();
-				
-				p2 = this.conexao.prepareStatement(comando2);
-				p2.setString(1, login.getNome());
-				p2.setString(2, login.getTelefone());
-				p2.setString(3, login.getCelular());
-				p2.setString(4, login.getEmail());
-				p2.executeUpdate();
-
-			}catch(SQLException e){
-				e.printStackTrace();
-				return false;
-			} 
-			return true;
-		}else {
-			System.out.println("else");
-			String comando =  " UPDATE endereco SET rua=?, numero=?, cep=? WHERE endereco.id in (select endereco_id from pessoa where pessoa.id in (select pessoa_id from login where login.id = "+login.getId()+"));";
-			String comando2 = " UPDATE pessoa SET nome=?, telefone=?, celular=?, email=? WHERE pessoa.id in (select pessoa_id from login where login.id = "+login.getId()+");";
-			String comando3 = " UPDATE login SET senha =? WHERE id = "+login.getId()+";";
+			String comando3 = "UPDATE login SET email =? WHERE id = "+login.getId()+";";
 			PreparedStatement p;
 			PreparedStatement p2;
 			PreparedStatement p3;
@@ -1137,7 +1107,38 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				p2.executeUpdate();
 				
 				p3 = this.conexao.prepareStatement(comando3);
-				p3.setString(1, login.getSenha());
+				p3.setString(1, login.getEmail());
+				p3.executeUpdate();
+				
+			}catch(SQLException e){
+				e.printStackTrace();
+				return false;
+			} 
+			return true;
+		}else {
+			String comando =  " UPDATE endereco SET rua=?, numero=?, cep=? WHERE endereco.id in (select endereco_id from pessoa where pessoa.id in (select pessoa_id from login where login.id = "+login.getId()+"));";
+			String comando2 = " UPDATE pessoa SET nome=?, telefone=?, celular=?, email=? WHERE pessoa.id in (select pessoa_id from login where login.id = "+login.getId()+");";
+			String comando3 = " UPDATE login SET email=?, senha=? WHERE id = "+login.getId()+";";
+			PreparedStatement p;
+			PreparedStatement p2;
+			PreparedStatement p3;
+			try{
+				p = this.conexao.prepareStatement(comando);
+				p.setString(1, login.getEndereco());
+				p.setString(2, login.getNumero());
+				p.setString(3, login.getCep());
+				p.executeUpdate();
+				
+				p2 = this.conexao.prepareStatement(comando2);
+				p2.setString(1, login.getNome());
+				p2.setString(2, login.getTelefone());
+				p2.setString(3, login.getCelular());
+				p2.setString(4, login.getEmail());
+				p2.executeUpdate();
+				
+				p3 = this.conexao.prepareStatement(comando3);
+				p3.setString(1, login.getEmail());
+				p3.setString(2, login.getSenha());
 				p3.executeUpdate();
 			}catch(SQLException e){
 				e.printStackTrace();
