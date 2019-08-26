@@ -1295,7 +1295,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	/*FIM SELECTs OS*/
 
 	public boolean inserirOrdemServico(OrdemServicoObj os) {
-		String comando = "insert into ordemservico (numeroos, observacoes, statusos, pessoa_id, ativo, aparelho_id, servicos_id) "
+		String comando = "insert into ordemservico (numeroos, descproblema, statusos, pessoa_id, aparelho_id, servicos_id) "
 					   + "values(?, ?, ?, ?, ?, ?, ?, ?);";
 		PreparedStatement p;
 		try {
@@ -1304,10 +1304,8 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			p.setString(2, os.getObsproblema());
 			p.setString(3, os.getStatusos());
 			p.setInt(4, os.getPessoa_id());
-			p.setString(5, os.getAtivo());
 			p.setInt(6, os.getAparelho_id());
-			p.setInt(7, os.getServicos_id());
-			
+			p.setInt(7, os.getServicos_id());			
 			p.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -1,11 +1,3 @@
-$(document).ready(function(){
-  buscarMarca();
-  buscarCatergoria();
-  buscarAparelho();
-  buscarPessoa();
-  buscarFuncionario();
-  buscarOS();
-});
 /*INICIO LOGIN*/
 function loginOS() {
 	var user = $("input[name=usuario]").val();
@@ -33,7 +25,6 @@ function loginOS() {
 	}
 }
 function carregaPerfil() {
-	alert("oi");
 	var id = document.cookie.split('=')[1];
 	console.log(id);
 	$.ajax({
@@ -94,7 +85,7 @@ function editarPerfil() {
 				carregaPerfil();
 			},
 			error : function() {
-				alert("Error!");
+				alert("Erro ao editar perfil");
 				$("#ModalPainelUsuario").find('input').val('');
 				$("#ModalPainelUsuario").modal('hide');
 			}
@@ -135,6 +126,7 @@ function CadastroAparelho() {
 	});
 }
 function buscarAparelho() {
+	alert("1");
 	var valorBusca = $('#buscaAparelhoInput').val();
 	$.ajax({
 		type : 'POST',
@@ -1180,9 +1172,11 @@ function numeroOS() {
 	});
 }
 function abrirOS() {
-	var os = {'numeroos':$("#idos").val(), 'observacoes':$("#descricaoservico").val(),'statusos':$("#statusos").val(),'pessoa_id':$("#").val(), 'ativo':$("#ativo").val(),
-			'aparelho_id':$("#aparelho_id").val(), 'servicos_id':$("servicos_id").val()};
+	var os = {'numeroos':$("#idos").val(), 'obsproblema':$("#descricaoservico").val(),'statusos':$("#statusos").val(),
+			'pessoa_id':$("#idpessoa").val(), 'aparelho_id':$("#aparelho_id").val(), 'servicos_id':$("#tiposervico").val()};
 	var ordemservico = JSON.stringify(os);
+	console.log(os);
+	console.log(ordemservico);
 	$.ajax({
 		type : 'POST',
 		url : '/DigitalOS/rest/RestOrdemServico/addOrdemServico',
@@ -1233,7 +1227,7 @@ function tabelaPessoaOS(resposta) {
 		clientes[i] = new Cliente(resposta[i].nome, resposta[i].cpf, resposta[i].rg, resposta[i].endereco, resposta[i].telefone);
 		html += "<tr>"
 					+ "<td>" + "<input type='radio' id='radio' name='capiroto' onclick='carregaPessoaOS()'>"+"</td>" 
-					+ "<td>" + resposta[i].id + "</td>" 
+					+ "<td id='idpessoa'>" + resposta[i].id + "</td>" 
 					+ "<td>" + resposta[i].nome + "</td>" 
 					+ "<td>" + resposta[i].cpf + "</td>" 
 					+ "<td>" + resposta[i].rg + "</td>" 
@@ -1245,8 +1239,9 @@ function tabelaPessoaOS(resposta) {
 	$("#tabelaPessoas").html(html);
 }
 function fechaModal() {
-	document.getElementById('modalselecionacliente').style.display = "none";
-	document.getElementById('modalselecionaAparelho').style.display = "none";
+	$("#ModalPainelUsuario").css("display","hide");
+	$("#modalselecionacliente").css("display","none");
+	$("#modalselecionaAparelho").css("display","none");
 }
 function carregaPessoaOS() {
 	var radioButtons = $("#tabelaPessoas input:radio[name='capiroto']");
@@ -1316,7 +1311,7 @@ function tabelaAparelhoOS(resposta) {
 		let aparelho = aparelhos[i];
 		html += "<tr>"
 					+ "<td>" + "<input type='checkbox' id='aparelho' name='aparelhos'>"+"</td>" 
-					+ "<td>" + aparelho.idaparelho + "</td>" 
+					+ "<td id='aparelho_id'>" + aparelho.idaparelho + "</td>" 
 					+ "<td>" + aparelho.modelo + "</td>" 
 					+ "<td>" + aparelho.nomeCategoria + "</td>" 
 					+ "<td>" + aparelho.nomeMarca + "</td>" 

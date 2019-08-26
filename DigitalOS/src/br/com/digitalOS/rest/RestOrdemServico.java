@@ -27,6 +27,7 @@ public class RestOrdemServico extends UtilRest{
 	@Path("/addOrdemServico")
 	@Consumes("application/*")
 	public Response addOrdemServico(String ordemservico) {
+		System.out.println("OS: "+ordemservico);
 		try {		
 			OrdemServicoObj os = new ObjectMapper().readValue(ordemservico, OrdemServicoObj.class);
 			

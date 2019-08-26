@@ -17,6 +17,8 @@ public class OrdemServicoObj implements Serializable{
 	private String nome;
 	private String obsproblema;
 	private String obssolucao;
+	private String statusos;
+	private String ativo;
 	private Date abertura;
 	private Date prazo;
 	private Date fechamento;
@@ -111,7 +113,5 @@ public class OrdemServicoObj implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	private String statusos;
-	private String ativo;
 
 }
