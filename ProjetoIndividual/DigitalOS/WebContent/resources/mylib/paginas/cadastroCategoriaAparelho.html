@@ -1,0 +1,148 @@
+<div class="div-painel-categoriaAparelho col-md-10">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<div>
+				<label class="label-painel-categoriaAparelho">Painel de Categoria de Aparelhos</label> 
+			</div>
+			<div class="input-group input-group-barra-pesquisa">
+				<input type="text" class="form-control form-control-custom" placeholder="Televisor" id="buscaCategoria" name="buscaCategoria">
+				<span class="btn input-group-addon icone-pesquisar glyphicon glyphicon-search" onclick="buscarCatergoria()"></span>					
+			</div>
+			
+			<div class="icone-adicionar-categoriaAparelho">
+				<span class="btn btn-default glyphicon glyphicon-plus"></span>
+			</div>
+			
+			<div class="btn-group filtroAtivo">
+				<div class="labelFiltro">
+					<label>Filtro de Categoria |</label>
+				</div>
+				<div class="botaoFiltro">
+				    <select class="btn-default form-control" id="filtroAtivoOpc" onchange="filtroCategoria()">
+						<option value="A">Todos</option>
+						<option value="S">Ativos</option>
+						<option value="N">Inativos</option>
+					</select>
+				</div>
+			</div>		
+		</div>
+		<div class="panel-body">
+			<div id="resultadoCategoria" class="resultadoCategoria"></div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade ModalPainelUsuario col-md-12" id="ModalPainelUsuario">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content col-md-12">
+			<div class="modal-header col-md-12">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h5 class="modal-title">Painel Usuario</h5>
+			</div>
+			
+			<div class="modal-body col-md-12">
+			 	<ul class="nav nav-tabs nav-justified">
+				  <li role="representation" data-toggle="tab" class="active"><a href="#dadospessoais">Dados pessoais</a></li>
+				  <li role="representation" data-toggle="tab"><a href="#dadoslogin">Dados de login</a></li>
+				  <li role="representation" data-toggle="tab"><a href="#alterarsenha">Alterar senha</a></li>
+				</ul>
+				
+				<div class="tab-content">
+				    <div id="dadospessoais" class="tab-pane fade in active">
+				      teste	
+				    </div>
+				    <div id="dadoslogin" class="tab-pane fade">
+				      teste 2
+				    </div>
+				    <div id="alterarsenha" class="tab-pane fade">
+				      teste 3
+				    </div>
+			  </div>
+			</div>
+			
+			<div class="modal-footer col-md-12">
+				<button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">
+					Cancelar
+				</button>
+				
+				<button type="submit" class="btn btn-primary botao-salvar" id="salvarAparelho" onclick="editarAparelho()">
+					Salvar
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modalcategoriaaparelho">
+  <div class="modal-dialog modalmd modal-dialog-custom" role="document">
+  	<div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title">Cadastro de Categoria Aparelho</h3>
+      </div>
+      
+      <div class="modal-body">
+        <div class="form">     	
+        	<div class="row">		        					        	   	
+	        	<div class="form-group col-md-4">
+	        		<label>Nome Categoria</label>
+	        		<input class="form-control" type="text" id="nomecategoria" placeholder="Televisor">
+	        	</div>        	
+	        	<div class="form-group col-md-2">
+	        		<label>Ativo</label>
+	        		<input class="form-control" type="text" id="statuscategoria" value="S" placeholder="S" disabled>
+	        	</div>
+	        </div>
+        </div>
+      </div> 
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary botao-salvar" onclick="addCategoriaAparelho()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="msgEditCategoria">
+  <div class="modal-dialog modalmd modal-dialog-custom" role="document">
+  	<div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title">Edicao de Categoria de Aparelho</h3>
+      </div>
+      
+      <div class="modal-body">
+        <div class="form">     	
+        	<div class="row">
+        		<div class="form-group col-md-2">	
+        			<label>Id</label>	    
+        			<input class="form-control" id="EditIdCategoria" disabled>
+        		</div>    					        	   	
+	        	<div class="form-group col-md-4">
+	        		<label>Nome Categoria</label>
+	        		<input class="form-control" type="text" id="EditNomeCategoria" placeholder="Televisor">
+	        	</div>        	
+	        	<div class="form-group col-md-3">
+	        		<label>Ativo</label>
+	        		<select class="form-control" id="EditStatusCategoria">
+	        			<option value="S">Ativo</option>
+	        			<option value="N">Inativo</option>
+	        		</select>
+	        	</div>
+	        </div>
+        </div>
+      </div> 
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary botao-salvar" onclick="editarCategoria()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+	$(".icone-adicionar-categoriaAparelho").click(function(){
+		$('#modalcategoriaaparelho').modal('show');
+	});
+</script>
