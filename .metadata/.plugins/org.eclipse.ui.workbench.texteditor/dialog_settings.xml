@@ -2,12 +2,19 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="OrdemServico" key="selection"/>
+		<item value="listarOS" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="listarOS"/>
+			<item value="botao"/>
+			<item value="salario"/>
+			<item value="icone-sa"/>
+			<item value="fecha"/>
+			<item value="fechar"/>
+			<item value="data"/>
 			<item value="Marca"/>
 			<item value="OrdemServico"/>
 			<item value="modalseleciona"/>
@@ -16,13 +23,6 @@
 			<item value="icone-pesquisar"/>
 			<item value="PessoaObj"/>
 			<item value="buscarOS"/>
-			<item value="Select"/>
-			<item value=".barra-lateral"/>
-			<item value="botaoFiltro"/>
-			<item value="Filtro"/>
-			<item value="grafico"/>
-			<item value="myDiv"/>
-			<item value="usuario"/>
 		</list>
 		<list key="replacehistory">
 			<item value="OrdemServico"/>

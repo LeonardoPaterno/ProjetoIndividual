@@ -103,11 +103,23 @@ h4 {
     height: 34px;
     left: -36px;
 }
-
 .div-salario{
 	left: 50px;
     position: absolute;
 }
+
+.icone-totalos{
+	display: table;
+    position: relative;
+    top: 10px;
+    padding: 10px;
+}
+
+/* .div-totalos{
+	left: 50px;
+    position: absolute;
+}
+ */
 /*--------------------------------*/
 /*---------------MENU-------------*/
 /*--------------------------------*/

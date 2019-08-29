@@ -1295,17 +1295,19 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	/*FIM SELECTs OS*/
 
 	public boolean inserirOrdemServico(OrdemServicoObj os) {
-		String comando = "insert into ordemservico (numeroos, descproblema, statusos, pessoa_id, aparelho_id, servicos_id) "
-					   + "values(?, ?, ?, ?, ?, ?, ?, ?);";
+		String comando = "insert into ordemservico (numeroos, descproblema, dataabertura, dataprazo, statusos, pessoa_id, ativo, aparelho_id, servicos_id) "
+					   + "values(?, ?, ?, ?, ?, ?, 'S', ?, ?);";
 		PreparedStatement p;
 		try {
 			p = this.conexao.prepareStatement(comando);
 			p.setInt(1, os.getNumeroos());
 			p.setString(2, os.getObsproblema());
-			p.setString(3, os.getStatusos());
-			p.setInt(4, os.getPessoa_id());
-			p.setInt(6, os.getAparelho_id());
-			p.setInt(7, os.getServicos_id());			
+			p.setDate(3, os.getAbertura());
+			p.setDate(4, os.getPrazo());
+			p.setString(5, os.getStatusos());
+			p.setInt(6, os.getPessoa_id());
+			p.setInt(7, os.getAparelho_id());
+			p.setInt(8, os.getServicos_id());			
 			p.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -1315,9 +1317,15 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 	public List<OrdemServicoObj> buscarOS(int numero) {
 		List<OrdemServicoObj> listaOS = new ArrayList<OrdemServicoObj>();
-		String comando = "select id, numeroos, pessoa.nome, dataabertura, dataprazo, datafechamento, statusos, orcamento.numero, orcamento.total from ordemservico "
+		String comando = "";
+		if(numero != 0) {
+			comando += "select ordemservico.id, numeroos, pessoa.nome, dataabertura, dataprazo, datafechamento, statusos, total from ordemservico "
 				       + "inner join pessoa on pessoa.id = ordemservico.pessoa_id "
-				       + "inner join orcamento on orcamento.numero = ordemservico.orcamento_numero";
+				       + "where numeroos = "+numero+";";
+		}else {
+			comando += "select ordemservico.id, numeroos, pessoa.nome, dataabertura, dataprazo, datafechamento, statusos, total from ordemservico "
+				       + "inner join pessoa on pessoa.id = ordemservico.pessoa_id ";
+		};
 		
 		try {
 			java.sql.Statement stmt = conexao.createStatement();
@@ -1325,15 +1333,14 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			while (rs.next()) {
 				OrdemServicoObj os = new OrdemServicoObj();
 				
-				int id = rs.getInt("id");
+				int id = rs.getInt("ordemservico.id");
 				int numeroos = rs.getInt("numeroos");
 				String nome = rs.getString("pessoa.nome");
 				Date abertura = rs.getDate("dataabertura");
 				Date prazo = rs.getDate("dataprazo");
 				Date fechamento = rs.getDate("datafechamento");
 				String statusos = rs.getString("statusos");
-				int orcamento = rs.getInt("orcamento.numero");
-				float total = rs.getFloat("orcamento.total");
+				float total = rs.getInt("total");
 				
 				os.setId(id);
 				os.setNumeroos(numeroos);
@@ -1342,7 +1349,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				os.setPrazo(prazo);
 				os.setFechamento(fechamento);
 				os.setStatusos(statusos);
-				os.setOrcamento_numero(orcamento);
 				os.setTotal(total);
 				
 				listaOS.add(os);
