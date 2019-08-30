@@ -8,7 +8,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -44,16 +43,15 @@ public class RestOrdemServico extends UtilRest{
 	}
 
 	@POST
-	@Path("/buscarOS/{numero}")
-	@Produces({MediaType.APPLICATION_JSON})
-	public Response buscarOS(@PathParam("numero") int numero) {
-		System.out.println("N° OS: "+numero);
+	@Path("/buscarOS/{num}")
+    @PathParam(MediaType.APPLICATION_JSON)
+	public Response buscarOS(@PathParam("num") int num) {
 		try {
 			List<OrdemServicoObj> os = new ArrayList<OrdemServicoObj>();
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCDigitalOSLoginDAO jdbcOrdemServicoObj = new JDBCDigitalOSLoginDAO(conexao);
-			os = jdbcOrdemServicoObj.buscarOS(numero);
+			os = jdbcOrdemServicoObj.buscarOS(num);
 			conec.fecharConexao();
 			return Response.ok(this.buildResponse(os), MediaType.APPLICATION_JSON).build();
 		} catch (Exception e) {

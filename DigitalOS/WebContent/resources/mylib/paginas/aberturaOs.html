@@ -255,6 +255,149 @@
 </div>
 <!-- FIM MODAL -->
 
+<!-- MODAL EDITAR OS -->
+<div class="modal fade col-xs-11 col-sm-6 col-md-12" tabindex="100" role="dialog" id="msgEditOS">
+  <div class="modal-dialog modal-lg modal-dialog-custom" role="document">
+  	<div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="fechaModal()"><span aria-hidden="false">&times;</span></button>
+        <h3 class="modal-title">Edição de Ordem de Serviço</h3>
+      </div><!-- /div modal-header -->
+      <div class="modal-body">
+        <div class="form">
+        	<div class="row rowCustom">
+        		<div class="col-md-offset-6"></div>
+        		<div class="form-group col-md-2">
+	        		<label>Número OS</label>
+	        		<input class="form-control" type="text" id="idos" maxlength="6" disabled>
+	        	</div>
+        		<div class="input-group col-md-4 divPequisaCliente">
+        			<label>Localizar Cliente:</label>
+        			<div>
+						<input type="text" class="form-control" id="buscarCliente" disabled>
+						<span class="btn input-group-addon icone-pesquisar-cliente glyphicon glyphicon-search"></span>					
+					</div>
+				</div>
+        	</div>
+        	<hr>
+        	<div class="row rowCustom">
+        		<div class="form-group col-md-6">
+	        		<label>Nome Cliente</label>
+	        		<input class="form-control" id="nome" type="text" maxlength="80" disabled>
+	        	</div>
+	        	<div class="form-group col-md-3">
+	        		<label>CPF</label>
+	        		<input class="form-control" id="cpf" type="text" maxlength="14" disabled>
+	        	</div>
+	        	<div class="form-group col-md-3">
+	        		<label>RG</label>
+	        		<input class="form-control" id="rg" type="text" maxlength="7" disabled>
+	        	</div>
+	        </div>
+	        <div class="row rowCustom">
+	        	<div class="form-group col-md-6">
+	        		<label>Endereço</label>
+	        		<input class="form-control" id="endereco" type="text" maxlength="60" disabled>
+	        	</div>
+	        	<div class="form-group col-md-3">
+	        		<label>Telefone</label>
+	        		<input class="form-control" id="telefone" type="text" maxlength="10" disabled>
+	        	</div>
+	        	<div class="form-group col-md-3">
+	        		<label>Celular</label>
+	        		<input class="form-control" id="celular" type="text" maxlength="11" disabled>
+	        	</div>
+        	</div><!-- /div row -->
+        	<hr>
+        	<div class="row rowCustom">
+        		<div class="col-md-offset-3"></div>
+        		<div class="form-group col-md-3">
+	        		<label>Status OS</label>
+	        		<select class="form-control" id="statusos">
+	        		</select>
+	        	</div>
+        		<div class="input-group col-md-4 divPequisaAparelho">
+        			<label>Localizar Aparelho:</label>
+        			<div>
+						<input type="text" class="form-control" placeholder="Moto X Play" id="buscarAparelho">
+						<span class="btn input-group-addon iconePesquisarSparelho glyphicon glyphicon-search" onclick="buscarAparelhoOS()"></span>					
+					</div>
+				</div>
+        	</div>
+        	<hr>
+       	 	<div class="row rowCustom">
+	        	<div class="form-group col-md-3">
+	        		<label>Categoria</label>
+	        		<input class="form-control" id="nomeCategoria" disabled>
+	        	</div>	      
+	        	<div class="form-group col-md-3">
+	        		<label>Marca</label>
+	        		<input class="form-control" id="nomeMarca" disabled>
+	        	</div>
+	        	<div class="form-group col-md-3">
+	        		<label>Modelo</label>
+	        		<input class="form-control" type="text" id="modelo" maxlength="25" disabled>
+	        	</div>
+	        	<div class="form-group col-md-3">
+	        		<label>N° Série</label>
+	        		<input class="form-control" type="text" id="nsaparelho" maxlength="25" disabled>
+	        	</div>
+        	</div><!-- /div row -->
+        	<hr>
+        	<div class="row rowCustom">
+        		<div class="form-group col-md-3">
+        			<label>Tipo Serviço</label>
+        			<select class="form-control" id="tiposervico">
+        			</select>
+        		</div>
+	        	<div class="form-group col-md-3">
+	        		<label>Data Abertura</label>
+	        		<input class="form-control" id="dataabertura" type="date">
+	        	</div>
+	        	<div class="form-group col-md-3">
+	        		<label>Data Fechamento</label>
+	        		<input class="form-control" id="datafechamento" type="date" disabled>
+	        	</div>
+	        	<div class="form-group col-md-3">
+	        		<label>Data Prazo</label>
+	        		<input class="form-control" id="dataprazo" type="date">
+	        	</div>
+        	</div><!-- /div row -->
+        	<div class="row">
+        		<div class="col-md-3">
+        			<label>Total OS</label>
+			       	<div class="input-group">
+		  				<span class="input-group-addon">R$</span>
+		  				<input type="text" class="form-control" id="totalos" disabled>
+		  				<span class="input-group-addon">,00</span>
+					</div><!-- /input-group -->
+				</div>
+			</div><!-- /div row -->
+        	<hr>
+        	<div class="row">
+	        	<div class="form-group col-md-12">
+	        		<label>Descrição Problema</label>
+	        		<textarea class="form-control" rows="3" id="descricaoservico"></textarea>
+	        	</div>
+        	</div><!-- /div row -->
+        	<div class="row">
+	        	<div class="form-group col-md-12">
+	        		<label>Descrição Solução</label>
+	        		<textarea class="form-control" rows="3" id="descricaoservico" disabled></textarea>
+	        	</div>
+        	</div><!-- /div row -->        	
+        	<div style="display:none"><input id="id" disabled></div>
+        	<div style="display:none"><input id="idaparelho" disabled></div>
+        </div><!-- /div form -->
+      </div><!-- /div modal-body -->    
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="fechaModal()">Cancelar</button>
+        <button type="button" class="btn btn-success" onclick="abrirOS()">Salvar</button>
+      </div><!-- /div modal-footer -->  
+    </div><!-- /div modal-content -->
+  </div><!-- /div modal-dialog -->
+</div><!-- /div modal fade -->
+<!-- FIM MODAL -->
 <script>
 	$("#botao-icone-menu").click(function(e) {
 		e.preventDefault();

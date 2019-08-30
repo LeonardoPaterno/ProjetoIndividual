@@ -126,14 +126,11 @@ function CadastroAparelho() {
 	});
 }
 function buscarAparelho() {
-	alert("1");
 	var valorBusca = $('#buscaAparelhoInput').val();
 	$.ajax({
 		type : 'POST',
 		url : '../../../ServletBuscarAparelho',
-		data : {
-			'valorBusca' : valorBusca
-		},
+		data : {'valorBusca' : valorBusca},
 		success : function(listaAparelhosAchados) {
 			carregarTabela(listaAparelhosAchados);
 		},
@@ -1329,7 +1326,7 @@ function abrirOS() {
 		data: ordemservico,
 		success : function(resposta) {
 			alert(resposta);
-			carregarOS();
+			buscarOS();
 			fechaModal();
 		},
 		error : function(resposta) {
@@ -1338,12 +1335,15 @@ function abrirOS() {
 	});
 }
 function buscarOS(){
-	var num = $("#buscaOS").val();
-	var numero = JSON.stringify(num);
-	alert(numero);
+	var num;
+	if($("#buscaOS").val() == "" || $("#buscaOS").val() == undefined){
+		num = 0;
+	}else{
+		num = $("#buscaOS").val();
+	}
 	$.ajax({
-		type: 'POST',
-		url:'/DigitalOS/rest/RestOrdemServico/buscarOS/'+num,
+		type:'POST',
+		url:'/DigitalOS/rest/RestOrdemServico/buscarOS/'+ num,
 		success:function(resposta){
 			alert("OS Encontrada");
 			tabelaOS(resposta);
@@ -1359,8 +1359,9 @@ function tabelaOS(resposta) {
 	var html = "<div class='teble-reponsive'>"
 				+ "<table class='table table-striped table-condensed table-bordered'>";
 			html += "<tr>"
-				  	+ "<th># numeroos</th> <th>Cliente</th> <th>Aberta</th> <th>Prazo</th> <th>Fechada</th> <th>Status OS</th> <th>Total OS</th> <th>Edição</th>"
+				  	+ "<th>N° OS</th> <th>Cliente</th> <th>Aberta em</th> <th>Prazo até </th> <th>Fechada em</th> <th>Status OS</th> <th>Total OS</th> <th>Edição</th>"
 				  + "</tr>"
+				  if(resposta!= undefined || resposta != null ){
 			for (var i = 0; i < resposta.length; i++) {
 				html += "<tr>"
 							+ "<td>"+ resposta[i].numeroos+ "</td>"
@@ -1370,12 +1371,29 @@ function tabelaOS(resposta) {
 							+ "<td>"+ resposta[i].fechamento+ "</td>"
 							+ "<td>"+ resposta[i].statusos+ "</td>"
 							+ "<td>"+ resposta[i].total+ "</td>"
-							+ "<td>"+ "<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoOS("+ resposta[i].id + ")'></div>" 
+							+ "<td>"+ "<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoOS("+ resposta[i].numeroos + ")'></div>" 
 							+ "</td>" 
 						+"</tr>"
 			}
+				  }
 		 html += "</table>" 
 		    + "</div>"
 	$("#resultadoOS").html(html);
+}
+function exibirEdicaoOS(id){
+	$("#msgEditOS").modal();
+	$.ajax({
+		type : 'POST',
+		url : '/DigitalOS/rest/RestOrdemServico/buscarOSPeloId/' + numeroos,
+		success : function(os) {
+			$("#idos").val(numeroos);
+			$("#EditNomeMarca").val(os.nome);
+			$("#EditStatusMarca").val(os.ativo);
+			$("#msgEditOS").modal(os);
+		},
+		error : function(servico) {
+			alert("Erro ao editar marca!");
+		}
+	});
 }
 /* FIM ORDEM DE SERVICO */
