@@ -14,15 +14,73 @@ public class OrdemServicoObj implements Serializable{
 	private int servicos_id;
 	private int orcamento_numero;
 	private float total;
-	private String nome;
 	private String obsproblema;
 	private String obssolucao;
 	private String statusos;
 	private String ativo;
+	private String nome;
+	private String cpf;
+	private String rg;
+	private String telefone;
+	private String celular;
+	private String rua;
+	private String categoria;
+	private String marca;
+	private String modelo;
+	private String numeroserie;
+	
 	private Date abertura;
 	private Date prazo;
 	private Date fechamento;
 	
+	public String getRua() {
+		return rua;
+	}
+	public void setRua(String rua) {
+		this.rua = rua;
+	}
+	public String getCpf() {
+		return cpf;
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+	public String getRg() {
+		return rg;
+	}
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+	public String getCelular() {
+		return celular;
+	}
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+	public String getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+	public String getMarca() {
+		return marca;
+	}
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+	public String getModelo() {
+		return modelo;
+	}
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
+	}
+	public String getNumeroserie() {
+		return numeroserie;
+	}
+	public void setNumeroserie(String numeroserie) {
+		this.numeroserie = numeroserie;
+	}	
 	public float getTotal() {
 		return total;
 	}
@@ -113,5 +171,10 @@ public class OrdemServicoObj implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 }

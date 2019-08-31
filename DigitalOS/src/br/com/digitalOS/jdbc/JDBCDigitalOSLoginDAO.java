@@ -1230,11 +1230,11 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 	public List<PessoaOsObj> buscarPessoaOs(String nome) {
 		List<PessoaOsObj> ListaPessoaOs = new ArrayList<PessoaOsObj>();
-		String comando = "SELECT pessoa.id, nome, cpf, rg, telefone,"
-				   + "endereco.rua FROM pessoa INNER JOIN endereco ON endereco.id = pessoa.endereco_id ";
+		String comando = "SELECT pessoa.id, nome, cpf, rg, telefone, celular, "
+				       + "endereco.rua FROM pessoa INNER JOIN endereco ON endereco.id = pessoa.endereco_id ";
 	if (nome != "") {
 		comando += "WHERE nome LIKE '" + nome + "%' "
-				+ "AND pessoa.ativo = 'S' AND pessoa.id IN (SELECT pessoa.id FROM pessoa WHERE pessoa.funcionario_id IS NULL);";
+				 + "AND pessoa.ativo = 'S' AND pessoa.id IN (SELECT pessoa.id FROM pessoa WHERE pessoa.funcionario_id IS NULL);";
 		}
 	try {
 		java.sql.Statement stmt = conexao.createStatement();
@@ -1246,6 +1246,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				String cpf = rs.getString("cpf");
 				String rg = rs.getString("rg");
 				String telefone = rs.getString("telefone");
+				String celular = rs.getString("celular");
 				String endereco = rs.getString("endereco.rua");
 			
 			pessoa.setId(id);
@@ -1254,6 +1255,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			pessoa.setRg(rg);
 			pessoa.setEndereco(endereco);
 			pessoa.setTelefone(telefone);
+			pessoa.setCelular(celular);
 
 			ListaPessoaOs.add(pessoa);
 		}
@@ -1359,6 +1361,72 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			return null;
 		}
 		return listaOS;
+	}
+
+	public OrdemServicoObj buscarPorNumeroOs(int numeroos) {
+		String comando = "select numeroos, descproblema, descsolucao, dataabertura, dataprazo, datafechamento, statusos, ordemservico.ativo, total, "
+				       + "pessoa.nome, pessoa.cpf, pessoa.rg, pessoa.telefone, pessoa.celular, "
+				       + "endereco.rua, "
+				       + "categoriaaparelho.nome, "
+				       + "marca.nome, "
+				       + "aparelho.modelo, aparelho.numeroserie "
+				       + "from ordemservico "
+				       + "inner join aparelho on aparelho.id = ordemservico.aparelho_id "
+				       + "inner join categoriaaparelho on categoriaaparelho.id = aparelho.categoriaaparelho_id "
+				       + "inner join marca on marca.id = aparelho.marca_id "
+				       + "inner join pessoa on pessoa.id = ordemservico.pessoa_id "
+				       + "inner join endereco on endereco.id = pessoa.endereco_id "
+				       + "where numeroos = "+numeroos+";";
+			OrdemServicoObj os = new OrdemServicoObj();
+		
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while(rs.next()) {
+				
+				int numero = rs.getInt("numeroos");
+				String obsproblema = rs.getString("descproblema");
+				String obssolucao = rs.getString("descsolucao");
+				Date abertura = rs.getDate("dataabertura");
+				Date prazo = rs.getDate("dataprazo");
+				Date fechamento = rs.getDate("datafechamento");
+				String statusos = rs.getString("statusos");
+				String ativo = rs.getString("ordemservico.ativo");
+				float total = rs.getFloat("total");
+				String nome = rs.getString("pessoa.nome");
+				String cpf = rs.getString("pessoa.cpf");
+				String rg = rs.getString("pessoa.rg");
+				String telefone = rs.getString("pessoa.telefone");
+				String celular = rs.getString("pessoa.celular");
+				String rua = rs.getString("endereco.rua");
+				String marca = rs.getString("marca.nome");
+				String modelo = rs.getString("aparelho.modelo");
+				String numeroserie = rs.getString("aparelho.numeroserie");
+				
+				os.setNumeroos(numero);
+				os.setObsproblema(obsproblema);
+				os.setObssolucao(obssolucao);
+				os.setAbertura(abertura);
+				os.setPrazo(prazo);
+				os.setFechamento(fechamento);
+				os.setStatusos(statusos);
+				os.setAtivo(ativo);
+				os.setTotal(total);
+				os.setNome(nome);
+				os.setCpf(cpf);
+				os.setRg(rg);
+				os.setTelefone(telefone);
+				os.setCelular(celular);
+				os.setRua(rua);
+				os.setMarca(marca);
+				os.setModelo(modelo);
+				os.setNumeroserie(numeroserie);
+				
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return os;
 	}
 }
 

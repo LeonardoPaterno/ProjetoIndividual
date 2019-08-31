@@ -22,7 +22,6 @@
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="javax.ws.rs.Consumes"/>
 <fullyQualifiedTypeName name="org.codehaus.jackson.map.PropertyNamingStrategy.LowerCaseWithUnderscoresStrategy"/>
-<fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="br.com.digitalOS.objetos.ServicoObj"/>
 <fullyQualifiedTypeName name="br.com.digitalOS.objetos.AparelhoObj"/>
 <fullyQualifiedTypeName name="br.com.digitalOS.objetos.PessoaOsObj"/>
@@ -30,4 +29,6 @@
 <fullyQualifiedTypeName name="javax.ws.rs.Produces"/>
 <fullyQualifiedTypeName name="javax.ws.rs.core.MediaType"/>
 <fullyQualifiedTypeName name="javax.ws.rs.PathParam"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="br.com.digitalOS.objetos.OrdemServicoObj"/>
 </qualifiedTypeNameHistroy>

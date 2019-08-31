@@ -1124,24 +1124,25 @@ function buscarClienteOS() {
 		}
 	});
 }
-function Cliente(id, nome, cpf, rg, endereco, telefone) {
+function Cliente(id, nome, cpf, rg, endereco, telefone, celular) {
 	this. id = id;
 	this.nome = nome;
 	this.cpf = cpf;
 	this.rg = rg;
 	this.endereco = endereco;
 	this.telefone = telefone;
+	this.celular = celular;
 }
 clientes = [];
 function tabelaPessoaOS(resposta) {
 	var html = "<div class='table-reponsive'>"
 			+ "<table class='table table-striped table-condensed table-bordered'>";
 	html += "<tr>"
-			+ "<th>Seleção</th> <th>ID</th> <th>Nome</th> <th>CPF</th> <th>RG</th> <th>Endereco</th> <th>Telefone</th>"
+			+ "<th>Seleção</th> <th>ID</th> <th>Nome</th> <th>CPF</th> <th>RG</th> <th>Endereco</th> <th>Telefone</th> <th>Celular</th>"
 			+ "</tr>"
 
 	for (var i = 0; i < resposta.length; i++) {
-		clientes[i] = new Cliente(resposta[i].id, resposta[i].nome, resposta[i].cpf, resposta[i].rg, resposta[i].endereco, resposta[i].telefone);
+		clientes[i] = new Cliente(resposta[i].id, resposta[i].nome, resposta[i].cpf, resposta[i].rg, resposta[i].endereco, resposta[i].telefone, resposta[i].celular);
 		html += "<tr>"
 					+ "<td>" + "<input type='radio' id='radio' name='capiroto'>"+"</td>" 
 					+ "<td>" + resposta[i].id + "</td>" 
@@ -1149,7 +1150,8 @@ function tabelaPessoaOS(resposta) {
 					+ "<td>" + resposta[i].cpf + "</td>" 
 					+ "<td>" + resposta[i].rg + "</td>" 
 					+ "<td>" + resposta[i].endereco + "</td>" 
-					+ "<td>" + resposta[i].telefone + "</td>" 
+					+ "<td>" + resposta[i].telefone + "</td>"
+					+ "<td>" + resposta[i].celular + "</td>"
 				+ "</tr>"
 	}
 	html += "</table>" + "</div>"
@@ -1380,18 +1382,35 @@ function tabelaOS(resposta) {
 		    + "</div>"
 	$("#resultadoOS").html(html);
 }
-function exibirEdicaoOS(id){
-	$("#msgEditOS").modal();
+function exibirEdicaoOS(numeroos){
 	$.ajax({
 		type : 'POST',
 		url : '/DigitalOS/rest/RestOrdemServico/buscarOSPeloId/' + numeroos,
 		success : function(os) {
-			$("#idos").val(numeroos);
-			$("#EditNomeMarca").val(os.nome);
-			$("#EditStatusMarca").val(os.ativo);
+			console.log(os);
+			$("#idosEdit").val(os.numeroos);
+			$("#nomeEdit").val(os.nome);
+			$("#cpfEdit").val(os.cpf);
+			$("#rgEdit").val(os.rg);
+			$("#enderecoEdit").val(os.rua);
+			$("#telefoneEdit").val(os.telefone);
+			$("#celularEdit").val(os.celular);
+			$("#statusosEdit").val(os.statusos);
+			$("#categoriaEdit").val(os.categoria);
+			$("#marcaEdit").val(os.marca);
+			$("#modeloEdit").val(os.modelo);
+			$("#nsaparelhoEdit").val(os.numeroserie);
+			$("#tiposervicoEdit").val(os.tiposervico);
+			$("#dataaberturaEdit").val(os.abertura);
+			$("#dataprazoEdit").val(os.prazo);
+			$("#datafechamentoEdit").val(os.fechamento);
+			$("#totalEdit").val(os.total);
+			$("#obsproblemaEdit").val(os.obsproblema);
+			$("#obssolucaoEdit").val(os.obssolucao);
 			$("#msgEditOS").modal(os);
-		},
-		error : function(servico) {
+
+			},
+		error : function() {
 			alert("Erro ao editar marca!");
 		}
 	});

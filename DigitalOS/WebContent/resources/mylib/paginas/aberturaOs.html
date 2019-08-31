@@ -269,7 +269,7 @@
         		<div class="col-md-offset-6"></div>
         		<div class="form-group col-md-2">
 	        		<label>Número OS</label>
-	        		<input class="form-control" type="text" id="idos" maxlength="6" disabled>
+	        		<input class="form-control" type="text" id="idosEdit" maxlength="6" disabled>
 	        	</div>
         		<div class="input-group col-md-4 divPequisaCliente">
         			<label>Localizar Cliente:</label>
@@ -283,29 +283,29 @@
         	<div class="row rowCustom">
         		<div class="form-group col-md-6">
 	        		<label>Nome Cliente</label>
-	        		<input class="form-control" id="nome" type="text" maxlength="80" disabled>
+	        		<input class="form-control" id="nomeEdit" type="text" maxlength="80" disabled>
 	        	</div>
 	        	<div class="form-group col-md-3">
 	        		<label>CPF</label>
-	        		<input class="form-control" id="cpf" type="text" maxlength="14" disabled>
+	        		<input class="form-control" id="cpfEdit" type="text" maxlength="14" disabled>
 	        	</div>
 	        	<div class="form-group col-md-3">
 	        		<label>RG</label>
-	        		<input class="form-control" id="rg" type="text" maxlength="7" disabled>
+	        		<input class="form-control" id="rgEdit" type="text" maxlength="7" disabled>
 	        	</div>
 	        </div>
 	        <div class="row rowCustom">
 	        	<div class="form-group col-md-6">
 	        		<label>Endereço</label>
-	        		<input class="form-control" id="endereco" type="text" maxlength="60" disabled>
+	        		<input class="form-control" id="enderecoEdit" type="text" maxlength="60" disabled>
 	        	</div>
 	        	<div class="form-group col-md-3">
 	        		<label>Telefone</label>
-	        		<input class="form-control" id="telefone" type="text" maxlength="10" disabled>
+	        		<input class="form-control" id="telefoneEdit" type="text" maxlength="10" disabled>
 	        	</div>
 	        	<div class="form-group col-md-3">
 	        		<label>Celular</label>
-	        		<input class="form-control" id="celular" type="text" maxlength="11" disabled>
+	        		<input class="form-control" id="celularEdit" type="text" maxlength="11" disabled>
 	        	</div>
         	</div><!-- /div row -->
         	<hr>
@@ -313,7 +313,7 @@
         		<div class="col-md-offset-3"></div>
         		<div class="form-group col-md-3">
 	        		<label>Status OS</label>
-	        		<select class="form-control" id="statusos">
+	        		<select class="form-control" id="statusosEdit">
 	        		</select>
 	        	</div>
         		<div class="input-group col-md-4 divPequisaAparelho">
@@ -328,39 +328,39 @@
        	 	<div class="row rowCustom">
 	        	<div class="form-group col-md-3">
 	        		<label>Categoria</label>
-	        		<input class="form-control" id="nomeCategoria" disabled>
+	        		<input class="form-control" id="categoriaEdit" disabled>
 	        	</div>	      
 	        	<div class="form-group col-md-3">
 	        		<label>Marca</label>
-	        		<input class="form-control" id="nomeMarca" disabled>
+	        		<input class="form-control" id="marcaEdit" disabled>
 	        	</div>
 	        	<div class="form-group col-md-3">
 	        		<label>Modelo</label>
-	        		<input class="form-control" type="text" id="modelo" maxlength="25" disabled>
+	        		<input class="form-control" type="text" id="modeloEdit" maxlength="25" disabled>
 	        	</div>
 	        	<div class="form-group col-md-3">
 	        		<label>N° Série</label>
-	        		<input class="form-control" type="text" id="nsaparelho" maxlength="25" disabled>
+	        		<input class="form-control" type="text" id="nsaparelhoEdit" maxlength="25" disabled>
 	        	</div>
         	</div><!-- /div row -->
         	<hr>
         	<div class="row rowCustom">
         		<div class="form-group col-md-3">
         			<label>Tipo Serviço</label>
-        			<select class="form-control" id="tiposervico">
+        			<select class="form-control" id="tiposervicoEdit" disabled>
         			</select>
         		</div>
 	        	<div class="form-group col-md-3">
 	        		<label>Data Abertura</label>
-	        		<input class="form-control" id="dataabertura" type="date">
+	        		<input class="form-control" id="dataaberturaEdit" type="date" disabled>
 	        	</div>
 	        	<div class="form-group col-md-3">
 	        		<label>Data Fechamento</label>
-	        		<input class="form-control" id="datafechamento" type="date" disabled>
+	        		<input class="form-control" id="datafechamentoEdit" type="date">
 	        	</div>
 	        	<div class="form-group col-md-3">
 	        		<label>Data Prazo</label>
-	        		<input class="form-control" id="dataprazo" type="date">
+	        		<input class="form-control" id="dataprazoEdit" type="date">
 	        	</div>
         	</div><!-- /div row -->
         	<div class="row">
@@ -368,7 +368,7 @@
         			<label>Total OS</label>
 			       	<div class="input-group">
 		  				<span class="input-group-addon">R$</span>
-		  				<input type="text" class="form-control" id="totalos" disabled>
+		  				<input type="text" class="form-control" id="totalEdit">
 		  				<span class="input-group-addon">,00</span>
 					</div><!-- /input-group -->
 				</div>
@@ -377,13 +377,13 @@
         	<div class="row">
 	        	<div class="form-group col-md-12">
 	        		<label>Descrição Problema</label>
-	        		<textarea class="form-control" rows="3" id="descricaoservico"></textarea>
+	        		<textarea class="form-control" rows="3" id="obsproblemaEdit" disabled></textarea>
 	        	</div>
         	</div><!-- /div row -->
         	<div class="row">
 	        	<div class="form-group col-md-12">
 	        		<label>Descrição Solução</label>
-	        		<textarea class="form-control" rows="3" id="descricaoservico" disabled></textarea>
+	        		<textarea class="form-control" rows="3" id="obssolucaoEdit"></textarea>
 	        	</div>
         	</div><!-- /div row -->        	
         	<div style="display:none"><input id="id" disabled></div>

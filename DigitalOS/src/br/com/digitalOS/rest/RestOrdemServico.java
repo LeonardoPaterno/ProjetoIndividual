@@ -59,4 +59,22 @@ public class RestOrdemServico extends UtilRest{
 			return this.buildErrorResponse(e.getMessage());
 		}
 	}
+	
+	@POST
+	@Path("/buscarOSPeloId/{numeroos}")
+    @PathParam(MediaType.APPLICATION_JSON)
+	public Response buscarOSPeloId(@PathParam("numeroos") int numeroos) {
+		try {
+			OrdemServicoObj os = new OrdemServicoObj();
+			Conexao conec = new Conexao();
+			Connection conexao = conec.abrirConexao();
+			JDBCDigitalOSLoginDAO jdbcOrdemServicoObj = new JDBCDigitalOSLoginDAO(conexao);
+			os = jdbcOrdemServicoObj.buscarPorNumeroOs(numeroos);
+			conec.fecharConexao();
+			return Response.ok(this.buildResponse(os), MediaType.APPLICATION_JSON).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
 }
