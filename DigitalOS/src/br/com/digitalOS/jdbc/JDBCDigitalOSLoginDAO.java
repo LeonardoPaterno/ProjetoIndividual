@@ -1364,19 +1364,17 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 
 	public OrdemServicoObj buscarPorNumeroOs(int numeroos) {
-		String comando = "select numeroos, descproblema, descsolucao, dataabertura, dataprazo, datafechamento, statusos, ordemservico.ativo, total, "
-				       + "pessoa.nome, pessoa.cpf, pessoa.rg, pessoa.telefone, pessoa.celular, "
-				       + "endereco.rua, "
-				       + "categoriaaparelho.nome, "
-				       + "marca.nome, "
-				       + "aparelho.modelo, aparelho.numeroserie "
-				       + "from ordemservico "
-				       + "inner join aparelho on aparelho.id = ordemservico.aparelho_id "
-				       + "inner join categoriaaparelho on categoriaaparelho.id = aparelho.categoriaaparelho_id "
-				       + "inner join marca on marca.id = aparelho.marca_id "
-				       + "inner join pessoa on pessoa.id = ordemservico.pessoa_id "
-				       + "inner join endereco on endereco.id = pessoa.endereco_id "
-				       + "where numeroos = "+numeroos+";";
+		String comando = "select numeroos, descproblema, descsolucao, dataabertura, dataprazo, datafechamento, statusos, ordemservico.ativo, "
+				+ "total, pessoa.nome as cliente, pessoa.cpf, pessoa.rg, pessoa.telefone, pessoa.celular, endereco.rua, "
+				+ "categoriaaparelho.nome as categoria, marca.nome as marca, aparelho.modelo, aparelho.numeroserie, servicos.tiposervico "
+				+ "from ordemservico "
+				+ "inner join aparelho on aparelho.id = ordemservico.aparelho_id "
+				+ "inner join categoriaaparelho on categoriaaparelho.id = aparelho.categoriaaparelho_id "
+				+ "inner join marca on marca.id = aparelho.marca_id "
+				+ "inner join pessoa on pessoa.id = ordemservico.pessoa_id "
+				+ "inner join endereco on endereco.id = pessoa.endereco_id "
+				+ "inner join servicos on servicos.id = ordemservico.servicos_id "
+				+ "where numeroos = "+numeroos+";";
 			OrdemServicoObj os = new OrdemServicoObj();
 		
 		try {
@@ -1393,15 +1391,17 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				String statusos = rs.getString("statusos");
 				String ativo = rs.getString("ordemservico.ativo");
 				float total = rs.getFloat("total");
-				String nome = rs.getString("pessoa.nome");
+				String nome = rs.getString("cliente");
 				String cpf = rs.getString("pessoa.cpf");
 				String rg = rs.getString("pessoa.rg");
 				String telefone = rs.getString("pessoa.telefone");
 				String celular = rs.getString("pessoa.celular");
 				String rua = rs.getString("endereco.rua");
-				String marca = rs.getString("marca.nome");
+				String marca = rs.getString("marca");
+				String categoria = rs.getString("categoria");
 				String modelo = rs.getString("aparelho.modelo");
 				String numeroserie = rs.getString("aparelho.numeroserie");
+				String tiposervico = rs.getString("servicos.tiposervico");
 				
 				os.setNumeroos(numero);
 				os.setObsproblema(obsproblema);
@@ -1419,14 +1419,37 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				os.setCelular(celular);
 				os.setRua(rua);
 				os.setMarca(marca);
+				os.setCategoria(categoria);
 				os.setModelo(modelo);
 				os.setNumeroserie(numeroserie);
+				os.setTiposervico(tiposervico);
 				
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return os;
+	}
+
+		public boolean editarOS(OrdemServicoObj os) {
+		String comando = "update ordemservico set descsolucao = \"teste\", datafechamento = \"2019-09-09\", total = 200 where id =  1";
+		PreparedStatement p;
+		try {
+			p = this.conexao.prepareStatement(comando);
+			p.setInt(1, os.getNumeroos());
+			p.setString(2, os.getObsproblema());
+			p.setDate(3, os.getAbertura());
+			p.setDate(4, os.getPrazo());
+			p.setString(5, os.getStatusos());
+			p.setInt(6, os.getPessoa_id());
+			p.setInt(7, os.getAparelho_id());
+			p.setInt(8, os.getServicos_id());			
+			p.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 }
 

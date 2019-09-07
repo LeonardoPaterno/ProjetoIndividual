@@ -77,4 +77,24 @@ public class RestOrdemServico extends UtilRest{
 			return this.buildErrorResponse(e.getMessage());
 		}
 	}
+	
+	@POST
+	@Path("/editarOS")
+	@Consumes("application/*")
+	public Response editarOrdemServico(String ordemservico) {
+		System.out.println("OS: "+ordemservico);
+		try {		
+			OrdemServicoObj os = new ObjectMapper().readValue(ordemservico, OrdemServicoObj.class);
+			
+			Conexao conec = new Conexao();
+			Connection conexao = conec.abrirConexao();
+			JDBCDigitalOSLoginDAO jdbcOrdemServicoObj = new JDBCDigitalOSLoginDAO(conexao);
+			jdbcOrdemServicoObj.editarOS(os);
+			conec.fecharConexao();
+			return Response.ok(this.buildResponse("Ordem de serviço cadastrada com sucesso!")).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
 }

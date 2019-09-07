@@ -13,7 +13,9 @@ public class OrdemServicoObj implements Serializable{
 	private int aparelho_id;
 	private int servicos_id;
 	private int orcamento_numero;
+	
 	private float total;
+	
 	private String obsproblema;
 	private String obssolucao;
 	private String statusos;
@@ -28,6 +30,7 @@ public class OrdemServicoObj implements Serializable{
 	private String marca;
 	private String modelo;
 	private String numeroserie;
+	private String tiposervico;
 	
 	private Date abertura;
 	private Date prazo;
@@ -176,5 +179,11 @@ public class OrdemServicoObj implements Serializable{
 	}
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+	public String getTiposervico() {
+		return tiposervico;
+	}
+	public void setTiposervico(String tiposervico) {
+		this.tiposervico = tiposervico;
 	}
 }

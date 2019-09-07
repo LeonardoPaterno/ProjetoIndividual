@@ -94,7 +94,7 @@
         		<div class="col-md-offset-3"></div>
         		<div class="form-group col-md-3">
 	        		<label>Status OS</label>
-	        		<input class="form-control" id="statusos" value="A" disabled>
+	        		<input class="form-control" id="statusos" value="AB" disabled>
 	        	</div>
         		<div class="input-group col-md-4 divPequisaAparelho">
         			<label>Localizar Aparelho:</label>
@@ -314,6 +314,10 @@
         		<div class="form-group col-md-3">
 	        		<label>Status OS</label>
 	        		<select class="form-control" id="statusosEdit">
+	        			<option value="AB" selected>Aberta</option>
+	        			<option value="EA">Em Andamento</option>
+	        			<option value="PA">Parada</option>
+	        			<option value="CA">Cancelada</option>
 	        		</select>
 	        	</div>
         		<div class="input-group col-md-4 divPequisaAparelho">
@@ -347,8 +351,7 @@
         	<div class="row rowCustom">
         		<div class="form-group col-md-3">
         			<label>Tipo Serviço</label>
-        			<select class="form-control" id="tiposervicoEdit" disabled>
-        			</select>
+        			<input class="form-control" id="tiposervicoEdit" disabled>
         		</div>
 	        	<div class="form-group col-md-3">
 	        		<label>Data Abertura</label>
@@ -392,7 +395,7 @@
       </div><!-- /div modal-body -->    
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="fechaModal()">Cancelar</button>
-        <button type="button" class="btn btn-success" onclick="abrirOS()">Salvar</button>
+        <button type="button" class="btn btn-success" onclick="editarOS()">Salvar</button>
       </div><!-- /div modal-footer -->  
     </div><!-- /div modal-content -->
   </div><!-- /div modal-dialog -->
