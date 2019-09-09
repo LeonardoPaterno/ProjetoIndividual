@@ -1432,19 +1432,15 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	}
 
 		public boolean editarOS(OrdemServicoObj os) {
-		String comando = "update ordemservico set descsolucao = \"teste\", datafechamento = \"2019-09-09\", total = 200 where id =  1";
+		String comando = "update ordemservico set descsolucao = ?, datafechamento = ?, total = ? where id =  "+os.getNumeroos()+";";
 		PreparedStatement p;
 		try {
 			p = this.conexao.prepareStatement(comando);
 			p.setInt(1, os.getNumeroos());
-			p.setString(2, os.getObsproblema());
-			p.setDate(3, os.getAbertura());
-			p.setDate(4, os.getPrazo());
-			p.setString(5, os.getStatusos());
-			p.setInt(6, os.getPessoa_id());
-			p.setInt(7, os.getAparelho_id());
-			p.setInt(8, os.getServicos_id());			
-			p.execute();
+			p.setString(2, os.getObssolucao());
+			p.setDate(3, os.getFechamento());
+			p.setFloat(4, os.getTotal());			
+			p.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;

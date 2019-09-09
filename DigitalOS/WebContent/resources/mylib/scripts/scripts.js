@@ -1416,15 +1416,15 @@ function exibirEdicaoOS(numeroos){
 	});
 }
 function editarOS(){
-	var os = {'numeroos':$("#idos").val(), 'obsproblema':$("#obssolucaoEdit").val(),'statusos':$("#statusosEdit").val(),
-			  'total':$("#totalEdit").val(), 'prazo':$("#dataprazoEdit").val(), 'fechamento':$("#datafechamentoEdit").val()};
+	var os = {'numeroos':$("#idos").val(), 'obsobssolucao':$("#obssolucaoEdit").val(),'statusos':$("#statusosEdit").val(),
+			  'total':$("#totalEdit").val(), 'fechamento':$("#datafechamentoEdit").val()};
 	$.ajax({
 		type: 'POST',
 		url: '/DigitalOS/rest/RestOrdemServico/editarOS',
 		data: os,
 		success: function(resposta){
 			alert(resposta);
-			tabelaOS(resposta);
+			buscarOS();
 		},
 		error: function(){
 			alert("Erro ao editar OS");
