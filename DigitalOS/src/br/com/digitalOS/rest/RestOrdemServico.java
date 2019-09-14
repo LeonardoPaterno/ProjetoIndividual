@@ -8,6 +8,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -92,6 +93,51 @@ public class RestOrdemServico extends UtilRest{
 			jdbcOrdemServicoObj.editarOS(os);
 			conec.fecharConexao();
 			return Response.ok(this.buildResponse("Ordem de serviço cadastrada com sucesso!")).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+	
+	@POST
+	@Path("/filtroOsStatus")
+	@Produces("application/*")
+	public Response filtrarOsStatus(String status) {
+		try {
+			OrdemServicoObj os = new OrdemServicoObj();
+			os.setAtivo(status);
+			
+			Conexao conec = new Conexao();
+			Connection conexao = conec.abrirConexao();
+			
+			JDBCDigitalOSLoginDAO jdbcServicoObj = new JDBCDigitalOSLoginDAO(conexao);
+			List<OrdemServicoObj> ordemservico = jdbcServicoObj.filtroOsStatus(os);
+			conec.fecharConexao();
+			
+			return Response.ok(this.buildResponse(ordemservico), MediaType.APPLICATION_JSON).build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return this.buildErrorResponse(e.getMessage());
+		}
+	}
+
+	@POST
+	@Path("/filtroOsAtivo")
+	@Produces("application/*")
+	public Response filtrarOsAtivos(String ativo) {
+		System.out.println(ativo);
+		try {
+			OrdemServicoObj os = new OrdemServicoObj();
+			os.setAtivo(ativo);
+			
+			Conexao conec = new Conexao();
+			Connection conexao = conec.abrirConexao();
+			
+			JDBCDigitalOSLoginDAO jdbcServicoObj = new JDBCDigitalOSLoginDAO(conexao);
+			List<OrdemServicoObj> ordemservico = jdbcServicoObj.filtroOsAtivo(os);
+			conec.fecharConexao();
+			
+			return Response.ok(this.buildResponse(ordemservico), MediaType.APPLICATION_JSON).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());

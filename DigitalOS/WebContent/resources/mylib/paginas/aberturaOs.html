@@ -11,17 +11,30 @@
 				<span class="btn input-group-addon icone-pesquisar glyphicon glyphicon-search" onclick="buscarOS()"></span>					
 			</div>
 			
-			<div class="btn-group filtroAtivo">
+			<div class="btn-group filtroStatus">
 				<div class="labelFiltro">
-					<label>Filtro de O.S. |</label>
+					<label>Filtro de Status |</label>
 				</div>
-				<div class="botaoFiltro">
-				    <select class="btn-default form-control" id="filtrarOS" onchange="filtroOS()">
-				    	<option value="OP">Opção</option>
+				<div class="botaoFiltroStatus">
+				    <select class="btn-default form-control btnFiltroStatus" id="filtroOSstatus" onchange="filtroOSstatus()">
+				    	<option value="GE">Geral</option>
 						<option value="AB">Aberta</option>
-						<option value="CO">Concluida</option>
 						<option value="EA">Em Andamento</option>
-						<option value="CA">Em Andamento</option>
+						<option value="CO">Concluida</option>
+						<option value="CA">Cancelada</option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="btn-group filtroAtivoOS">
+				<div class="labelFiltro">
+					<label>Filtro Ativo |</label>
+				</div>
+				<div class="botaoFiltroAtivo">
+				    <select class="btn-default form-control" id="filtrarOSAtivo" onchange="filtrarOSAtivo()">
+				    	<option value="TD">Todas</option>
+						<option value="S">Ativa</option>
+						<option value="N">Inativa</option>
 					</select>
 				</div>
 			</div>
@@ -316,7 +329,7 @@
 	        		<select class="form-control" id="statusosEdit">
 	        			<option value="AB" selected>Aberta</option>
 	        			<option value="EA">Em Andamento</option>
-	        			<option value="PA">Parada</option>
+	        			<option value="CO">Concluida</option>
 	        			<option value="CA">Cancelada</option>
 	        		</select>
 	        	</div>

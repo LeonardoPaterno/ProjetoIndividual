@@ -1106,329 +1106,366 @@ function filtroMarca() {
 }
 /* FIM CRUD MARCA */
 
+/* INICIO FECHA MODAL */
+	function fechaModal() {
+		$("#ModalPainelUsuario").css("display","hide");
+		$("#modalordemservico").modal('hide');
+		$("#msgEditOS").modal('hide');
+	}
+	function fechaModalOS() {
+		$("#modalselecionacliente").css("display","none");
+		$("#modalselecionaAparelho").css("display","none");
+	}
+/* FIM FECHA MODAL */
+
 /* INICIO ORDEM DE SERVICO */
-function buscarClienteOS() {
-	document.getElementById('modalselecionacliente').style.display = "block";
-	var nome = $("#buscarClienteS").val();
-	$.ajax({
-		type : 'POST',
-		url : '/DigitalOS/rest/RestPessoaOs/buscarPessoaOs',
-		data : nome,
-		success : function(resposta) {
-			tabelaPessoaOS(resposta);
-			console.log(resposta);
-			$('#modalselecionacliente').modal('show');
-		},
-		error : function(resposta) {
-			alert("Erro ao localizar clientes");
-		}
-	});
-}
-function Cliente(id, nome, cpf, rg, endereco, telefone, celular) {
-	this. id = id;
-	this.nome = nome;
-	this.cpf = cpf;
-	this.rg = rg;
-	this.endereco = endereco;
-	this.telefone = telefone;
-	this.celular = celular;
-}
-clientes = [];
-function tabelaPessoaOS(resposta) {
-	var html = "<div class='table-reponsive'>"
-			+ "<table class='table table-striped table-condensed table-bordered'>";
-	html += "<tr>"
-			+ "<th>Seleção</th> <th>ID</th> <th>Nome</th> <th>CPF</th> <th>RG</th> <th>Endereco</th> <th>Telefone</th> <th>Celular</th>"
-			+ "</tr>"
-
-	for (var i = 0; i < resposta.length; i++) {
-		clientes[i] = new Cliente(resposta[i].id, resposta[i].nome, resposta[i].cpf, resposta[i].rg, resposta[i].endereco, resposta[i].telefone, resposta[i].celular);
-		html += "<tr>"
-					+ "<td>" + "<input type='radio' id='radio' name='capiroto'>"+"</td>" 
-					+ "<td>" + resposta[i].id + "</td>" 
-					+ "<td>" + resposta[i].nome + "</td>" 
-					+ "<td>" + resposta[i].cpf + "</td>" 
-					+ "<td>" + resposta[i].rg + "</td>" 
-					+ "<td>" + resposta[i].endereco + "</td>" 
-					+ "<td>" + resposta[i].telefone + "</td>"
-					+ "<td>" + resposta[i].celular + "</td>"
-				+ "</tr>"
-	}
-	html += "</table>" + "</div>"
-	$("#tabelaPessoas").html(html);
-}
-function carregaPessoaOS() {
-	var radioButtons = $("#tabelaPessoas input:radio[name='capiroto']");
-	var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
-	cliente = clientes[selectedIndex];
-	for ( let name in cliente) {
-		$("#"+name).val(cliente[name]);
-	}
-	fechaModalOS()
-}
-/*--------------------------------------------*/
-function buscarAparelhoOS() {
-	document.getElementById('modalselecionaAparelho').style.display = "block";
-	var nome = $("#buscarAparelho").val();
-	$.ajax({
-		type : 'POST',
-		url : '/DigitalOS/rest/RestSelect/buscarAparelhoOs',
-		data : nome,
-		success : function(resposta) {
-			console.log("buscarAparelhoOS: "+resposta);
-			tabelaAparelhoOS(resposta);
-			$('#modalselecionaAparelho').modal('show');
-		},
-		error : function(resposta) {
-			alert("Erro ao localizar aparelhos");
-		}
-	});
-}
-function AparelhoBuilder(){
-	return{
-		build : function(resposta){
-					let aparelhos=[]
-					let respostaArray = JSON.parse(resposta);
-					
-					for(let i = 0; i <= respostaArray.length; i++){
-						if (respostaArray[i] == undefined || respostaArray[i] == null){
-							continue;
-						}
-						console.log(respostaArray[i]);
-						aparelhos[i] = new Aparelho(respostaArray[i]);
-					}
-					console.log(aparelhos)
-					return aparelhos;
-		}
-	}
-}
-function Aparelho({idaparelho, nomeCategoria, nomeMarca, modelo, nsaparelho}) {
-	return {
-		idaparelho : idaparelho,
-		nomeCategoria : nomeCategoria,
-		nomeMarca : nomeMarca,
-		modelo : modelo,
-		nsaparelho : nsaparelho
-	};
-}
-aparelhos = [];
-function tabelaAparelhoOS(resposta) {
-	console.log("tabelaAparelhoOS: "+resposta);
-	var html = "<div class='table-reponsive'> " +
-			   "<table class='table table-striped table-condensed table-bordered'>";
-	html += "<tr>"
-			+ "<th>Seleção</th> <th>ID</th> <th>Modelo</th> <th>Categoria</th> <th>Marca</th> <th>Número Série</th>"
-		  + "</tr>"
-	aparelhos = AparelhoBuilder().build(resposta);
-	console.log(aparelhos)
-	for (var i = 0; i < aparelhos.length; i++) {
-		let aparelho = aparelhos[i];
-		html += "<tr>"
-					+ "<td>" + "<input type='checkbox' id='aparelho' name='aparelhos'>"+"</td>" 
-					+ "<td>" + aparelho.idaparelho + "</td>" 
-					+ "<td>" + aparelho.modelo + "</td>" 
-					+ "<td>" + aparelho.nomeCategoria + "</td>" 
-					+ "<td>" + aparelho.nomeMarca + "</td>" 
-					+ "<td>" + aparelho.nsaparelho + "</td>"  
-			 + "</tr>"
-	}
-	html += "</table>" + "</div>"
-	$("#tabelaAparelhos").html(html);
-}
-function carregaAparelhoOS() {
-	var inputs = $("#tabelaAparelhos input:checkbox[name='aparelhos']");
-	var selectedIndex = inputs.index(inputs.filter(':checked'));
-	aparelho = aparelhos[selectedIndex];
-	for ( let name in aparelho) {
-		$("#"+name).val(aparelho[name]);
-	}
-	fechaModalOS();
-}
-/*--------------------------------------------*/
-function fechaModal() {
-	$("#ModalPainelUsuario").css("display","hide");
-	$("#modalordemservico").modal('hide');
-}
-function fechaModalOS() {
-	$("#modalselecionacliente").css("display","none");
-	$("#modalselecionaAparelho").css("display","none");
-}
-/*--------------------------------------------*/
-function carregarSelect() {
-	$.ajax({
-		type : 'POST',
-		url : '/DigitalOS/rest/RestSelect/buscarSelectCategoria',
-		success : function(lista) {
-			listosa = JSON.parse(lista);
-			$.each(listosa, function(i, v) {
-				$('#categoria').append(
-						$('<option>').text(v.nome).attr('value', v.id));
+	/* INICIO BSUCAR CLIENTES */
+		function buscarClienteOS() {
+			document.getElementById('modalselecionacliente').style.display = "block";
+			var nome = $("#buscarClienteS").val();
+			$.ajax({
+				type : 'POST',
+				url : '/DigitalOS/rest/RestPessoaOs/buscarPessoaOs',
+				data : nome,
+				success : function(resposta) {
+					tabelaPessoaOS(resposta);
+					console.log(resposta);
+					$('#modalselecionacliente').modal('show');
+				},
+				error : function(resposta) {
+					alert("Erro ao localizar clientes");
+				}
 			});
-		},
-		error : function() {
-			alert("Erro ao encontrar categoria");
 		}
-	});
-
-	$.ajax({
-		type : 'POST',
-		url : '/DigitalOS/rest/RestSelect/buscarSelectMarca',
-		success : function(lista) {
-			listosa = JSON.parse(lista);
-			$.each(listosa, function(i, v) {
-				$('#marca').append(
-						$('<option>').text(v.nome).attr('value', v.id));
-			});
-		},
-		error : function() {
-			alert("Erro ao encontrar marca");
+		function Cliente(id, nome, cpf, rg, endereco, telefone, celular) {
+			this. id = id;
+			this.nome = nome;
+			this.cpf = cpf;
+			this.rg = rg;
+			this.endereco = endereco;
+			this.telefone = telefone;
+			this.celular = celular;
 		}
-	});
-
-	$.ajax({
-		type : 'POST',
-		url : '/DigitalOS/rest/RestSelect/buscarSelectTipoServico',
-		success : function(lista) {
-			listosa = JSON.parse(lista);
-			$.each(listosa, function(i, v) {
-				$('#tiposervico').append(
-						$('<option>').text(v.tiposervico).attr('value', v.idservico));
-			});
-		},
-		error : function() {
-			alert("Erro ao encontrar marca");
-		}
-	});
-}
-function numeroOS() {
-	$.ajax({
-		type : 'POST',
-		url : '/DigitalOS/rest/RestSelect/buscarSelectNumeroOS',
-		success : function(numero) {
-			id = (JSON.parse(numero));
-
-			numeroOS = id.id + 1;
-			$("#idos").val(numeroOS);
-		},
-		error : function() {
-			alert("Erro ao gerar numero da OS");
-		}
-	});
-}
-function abrirOS() {
-	var os = {'numeroos':$("#idos").val(), 'obsproblema':$("#descricaoservico").val(),'statusos':$("#statusos").val(),
-			'abertura':$("#dataabertura").val(), 'prazo':$("#dataprazo").val(),
-			'pessoa_id':$("#id").val(), 'aparelho_id':$("#idaparelho").val(), 'servicos_id':$("#tiposervico").val()};
-	var ordemservico = JSON.stringify(os);
-	console.log(os);
-	console.log(ordemservico);
-	$.ajax({
-		type : 'POST',
-		url : '/DigitalOS/rest/RestOrdemServico/addOrdemServico',
-		data: ordemservico,
-		success : function(resposta) {
-			alert(resposta);
-			buscarOS();
-			fechaModal();
-		},
-		error : function(resposta) {
-			alert(resposta);
-		}
-	});
-}
-function buscarOS(){
-	var num;
-	if($("#buscaOS").val() == "" || $("#buscaOS").val() == undefined){
-		num = 0;
-	}else{
-		num = $("#buscaOS").val();
-	}
-	$.ajax({
-		type:'POST',
-		url:'/DigitalOS/rest/RestOrdemServico/buscarOS/'+ num,
-		success:function(resposta){
-			alert("OS Encontrada");
-			tabelaOS(resposta);
-		},
-		error: function(){
-			alert("Erro ao localizar as ordens de servico");
-			tabelaOS();
-		}
-	});
-}
-function tabelaOS(resposta) {
-	console.log(resposta);
-	var html = "<div class='teble-reponsive'>"
-				+ "<table class='table table-striped table-condensed table-bordered'>";
+		clientes = [];
+		function tabelaPessoaOS(resposta) {
+			var html = "<div class='table-reponsive'>"
+					+ "<table class='table table-striped table-condensed table-bordered'>";
 			html += "<tr>"
-				  	+ "<th>N° OS</th> <th>Cliente</th> <th>Aberta em</th> <th>Prazo até </th> <th>Fechada em</th> <th>Status OS</th> <th>Total OS</th> <th>Edição</th>"
-				  + "</tr>"
-				  if(resposta!= undefined || resposta != null ){
+					+ "<th>Seleção</th> <th>ID</th> <th>Nome</th> <th>CPF</th> <th>RG</th> <th>Endereco</th> <th>Telefone</th> <th>Celular</th>"
+					+ "</tr>"
+		
 			for (var i = 0; i < resposta.length; i++) {
+				clientes[i] = new Cliente(resposta[i].id, resposta[i].nome, resposta[i].cpf, resposta[i].rg, resposta[i].endereco, resposta[i].telefone, resposta[i].celular);
 				html += "<tr>"
-							+ "<td>"+ resposta[i].numeroos+ "</td>"
-							+ "<td>"+ resposta[i].nome+ "</td>"
-							+ "<td>"+ resposta[i].abertura+ "</td>"
-							+ "<td>"+ resposta[i].prazo+ "</td>"
-							+ "<td>"+ resposta[i].fechamento+ "</td>"
-							+ "<td>"+ resposta[i].statusos+ "</td>"
-							+ "<td>"+ resposta[i].total+ "</td>"
-							+ "<td>"+ "<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoOS("+ resposta[i].numeroos + ")'></div>" 
-							+ "</td>" 
-						+"</tr>"
+							+ "<td>" + "<input type='radio' id='radio' name='capiroto'>"+"</td>" 
+							+ "<td>" + resposta[i].id + "</td>" 
+							+ "<td>" + resposta[i].nome + "</td>" 
+							+ "<td>" + resposta[i].cpf + "</td>" 
+							+ "<td>" + resposta[i].rg + "</td>" 
+							+ "<td>" + resposta[i].endereco + "</td>" 
+							+ "<td>" + resposta[i].telefone + "</td>"
+							+ "<td>" + resposta[i].celular + "</td>"
+						+ "</tr>"
 			}
-				  }
-		 html += "</table>" 
-		    + "</div>"
-	$("#resultadoOS").html(html);
-}
-function exibirEdicaoOS(numeroos){
-	$.ajax({
-		type : 'POST',
-		url : '/DigitalOS/rest/RestOrdemServico/buscarOSPeloId/' + numeroos,
-		success : function(os) {
+			html += "</table>" + "</div>"
+			$("#tabelaPessoas").html(html);
+		}
+		function carregaPessoaOS() {
+			var radioButtons = $("#tabelaPessoas input:radio[name='capiroto']");
+			var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
+			cliente = clientes[selectedIndex];
+			for ( let name in cliente) {
+				$("#"+name).val(cliente[name]);
+			}
+			fechaModalOS()
+		}
+	/* FIM BUSCAR CLIENTES */
+	
+	/* INICIO BUSCAR APARELHOS */
+		function buscarAparelhoOS() {
+			document.getElementById('modalselecionaAparelho').style.display = "block";
+			var nome = $("#buscarAparelho").val();
+			$.ajax({
+				type : 'POST',
+				url : '/DigitalOS/rest/RestSelect/buscarAparelhoOs',
+				data : nome,
+				success : function(resposta) {
+					console.log("buscarAparelhoOS: "+resposta);
+					tabelaAparelhoOS(resposta);
+					$('#modalselecionaAparelho').modal('show');
+				},
+				error : function(resposta) {
+					alert("Erro ao localizar aparelhos");
+				}
+			});
+		}
+		function AparelhoBuilder(){
+			return{
+				build : function(resposta){
+							let aparelhos=[]
+							let respostaArray = JSON.parse(resposta);
+							
+							for(let i = 0; i <= respostaArray.length; i++){
+								if (respostaArray[i] == undefined || respostaArray[i] == null){
+									continue;
+								}
+								console.log(respostaArray[i]);
+								aparelhos[i] = new Aparelho(respostaArray[i]);
+							}
+							console.log(aparelhos)
+							return aparelhos;
+				}
+			}
+		}
+		function Aparelho({idaparelho, nomeCategoria, nomeMarca, modelo, nsaparelho}) {
+			return {
+				idaparelho : idaparelho,
+				nomeCategoria : nomeCategoria,
+				nomeMarca : nomeMarca,
+				modelo : modelo,
+				nsaparelho : nsaparelho
+			};
+		}
+		aparelhos = [];
+		function tabelaAparelhoOS(resposta) {
+			console.log("tabelaAparelhoOS: "+resposta);
+			var html = "<div class='table-reponsive'> " +
+					   "<table class='table table-striped table-condensed table-bordered'>";
+			html += "<tr>"
+					+ "<th>Seleção</th> <th>ID</th> <th>Modelo</th> <th>Categoria</th> <th>Marca</th> <th>Número Série</th>"
+				  + "</tr>"
+			aparelhos = AparelhoBuilder().build(resposta);
+			console.log(aparelhos)
+			for (var i = 0; i < aparelhos.length; i++) {
+				let aparelho = aparelhos[i];
+				html += "<tr>"
+							+ "<td>" + "<input type='checkbox' id='aparelho' name='aparelhos'>"+"</td>" 
+							+ "<td>" + aparelho.idaparelho + "</td>" 
+							+ "<td>" + aparelho.modelo + "</td>" 
+							+ "<td>" + aparelho.nomeCategoria + "</td>" 
+							+ "<td>" + aparelho.nomeMarca + "</td>" 
+							+ "<td>" + aparelho.nsaparelho + "</td>"  
+					 + "</tr>"
+			}
+			html += "</table>" + "</div>"
+			$("#tabelaAparelhos").html(html);
+		}
+		function carregaAparelhoOS() {
+			var inputs = $("#tabelaAparelhos input:checkbox[name='aparelhos']");
+			var selectedIndex = inputs.index(inputs.filter(':checked'));
+			aparelho = aparelhos[selectedIndex];
+			for ( let name in aparelho) {
+				$("#"+name).val(aparelho[name]);
+			}
+			fechaModalOS();
+		}
+	/* FIM BUSCA APARELHOS */
+	
+		function carregarSelect() {
+			$.ajax({
+				type : 'POST',
+				url : '/DigitalOS/rest/RestSelect/buscarSelectCategoria',
+				success : function(lista) {
+					listosa = JSON.parse(lista);
+					$.each(listosa, function(i, v) {
+						$('#categoria').append(
+								$('<option>').text(v.nome).attr('value', v.id));
+					});
+				},
+				error : function() {
+					alert("Erro ao encontrar categoria");
+				}
+			});
+		
+			$.ajax({
+				type : 'POST',
+				url : '/DigitalOS/rest/RestSelect/buscarSelectMarca',
+				success : function(lista) {
+					listosa = JSON.parse(lista);
+					$.each(listosa, function(i, v) {
+						$('#marca').append(
+								$('<option>').text(v.nome).attr('value', v.id));
+					});
+				},
+				error : function() {
+					alert("Erro ao encontrar marca");
+				}
+			});
+		
+			$.ajax({
+				type : 'POST',
+				url : '/DigitalOS/rest/RestSelect/buscarSelectTipoServico',
+				success : function(lista) {
+					listosa = JSON.parse(lista);
+					$.each(listosa, function(i, v) {
+						$('#tiposervico').append(
+								$('<option>').text(v.tiposervico).attr('value', v.idservico));
+					});
+				},
+				error : function() {
+					alert("Erro ao encontrar marca");
+				}
+			});
+		}
+		function numeroOS() {
+			$.ajax({
+				type : 'POST',
+				url : '/DigitalOS/rest/RestSelect/buscarSelectNumeroOS',
+				success : function(numero) {
+					id = (JSON.parse(numero));
+		
+					numeroOS = id.id + 1;
+					$("#idos").val(numeroOS);
+				},
+				error : function() {
+					alert("Erro ao gerar numero da OS");
+				}
+			});
+		}
+		function abrirOS() {
+			var os = {'numeroos':$("#idos").val(), 'obsproblema':$("#descricaoservico").val(),'statusos':$("#statusos").val(),
+					'abertura':$("#dataabertura").val(), 'prazo':$("#dataprazo").val(),
+					'pessoa_id':$("#id").val(), 'aparelho_id':$("#idaparelho").val(), 'servicos_id':$("#tiposervico").val()};
+			var ordemservico = JSON.stringify(os);
 			console.log(os);
-			$("#idosEdit").val(os.numeroos);
-			$("#nomeEdit").val(os.nome);
-			$("#cpfEdit").val(os.cpf);
-			$("#rgEdit").val(os.rg);
-			$("#enderecoEdit").val(os.rua);
-			$("#telefoneEdit").val(os.telefone);
-			$("#celularEdit").val(os.celular);
-			$("#statusosEdit").val(os.statusos);
-			$("#categoriaEdit").val(os.categoria);
-			$("#marcaEdit").val(os.marca);
-			$("#modeloEdit").val(os.modelo);
-			$("#nsaparelhoEdit").val(os.numeroserie);
-			$("#tiposervicoEdit").val(os.tiposervico);
-			$("#dataaberturaEdit").val(os.abertura);
-			$("#dataprazoEdit").val(os.prazo);
-			$("#datafechamentoEdit").val(os.fechamento);
-			$("#totalEdit").val(os.total);
-			$("#obsproblemaEdit").val(os.obsproblema);
-			$("#obssolucaoEdit").val(os.obssolucao);
-			$("#msgEditOS").modal(os);
-
-			},
-		error : function() {
-			alert("Erro ao editar marca!");
+			console.log(ordemservico);
+			$.ajax({
+				type : 'POST',
+				url : '/DigitalOS/rest/RestOrdemServico/addOrdemServico',
+				data: ordemservico,
+				success : function(resposta) {
+					alert(resposta);
+					buscarOS();
+					fechaModal();
+				},
+				error : function(resposta) {
+					alert(resposta);
+				}
+			});
 		}
-	});
-}
-function editarOS(){
-	var os = {'numeroos':$("#idos").val(), 'obsobssolucao':$("#obssolucaoEdit").val(),'statusos':$("#statusosEdit").val(),
-			  'total':$("#totalEdit").val(), 'fechamento':$("#datafechamentoEdit").val()};
-	$.ajax({
-		type: 'POST',
-		url: '/DigitalOS/rest/RestOrdemServico/editarOS',
-		data: os,
-		success: function(resposta){
-			alert(resposta);
-			buscarOS();
-		},
-		error: function(){
-			alert("Erro ao editar OS");
+		function buscarOS(){
+			var num;
+			if($("#buscaOS").val() == "" || $("#buscaOS").val() == undefined){
+				num = 0;
+			}else{
+				num = $("#buscaOS").val();
+			}
+			$.ajax({
+				type:'POST',
+				url:'/DigitalOS/rest/RestOrdemServico/buscarOS/'+ num,
+				success:function(resposta){
+					alert("OS Encontrada");
+					tabelaOS(resposta);
+				},
+				error: function(){
+					alert("Erro ao localizar as ordens de servico");
+					tabelaOS();
+				}
+			});
 		}
-	});
-}
-/* FIM ORDEM DE SERVICO */
+		function tabelaOS(resposta) {
+			console.log(resposta);
+			var html = "<div class='teble-reponsive'>"
+						+ "<table class='table table-striped table-condensed table-bordered'>";
+					html += "<tr>"
+						  	+ "<th>N° OS</th> <th>Cliente</th> <th>Aberta em</th> <th>Prazo até </th> <th>Fechada em</th> <th>Status OS</th> <th>Total OS</th> <th>Edição</th>"
+						  + "</tr>"
+						  if(resposta!= undefined || resposta != null ){
+					for (var i = 0; i < resposta.length; i++) {
+						html += "<tr>"
+									+ "<td>"+ resposta[i].numeroos+ "</td>"
+									+ "<td>"+ resposta[i].nome+ "</td>"
+									+ "<td>"+ resposta[i].abertura+ "</td>"
+									+ "<td>"+ resposta[i].prazo+ "</td>"
+									+ "<td>"+ resposta[i].fechamento+ "</td>"
+									+ "<td>"+ resposta[i].statusos+ "</td>"
+									+ "<td>"+ resposta[i].total+ "</td>"
+									+ "<td>"+ "<div class='btn glyphicon glyphicon-pencil' onclick='exibirEdicaoOS("+ resposta[i].numeroos + ")'></div>" 
+									+ "</td>" 
+								+"</tr>"
+					}
+						  }
+				 html += "</table>" 
+				    + "</div>"
+			$("#resultadoOS").html(html);
+		}
+		function exibirEdicaoOS(numeroos){
+			$.ajax({
+				type : 'POST',
+				url : '/DigitalOS/rest/RestOrdemServico/buscarOSPeloId/' + numeroos,
+				success : function(os) {
+					console.log(os);
+					$("#idosEdit").val(os.numeroos);
+					$("#nomeEdit").val(os.nome);
+					$("#cpfEdit").val(os.cpf);
+					$("#rgEdit").val(os.rg);
+					$("#enderecoEdit").val(os.rua);
+					$("#telefoneEdit").val(os.telefone);
+					$("#celularEdit").val(os.celular);
+					$("#statusosEdit").val(os.statusos);
+					$("#categoriaEdit").val(os.categoria);
+					$("#marcaEdit").val(os.marca);
+					$("#modeloEdit").val(os.modelo);
+					$("#nsaparelhoEdit").val(os.numeroserie);
+					$("#tiposervicoEdit").val(os.tiposervico);
+					$("#dataaberturaEdit").val(os.abertura);
+					$("#dataprazoEdit").val(os.prazo);
+					$("#datafechamentoEdit").val(os.fechamento);
+					$("#totalEdit").val(os.total);
+					$("#obsproblemaEdit").val(os.obsproblema);
+					$("#obssolucaoEdit").val(os.obssolucao);
+					$("#msgEditOS").modal(os);
+		
+					},
+				error : function() {
+					alert("Erro ao editar marca!");
+				}
+			});
+		}
+		function editarOS(){
+			var os = {'numeroos':$("#idosEdit").val(), 'obssolucao':$("#obssolucaoEdit").val(), 'prazo':$("#dataprazoEdit").val(),'statusos':$("#statusosEdit").val(),
+					  'total':$("#totalEdit").val(), 'fechamento':$("#datafechamentoEdit").val()};
+			var ordem = JSON.stringify(os);
+			$.ajax({
+				type: 'POST',
+				url: '/DigitalOS/rest/RestOrdemServico/editarOS',
+				data: ordem,
+				success: function(resposta){
+					alert(resposta);
+					fechaModal();
+					buscarOS();
+				},
+				error: function(){
+					alert("Erro ao editar OS");
+				}
+			});
+		}
+		function filtroOSstatus(){
+			var status = $("#filtroOSstatus").val();
+			$.ajax({
+				type: 'POST',
+				url: '/DigitalOS/rest/RestOrdemServico/filtroOsStatus',
+				data: status,
+				success: function(resposta){
+					tabelaOS(resposta);
+				},
+				error: function(){
+					alert("Erro ao editar OS");
+				}
+			});
+		}
+		function filtrarOSAtivo(){
+			var ativo = $("#filtrarOSAtivo").val();
+			$.ajax({
+				type: 'POST',
+				url: '/DigitalOS/rest/RestOrdemServico/filtroOsAtivo',
+				data: ativo,
+				success: function(resposta){
+					tabelaOS(resposta);
+				},
+				error: function(){
+					alert("Erro ao editar OS");
+				}
+			});
+		}
+/* FIM ORDEM SE SERVIÇO */

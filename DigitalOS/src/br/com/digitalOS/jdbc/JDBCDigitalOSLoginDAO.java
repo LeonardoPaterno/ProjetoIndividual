@@ -1342,7 +1342,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				Date prazo = rs.getDate("dataprazo");
 				Date fechamento = rs.getDate("datafechamento");
 				String statusos = rs.getString("statusos");
-				float total = rs.getInt("total");
+				float total = rs.getFloat("total");
 				
 				os.setId(id);
 				os.setNumeroos(numeroos);
@@ -1362,7 +1362,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return listaOS;
 	}
-
 	public OrdemServicoObj buscarPorNumeroOs(int numeroos) {
 		String comando = "select numeroos, descproblema, descsolucao, dataabertura, dataprazo, datafechamento, statusos, ordemservico.ativo, "
 				+ "total, pessoa.nome as cliente, pessoa.cpf, pessoa.rg, pessoa.telefone, pessoa.celular, endereco.rua, "
@@ -1430,16 +1429,28 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return os;
 	}
-
-		public boolean editarOS(OrdemServicoObj os) {
-		String comando = "update ordemservico set descsolucao = ?, datafechamento = ?, total = ? where id =  "+os.getNumeroos()+";";
+	public boolean editarOS(OrdemServicoObj os) {
+		String comando = "";
+		String status = os.getStatusos();
+		if(status.equalsIgnoreCase("CA") || status.equalsIgnoreCase("CO")) {
+			comando += "update ordemservico "
+					+ "set descsolucao = ?, dataprazo = ?, datafechamento = ?,  statusos= ?, total = ?, ativo = 'N' "
+					+ "where id = "+os.getNumeroos()+";";
+		}else {
+			comando +="update ordemservico "
+					+ "set descsolucao = ?, dataprazo = ?, datafechamento = ?,  statusos= ?, total = ?, ativo = 'S' "
+					+ "where id = "+os.getNumeroos()+";";
+		}
+		
 		PreparedStatement p;
 		try {
 			p = this.conexao.prepareStatement(comando);
-			p.setInt(1, os.getNumeroos());
-			p.setString(2, os.getObssolucao());
+			System.out.println(comando);
+			p.setString(1, os.getObssolucao());
+			p.setDate(2, os.getPrazo());
 			p.setDate(3, os.getFechamento());
-			p.setFloat(4, os.getTotal());			
+			p.setString(4, os.getStatusos());
+			p.setDouble(5, os.getTotal());			
 			p.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -1447,7 +1458,115 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		}
 		return true;
 	}
+	public List<OrdemServicoObj> filtroOsStatus(OrdemServicoObj os) {
+		List<OrdemServicoObj> listaOS = new ArrayList<OrdemServicoObj>();
+		String comando = "";
+		String status = os.getAtivo();
+		if(status.equalsIgnoreCase("CO")) {
+			comando += "select ordemservico.id, numeroos, pessoa.nome, dataabertura, dataprazo, datafechamento, statusos, total from ordemservico "
+					+ "inner join pessoa on pessoa.id = ordemservico.pessoa_id where ordemservico.statusos like 'CO%';";
+		}
+		else if(status.equalsIgnoreCase("CA")) {
+			comando += "select ordemservico.id, numeroos, pessoa.nome, dataabertura, dataprazo, datafechamento, statusos, total from ordemservico "
+					+ "inner join pessoa on pessoa.id = ordemservico.pessoa_id where ordemservico.statusos like 'CA%';";
+		}
+		else if(status.equalsIgnoreCase("AB")) {
+			comando += "select ordemservico.id, numeroos, pessoa.nome, dataabertura, dataprazo, datafechamento, statusos, total from ordemservico "
+					+ "inner join pessoa on pessoa.id = ordemservico.pessoa_id where ordemservico.statusos like 'AB%';";
+		}
+		else if(status.equalsIgnoreCase("EA")) {
+			comando += "select ordemservico.id, numeroos, pessoa.nome, dataabertura, dataprazo, datafechamento, statusos, total from ordemservico "
+					+ "inner join pessoa on pessoa.id = ordemservico.pessoa_id where ordemservico.statusos like 'EA%';";
+		}
+		else{
+			comando += "select ordemservico.id, numeroos, pessoa.nome, dataabertura, dataprazo, datafechamento, statusos, total from ordemservico "
+					+ "inner join pessoa on pessoa.id = ordemservico.pessoa_id;";
+		}	
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while (rs.next()) {
+				OrdemServicoObj ordem = new OrdemServicoObj();
+				
+				int id = rs.getInt("ordemservico.id");
+				int numeroos = rs.getInt("numeroos");
+				String nome = rs.getString("pessoa.nome");
+				Date abertura = rs.getDate("dataabertura");
+				Date prazo = rs.getDate("dataprazo");
+				Date fechamento = rs.getDate("datafechamento");
+				String statusos = rs.getString("statusos");
+				float total = rs.getFloat("total");
+				
+				ordem.setId(id);
+				ordem.setNumeroos(numeroos);
+				ordem.setNome(nome);
+				ordem.setAbertura(abertura);
+				ordem.setPrazo(prazo);
+				ordem.setFechamento(fechamento);
+				ordem.setStatusos(statusos);
+				ordem.setTotal(total);
+				
+				listaOS.add(ordem);
+				
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return listaOS;
+	}
+	public List<OrdemServicoObj> filtroOsAtivo(OrdemServicoObj os) {
+		List<OrdemServicoObj> listaOS = new ArrayList<OrdemServicoObj>();
+		String comando = "";
+		String ativo = os.getAtivo();
+		if(ativo.equalsIgnoreCase("N")) {
+			comando += "select ordemservico.id, numeroos, pessoa.nome, dataabertura, dataprazo, datafechamento, statusos, total from ordemservico "
+					+ "inner join pessoa on pessoa.id = ordemservico.pessoa_id where ordemservico.ativo = 'N';";
+		}
+		else if(ativo.equalsIgnoreCase("S")) {
+			comando += "select ordemservico.id, numeroos, pessoa.nome, dataabertura, dataprazo, datafechamento, statusos, total from ordemservico "
+					+ "inner join pessoa on pessoa.id = ordemservico.pessoa_id where ordemservico.ativo = 'S';";
+		}
+		else{
+			comando += "select ordemservico.id, numeroos, pessoa.nome, dataabertura, dataprazo, datafechamento, statusos, total from ordemservico "
+					+ "inner join pessoa on pessoa.id = ordemservico.pessoa_id;";
+		}	
+		System.out.println(comando);
+		try {
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while (rs.next()) {
+				OrdemServicoObj ordem = new OrdemServicoObj();
+				
+				int id = rs.getInt("ordemservico.id");
+				int numeroos = rs.getInt("numeroos");
+				String nome = rs.getString("pessoa.nome");
+				Date abertura = rs.getDate("dataabertura");
+				Date prazo = rs.getDate("dataprazo");
+				Date fechamento = rs.getDate("datafechamento");
+				String statusos = rs.getString("statusos");
+				float total = rs.getFloat("total");
+				
+				ordem.setId(id);
+				ordem.setNumeroos(numeroos);
+				ordem.setNome(nome);
+				ordem.setAbertura(abertura);
+				ordem.setPrazo(prazo);
+				ordem.setFechamento(fechamento);
+				ordem.setStatusos(statusos);
+				ordem.setTotal(total);
+				
+				listaOS.add(ordem);
+				
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return listaOS;
+	}
 }
+
 
 
 

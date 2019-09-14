@@ -472,6 +472,36 @@ h4 {
 	z-index: 5000;
 }
 
+.filtroStatus{
+	left: 350px;
+	top: 3px;
+}
+
+.filtroAtivoOS{
+	left: 25px;
+	top: 3px;
+}
+
+.botaoFiltroStatus{
+    display: table;
+    top: -1px;
+    left: 120px;
+    position: absolute;
+    width: 92px;
+}
+
+.btnFiltroStatus{
+	width: 164% !important;
+}
+
+.botaoFiltroAtivo{
+    display: table;
+    top: -1px;
+    left: 90px;
+    position: absolute;
+    width: 92px;
+}
+
 .filtroAtivo{
 	left: 85px;
 	top: 3px;
