@@ -12,6 +12,7 @@ import br.com.digitalOS.jdbcInterface.DigitalOSInterface;
 import br.com.digitalOS.objetos.AparelhoObj;
 import br.com.digitalOS.objetos.CategoriaAparelhoObj;
 import br.com.digitalOS.objetos.FuncionarioObj;
+import br.com.digitalOS.objetos.GraficoOS;
 import br.com.digitalOS.objetos.LoginObj;
 import br.com.digitalOS.objetos.MarcaObj;
 import br.com.digitalOS.objetos.OrdemServicoObj;
@@ -1531,7 +1532,6 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			comando += "select ordemservico.id, numeroos, pessoa.nome, dataabertura, dataprazo, datafechamento, statusos, total from ordemservico "
 					+ "inner join pessoa on pessoa.id = ordemservico.pessoa_id;";
 		}	
-		System.out.println(comando);
 		try {
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
@@ -1564,6 +1564,30 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			return null;
 		}
 		return listaOS;
+	}
+
+	public List<GraficoOS> OSmensal(GraficoOS os) {
+		List<GraficoOS> lista = new ArrayList<GraficoOS>();
+		try {
+			String comando = "select distinct monthname(dataabertura) as mes, 3, count(numeroos) as qtde from ordemservico group by mes;";
+			java.sql.Statement stmt = conexao.createStatement();
+			ResultSet rs = stmt.executeQuery(comando);
+			while(rs.next()) {
+				GraficoOS graficos = new GraficoOS();
+				
+				String mes = rs.getString("mes");
+				int qtde = rs.getInt("qtde");
+				
+				graficos.setMes(mes);;
+				graficos.setValor(qtde);
+				
+				lista.add(graficos);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return lista;
 	}
 }
 

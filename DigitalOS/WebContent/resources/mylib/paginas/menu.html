@@ -14,6 +14,7 @@
 		<script type="text/javascript" src="../../lib/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 		<script type="text/javascript" src="../../lib/jquery/jquery.cookie.js"></script> 
+		<script src="https://cdn.anychart.com/releases/8.7.0/js/anychart-base.min.js"></script>
 		<script type="text/javascript" src="../scripts/carrega.js"></script>
 		<script type="text/javascript" src="../scripts/scripts.js"></script>
 	</head>
@@ -161,33 +162,19 @@
 			</div>
 		</div>
 			
-		<div class="btn-group visible-xs col-xs-1 col-sm-1 col-xs1-custom botao-barra-lateral-xs" id="div-botao-barra-lateral-xs">
+		<!-- <div class="btn-group visible-xs col-xs-1 col-sm-1 col-xs1-custom botao-barra-lateral-xs" id="div-botao-barra-lateral-xs">
 			<a class="btn btn-default btn-lg" type="button" aria-haspopup="true" aria-expanded="false" id="botao-icone-menu"> 
 				<span class="glyphicon glyphicon-menu-hamburger"></span>
 			</a>
-		</div> <!-- menu-display-xs -->
+		</div> menu-display-xs -->
 
 		<div class="panel panel-primary divGrafico">
-			<div class="panel-heading divTituloGrafico">
-				<div class="panel-title">
-					<p>Grafico Ordens de Serviços</p>
-				</div>
+			<div class="panel-heading panel-title-custom-grafico">
+				<div class="panel-title"><p>Ordens de Serviço Mes</p></div>
 			</div>
-			
-			<div id="myDiv" class="myDiv">
+			<div id="container" class="graficobarras">
 			</div>
 		</div>	
-		
-		<div class="panel panel-primary divGrafico2">
-			<div class="panel-heading divTituloGrafico2">
-				<div class="panel-title">
-					<p>Grafico Ordens de Serviços</p>
-				</div>
-			</div>
-			
-			<div id="myDiv2" class="myDiv2">
-			</div>
-		</div>
 	</div> <!-- menu -->
 
 	<script>
@@ -224,9 +211,10 @@
 			    $("#dadosLogin").modal('hide');
 		    }
 		}
+		
+		populargrafico();
 	</script>
 	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-	<script type="text/javascript" src="../scripts/grafico.js"></script>
-	<script type="text/javascript" src="../scripts/grafico2.js"></script>		
+	<script type="text/javascript" src="../scripts/grafico.js"></script>	
 </body>
 </html>

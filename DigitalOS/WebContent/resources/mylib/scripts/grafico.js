@@ -1,22 +1,49 @@
-var trace1 = {
-    type: 'bar',
-    x: [1, 2, 3, 4],
-    y: [1, 2, 3, 4],
-    marker: {
-        color: '#fff',
-        line: {
-            width: 1
-        }
-    }
+var jan; var fev; var mar; var abr; var mai; var jun; var jul; var ago; var set; var out; var nov; var dez;
+function dadosgrafico(resposta){
+	
 };
+function graficoBuilder(){
+	return{
+		build : function(resposta){
+					let aparelhos=[]
+					let respostaArray = JSON.parse(resposta);
+					
+					for(let i = 0; i <= respostaArray.length; i++){
+						if (respostaArray[i] == undefined || respostaArray[i] == null){
+							continue;
+						}
+						console.log(respostaArray[i]);
+						aparelhos[i] = new Aparelho(respostaArray[i]);
+					}
+					console.log(aparelhos)
+					return aparelhos;
+		}
+	}
+}
+// create data
+var data = [
+  ["Janeiro", jan],
+  ["Fevereiro", fev],
+  ["Março", mar],
+  ["Abril", abr],
+  ["Maio", mai],
+  ["Junho", jun],
+  ["Julho", jul],
+  ["Agosto", ago],
+  ["Setembro", set],
+  ["Outrubro", out],
+  ["Novembro", nov],
+  ["Dezembro", dez]
+];
 
-var data = [ trace1 ];
+// create a chart
+chart = anychart.column();
 
-var layout = {
-  title: 'O.S. Abertas',
-  font: {size: 12},
-  plot_bgcolor: '#c7c9cb',
-  paper_bgcolor: '#c7c9cb'
-};
+// create a column series and set the data
+var series = chart.column(data);
 
-Plotly.newPlot('myDiv', data, layout, {responsive: true});
+// set the container id
+chart.container("container");
+
+// initiate drawing the chart
+chart.draw();
