@@ -1355,7 +1355,6 @@
 				type:'POST',
 				url:'/DigitalOS/rest/RestOrdemServico/buscarOS/'+ num,
 				success:function(resposta){
-					alert("OS Encontrada");
 					tabelaOS(resposta);
 				},
 				error: function(){
@@ -1471,20 +1470,3 @@
 		}
 	/* FIM OS */
 /* FIM ORDEM SE SERVIÇO */
-
-/* INICIO GRAFICOS*/
-		function populargrafico(){
-			alert("PopularGrafico");
-			$.ajax({
-				type: 'POST',
-				url: '/DigitalOS/rest/RestPopulaGrafico/NumeroOSMensal',
-				success: function(resposta){
-					console.log(resposta);
-					dadosgrafico(resposta);
-				},
-				error: function(){
-					alert("Erro ao editar OS");
-				}
-			});
-		}
-/*FIM GRAFICOS*/

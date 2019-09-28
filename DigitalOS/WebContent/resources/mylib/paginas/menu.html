@@ -171,9 +171,9 @@
 		<div class="panel panel-primary divGrafico">
 			<div class="panel-heading panel-title-custom-grafico">
 				<div class="panel-title"><p>Ordens de Serviço Mes</p></div>
+				<div id="selecionaAno"></div>
 			</div>
-			<div id="container" class="graficobarras">
-			</div>
+			<div id="conteudo" class="graficobarras"><canvas id="grafico" ></canvas></div>
 		</div>	
 	</div> <!-- menu -->
 
@@ -211,10 +211,7 @@
 			    $("#dadosLogin").modal('hide');
 		    }
 		}
-		
-		populargrafico();
 	</script>
-	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 	<script type="text/javascript" src="../scripts/grafico.js"></script>	
 </body>
 </html>

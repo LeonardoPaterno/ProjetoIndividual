@@ -1569,7 +1569,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	public List<GraficoOS> OSmensal(GraficoOS os) {
 		List<GraficoOS> lista = new ArrayList<GraficoOS>();
 		try {
-			String comando = "select distinct monthname(dataabertura) as mes, 3, count(numeroos) as qtde from ordemservico group by mes;";
+			String comando = "select distinct month(dataabertura) as mes, year(dataabertura) as ano, count(numeroos) as qtde from ordemservico group by mes;";
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
 			while(rs.next()) {
@@ -1577,9 +1577,11 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				
 				String mes = rs.getString("mes");
 				int qtde = rs.getInt("qtde");
+				int ano = rs.getInt("ano");
 				
 				graficos.setMes(mes);;
 				graficos.setValor(qtde);
+				graficos.setAno(ano);
 				
 				lista.add(graficos);
 			}
