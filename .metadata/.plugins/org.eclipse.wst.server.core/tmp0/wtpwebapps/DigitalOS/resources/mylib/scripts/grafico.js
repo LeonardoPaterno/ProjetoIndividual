@@ -8,14 +8,15 @@ $(document).ready(function(){
 			
 			listadeos = resposta;
 			
-			var html = "<select style='width:100px;' class='btn btn-default' id='atual' onchange='carregaGrafico()'>";
+			var html = "<label style='font-size:18px;'>Seleção Anual</label> " +
+						"<select style='width:100px;' class='btn btn-default' id='atual' onchange='carregaGrafico()'>";
 				anos = [];
 				for(var i = 0; i < resposta.length; i++){
 					if(!anos.includes(listadeos[i].ano)){
 						console.log(listadeos);
 						anos.push(listadeos[i].ano);
 						
-						html += "<option value="+listadeos[i].ano+">"
+						html +="<option value="+listadeos[i].ano+">"
 									+ listadeos[i].ano
 							   +"</option>";
 					}
@@ -37,6 +38,7 @@ function carregaGrafico(){
 	if(listadeos != undefined && listadeos.length > 0){
 	 
 		meses = [];
+		meses[0] = 0;
 		meses[1] = 0;
 		meses[2] = 0;
 		meses[3] = 0;
@@ -45,14 +47,13 @@ function carregaGrafico(){
 		meses[6] = 0;
 		meses[7] = 0;
 		meses[8] = 0;
-		meses[9] = 0;
+		meses[90] = 0;
 		meses[10] = 0;
 		meses[11] = 0;
-		meses[12] = 0;
 		
 		for(var i = 0; i < listadeos.length; i++){
 			if(listadeos[i].ano == ano){
-				meses[listadeos[i].mes] = listadeos[i].valor;
+				meses[listadeos[i].mes -1] = listadeos[i].valor;
 			}
 		}
 	}
@@ -62,80 +63,46 @@ $("#conteudo").append('<canvas id="grafico" class="graficobarras"></canvas>');
 
 
 var myBarChart = new Chart($("#grafico"), {
-	
 	type: 'bar',
     data: {
         datasets: [{
-            data: meses,
-            backgroundColor:[
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)'
-    		]
-        }],
-        labels:["Janeiro", "Fevereiro", "Marco", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+            		data: meses,
+            		backgroundColor:['#ff849f', '#00ca36', '#c7007f', '#69ddff', '#9762ff', '#007010', '#9dbf00', '#f28d27', '#c30000', '#7b0079', '#74ffec', '#504c7d'],
+            		label: false
+                   }],
+        labels:["Janeiro", "Fevereiro", "Marco", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
     },
-    options: {
-        scales: {
-            xAxes: [{
-                ticks: {
-                	type: 'category',
-                }
-            }]
-        }
+    options:{
+	    	title:{
+	    		display: true,
+	    		text: 'Ordens de Serviço Mensal',
+	    		fontSize: 16,
+	    		fontColor: '#000000'
+	    	},
+	    	legend:{
+	    		display: false
+	    	},
+	    	scales:{
+	    			yAxes:[{ticks:{
+	    						suggestedMin: 0 , 
+	    						suggestedMax: 10, 
+	    						fontColor: '#000000', 
+	    						ontSize: 14, 
+	    						fontStyle: 'bold'
+	    						}
+	    			}],
+	    			xAxes:[{ticks:{
+	    						fontColor: '#000000',
+	    						fontSize: 14,
+	    						fontStyle: 'bold'
+	    						}
+	    			}]
+	    	},   	
+	    	animation:{
+	    		onProgress:'linear',
+	    		duration: 4800
+	    	}
     }
-	
-	
-    /*type: 'bar',
-    data: {
-    	datasets:[{
-    			data: meses
-    		}],
-    	labels:["Janeiro", "Fevereiro", "Marco", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
-    	backgroundColor:[
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)'
-    		]
-    	},
-    	datasets:[{
-    		label: "Ordens de Servico",
-    		data: meses,
-    		scale: [{maxBarThickness: 1}],
-    		backgroundColor:[
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)',
-    			'rgba(255, 99, 132, 2)'
-    		]
-    	}]   	
-    }*/
 });
 
 }

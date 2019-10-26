@@ -31,18 +31,28 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	
 	/*INICIO LOGIN*/
 	public boolean consultarLogin(LoginObj login) {
-		String comando = "SELECT login.id from login where login.email like '"+login.getEmail()+"%';";
+		String comando = "SELECT login.id, login.email, login.senha from login where login.email = '"+login.getEmail()+"' and senha = '"+login.getSenha()+"';";
 		try {
 			java.sql.Statement stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(comando);
 			while (rs.next()) {
-				login.setId(rs.getInt("id"));		
+				int id = rs.getInt("login.id");
+				String email = rs.getString("login.email");
+				String senha = rs.getString("login.senha");
+				
+				login.setId(id);
+				login.setEmail(email);
+				login.setSenha(senha);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
-		return true;
+		if(login.getId() != 0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	/*FIM LOGIN*/
 	

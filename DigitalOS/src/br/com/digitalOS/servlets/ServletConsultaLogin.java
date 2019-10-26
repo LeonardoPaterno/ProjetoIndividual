@@ -2,9 +2,10 @@ package br.com.digitalOS.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,18 +51,33 @@ public class ServletConsultaLogin extends HttpServlet {
 			throws ServletException, IOException, NoSuchAlgorithmException {
 
 		LoginObj login = new LoginObj();
-
+		
 		login.setEmail(request.getParameter("user").toString());
 		String senhaCod = request.getParameter("passCoded").toString();
-		byte[] arreyBytes = Base64.getDecoder().decode(senhaCod);
-		String senhaDecoded = new String(arreyBytes);
-		login.setSenha(senhaDecoded);
-
+		
+		/*byte[] arreyBytes = Base64.getDecoder().decode(senhaCod);
+		String senhaDecoded = new String(arreyBytes);*/
+		
+		
+		 MessageDigest md = MessageDigest.getInstance("MD5"); 
+		 byte[] SenhaMD5 = md.digest(senhaCod.getBytes(StandardCharsets.UTF_8));
+		 
+		 StringBuilder MD5String = new StringBuilder(); 
+		 
+		 for (byte b : SenhaMD5) {
+			 MD5String.append(String.format("%02x", b)); 
+		 }
+		 
+        /*System.out.println("MD5 = " + new String(MD5String));*/
+		String retornoMD5 = MD5String.toString();
+		
+		login.setSenha(retornoMD5);
+		
 		try {
 			Conexao conec = new Conexao();
 			Connection conexao = conec.abrirConexao();
 			JDBCDigitalOSLoginDAO jdbclogin = new JDBCDigitalOSLoginDAO(conexao);
- 			boolean retorno = jdbclogin.consultarLogin(login);
+			boolean retorno = jdbclogin.consultarLogin(login);
 			conec.fecharConexao();
 			
 			String json = null;
@@ -71,7 +87,7 @@ public class ServletConsultaLogin extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			Map<String, String> msg = new HashMap<String, String>();
 			
-			if (retorno != false) {
+			if (retorno == true && login.getId() != 0) {
 				Cookie ck = new Cookie("id", id);
 				response.addCookie(ck);
 				
@@ -86,11 +102,11 @@ public class ServletConsultaLogin extends HttpServlet {
 				out.print(json);
 				out.flush();
 			} else {
-				msg.put("url", context + "/login.html");
+				msg.put("url", context+"/login.html");
+				json = new Gson().toJson(msg);
+				out = response.getWriter();
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
-				response.getWriter().write(json);
-				response.setStatus(HttpServletResponse.SC_OK);
 				out.print(json);
 				out.flush();
 

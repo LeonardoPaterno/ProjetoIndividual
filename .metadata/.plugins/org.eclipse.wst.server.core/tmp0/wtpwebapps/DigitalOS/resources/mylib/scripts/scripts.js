@@ -2,26 +2,41 @@
 	function loginOS() {
 		var user = $("input[name=usuario]").val();
 		var password = $("input[name=senha]").val();
-		if (user != "" && user != null && password != "" && password != null) {
-			var passCoded = btoa(password);
-	
-			$.ajax({
-				type : 'POST',
-				url : 'ServletConsultaLogin',
-				data : {
-					'user' : user,
-					'passCoded' : passCoded
-				},
-	
-				success : function(url) {
-					location.href = url.url;
-				},
-				error : function(url) {
-					location.href = url.url;
-				}
-			});
-		} else {
-			alert("E-mail ou Senha Inválido!");
+		if (this.user.indexOf("@") == -1 ||
+			this.user.indexOf(".") == -1 ||
+			this.user.indexOf("@") == 0 ||
+			this.user.lastIndexOf(".") + 1 == this.user.email.length ||
+			(this.user.indexOf("@") + 1 == this.user.email.indexOf("."))) {
+			
+		 
+			if (user != "" && user != null && password != "" && password != null) {
+				var passCoded = btoa(password);
+		
+				$.ajax({
+					type : 'POST',
+					url : 'ServletConsultaLogin',
+					data : {
+						'user' : user,
+						'passCoded' : passCoded
+					},
+		
+					success : function(url) {
+						location.href = url.url;
+						if(url.url == '/DigitalOS/login.html'){
+							alert("Usuário ou senha inválido!"+"\n"+"Tente novamente.");
+						}else{
+							alert("Login realizado com sucesso."+"\n"+"\Seja bem vindo!");
+						}
+					},
+					error : function(url) {
+						location.href = url.url;
+					}
+				});
+			} else {
+				alert("E-mail ou Senha Inválido!");
+			}
+		}else{
+			alert("E-mail invalido!");
 		}
 	}
 	function carregaPerfil() {

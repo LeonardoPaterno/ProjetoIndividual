@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link type="text/css" rel="stylesheet" href="resources/lib/bootstrap/css/bootstrap.min.css" >
+	<link type="text/css" rel="stylesheet" href="resources/mylib/mycss/css.css" >
+
+	<script type="text/javascript" src="resources/lib/jquery/jquery.min.js"></script>
+  	<script type="text/javascript" src="resources/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="resources/mylib/scripts/scripts.js"></script>
+</head>
+
+<body class="custom-background-login" >
+  <div class="container container-fluid">
+    <div class="main-div">
+
+      <div class="row">
+        <div class="col-md-4 col-sm-4 hidden-xs"></div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="content-login">
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <img src="resources/mylib/imagens/logologin.png" class="img-responsive center-block img-logo">
+              <div class="titulo">
+                  <h4>DIGITAL O.S</h4>
+              </div>
+            </div>
+          </div>
+		<form>
+          <div class="row">
+            <div class="col-md-12 col-sm-12 form-group">
+              <div class="div-usuario">
+                <label>USUARIO:</label>
+                <input class="form-control" type="text" name="usuario" placeholder="Usuário">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <div class="div-senha">
+                <label>SENHA:</label>
+                <input class="form-control" type="password" name="senha" placeholder="Senha">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 entrar text-center">
+                <input type="button"  value="ENTRAR" class="btn btn-primary" onclick="loginOS()">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 esqueci-senha text-center">
+              <a onclick= "chamaModal()" id="esqueci-minha-senha">ESQUECI MINHA SENHA</a>
+            </div>
+          </div>
+		</form>
+        </div>
+      </div>
+     </div> <!-- div-row -->
+    </div>
+    
+	<div class="modal fade ModalPainelUsuario col-md-12" id="modalMensagem">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content col-md-12">
+				<div class="modal-header col-md-12">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+					</button>
+					<h5 class="modal-title">Mensagem!</h5>
+				</div>
+				
+				<div class="modal-body col-md-12">
+				 	<ul class="nav nav-tabs nav-justified">
+					  <li role="representation" data-toggle="tab" class="active"><a href="#dadospessoais">Dados pessoais</a></li>
+					  <li role="representation" data-toggle="tab"><a href="#dadoslogin">Dados de login</a></li>
+					  <li role="representation" data-toggle="tab"><a href="#alterarsenha">Alterar senha</a></li>
+					</ul>
+					
+					<div class="tab-content">
+					    <div id="dadospessoais" class="tab-pane fade in active">
+					      teste	
+					    </div>
+					    <div id="dadoslogin" class="tab-pane fade">
+					      teste 2
+					    </div>
+					    <div id="alterarsenha" class="tab-pane fade">
+					      teste 3
+					    </div>
+				  </div>
+				</div>
+				
+				<div class="modal-footer col-md-12">
+					<button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal" onclick="fechaModal()">
+						Cancelar
+					</button>
+					
+					<button type="submit" class="btn btn-primary botao-salvar" id="salvarAparelho" onclick="editarAparelho()">
+						Salvar
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+    <div class="col-md-offset-3"></div>
+    <div class="modal fade col-xs-11 col-sm-12  modal-custom-login" tabindex="-1" role="dialog" id="modalesqueciminhasenha">
+		 <div class="modal-dialog modal-sm modal-dialog-custom" role="document">
+		  	<div class="modal-content">
+		      
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h3 class="modal-title">Redefinir senha</h3>
+		      </div>
+		      
+		      <div class="modal-body">
+		        <div class="form">     	
+		        	<div class="row">
+			        	<div class="form-group col-md-12">
+			        		<label>E-mail</label>
+			        		<input class="form-control" type="text" id="emailsenhanova" placeholder="exemplo@exemplo.com">
+			        	</div><!-- /. FORM-GROUP -->
+		        	</div><!-- /.ROW -->
+		        </div><!-- /.form -->
+		      </div><!-- /.modal-body -->
+		      
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">Cancelar</button>
+		        <button type="button" class="btn btn-primary botao-salvar">Enviar</button>
+		      </div><!-- /.modal-footer -->
+		      
+		    </div><!-- /.modal-content -->
+		 </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->	
+    <div class="col-md-offset-3"></div>
+  </div>
+	
+  <script>		
+	function chamaModal(){		
+		$('#modalesqueciminhasenha').modal('show');
+	}
+</script>
+
+</body>

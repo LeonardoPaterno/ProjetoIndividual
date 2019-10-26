@@ -196,8 +196,8 @@ DROP TABLE IF EXISTS `login` ;
 
 CREATE TABLE IF NOT EXISTS `login` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT 'Atributo chave primaria resposável por receber o identificador dos atributos na tabela.',
-  `email` VARCHAR(45) NOT NULL COMMENT 'Atrituo responsável por receber o e-mail registrado para o cliente.',
-  `senha` VARCHAR(16) NOT NULL COMMENT 'Atrituo responsável por receber a senha de acesso ao sistema para o usuário.',
+  `email` VARCHAR(80) NOT NULL COMMENT 'Atributo responsável por receber o e-mail registrado para o cliente.',
+  `senha` VARCHAR(32) NOT NULL COMMENT 'Atributo responsável por receber a senha de acesso ao sistema para o usuário.',
   `pessoa_id` INT NOT NULL,
   `ordemservico_id` INT NOT NULL,
   PRIMARY KEY (`id`),
