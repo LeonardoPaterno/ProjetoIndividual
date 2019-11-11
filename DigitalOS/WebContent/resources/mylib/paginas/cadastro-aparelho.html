@@ -94,7 +94,7 @@
 					</div>
 					
 					<div class="icone-adicionar-aparelho">
-						<span class="btn btn-default glyphicon glyphicon-plus"></span>
+						<span class="btn btn-default glyphicon glyphicon-plus" onclick="carregaCategoria(); carregaMarca()"></span>
 					</div>
 					
 					<div class="btn-group filtroAtivo">
@@ -217,23 +217,14 @@
 								<div class="form-group col-sm-2 col-md-3">
 									<label>Categoria</label> 
 									<select class="form-control categoria" id="categoriaaparelho" name="categoriaaparelho">
-										<option value="">Categoria</option>
-										<option value="1">Smartphone</option>
-										<option value="2">Televisor</option>
-										<option value="3">Computador</option>
-										<option value="4">Monitor</option>
+										<option value=9999>Categoria</option>
 									</select>
 								</div><!-- /. FORM-GROUP -->
 
 								<div class="form-group col-md-3">
 									<label>Marca</label> 
 									<select class="form-control marca"	id="marcaaparelho" name="marcaaparelho">
-										<option value="">Marca</option>
-										<option value="1">Motorola</option>
-										<option value="2">Sony</option>
-										<option value="3">Fujifilm</option>
-										<option value="4">AOC</option>
-										<option value="4">SempToshiba</option>
+										<option value=9999>Marca</option>
 									</select>
 								</div><!-- /. FORM-GROUP -->
 

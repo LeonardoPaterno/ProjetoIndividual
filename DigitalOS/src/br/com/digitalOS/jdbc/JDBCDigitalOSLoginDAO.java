@@ -1278,7 +1278,8 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 	public List<AparelhoObj> buscarAparelhoOs() {
 		String comando = "select ap.id, ap.nome, numeroserie, modelo, marca.nome as marca, categoriaaparelho.nome as categoria from aparelho ap "
 				       + "inner join categoriaaparelho on categoriaaparelho.id = ap.categoriaaparelho_id "
-				       + "inner join marca on marca.id = ap.marca_id";
+				       + "inner join marca on marca.id = ap.marca_id"
+				       + "where ap.ativo = 'S';";
 		List<AparelhoObj> listaAparelho = new ArrayList<AparelhoObj>();
 		try {
 			java.sql.Statement stmt = conexao.createStatement();
