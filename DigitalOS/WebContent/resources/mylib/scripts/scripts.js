@@ -109,6 +109,21 @@
 }
 /* FIM LOGIN */
 
+/* INICIO LOGOUT*/
+	function logout(){
+		$.ajax({
+			type : 'POST',
+			url : 'ServletLogout',
+			success : function() {
+				
+			},
+			error : function() {
+				alert("deu ruim");
+			}
+		});
+	}
+/* FIM LOGOUT*/
+
 /* INICIO CRUD APARELHO */
 	function CadastroAparelho() {
 		var nome = $("#nomeaparelho").val();
@@ -1253,7 +1268,7 @@
 		function AparelhoBuilder(){
 			return{
 				build : function(resposta){
-							let aparelhos=[]
+							let aparelhos=[];
 							let respostaArray = JSON.parse(resposta);
 							
 							for(let i = 0; i <= respostaArray.length; i++){
