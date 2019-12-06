@@ -113,12 +113,13 @@
 	function logout(){
 		$.ajax({
 			type : 'POST',
-			url : 'ServletLogout',
-			success : function() {
-				
+			url : '../../../ServletLogout',
+			success : function(logout) {
+					console.log(JSON.parse(logout));
+					location.href = JSON.parse(logout);				
 			},
-			error : function() {
-				alert("deu ruim");
+			error : function(logout) {
+				alert("Erro no logout");
 			}
 		});
 	}

@@ -4,8 +4,7 @@ $(document).ready(function(){
 		type: 'POST',
 		url: '/DigitalOS/rest/RestPopulaGrafico/NumeroOSMensal',
 		success: function(resposta){
-			console.log(resposta);
-			
+						
 			listadeos = resposta;
 			
 			var html = "<label style='font-size:18px;'>Seleção Anual</label> " +
@@ -13,7 +12,6 @@ $(document).ready(function(){
 				anos = [];
 				for(var i = 0; i < resposta.length; i++){
 					if(!anos.includes(listadeos[i].ano)){
-						console.log(listadeos);
 						anos.push(listadeos[i].ano);
 						
 						html +="<option value="+listadeos[i].ano+">"

@@ -1,14 +1,9 @@
 /*INICIO LOGIN*/
 	function loginOS() {
-		var user = $("input[name=usuario]").val();
-		var password = $("input[name=senha]").val();
-		if (this.user.indexOf("@") == -1 ||
-			this.user.indexOf(".") == -1 ||
-			this.user.indexOf("@") == 0 ||
-			this.user.lastIndexOf(".") + 1 == this.user.email.length ||
-			(this.user.indexOf("@") + 1 == this.user.email.indexOf("."))) {
-			
-		 
+		var user = $("#usuario").val();
+		var password = $("#senha").val();
+		var er = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/;
+		if (!er.exec(user)) {			
 			if (user != "" && user != null && password != "" && password != null) {
 				var passCoded = btoa(password);
 		
@@ -34,10 +29,12 @@
 				});
 			} else {
 				alert("E-mail ou Senha Inválido!");
-			}
+				$("#usuario").focus();
+			}	
 		}else{
 			alert("E-mail invalido!");
-		}
+			$("#usuario").focus();
+		}	
 	}
 	function carregaPerfil() {
 		var id = document.cookie.split('=')[1];
@@ -112,6 +109,22 @@
 }
 /* FIM LOGIN */
 
+/* INICIO LOGOUT*/
+	function logout(){
+		$.ajax({
+			type : 'POST',
+			url : '../../../ServletLogout',
+			success : function(logout) {
+					console.log(JSON.parse(logout));
+					location.href = JSON.parse(logout);				
+			},
+			error : function(logout) {
+				alert("Erro no logout");
+			}
+		});
+	}
+/* FIM LOGOUT*/
+
 /* INICIO CRUD APARELHO */
 	function CadastroAparelho() {
 		var nome = $("#nomeaparelho").val();
@@ -120,25 +133,29 @@
 		var modelo = $("#modeloaparelho").val();
 		var nsaparelho = $("#nsaparelho").val();
 		var ativo = $("#statusaparelho").val();
-	
-		$.ajax({
-			type : 'POST',
-			url : '../../../ServletCadastroAparelho',
-			data : {
-				'nome' : nome,
-				'marca' : marca,
-				'modelo' : modelo,
-				'nsaparelho' : nsaparelho,
-				'categoria' : categoria,
-				'ativo' : ativo
-			},
-			success : function(resposta) {
-				buscarAparelho();
-			},
-			error : function(resposta) {
-				alert(resposta);
-			}
-		});
+		if(nome != null && categoria != null && marca != null && modelo != null && nsaparelho != null && ativo != null){
+			$.ajax({
+				type : 'POST',
+				url : '../../../ServletCadastroAparelho',
+				data : {
+					'nome' : nome,
+					'marca' : marca,
+					'modelo' : modelo,
+					'nsaparelho' : nsaparelho,
+					'categoria' : categoria,
+					'ativo' : ativo
+				},
+				success : function(resposta) {
+					buscarAparelho();
+				},
+				error : function(resposta) {
+					alert(resposta);
+				}
+			});
+		}else{
+			alert("Preencha os campos corratamente!\n" + "Todos são obrigatorios!");
+		}
+
 	}
 	function buscarAparelho() {
 		var valorBusca = $('#buscaAparelhoInput').val();
@@ -268,6 +285,41 @@
 	});
 }
 /* FIM CRUD APARELHO */
+	
+/*INICIO CRUD CARREGA SELECT*/
+	function carregaCategoria(){
+		$.ajax({
+			type : 'POST',
+			url : '/DigitalOS/rest/RestSelect/buscarSelectCategoria',
+			success : function(lista) {
+				listosa = JSON.parse(lista);
+				$.each(listosa, function(i, v) {
+					$('#categoriaaparelho').append(
+							$('<option>').text(v.nome).attr('value', v.id));
+				});
+			},
+			error : function() {
+				alert("Erro ao encontrar categoria");
+			}
+		});
+	}
+	function carregaMarca(){
+		$.ajax({
+			type : 'POST',
+			url : '/DigitalOS/rest/RestSelect/buscarSelectMarca',
+			success : function(lista) {
+				listosa = JSON.parse(lista);
+				$.each(listosa, function(i, v) {
+					$('#marcaaparelho').append(
+							$('<option>').text(v.nome).attr('value', v.id));
+				});
+			},
+			error : function() {
+				alert("Erro ao encontrar marca");
+			}
+		});
+	}
+/*FIM CRUF CARREGA SELECT*/
 
 /* INICIO CRUD PESSOA */
 	function inserirPessoa() {
@@ -1217,7 +1269,7 @@
 		function AparelhoBuilder(){
 			return{
 				build : function(resposta){
-							let aparelhos=[]
+							let aparelhos=[];
 							let respostaArray = JSON.parse(resposta);
 							
 							for(let i = 0; i <= respostaArray.length; i++){
