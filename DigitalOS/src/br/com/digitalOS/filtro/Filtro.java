@@ -20,7 +20,7 @@ public class Filtro implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		String context = request.getServletContext().getContextPath();
-
+		//System.out.println("passando no filtro");
 		try {
 			HttpSession sessao = ((HttpServletRequest) request).getSession();
 			String usuario = (String) sessao.getAttribute("login");
@@ -28,7 +28,7 @@ public class Filtro implements Filter {
 			if (sessao != null) {
 				usuario = (String) sessao.getAttribute("login");
 			}
-
+				//System.out.println("usuario no filtro: "+usuario);
 			if (usuario == null) {
 				sessao.setAttribute("msg", "Você não está logado no sistema!");
 				((HttpServletResponse) response).sendRedirect(context + "/login.html");

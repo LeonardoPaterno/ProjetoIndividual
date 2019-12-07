@@ -57,20 +57,6 @@
 					</ul>
 				</div>
 
-				<div class="btn-group btn-group-vertical group-menu" role="group">
-					<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Relatório <span class="caret"></span></button>
-					<ul class="dropdown-menu dropdown-menu-custom div-botao-relatorio">
-						<li>
-							<div class="btn-group-vertical" role="group">
-								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Funcionario</a>
-								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Cliente</a> 
-								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Ordem de Serviço</a> 
-								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Itens de Serviço</a>
-							</div>
-						</li>
-					</ul>
-				</div>
-
 				<div class="btn-group btn-group-vertical div-botao-sair">
 					<button class="btn btn-danger botao-sair" id="botao-sair" onclick="logout()">
 						Sair <span class="glyphicon glyphicon-log-out icone-sair"></span>
@@ -145,7 +131,7 @@
 							   			<label>Confirmar Senha</label>
 							   			<input id="confirmaSenha" class="form-control" type="password" placeholder="****************" maxlength="16">
 							   		</div>
-							   		<input id="id">
+							   		<input id="id" disabled style="display:none">
 							   	</div>
 						   </div>
 						</div>

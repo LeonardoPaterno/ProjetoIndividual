@@ -38,12 +38,10 @@
 	}
 	function carregaPerfil() {
 		var id = document.cookie.split('=')[1];
-		console.log(id);
 		$.ajax({
 			type : 'POST',
 			url : '/DigitalOS/rest/RestPerfil/buscarPerfilPeloId/' + id,
 			success : function(perfil) {
-				console.log(perfil);
 				$("#nome").val(perfil.nome);
 				$("#cep").val(perfil.cep);
 				$("#numero").val(perfil.numero);
@@ -86,7 +84,6 @@
 			'senha' : senha
 		};
 		var perfil = JSON.stringify(perfilNovo);
-		console.log(perfil);
 		$.ajax({
 			type : 'POST',
 			url : '/DigitalOS/rest/RestPerfil/editarPerfil',
@@ -114,17 +111,23 @@
 		$.ajax({
 			type : 'POST',
 			url : '../../../ServletLogout',
-			success : function(logout) {
-					console.log(JSON.parse(logout));
+			//data: session.,
+			success : function(logout) { 
 					location.href = JSON.parse(logout);				
 			},
 			error : function(logout) {
-				alert("Erro no logout");
+				alert("Erro no logout!");
 			}
 		});
 	}
 /* FIM LOGOUT*/
-
+/* INICIO DELETE COOKIE*/
+	function deleteACookie(){
+	    var cname = window.document.getElementById('cname').value;//Get the cookie name from the cname input element
+	    deleteCookie(cname);//Call the deleteCookie to delete the cookie
+	    window.location.reload();//Reload the page
+	}
+/* FIM DELETE COOKIE*/
 /* INICIO CRUD APARELHO */
 	function CadastroAparelho() {
 		var nome = $("#nomeaparelho").val();
@@ -1007,7 +1010,6 @@
 					url : '/DigitalOS/rest/RestCategoriaAparelho/buscarCategoriaAparelhoPeloId/'
 							+ id,
 					success : function(categoria) {
-						console.log(categoria);
 						$("#EditIdCategoria").val(categoria.id);
 						$("#EditNomeCategoria").val(categoria.nome);
 						$("#EditStatusCategoria").val(categoria.ativo);
@@ -1144,7 +1146,6 @@
 			'nome' : nome,
 			'ativo' : ativo
 		});
-		console.log(marca);
 		$.ajax({
 			type : 'POST',
 			url : '/DigitalOS/rest/RestMarca/editarMarca',
@@ -1180,6 +1181,7 @@
 		$("#msgEditOS").modal('hide');
 	}
 	function fechaModalOS() {
+		$("#modalselecionacliente").removeClass("in");
 		$("#modalselecionacliente").css("display","none");
 		$("#modalselecionaAparelho").css("display","none");
 	}
@@ -1196,7 +1198,6 @@
 				data : nome,
 				success : function(resposta) {
 					tabelaPessoaOS(resposta);
-					console.log(resposta);
 					$('#modalselecionacliente').modal('show');
 				},
 				error : function(resposta) {
@@ -1257,7 +1258,6 @@
 				url : '/DigitalOS/rest/RestSelect/buscarAparelhoOs',
 				data : nome,
 				success : function(resposta) {
-					console.log("buscarAparelhoOS: "+resposta);
 					tabelaAparelhoOS(resposta);
 					$('#modalselecionaAparelho').modal('show');
 				},
@@ -1276,10 +1276,8 @@
 								if (respostaArray[i] == undefined || respostaArray[i] == null){
 									continue;
 								}
-								console.log(respostaArray[i]);
 								aparelhos[i] = new Aparelho(respostaArray[i]);
 							}
-							console.log(aparelhos)
 							return aparelhos;
 				}
 			}
@@ -1295,14 +1293,12 @@
 		}
 		aparelhos = [];
 		function tabelaAparelhoOS(resposta) {
-			console.log("tabelaAparelhoOS: "+resposta);
 			var html = "<div class='table-reponsive'> " +
 					   "<table class='table table-striped table-condensed table-bordered'>";
 			html += "<tr>"
 					+ "<th>Seleção</th> <th>ID</th> <th>Modelo</th> <th>Categoria</th> <th>Marca</th> <th>Número Série</th>"
 				  + "</tr>"
 			aparelhos = AparelhoBuilder().build(resposta);
-			console.log(aparelhos)
 			for (var i = 0; i < aparelhos.length; i++) {
 				let aparelho = aparelhos[i];
 				html += "<tr>"
@@ -1395,8 +1391,6 @@
 					'abertura':$("#dataabertura").val(), 'prazo':$("#dataprazo").val(),
 					'pessoa_id':$("#id").val(), 'aparelho_id':$("#idaparelho").val(), 'servicos_id':$("#tiposervico").val()};
 			var ordemservico = JSON.stringify(os);
-			console.log(os);
-			console.log(ordemservico);
 			$.ajax({
 				type : 'POST',
 				url : '/DigitalOS/rest/RestOrdemServico/addOrdemServico',
@@ -1431,7 +1425,6 @@
 			});
 		}
 		function tabelaOS(resposta) {
-			console.log(resposta);
 			var html = "<div class='teble-reponsive'>"
 						+ "<table class='table table-striped table-condensed table-bordered'>";
 					html += "<tr>"
@@ -1461,7 +1454,6 @@
 				type : 'POST',
 				url : '/DigitalOS/rest/RestOrdemServico/buscarOSPeloId/' + numeroos,
 				success : function(os) {
-					console.log(os);
 					$("#idosEdit").val(os.numeroos);
 					$("#nomeEdit").val(os.nome);
 					$("#cpfEdit").val(os.cpf);
