@@ -1176,7 +1176,7 @@
 
 /* INICIO FECHA MODAL */
 	function fechaModal() {
-		$("#ModalPainelUsuario").css("display","hide");
+		$("#ModalPainelUsuario").modal('toggle');
 		$("#modalordemservico").modal('hide');
 		$("#msgEditOS").modal('hide');
 	}
