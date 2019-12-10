@@ -1181,7 +1181,7 @@
 		$("#msgEditOS").modal('hide');
 	}
 	function fechaModalOS() {
-		$("#modalselecionacliente").removeClass("in");
+		$("selecionaAparelhoModal").css("z-index", "-1");
 		$("#modalselecionacliente").css("display","none");
 		$("#modalselecionaAparelho").css("display","none");
 	}
