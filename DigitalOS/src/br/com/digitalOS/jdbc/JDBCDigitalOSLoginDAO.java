@@ -543,14 +543,13 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		return ListaFuncionario;
 	}
 	public FuncionarioObj buscarFuncionarioPorId(int id) {
-		String comando = "SELECT pessoa.id, nome, cpf, rg, datanascimento, sexo, telefone, celular, email, profissao, tipomorada, ativo, "
-					   + "funcionario_id, endereco_id, endereco.cep, endereco.numero, endereco.rua, endereco.bairro, endereco.cidade, endereco.estado, "
-					   + "funcionario.numeroct, funcionario.pis, funcionario.cargo, funcionario.setor, funcionario.salario, funcionario.dataadmissao, "
-					   + "funcionario.datademissao "
-					   + "FROM pessoa "
-					   + "INNER JOIN endereco on endereco.id = pessoa.endereco_id "
-					   + "INNER JOIN funcionario on funcionario.id = pessoa.funcionario_id "
-					   + "WHERE pessoa.id = 1;";
+		String comando = "select pessoa.id, nome, cpf, rg, datanascimento, sexo, telefone, celular, email, profissao, tipomorada, ativo, "
+				+ "funcionario_id, endereco_id, endereco.cep, endereco.numero, endereco.rua, endereco.bairro, endereco.cidade, "
+				+ "endereco.estado, funcionario.numeroct, funcionario.pis, funcionario.cargo, funcionario.setor, funcionario.salario, "
+				+ "funcionario.dataadmissao, funcionario.datademissao from funcionario "
+				+ "inner join pessoa on funcionario.id = pessoa.funcionario_id "
+				+ "inner join endereco on endereco.id = pessoa.endereco_id "
+				+ "where funcionario.id = "+id+";";
 		FuncionarioObj funcionario = new FuncionarioObj();
 		try{
 			java.sql.Statement stmt = conexao.createStatement();
@@ -624,40 +623,80 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		String comando2 = "UPDATE funcionario SET numeroct=?, pis=?, cargo=?, setor=?, salario=?, dataadmissao=? WHERE funcionario.id = "+funcionario.getIdfuncionario()+";";				
 		String comando3 = "UPDATE pessoa SET nome=?, cpf=?, rg=?, datanascimento=?, sexo=?, telefone=?, celular=?, email=?, ativo=? WHERE pessoa.id = "+funcionario.getId()+";";
 		
+		String comando4 = "UPDATE funcionario SET numeroct=?, pis=?, cargo=?, setor=?, salario=?, dataadmissao=?, datademissao=? WHERE funcionario.id = "+funcionario.getIdfuncionario()+";";
+		String comando5 = "UPDATE pessoa SET nome=?, cpf=?, rg=?, datanascimento=?, sexo=?, telefone=?, celular=?, email=?, ativo='N' WHERE pessoa.id = "+funcionario.getId()+";";
+		
 		PreparedStatement p1;
 		PreparedStatement p2;
 		PreparedStatement p3;
+		PreparedStatement p4;
+		PreparedStatement p5;
+		
+		Date demissao = funcionario.getDatademissao();
 		try{
-			p1 = this.conexao.prepareStatement(comando1);
-			p1.setString(1, funcionario.getEstado());
-			p1.setString(2, funcionario.getCidade());
-			p1.setString(3, funcionario.getBairro());
-			p1.setString(4, funcionario.getEndereco());
-			p1.setInt(5, funcionario.getNumero());
-			p1.setString(6, funcionario.getCep());
-			p1.executeUpdate();
-			
-			p2 = this.conexao.prepareStatement(comando2);
-			p2.setString(1, funcionario.getNumeroct());
-			p2.setString(2, funcionario.getNumeropis());
-			p2.setString(3, funcionario.getCargo());
-			p2.setString(4, funcionario.getSetor());
-			p2.setString(5, funcionario.getSalario());
-			p2.setDate(6, funcionario.getDataadmissao());
-			p2.executeUpdate();
-			
-			p3 = this.conexao.prepareStatement(comando3);
-			p3.setString(1, funcionario.getNome());
-			p3.setString(2, funcionario.getCpf());
-			p3.setString(3, funcionario.getRg());
-			p3.setDate(4, funcionario.getDatanascimento());
-			p3.setString(5, funcionario.getSexo());
-			p3.setString(6, funcionario.getTelefone());
-			p3.setString(7, funcionario.getCelular());
-			p3.setString(8, funcionario.getEmail());
-			p3.setString(9, funcionario.getAtivo());
-			p3.execute();
-			p3.executeUpdate();
+			if(funcionario.getDatademissao() == null || demissao == null) {
+				p1 = this.conexao.prepareStatement(comando1);
+				p1.setString(1, funcionario.getEstado());
+				p1.setString(2, funcionario.getCidade());
+				p1.setString(3, funcionario.getBairro());
+				p1.setString(4, funcionario.getEndereco());
+				p1.setInt(5, funcionario.getNumero());
+				p1.setString(6, funcionario.getCep());
+				p1.executeUpdate();
+				
+				p2 = this.conexao.prepareStatement(comando2);
+				p2.setString(1, funcionario.getNumeroct());
+				p2.setString(2, funcionario.getNumeropis());
+				p2.setString(3, funcionario.getCargo());
+				p2.setString(4, funcionario.getSetor());
+				p2.setString(5, funcionario.getSalario());
+				p2.setDate(6, funcionario.getDataadmissao());
+				p2.executeUpdate();
+
+				p3 = this.conexao.prepareStatement(comando3);
+				p3.setString(1, funcionario.getNome());
+				p3.setString(2, funcionario.getCpf());
+				p3.setString(3, funcionario.getRg());
+				p3.setDate(4, funcionario.getDatanascimento());
+				p3.setString(5, funcionario.getSexo());
+				p3.setString(6, funcionario.getTelefone());
+				p3.setString(7, funcionario.getCelular());
+				p3.setString(8, funcionario.getEmail());
+				p3.setString(9, funcionario.getAtivo());
+				p3.execute();
+				p3.executeUpdate();
+			}else {
+				p1 = this.conexao.prepareStatement(comando1);
+				p1.setString(1, funcionario.getEstado());
+				p1.setString(2, funcionario.getCidade());
+				p1.setString(3, funcionario.getBairro());
+				p1.setString(4, funcionario.getEndereco());
+				p1.setInt(5, funcionario.getNumero());
+				p1.setString(6, funcionario.getCep());
+				p1.executeUpdate();
+				
+				p5 = this.conexao.prepareStatement(comando5);
+				p5.setString(1, funcionario.getNome());
+				p5.setString(2, funcionario.getCpf());
+				p5.setString(3, funcionario.getRg());
+				p5.setDate(4, funcionario.getDatanascimento());
+				p5.setString(5, funcionario.getSexo());
+				p5.setString(6, funcionario.getTelefone());
+				p5.setString(7, funcionario.getCelular());
+				p5.setString(8, funcionario.getEmail());
+				p5.execute();
+				p5.executeUpdate();
+				
+				p4 = this.conexao.prepareStatement(comando4);
+				p4.setString(1, funcionario.getNumeroct());
+				p4.setString(2, funcionario.getNumeropis());
+				p4.setString(3, funcionario.getCargo());
+				p4.setString(4, funcionario.getSetor());
+				p4.setString(5, funcionario.getSalario());
+				p4.setDate(6, funcionario.getDataadmissao());
+				p4.setDate(7, funcionario.getDatademissao());
+				p4.executeUpdate();
+			}			
 		}catch(SQLException e){
 			e.printStackTrace();
 			return false;
