@@ -35,7 +35,7 @@ public class RestCategoriaAparelho extends UtilRest{
 			JDBCDigitalOSLoginDAO jdbcCategoriaAparelhoObj = new JDBCDigitalOSLoginDAO(conexao);
 			jdbcCategoriaAparelhoObj.inserirCategoriaAparelho(CategoriaAparelhoNova);
 			conec.fecharConexao();
-			return Response.ok(this.buildResponse("Cadastrou")).build();
+			return Response.ok(this.buildResponse("Categoria cadastrada com sucesso!")).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return this.buildErrorResponse(e.getMessage());

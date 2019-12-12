@@ -21,10 +21,14 @@
 					<img src="../imagens/logoteste2.png" class="img-responsive">
 				</div>
 			</div><!-- navbar-header -->
-			
-			<button class="btn btn-primary btn-group-custom" id="painelUsuario" onclick="carregaPerfil()">Painel Usuario</button>
-			
+					
 			<div class="btn-group btn-group-vertical btn-group-custom" role="group">
+				<div class="btn-group btn-group-vertical group-menu btn-group-custom">
+					<div>
+						<button class="btn btn-primary btn-menu" onclick="location.href='menu.html'">Menu</button>
+					</div>
+				</div>
+				
 				<div class="btn-group btn-group-vertical group-menu" role="group">
 					<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Cadastrar <span class="caret"></span></button>
 					<ul class="dropdown-menu dropdown-menu-custom div-botao-cadastrar">
@@ -51,23 +55,9 @@
 						</li>
 					</ul>
 				</div>
-
-				<div class="btn-group btn-group-vertical group-menu" role="group">
-					<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Relatório <span class="caret"></span></button>
-					<ul class="dropdown-menu dropdown-menu-custom div-botao-relatorio">
-						<li>
-							<div class="btn-group-vertical" role="group">
-								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Funcionario</a>
-								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Cliente</a> 
-								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Ordem de Serviço</a> 
-								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Itens de Serviço</a>
-							</div>
-						</li>
-					</ul>
-				</div>
-
+				
 				<div class="btn-group btn-group-vertical div-botao-sair">
-					<button class="btn btn-danger botao-sair" id="botao-sair">
+					<button class="btn btn-danger botao-sair" id="botao-sair" onclick="logout()">
 						Sair <span class="glyphicon glyphicon-log-out icone-sair"></span>
 					</button>
 				</div>
@@ -246,8 +236,8 @@
 		</div><!-- /.modal-body -->
 		      
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">Cancelar</button>
-		        <button type="submit" class="btn btn-primary botao-salvar" onclick="inserirPessoa()">Salvar</button>
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+		        <button type="submit" class="btn btn-success" onclick="inserirPessoa()">Salvar</button>
 		      </div>
 		      
 		    </div><!-- /.modal-content -->
@@ -462,11 +452,11 @@
 					</div>
 									
 					<div class="modal-footer col-md-12">
-						<button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">
 							Cancelar
 						</button>
 	
-						<button type="button" class="btn btn-primary botao-salvar" id="salvarPessoaEdit" onclick="editarPessoa()">
+						<button type="button" class="btn btn-success" id="salvarPessoaEdit" onclick="editarPessoa()">
 							Salvar
 						</button>
 					</div>

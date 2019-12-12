@@ -121,6 +121,7 @@
 		});
 	}
 /* FIM LOGOUT*/
+
 /* INICIO DELETE COOKIE*/
 	function deleteACookie(){
 	    var cname = window.document.getElementById('cname').value;//Get the cookie name from the cname input element
@@ -128,7 +129,8 @@
 	    window.location.reload();//Reload the page
 	}
 /* FIM DELETE COOKIE*/
-/* INICIO CRUD APARELHO */
+
+	/* INICIO CRUD APARELHO */
 	function CadastroAparelho() {
 		var nome = $("#nomeaparelho").val();
 		var categoria = $("#categoriaaparelho").val();
@@ -149,6 +151,12 @@
 					'ativo' : ativo
 				},
 				success : function(resposta) {
+					$("#nomeaparelho").val('');
+					$("#categoriaaparelho").val('');
+					$("#marcaaparelho").val('');
+					$("#modeloaparelho").val('');
+					$("#nsaparelho").val('');
+					$("#modalaparelho").modal('hide');
 					buscarAparelho();
 				},
 				error : function(resposta) {
@@ -264,6 +272,7 @@
 			},
 			success : function(resposta) {
 				alert("Atualizado");
+				$("#msgEditAparelho").modal('hide');
 				buscarAparelho();
 			},
 			error : function() {
@@ -523,6 +532,7 @@
 			data : pessoa,
 			success : function(resposta) {
 				alert(resposta);
+				$("#msgEditPessoa").modal('hide');
 				buscarPessoa();
 			},
 			error : function() {
@@ -791,13 +801,17 @@
 				data : pessoa,
 				success : function(resposta) {
 					alert(resposta);
-					$("#modalservico").find('form')[0].reset();
-					$("#modalservico").modal('hide');
-					fecharModalServico();
+					$("#tiposervico").val('');
+					$("#nomeservico").val('');
+					$("#descricaoservico").val('');
+					$("#modalservico").modal('hide');;
 					buscarServico();
 				},
 				error : function() {
 					alert("Erro ao cadastrar nova pessoa.");
+					$("#tiposervico").val('');
+					$("#nomeservico").val('');
+					$("#descricaoservico").val('');
 					$("#modalservico").modal('hide');
 					buscarServico();
 				}
@@ -838,12 +852,10 @@
 		$("#resultadoServico").html(html);
 	}
 	function exibirEdicaoServico(idservico) {
-		alert("Exibe Edicao");
 		$.ajax({
 			type : 'POST',
 			url : '/DigitalOS/rest/RestServico/buscarServicoPeloId/' + idservico,
 			success : function(servico) {
-				alert(servico);
 				$("#EditIdServico").val(idservico);
 				$("#EditNomeTipoServico").val(servico.tiposervico);
 				$("#EditNomeServico").val(servico.nomeservico);
@@ -920,16 +932,16 @@
 			url : '/DigitalOS/rest/RestCategoriaAparelho/addCategoriaAparelho',
 			data : categoria,
 			success : function(resposta) {
-				alert(resposta);
+				alert("Categoria cadastrada com sucesso!");
+				$("#nomecategoria").val('');
 				fechaModalCategoriaAparelho();
-				/*
-				 * $("#modalcategoriaaparelho").find('form')[0].reset();
-				 * $("#modalcategoriaaparelho").modal('hide');
-				 */
 				buscarCatergoria();
 			},
 			error : function() {
 				alert("Erro ao salvar categoria de aparelho");
+				$("#nomecategoria").val('');
+				fechaModalCategoriaAparelho();
+				buscarCatergoria();
 			}
 		});
 	}
@@ -973,22 +985,20 @@
 		$("#resultadoCategoria").html(html);
 	}
 	function exibirEdicaoCategoria(id) {
-		alert(id);
-		$
-				.ajax({
-					type : 'POST',
-					url : '/DigitalOS/rest/RestCategoriaAparelho/buscarCategoriaAparelhoPeloId/'
-							+ id,
-					success : function(categoria) {
-						$("#EditIdCategoria").val(categoria.id);
-						$("#EditNomeCategoria").val(categoria.nome);
-						$("#EditStatusCategoria").val(categoria.ativo);
-						$("#msgEditCategoria").modal(categoria);
-					},
-					error : function(servico) {
-						alert("Erro ao editar Categoria!");
-					}
-				});
+		$.ajax({
+			type : 'POST',
+			url : '/DigitalOS/rest/RestCategoriaAparelho/buscarCategoriaAparelhoPeloId/'
+					+ id,
+			success : function(categoria) {
+				$("#EditIdCategoria").val(categoria.id);
+				$("#EditNomeCategoria").val(categoria.nome);
+				$("#EditStatusCategoria").val(categoria.ativo);
+				$("#msgEditCategoria").modal(categoria);
+			},
+			error : function(servico) {
+				alert("Erro ao editar Categoria!");
+			}
+		});
 	}
 	function editarCategoria() {
 		var id = $("#EditIdCategoria").val();
@@ -1008,6 +1018,7 @@
 			data : categoria,
 			success : function(resposta) {
 				alert(resposta);
+				$("#EditNomeCategoria").val('');
 				$('#msgEditCategoria').modal('hide');
 				buscarCatergoria();
 			},
@@ -1052,10 +1063,14 @@
 			data : marca,
 			success : function(resposta) {
 				$("#modalmarca").modal('hide');
+				$("#nomemarca").val('');
 				buscarMarca();
 			},
 			error : function() {
 				alert("Erro ao salvar marca de aparelho");
+				$("#modalmarca").modal('hide');
+				$("#nomemarca").val('');
+				buscarMarca();
 			}
 		});
 	}
@@ -1151,20 +1166,19 @@
 
 /* INICIO FECHA MODAL */
 	function fechaModal() {
-//		$('#ModalPainelUsuario').on('show.bs.modal', function (e) {
-//				console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-//			  $("body").removeClass("modal-open")
-//			})
-	
-	
 		$('#ModalPainelUsuario').modal('hide');
 		$('body').removeClass('modal-open');
 		$('.modal-backdrop').remove();
 	}
-	function fechaModalOS() {
-		$("selecionaAparelhoModal").css("z-index", "-1");
-		$("#modalselecionacliente").css("display","none");
-		$("#modalselecionaAparelho").css("display","none");
+	function clienteFechaModalOS() {
+		$('#modalselecionacliente').modal('hide');
+		//$('body').removeClass('modal-open');
+		//$('.modal-backdrop').remove();
+	}
+	function aparelhoFechaModalOS() {
+		$('#modalselecionaaparelho').modal('hide');
+		//$('body').removeClass('modal-open');
+		//$('.modal-backdrop').remove();
 	}
 /* FIM FECHA MODAL */
 
@@ -1226,7 +1240,7 @@
 			for ( let name in cliente) {
 				$("#"+name).val(cliente[name]);
 			}
-			fechaModalOS()
+			clienteFechaModalOS()
 		}
 	/* FIM BUSCAR CLIENTES */
 	
@@ -1301,7 +1315,7 @@
 			for ( let name in aparelho) {
 				$("#"+name).val(aparelho[name]);
 			}
-			fechaModalOS();
+			aparelhoFechaModalOS();
 		}
 	/* FIM BUSCA APARELHOS */
 	

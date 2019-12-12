@@ -33,48 +33,6 @@
 	</div>
 </div>
 
-<div class="modal fade ModalPainelUsuario col-md-12" id="ModalPainelUsuario">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content col-md-12">
-			<div class="modal-header col-md-12">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h5 class="modal-title">Painel Usuario</h5>
-			</div>
-			
-			<div class="modal-body col-md-12">
-			 	<ul class="nav nav-tabs nav-justified">
-				  <li role="representation" data-toggle="tab" class="active"><a href="#dadospessoais">Dados pessoais</a></li>
-				  <li role="representation" data-toggle="tab"><a href="#dadoslogin">Dados de login</a></li>
-				  <li role="representation" data-toggle="tab"><a href="#alterarsenha">Alterar senha</a></li>
-				</ul>
-				
-				<div class="tab-content">
-				    <div id="dadospessoais" class="tab-pane fade in active">
-				      teste	
-				    </div>
-				    <div id="dadoslogin" class="tab-pane fade">
-				      teste 2
-				    </div>
-				    <div id="alterarsenha" class="tab-pane fade">
-				      teste 3
-				    </div>
-			  </div>
-			</div>
-			
-			<div class="modal-footer col-md-12">
-				<button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">
-					Cancelar
-				</button>
-				
-				<button type="submit" class="btn btn-primary botao-salvar" id="salvarAparelho" onclick="editarAparelho()">
-					Salvar
-				</button>
-			</div>
-		</div>
-	</div>
-</div>
-
 <div class="modal fade" tabindex="-1" role="dialog" id="modalmarca">
   <div class="modal-dialog modalmd modal-dialog-custom" role="document">
   	<div class="modal-content">
@@ -98,8 +56,8 @@
         </div>
       </div> 
       <div class="modal-footer">
-        <button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary botao-salvar" onclick="addMarca()">Salvar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" onclick="addMarca()">Salvar</button>
       </div>
     </div>
   </div>
@@ -135,8 +93,8 @@
         </div>
       </div> 
       <div class="modal-footer">
-        <button type="button" class="btn btn-default botao-cancelar" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary botao-salvar" onclick="editarMarca()">Salvar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" onclick="editarMarca()">Salvar</button>
       </div>
     </div>
   </div>
