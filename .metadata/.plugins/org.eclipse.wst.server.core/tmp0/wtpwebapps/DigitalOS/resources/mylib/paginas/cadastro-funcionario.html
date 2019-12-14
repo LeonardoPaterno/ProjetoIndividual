@@ -74,7 +74,7 @@
 		  	<div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h3 class="modal-title">Cadastro de Funcionario</h3>
+		        <h3 class="modal-title">Cadastro de Funcionário</h3>
 		      </div>
 		      
 		      <div class="modal-body">
@@ -178,7 +178,7 @@
 			        		<input class="form-control" type="text" id="enderecofuncionario" maxlength="60" placeholder="Ex.: Rua dos Comerciarios de Guarujá">
 			        	</div>			        	
 				      	<div class="form-group col-md-2">
-				        	<label>Numero</label>
+				        	<label>Número</label>
 				        	<input class="form-control" type="text" id="numerofuncionario" maxlength="12" placeholder="0000">
 				        </div>
 				        <div class="form-group col-md-2">
@@ -245,9 +245,10 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<div>
-						<label class="label-painel-funcionario">Painel de Funcionario</label> 
+						<label class="label-painel-funcionario">Painel de Funcionário</label> 
 					</div>
 					
+						<label class="pesquisaNomeFuncionario">Nome Funcionário:</label>
 					<div class="input-group input-group-barra-pesquisa">
 						<input type="text" class="form-control form-control-custom" placeholder="João Miguel" id="buscaFuncionario">
 						<span class="btn input-group-addon icone-pesquisar glyphicon glyphicon-search" onclick="buscarFuncionario()"></span>					
@@ -255,9 +256,9 @@
 					
 					<div class="btn-group filtroAtivo">
 						<div class="labelFiltro">
-							<label>Filtro de Funcionario |</label>
+							<label>Filtro de Funcionário |</label>
 						</div>
-						<div class="botaoFiltro">
+						<div class="botaoFiltroFuncionario">
 						    <select class="btn-default form-control" id="filtroAtivoOpc" onchange="filtroFuncionariosAtivos()">
 								<option value="A">Todos</option>
 								<option value="S">Ativos</option>

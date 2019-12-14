@@ -47,6 +47,7 @@ public class RestFuncionario extends UtilRest{
 	@Path("/buscarFuncionarioPorNome")
 	@Produces({MediaType.APPLICATION_JSON})
 	public Response buscarFuncionariosPorNome(String nome) {
+		//System.out.println("Nome: "+nome);
 		try {
 			List<FuncionarioObj> Funcionarios = new ArrayList<FuncionarioObj>();
 			Conexao conec = new Conexao();

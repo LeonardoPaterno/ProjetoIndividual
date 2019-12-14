@@ -11,8 +11,9 @@ INDEX VERSION 1.131+C:\Users\Acer\Desktop\ProjetoIndividual\.metadata\.plugins\o
 1860485910.index
 3384032247.index
 2767149603.index
-531533494.index
 1880595094.index
+531533494.index
+638876795.index
 325315866.index
 1744875876.index
 38312963.index
@@ -40,8 +41,8 @@ INDEX VERSION 1.131+C:\Users\Acer\Desktop\ProjetoIndividual\.metadata\.plugins\o
 1158882567.index
 3934784004.index
 3832321544.index
-1293053237.index
 3263897811.index
+1293053237.index
 2623271014.index
 1728007215.index
 2380271370.index
@@ -55,9 +56,9 @@ INDEX VERSION 1.131+C:\Users\Acer\Desktop\ProjetoIndividual\.metadata\.plugins\o
 3276088136.index
 4118405267.index
 1737438557.index
-700719158.index
-2034634015.index
 1942359185.index
+2034634015.index
+700719158.index
 2887077954.index
 4061132170.index
 2510261342.index

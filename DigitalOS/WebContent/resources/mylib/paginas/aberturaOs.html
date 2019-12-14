@@ -5,7 +5,7 @@
 			<div>
 				<label class="label-painel-os">Painel de Odens de Serviço</label> 
 			</div>
-			
+			<label class="pesquisaNumeroOS">Número OS:</label>
 			<div class="input-group input-group-barra-pesquisa">
 				<input type="text" class="form-control form-control-custom" placeholder="João Miguel" id="buscaOS">
 				<span class="btn input-group-addon icone-pesquisar glyphicon glyphicon-search" onclick="buscarOS()"></span>					
@@ -54,7 +54,7 @@
   <div class="modal-dialog modal-lg modal-dialog-custom" role="document">
   	<div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="fechaModal()"><span aria-hidden="false">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="fechaModalOS()"><span aria-hidden="false">&times;</span></button>
         <h3 class="modal-title">Cadastro de Ordem de Serviço</h3>
       </div><!-- /div modal-header -->
       <div class="modal-body">
@@ -184,7 +184,7 @@
         </div><!-- /div form -->
       </div><!-- /div modal-body -->    
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="fechaModal()">Cancelar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="fechaMOdalOS()">Cancelar</button>
         <button type="button" class="btn btn-success" onclick="abrirOS()">Salvar</button>
       </div><!-- /div modal-footer -->  
     </div><!-- /div modal-content -->
@@ -336,8 +336,8 @@
         		<div class="input-group col-md-4 divPequisaAparelho">
         			<label>Localizar Aparelho:</label>
         			<div>
-						<input type="text" class="form-control" placeholder="Moto X Play" id="buscarAparelho">
-						<span class="btn input-group-addon iconePesquisarSparelho glyphicon glyphicon-search" onclick="buscarAparelhoOS()"></span>					
+						<input type="text" class="form-control" placeholder="Moto X Play" id="buscarAparelho" disabled>
+						<span class="btn input-group-addon iconePesquisarSparelho glyphicon glyphicon-search"></span>					
 					</div>
 				</div>
         	</div>

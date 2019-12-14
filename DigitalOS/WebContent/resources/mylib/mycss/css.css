@@ -169,7 +169,22 @@ h4 {
 .barra-lateral {
 	background-color: #2e6da4;
 	width: 180px;
-	height: 620px;
+	height: 635px;
+	border-radius: 0px;
+	left: -5px;
+	margin-top: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	overflow: hidden;
+	position: relative;
+	margin-left: -10px;
+	margin-top: 0px;
+}
+
+.barra-lateral-menu {
+	background-color: #2e6da4;
+	width: 180px;
+	height: 634px;
 	border-radius: 0px;
 	left: -5px;
 	margin-top: 0px;
@@ -198,11 +213,11 @@ h4 {
 	font-size: 24px !important;
 }
 .graficobarras {
-  width: 1159px;
-  height: 507px;
-  background-color: white;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+	width: 1158px;
+    height: 519px;
+    background-color: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 /* FIM GRAFICO */
@@ -459,12 +474,12 @@ h4 {
 }
 
 .filtroStatus{
-	left: 350px;
+	left: 272px;
 	top: 3px;
 }
 
 .filtroAtivoOS{
-	left: 25px;
+	left: -40px;
 	top: 3px;
 }
 
@@ -537,4 +552,67 @@ h4 {
 
 .rowCustom{
 	height: 65px;
+}
+
+/*AJUSTES DE CAMPOS*/
+/*TELA FUNCIONARIO*/
+.pesquisaNomeFuncionario{
+    left: 538px;
+    position: absolute;
+    top: 13px;
+    font-size: 15px;
+}
+.botaoFiltroFuncionario{
+    display: table;
+    top: -1px;
+    left: 154px;
+    position: absolute;
+    width: 92px;
+}
+/*----------------------------*/
+/*TELA DE APARELHO*/
+.pesquisaNomeAparelho{
+    position: absolute;
+    left: 558px;
+    top: 12px;
+    font-size: 15px;	
+}
+/*-----------------------------*/
+/*TELA CLIENTE*/
+.pesquisaNomeCliente{
+	position: absolute;
+    left: 576px;
+    top: 12px;
+    font-size: 15px;	
+}
+/*----------------------------*/
+/*TELA CATEGORIA APARELHO*/
+.PesquisaNomeCategoria{
+	position: absolute;
+    left: 560px;
+    top: 12px;
+    font-size: 15px;	
+}
+/*----------------------------*/
+/*TELA MARCA*/
+.pesquisaNomeMarca{
+	position: absolute;
+    left: 586px;
+    top: 12px;
+    font-size: 15px;	
+}
+/*-----------------------------*/
+.pesquisaNomeServico{
+	position: absolute;
+    left: 575px;
+    top: 12px;
+    font-size: 15px;	
+}
+/*------------------------------*/
+/*TELA ORDEM DE SERVIÇO*/
+.pesquisaNumeroOS{
+	position: absolute;
+    left: 585px;
+    top: 12px;
+    font-size: 15px;	
 }

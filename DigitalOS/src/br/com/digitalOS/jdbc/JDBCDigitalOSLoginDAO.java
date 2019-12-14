@@ -505,9 +505,10 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 			}
 	public List<FuncionarioObj> buscarFuncionarioPorNome(String nome) {
 		String comando = "SELECT pessoa.id, nome, cpf, cargo, setor, salario, sexo, ativo, funcionario_id, endereco_id FROM pessoa "
-					   + "INNER JOIN funcionario ON funcionario.id = pessoa.funcionario_id ";
+					   + "INNER JOIN funcionario ON funcionario.id = pessoa.funcionario_id "
+					   + "where pessoa.id NOT IN (SELECT pessoa.id FROM pessoa WHERE funcionario_id IS NULL)";
 		if (nome != "" && nome != null) {
-			comando += "AND pessoa.id NOT IN (SELECT pessoa.id FROM pessoa WHERE funcionario_id IS NULL);";
+			comando += "AND pessoa.nome like '"+nome+"%';";
 			}
 		List<FuncionarioObj> ListaFuncionario = new ArrayList<FuncionarioObj>();
 		try {

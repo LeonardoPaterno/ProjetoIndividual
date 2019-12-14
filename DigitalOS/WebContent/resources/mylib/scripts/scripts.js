@@ -106,12 +106,12 @@
 }
 /* FIM LOGIN */
 
-/* INICIO LOGOUT*/
+/* INICIO LOGOUT */
 	function logout(){
 		$.ajax({
 			type : 'POST',
 			url : '../../../ServletLogout',
-			//data: session.,
+			// data: session.,
 			success : function(logout) { 
 					location.href = JSON.parse(logout);				
 			},
@@ -120,15 +120,20 @@
 			}
 		});
 	}
-/* FIM LOGOUT*/
+/* FIM LOGOUT */
 
-/* INICIO DELETE COOKIE*/
+/* INICIO DELETE COOKIE */
 	function deleteACookie(){
-	    var cname = window.document.getElementById('cname').value;//Get the cookie name from the cname input element
-	    deleteCookie(cname);//Call the deleteCookie to delete the cookie
-	    window.location.reload();//Reload the page
+	    var cname = window.document.getElementById('cname').value;// Get the
+																	// cookie
+																	// name from
+																	// the cname
+																	// input
+																	// element
+	    deleteCookie(cname);// Call the deleteCookie to delete the cookie
+	    window.location.reload();// Reload the page
 	}
-/* FIM DELETE COOKIE*/
+/* FIM DELETE COOKIE */
 
 	/* INICIO CRUD APARELHO */
 	function CadastroAparelho() {
@@ -298,7 +303,7 @@
 }
 /* FIM CRUD APARELHO */
 	
-/*INICIO CRUD CARREGA SELECT*/
+/* INICIO CRUD CARREGA SELECT */
 	function carregaCategoria(){
 		$.ajax({
 			type : 'POST',
@@ -331,7 +336,7 @@
 			}
 		});
 	}
-/*FIM CRUF CARREGA SELECT*/
+/* FIM CRUF CARREGA SELECT */
 
 /* INICIO CRUD PESSOA */
 	function inserirPessoa() {
@@ -1172,13 +1177,12 @@
 	}
 	function clienteFechaModalOS() {
 		$('#modalselecionacliente').modal('hide');
-		//$('body').removeClass('modal-open');
-		//$('.modal-backdrop').remove();
 	}
 	function aparelhoFechaModalOS() {
 		$('#modalselecionaaparelho').modal('hide');
-		//$('body').removeClass('modal-open');
-		//$('.modal-backdrop').remove();
+	}
+	function fechaModalOS(){
+		$('#modalordemservico').modal('hide');
 	}
 /* FIM FECHA MODAL */
 
@@ -1393,7 +1397,7 @@
 				success : function(resposta) {
 					alert(resposta);
 					buscarOS();
-					fechaModal();
+					fechaModalOS();
 				},
 				error : function(resposta) {
 					alert(resposta);
@@ -1486,13 +1490,16 @@
 				data: ordem,
 				success: function(resposta){
 					alert(resposta);
-					fechaModal();
+					fechaModalEditarOS();
 					buscarOS();
 				},
 				error: function(){
 					alert("Erro ao editar OS");
 				}
 			});
+		}
+		function fechaModalEditarOS(){
+			$('#msgEditOS').modal('hide');
 		}
 		function filtroOSstatus(){
 			var status = $("#filtroOSstatus").val();

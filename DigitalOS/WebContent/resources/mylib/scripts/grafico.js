@@ -7,7 +7,7 @@ $(document).ready(function(){
 						
 			listadeos = resposta;
 			
-			var html = "<label style='font-size:18px;'>Seleção Anual</label> " +
+			var html = "<label style='font-size:16px;'>Selecione o ano:</label> " +
 						"<select style='width:100px;' class='btn btn-default' id='atual' onchange='carregaGrafico()'>";
 				anos = [];
 				for(var i = 0; i < resposta.length; i++){
