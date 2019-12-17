@@ -8,7 +8,6 @@
 		<link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css" >
 		<link rel="stylesheet" href="../mycss/css.css" >
 		
-
 		<script type="text/javascript" src="../../lib/jquery/jquery.js"></script>
 		<script type="text/javascript" src="../../lib/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="../../lib/bootstrap/js/bootstrap.min.js"></script>
@@ -35,12 +34,12 @@
 					<ul class="dropdown-menu dropdown-menu-custom div-botao-cadastrar">
 						<li>
 							<div class="btn-group-vertical" role="group">
-								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-aparelho.html'">Aparelho</a> 
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-funcionario.html'">Funcionário</a>
 								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-cliente.html'">Cliente</a> 
-								<a class="btn btn-primary btn-primary-custom" onclick="location.href='categoriaAparelho.html'">Categoria Aparelho</a>
-								<a class="btn btn-primary btn-primary-custom" onclick="location.href='marcaAparelho.html'">Marca</a>
-								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-funcionario.html'">Funcionario</a>
 								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-servico.html'">Serviços</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='categoriaAparelho.html'">Categoria Aparelho</a>
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='cadastro-aparelho.html'">Aparelho</a> 
+								<a class="btn btn-primary btn-primary-custom" onclick="location.href='marcaAparelho.html'">Marca</a>
 							</div>
 						</li>
 					</ul>
@@ -90,7 +89,7 @@
 							   	</div>
 							   	<div class="row col-md-12">
 							   		<div class="col-md-2">
-							   			<label>CEP</label><input id="cep" class="form-control" type="text" placeholder="00000-000" maxlength="8">
+							   			<label>CEP</label><input id="cep" class="form-control cep" type="text"  maxlength="8">
 							   		</div>
 							   		<div class="col-md-4">
 							   			<label>Endereco</label><input id="endereco" class="form-control" type="text" placeholder="Endereco" maxlength="50">
@@ -106,12 +105,12 @@
 							   	<hr class="col-md-6">
 							   		<div class="row col-md-12 divTelefone">
 								   		<div class="col-md-3">
-								   			<label>Telefone</label><input id="telefone" class="form-control" type="text" placeholder="0000 0000" maxlength="14">
+								   			<label>Telefone</label><input id="telefone" class="form-control telefone" type="text" maxlength="10">
 								   		</div>
 							   		</div>
 							   		<div class="row col-md-12 divCelular">
 								   		<div class="col-md-3">
-								   			<label>Celular</label><input id="celular" class="form-control" type="text" placeholder="0000 0000" maxlength="11">
+								   			<label>Celular</label><input id="celular" class="form-control celular" type="text" maxlength="11">
 								   		</div>
 							   		</div>
 							   	</div>
@@ -163,6 +162,19 @@
 	</div> <!-- menu -->
 
 	<script>
+		$(document).ready(function (){       
+		    $('.cpf').mask("000.000.000-00",{placeholder: "000.000.000-00"})
+		    $('.data').mask('00/00/0000');
+		    $('.placeholder').mask("00/00/0000", { placeholder: "__/__/____" }) ;
+		    $('.telefone').mask("(00) 0000-0000", {placeholder: "(00) 0000-0000"});
+		    $('.celular').mask("(00) 00000-0000", {placeholder: "(00) 00000-0000"});
+		    $('.rg').mask("0.000.000", {placeholder: "0.000.000"});
+		    $('.cep').mask("00000-000", {placeholder: "00000-000"});
+		    $('.pis').mask("000.00000.00-0", {placeholder: "000.00000.00-0"});
+		    $('.carteiraTrabalho').mask("0000000", {placeholder: "0000000"});
+		    $('.dinheiro').mask("#.##0,00", {reverse: true, placeholder: "0.000,00"});
+		});
+	
 		$("#botao-icone-menu").click(function(e) {
 			e.preventDefault();
 			$("#barra-lateral").toggle();

@@ -54,7 +54,7 @@
   <div class="modal-dialog modal-lg modal-dialog-custom" role="document">
   	<div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="fechaModalOS()"><span aria-hidden="false">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="fechaModalOS()"><span aria-hidden="true">&times;</span></button>
         <h3 class="modal-title">Cadastro de Ordem de Serviço</h3>
       </div><!-- /div modal-header -->
       <div class="modal-body">
@@ -179,8 +179,8 @@
 	        		<textarea class="form-control" rows="3" id="descricaoservico" disabled></textarea>
 	        	</div>
         	</div><!-- /div row -->        	
-        	<div style="display:none"><input id="id" disabled></div>
-        	<div style="display:none"><input id="idaparelho" disabled></div>
+        	<!-- <div style="display:none"><input id="id" disabled></div>
+        	<div style="display:none"><input id="idaparelho" disabled></div> -->
         </div><!-- /div form -->
       </div><!-- /div modal-body -->    
       <div class="modal-footer">
@@ -198,7 +198,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title">Seleção de Cliente</h5>
-				<button type="button" class="close" onclick="clienteFechaModalOS()"><span aria-hidden="false">&times;</span></button>
+				<button type="button" class="close" data-dismiss="modal"><span >&times;</span></button>
 			</div>
 			
 			<div class="modal-body">
@@ -217,13 +217,9 @@
 			</div>
 					
 			<div class="modal-footer">
-				<button type="button" class="btn btn-danger" id="fechaModal" onclick="clienteFechaModalOS()">
-					Fechar
-				</button>
+				<button type="button" class="btn btn-danger" id="fechaModal" data-dismiss="modal">Fechar</button>
 	
-				<button type="button" class="btn btn-success" id="salvarPessoaEdit" onclick="carregaPessoaOS()">
-					Confirmar
-				</button>
+				<button type="button" class="btn btn-success" id="salvarPessoaEdit" onclick="carregaPessoaOS()">Confirmar</button>
 			</div>
 		</div>
 	</div>
@@ -287,7 +283,7 @@
         		<div class="input-group col-md-4 divPequisaCliente">
         			<label>Localizar Cliente:</label>
         			<div>
-						<input type="text" class="form-control" id="buscarCliente" disabled>
+						<input type="text" class="form-control" disabled>
 						<span class="btn input-group-addon icone-pesquisar-cliente glyphicon glyphicon-search"></span>					
 					</div>
 				</div>
@@ -336,7 +332,7 @@
         		<div class="input-group col-md-4 divPequisaAparelho">
         			<label>Localizar Aparelho:</label>
         			<div>
-						<input type="text" class="form-control" placeholder="Moto X Play" id="buscarAparelho" disabled>
+						<input type="text" class="form-control" placeholder="Moto X Play" disabled>
 						<span class="btn input-group-addon iconePesquisarSparelho glyphicon glyphicon-search"></span>					
 					</div>
 				</div>

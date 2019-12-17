@@ -212,7 +212,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		String comando1 = "INSERT INTO endereco (estado, cidade, bairro, rua, numero, cep) VALUES(?,?,?,?,?,?);";				
 		String comando2 = "INSERT INTO pessoa (nome, cpf, rg, datanascimento, sexo, telefone, celular, email, profissao, tipomorada, tipopessoa, ativo, endereco_id) "
 						 + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?, (select max(id) from endereco));";
-		String comando3 = "INSERT INTO login (email, senha, pessoa_id, ordemservico_id) values((select email from pessoa where id in (select max(id) from pessoa)), '1234', (select max(id) from pessoa), (select max(id) from ordemservico));";
+		String comando3 = "INSERT INTO login (email, senha, pessoa_id, ordemservico_id) values((select email from pessoa where id in (select max(id) from pessoa)), '87d9bb400c0634691f0e3baaf1e2fd0d', (select max(id) from pessoa), (select max(id) from ordemservico));";
 		PreparedStatement p1;
 		PreparedStatement p2;
 		PreparedStatement p3;
@@ -261,7 +261,8 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				p1.setString(4, pessoa.getEndereco());
 				p1.setInt(5, pessoa.getNumero());
 				p1.setString(6, pessoa.getCep());
-			p1.executeUpdate(); System.out.println(p1);
+				p1.executeUpdate(); 
+				//System.out.println(p1);
 			
 			p2 = this.conexao.prepareStatement(comando2);
 				p2.setString(1, pessoa.getNome());
@@ -276,7 +277,8 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 				p2.setString(10, pessoa.getTipomorada());
 				p2.setString(11, pessoa.getTipopessoa());
 				p2.setString(12, pessoa.getAtivo());
-			p2.executeUpdate();System.out.println(p2);
+				p2.executeUpdate();
+				//System.out.println(p2);
 		}catch(SQLException e){
 			e.printStackTrace();
 			return false;
@@ -1497,7 +1499,7 @@ public class JDBCDigitalOSLoginDAO implements DigitalOSInterface {
 		PreparedStatement p;
 		try {
 			p = this.conexao.prepareStatement(comando);
-			System.out.println(comando);
+			//System.out.println(comando);
 			p.setString(1, os.getObssolucao());
 			p.setDate(2, os.getPrazo());
 			p.setDate(3, os.getFechamento());

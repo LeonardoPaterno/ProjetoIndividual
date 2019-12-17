@@ -416,6 +416,18 @@ h4 {
 	top: 90px;
 }
 
+.modal-custom{
+    position: fixed;
+    top: -15px;
+    right: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+}
+
 @media ( min-width : 992px) .modal-lg {
 	width:900px;
 }
@@ -587,7 +599,7 @@ h4 {
 }
 /*----------------------------*/
 /*TELA CATEGORIA APARELHO*/
-.PesquisaNomeCategoria{
+.pesquisaNomeCategoria{
 	position: absolute;
     left: 560px;
     top: 12px;

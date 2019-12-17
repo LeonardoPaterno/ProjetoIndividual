@@ -36,7 +36,7 @@
 			$("#usuario").focus();
 		}	
 	}
-	function carregaPerfil() {
+ 	function carregaPerfil() {
 		var id = document.cookie.split('=')[1];
 		$.ajax({
 			type : 'POST',
@@ -1177,15 +1177,30 @@
 	}
 	function clienteFechaModalOS() {
 		$('#modalselecionacliente').modal('hide');
+		insereClasse('#modalselecionacliente', '#modalordemservico');
 	}
 	function aparelhoFechaModalOS() {
-		$('#modalselecionaaparelho').modal('hide');
+		$('#modalselecionaAparelho').modal('hide');
+		insereClasse('#modalselecionaAparelho', '#modalordemservico');
 	}
 	function fechaModalOS(){
 		$('#modalordemservico').modal('hide');
 	}
 /* FIM FECHA MODAL */
 
+/* INICIO INSERE CLASSE MODAL-OPEN*/
+	function insereClasse(modalatual, modalbody){
+		$(modalatual).on('hidden.bs.modal', function(){
+			var visivel = $(modalbody+':visible');
+			if(visivel){
+				if(!$("body").hasClass('modal-open')){
+					$("body").addClass('modal-open')
+				}
+			}
+		});
+	}
+/* FIM INSERE CLASSE*/
+	
 /* INICIO ORDEM DE SERVICO */
 	/* INICIO BSUCAR CLIENTES */
 		function buscarClienteOS() {
@@ -1241,10 +1256,10 @@
 			var radioButtons = $("#tabelaPessoas input:radio[name='capiroto']");
 			var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
 			cliente = clientes[selectedIndex];
-			for ( let name in cliente) {
+			for (let name in cliente) {
 				$("#"+name).val(cliente[name]);
 			}
-			clienteFechaModalOS()
+			clienteFechaModalOS();
 		}
 	/* FIM BUSCAR CLIENTES */
 	
@@ -1398,11 +1413,32 @@
 					alert(resposta);
 					buscarOS();
 					fechaModalOS();
+					limpaModal();
 				},
 				error : function(resposta) {
 					alert(resposta);
 				}
 			});
+		}
+		function limpaModal(){
+			$("#idos").val('');
+			$("#nome").val('');
+			$("#cpf").val('');
+			$("#rg").val('');
+			$("#endereco").val('');
+			$("#telefone").val('');
+			$("#celular").val('');
+			$("#nomeCategoria").val('');
+			$("#nomeMarca").val('');
+			$("#modelo").val('');
+			$("#nsaparelho").val('');
+			$("#descricaoservico").val('');
+			$("#statusos").val('');
+			$("#dataabertura").val('');
+			$("#dataprazo").val('');
+			$("#id").val('');
+			$("#idaparelho").val('');
+			$("#tiposervico").val('');
 		}
 		function buscarOS(){
 			var num;

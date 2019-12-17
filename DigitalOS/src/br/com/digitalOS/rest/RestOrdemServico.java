@@ -27,7 +27,7 @@ public class RestOrdemServico extends UtilRest{
 	@Path("/addOrdemServico")
 	@Consumes("application/*")
 	public Response addOrdemServico(String ordemservico) {
-		System.out.println("OS: "+ordemservico);
+		//System.out.println("OS: "+ordemservico);
 		try {		
 			OrdemServicoObj os = new ObjectMapper().readValue(ordemservico, OrdemServicoObj.class);
 			
@@ -83,7 +83,7 @@ public class RestOrdemServico extends UtilRest{
 	@Path("/editarOS")
 	@Consumes("application/*")
 	public Response editarOrdemServico(String ordemservico) {
-		System.out.println("OS: "+ordemservico);
+		//System.out.println("OS: "+ordemservico);
 		try {		
 			OrdemServicoObj os = new ObjectMapper().readValue(ordemservico, OrdemServicoObj.class);
 			
@@ -125,7 +125,7 @@ public class RestOrdemServico extends UtilRest{
 	@Path("/filtroOsAtivo")
 	@Produces("application/*")
 	public Response filtrarOsAtivos(String ativo) {
-		System.out.println(ativo);
+		//System.out.println(ativo);
 		try {
 			OrdemServicoObj os = new OrdemServicoObj();
 			os.setAtivo(ativo);

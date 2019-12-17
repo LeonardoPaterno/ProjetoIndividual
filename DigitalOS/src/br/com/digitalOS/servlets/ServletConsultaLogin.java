@@ -54,6 +54,7 @@ public class ServletConsultaLogin extends HttpServlet {
 		
 		login.setEmail(request.getParameter("user").toString());
 		String senhaCod = request.getParameter("passCoded").toString();
+		//System.out.println(senhaCod);
 		
 		/*byte[] arreyBytes = Base64.getDecoder().decode(senhaCod);
 		String senhaDecoded = new String(arreyBytes);*/
